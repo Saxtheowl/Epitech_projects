@@ -1,29 +1,31 @@
-Epitech Projects with AI
+<h1>Epitech Projects with AI</h1>
 
-This repository is my attempt to complete most of the Epitech school projects by leveraging modern AI tools.
-The goal is not just to replicate the work, but to explore how advanced AI systems can assist, accelerate, and reshape the way we approach complex programming challenges.
+<p>
+  This repository is my attempt to complete most of the Epitech school projects by leveraging modern AI tools.
+  The goal is not just to replicate the work, but to explore how advanced AI systems can assist, accelerate,
+  and reshape the way we approach complex programming challenges.
+</p>
 
-🔧 Tools & Setup
+<h2>🔧 Tools &amp; Setup</h2>
 
-AI Assistants
+<h3>AI Assistants</h3>
+<ul>
+  <li>GPT-5</li>
+  <li>Sonnet 4.1</li>
+  <li>Claude Code</li>
+  <li>Gemini 2.5 Pro</li>
+</ul>
 
-GPT-5
+<h3>Environment</h3>
+<ul>
+  <li>Ubuntu 22.04 virtual machines (VMs) as the main development environment and Docker</li>
+  <li>Standard toolchain used at Epitech (C, C++, Python, Makefiles, etc.)</li>
+</ul>
 
-Claude 4.1
+<h2>📚 Project Subjects</h2>
+<p>The project statements and requirements come from the following repository:</p>
+<p>
+  <a href="https://github.com/Studio-17/Epitech-Subjects">https://github.com/Studio-17/Epitech-Subjects</a>
+</p>
 
-Claude Code
-
-Gemini 2.5 Pro
-
-Environment
-
-Ubuntu 22.04 virtual machines (VMs) as the main development environment
-
-Standard toolchain used at Epitech (C, C++, Python, Makefiles, etc.)
-
-📚 Project Subjects
-
-The project statements and requirements come from the following repository:
-https://github.com/Studio-17/Epitech-Subjects
-
-Many thanks to Studio-17 for making them available 🙏
+<p>Many thanks to Studio-17 for making them available 🙏</p>
