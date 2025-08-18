@@ -1,0 +1,74 @@
+/*
+** EPITECH PROJECT, 2025
+** MY_LS
+** File description:
+** Epitech-style source file for my_ls project
+*/
+#ifndef MY_LS_H_
+#define MY_LS_H_
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <dirent.h>
+#include <pwd.h>
+#include <grp.h>
+#include <unistd.h>
+#include <time.h>
+#include <limits.h>
+
+#ifndef PATH_MAX
+  #include <linux/limits.h>
+  #ifndef PATH_MAX
+    #define PATH_MAX 4096
+  #endif
+#endif
+
+typedef struct {
+    int a_opt;
+    int l_opt;
+    int R_opt;
+    int d_opt;
+    int r_opt;
+    int t_opt;
+} options_t;
+
+typedef struct {
+    char *name;
+    char *path;
+    struct stat st;
+    int is_link;
+    ssize_t link_len;
+    char link_target[PATH_MAX];
+} entry_t;
+
+typedef struct {
+    size_t lnk_w;
+    size_t usr_w;
+    size_t grp_w;
+    size_t size_w;
+    long long total_blocks;
+} widths_t;
+
+int parse_options(int argc, char **argv, options_t *opts, int *first_path);
+int my_ls_paths(int argc, char **argv, int from, options_t *opts);
+int my_ls_single_path(const char *path, options_t *opts, int show_header);
+
+void my_write_str(int fd, const char *s);
+void my_write_char(int fd, char c);
+void my_write_ll(int fd, long long n);
+void my_write_sz(int fd, size_t n);
+
+char *my_strdup(const char *s);
+int my_strcmp(const char *a, const char *b);
+size_t my_strlen(const char *s);
+
+void build_perm_string(mode_t mode, char out[11]);
+void print_long_entry(entry_t *e, widths_t *w);
+void compute_widths(entry_t *arr, size_t n, widths_t *w);
+
+int read_entries(const char *path, options_t *opts, entry_t **out, size_t *n);
+void free_entries(entry_t *arr, size_t n);
+
+void sort_entries(entry_t *arr, size_t n, int t_opt, int r_opt);
+
+#endif /* !MY_LS_H_ */
