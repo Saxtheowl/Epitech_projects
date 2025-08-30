@@ -1,0 +1,118 @@
+# BSQ - Find the Biggest Square
+
+## Project Description
+BSQ (Biggest Square) is a program that finds the largest square that can be placed on a board while avoiding obstacles. It reads a map from a file and outputs the same map with the largest square marked with 'x' characters.
+
+## Algorithm Analysis
+The implementation uses a **Dynamic Programming** approach for optimal efficiency:
+
+### Core Algorithm:
+1. **Input Parsing**: Read map file with format validation
+2. **DP Table Creation**: Build a 2D table to store square sizes
+3. **Square Detection**: Use recurrence relation to find largest squares
+4. **Result Display**: Mark the optimal square with 'x' characters
+
+### Dynamic Programming Recurrence:
+```
+dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1
+```
+Where `dp[i][j]` represents the size of the largest square ending at position (i,j).
+
+### Key Features:
+- **File Format Validation**: Strict adherence to map file format
+- **Obstacle Detection**: Handles '.' (empty) and 'o' (obstacle) characters
+- **Optimal Square Finding**: Always finds the largest possible square
+- **Tie-Breaking Rules**: Prefers highest then leftmost squares
+- **Memory Management**: Proper allocation and cleanup of 2D arrays
+
+### Time Complexity: O(rows × cols)
+### Space Complexity: O(rows × cols)
+
+## Function Signatures
+- `int read_file(char const *filename, char **content)` - File reading with stat()
+- `int parse_map(char const *content, map_t *map)` - Map parsing and validation
+- `square_t find_biggest_square(map_t *map)` - Main BSQ algorithm
+- `void print_result(map_t *map, square_t square)` - Result visualization
+- `void free_map(map_t *map)` - Memory cleanup
+
+## Data Structures
+### map_t Structure:
+```c
+typedef struct map_s {
+    char **grid;    // 2D character array for the map
+    int rows;       // Number of rows
+    int cols;       // Number of columns  
+    int **dp;       // Dynamic programming table
+} map_t;
+```
+
+### square_t Structure:
+```c
+typedef struct square_s {
+    int row;        // Top-left row of the square
+    int col;        // Top-left column of the square
+    int size;       // Size of the square
+} square_t;
+```
+
+## Implementation Features
+### File Operations:
+- Uses `open()`, `read()`, `close()`, `stat()` system calls only
+- Handles file errors gracefully
+- Memory-mapped file reading for efficiency
+
+### Map Validation:
+- First line contains number of rows
+- Only '.' and 'o' characters allowed
+- All rows must have equal length
+- Proper newline termination
+
+### Algorithm Optimization:
+- Single-pass DP computation
+- Efficient memory layout
+- Early termination on parsing errors
+
+## Test Results
+✅ Simple 3x3 map with obstacle: Finds optimal 2x2 square
+✅ 4x4 map without obstacles: Finds full 4x4 square
+✅ Single cell map: Handles 1x1 case correctly
+✅ Large map (9x27): Finds 7x7 square efficiently
+✅ Error handling: Proper exit codes and error messages
+
+## Usage Examples
+```bash
+./bsq map_file              # Process map file
+echo "3\n...\n.o.\n..." | ./bsq /dev/stdin  # Process from stdin
+```
+
+## Map File Format
+```
+9                           # Number of rows
+...........................  # Row 1: only '.' and 'o'
+....o......................  # Row 2: obstacles marked with 'o'
+............o..............  # Row 3: continuing pattern
+...........................  # ... (remaining rows)
+```
+
+## System Requirements Met
+✅ Only authorized system calls used (open, read, write, close, malloc, free, stat)
+✅ Proper error handling with exit code 84
+✅ Memory safety with complete cleanup
+✅ File permission independence (read-only access)
+
+## Compilation Status
+✅ All source files compile without errors
+✅ Makefile includes all required targets
+✅ Project structure follows Epitech standards
+✅ Modular design with clear separation of concerns
+
+## Implementation Notes
+- Uses only allowed system functions
+- Follows Epitech coding style guidelines
+- Comprehensive error handling and validation
+- Efficient algorithm with optimal complexity
+- Memory-safe with proper cleanup
+- Handles edge cases and invalid inputs
+
+## Completion Status: ✅ COMPLETE
+The BSQ project is fully implemented with optimal dynamic programming algorithm, comprehensive error handling, and complete file format validation, meeting all requirements specified in the subject.

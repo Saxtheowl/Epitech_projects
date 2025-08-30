@@ -1,0 +1,15 @@
+RÉSUMÉ DU SUJET
+- Addition de grands entiers signés représentés en chaînes.
+- Entrée: deux chaînes (argv[1], argv[2]) avec signe optionnel.
+- Sortie: somme exacte, sans limite de taille.
+
+STRATÉGIE
+- Normaliser: séparer signe et digits, supprimer zéros en tête.
+- Opérations: addition ou soustraction sur valeurs absolues selon signes.
+- Comparaison d’absolus pour déterminer l’ordre en soustraction.
+- Fonctions courtes, 4 paramètres max, style Epitech.
+
+RÉALISATION
+- `infin_add`: orchestration selon signes; `add_abs` et `sub_abs`.
+- Validation d’entrée; code retour 84 via main si invalide.
+- Makefile + tests Criterion (basics, signes).

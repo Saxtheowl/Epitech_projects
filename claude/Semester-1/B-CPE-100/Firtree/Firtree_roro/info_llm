@@ -1,0 +1,88 @@
+FIRTREE PROJECT ANALYSIS
+========================
+Date: 2024-08-30
+
+COMPREHENSION DU SUJET :
+========================
+
+Le projet Firtree consiste à créer une fonction qui affiche un sapin ASCII de taille variable.
+
+Spécifications :
+- Fonction : void tree(int size);
+- Si size = 0, ne rien afficher
+- Seule fonction autorisée : my_putchar (fournie par Epitech)
+- Seul appel système autorisé : write
+- Livrable unique : tree.c
+
+Pattern observé dans les exemples :
+- Size 1 : 4 lignes d'étoiles (1,3,5,7) + 1 ligne de tronc (|)
+- Size 5 : Multiple sections de sapin + tronc de 5 lignes (|||||)
+
+Structure du sapin :
+- Chaque niveau commence par 1 étoile
+- Augmente de 2 étoiles par ligne
+- Sections multiples pour size > 1
+- Centrage automatique
+- Tronc proportionnel à la taille
+
+STRATÉGIE D'IMPLÉMENTATION :
+============================
+
+1. ANALYSE DU PATTERN :
+   - Size 1 : 1 section de 4 lignes
+   - Size n : n sections avec chevauchement
+   - Largeur maximale calculable
+   - Tronc : size lignes de size caractères '|'
+
+2. ARCHITECTURE MODULAIRE :
+   - tree() : fonction principale
+   - print_spaces() : affichage des espaces de centrage  
+   - print_stars() : affichage des étoiles
+   - print_trunk() : affichage du tronc
+   - calculate_max_width() : calcul largeur maximale
+
+3. ALGORITHME :
+   - Calculer largeur totale du sapin
+   - Pour chaque section :
+     - Calculer nombre de lignes
+     - Pour chaque ligne : centrer et afficher étoiles
+   - Afficher le tronc centré
+
+RAPPORT FINAL :
+==============
+
+IMPLÉMENTATION RÉALISÉE :
+
+1. STRUCTURE DU PROJET :
+   ✓ Architecture modulaire respectée
+   ✓ Fonctions courtes et spécialisées
+   ✓ Headers avec prototypes
+   ✓ Tests complets
+
+2. ALGORITHME :
+   ✓ tree() : fonction principale demandée
+   ✓ Gestion correcte du size = 0
+   ✓ Pattern de sapin complexe implémenté
+   ✓ Centrage automatique des lignes
+   ✓ Tronc proportionnel à la taille
+
+3. FONCTIONS AUXILIAIRES :
+   ✓ print_spaces() : gestion du centrage
+   ✓ print_stars() : affichage optimisé des étoiles
+   ✓ print_trunk() : tronc avec bonne largeur
+   ✓ calculate_sections() : calcul des paramètres
+
+4. CONFORMITÉ EPITECH :
+   ✓ Style respecté (≤80 col, 4 espaces, fonctions courtes)
+   ✓ Headers Epitech sur tous les fichiers  
+   ✓ Seul my_putchar utilisé pour l'affichage
+   ✓ Livrable tree.c unique comme demandé
+   ✓ Pas de fonction main (fournie par Epitech)
+
+5. TESTS ET VALIDATION :
+   ✓ Test size = 0 : rien affiché
+   ✓ Test size = 1 : sapin simple correct
+   ✓ Test size = 5 : sapin complexe conforme
+   ✓ Validation du centrage et proportions
+
+Le projet est complet et génère les sapins ASCII exactement comme spécifié.

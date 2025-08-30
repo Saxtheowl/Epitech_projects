@@ -1,0 +1,15 @@
+RÉSUMÉ DU SUJET
+- Reproduire `ls` avec options usuelles: `-l, -R, -d, -r, -t, -a` et
+  multi-chemins, affichages triés, et formats longs.
+
+STRATÉGIE
+- Parser les options, collecter les entrées via `opendir/readdir` et
+  `lstat`, trier selon nom/mtime, inverser avec `-r`.
+- Afficher soit simple (un nom par ligne), soit long (`-l`) avec droits,
+  liens, propriétaire, groupe, taille, date, nom.
+- `-a`: inclure les fichiers cachés; `-d`: ne pas lister le contenu;
+  `-R`: récursif; `-t`: trier par date.
+
+RÉALISATION
+- Code modulaire: `parse.c`, `ls.c`, `sort.c`, `format.c`, `util.c`.
+- `Makefile` complet et test Criterion pour le parsing des flags.

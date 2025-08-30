@@ -1,0 +1,14 @@
+RÉSUMÉ DU SUJET
+- Imprimer un sapin (firtree) ASCII de taille N avec plusieurs étages
+  et un tronc centré, en suivant le format classique Epitech.
+
+STRATÉGIE
+- Calcul de la largeur totale finale pour centrer.
+- Parcours des étages (hauteur i+3), augmentation de 2 étoiles par ligne,
+  léger décalage négatif entre étages.
+- Tronc de largeur N si impair, sinon N+1 ; hauteur N.
+
+RÉALISATION
+- `print_tree(size)` produit les feuilles avec bordures `/` et `\\`,
+  puis le tronc avec `|`, centrés.
+- Makefile et test minimal (N=0) fournis.

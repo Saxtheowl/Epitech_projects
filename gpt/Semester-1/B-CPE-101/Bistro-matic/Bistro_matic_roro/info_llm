@@ -1,0 +1,20 @@
+RÉSUMÉ DU SUJET
+- Calculatrice arithmétique sur grands entiers avec base et opérateurs
+  personnalisés. Entrées: `base`, `ops`, longueur, puis l'expression sur
+  stdin. Sortie: résultat exact.
+
+STRATÉGIE
+- Parser la base (mapping char->digit) et les opérateurs `() +-*/%`.
+- Analyse descendante récursive avec priorités (*/% > +-), parenthèses,
+  gestion du signe unaire.
+- Implémenter des entiers arbitraires signés sous forme de vecteur de
+  chiffres en base `|base|`: addition/soustraction, multiplication par
+  produit scolaire, division/modulo par division longue.
+
+RÉALISATION
+- `eval_expr(base, ops, expr, size)`: point d'entrée; renvoie une chaîne
+  nouvellement allouée représentant le résultat dans la base donnée.
+- `bigint.c`: opérations big int génériques en base arbitraire.
+- `parser.c`: parse et évalue; `base.c`: mapping base/ops + utilitaires.
+- `main.c`: binaire autonome pour tester comme dans le sujet.
+- Makefile + tests Criterion de base (priorités et parenthèses).

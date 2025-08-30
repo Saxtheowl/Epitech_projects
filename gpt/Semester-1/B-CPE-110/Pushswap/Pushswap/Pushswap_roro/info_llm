@@ -1,0 +1,15 @@
+RÉSUMÉ DU SUJET
+- Trier une liste d'entiers via opérations `sa/sb/sc`, `pa/pb`, `ra/rb/rr`,
+  `rra/rrb/rrr`. Entrée: liste d'entiers (argv). Sortie: suite d'opérations.
+
+STRATÉGIE
+- Parser les entiers (supporte arguments multiples et liste espace-séparée),
+  vérifier doublons, compresser en indices 0..N-1 pour gérer signes.
+- Algorithme: tri radix LSD sur pile A -> B selon bits, puis retour sur A.
+- Opérations minimales correctes (pas forcément optimales), séparées par
+  des espaces, newline final.
+
+RÉALISATION
+- Piles en vecteurs en tête (push/pop/rotate). Construction du buffer
+  d'opérations pour sortie unique. Gestion d'erreurs -> 84.
+- Makefile standard + test Criterion basique.

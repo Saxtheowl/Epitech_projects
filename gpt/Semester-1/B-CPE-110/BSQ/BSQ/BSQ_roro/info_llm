@@ -1,0 +1,14 @@
+RÉSUMÉ DU SUJET
+- Trouver le plus grand carré de '.' dans une carte ('.' libre, 'o' obstacle),
+  marquer ce carré avec 'x' et afficher la carte.
+
+STRATÉGIE
+- Lire N depuis la première ligne, puis N lignes.
+- Validation stricte (mêmes longueurs, caractères valides).
+- DP classique: dp[i,j] = 0 si obstacle; sinon 1 + min(haut, gauche, haut-gauche).
+- Suivre le meilleur (taille et position) pour marquer le carré.
+
+RÉALISATION
+- `solve_bsq` calcule dp sur un tableau 1D; puis marque le carré.
+- `map_io.c`: lecture/validation/affichage/libération.
+- Makefile avec cibles requises; test unitaire simple.

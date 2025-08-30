@@ -1,0 +1,18 @@
+RÉSUMÉ DU SUJET
+- Jeu Navy à 2 processus communiquant via signaux. Chaque joueur charge
+  sa carte (format `size:CA:CB`), affiche ses cartes, puis alterne les
+  attaques (A1..H8). Les résultats (hit/missed) sont renvoyés via signaux.
+
+STRATÉGIE
+- Cartes 8x8: `my` et `enemy`. Chargement: 4 bateaux (tailles 2..5)
+  posés horizontalement/verticalement.
+- Connexion: joueur 1 affiche son PID et attend SIGUSR2; joueur 2 prend
+  le PID en argument et envoie SIGUSR2.
+- Transmission des coordonnées: coder `r*8+c+1` impulsions SIGUSR1 puis
+  un SIGUSR2 (fin). Le receveur compte les impulsions pour décoder.
+- Réponse: SIGUSR1 pour `hit`, SIGUSR2 pour `missed`.
+
+RÉALISATION
+- `map.c`: chargement/affichage. `signals.c`: handlers, connexion,
+  envoi/réception valeur, boucle de jeu. `main.c`: gestion des modes.
+- Makefile + test placeholder (les signaux ne sont pas testés ici).

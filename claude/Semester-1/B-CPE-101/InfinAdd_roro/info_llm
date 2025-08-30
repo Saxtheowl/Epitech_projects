@@ -1,0 +1,65 @@
+# InfinAdd - Infinite Addition
+
+## Project Description
+InfinAdd is a C program that performs infinite addition on arbitrarily large numbers represented as strings. It can handle positive and negative numbers of any size, limited only by available memory.
+
+## Algorithm Analysis
+The implementation uses a digit-by-digit approach similar to manual arithmetic:
+
+### Addition Algorithm (add_positive):
+1. Start from the rightmost digits of both numbers
+2. Add corresponding digits plus any carry from previous position
+3. Store result digit and calculate new carry
+4. Continue until all digits are processed and no carry remains
+5. Reverse the result string to get correct order
+
+### Subtraction Algorithm (subtract_positive):
+1. Determine which absolute value is larger
+2. Subtract smaller from larger digit by digit
+3. Handle borrowing when necessary
+4. Remove leading zeros from result
+5. Apply negative sign if the first operand was smaller
+
+### Main Logic (infin_add):
+- Parse signs of both numbers
+- Route to appropriate operation based on signs:
+  - Both positive: direct addition
+  - Both negative: addition with negative result
+  - Mixed signs: subtraction with appropriate sign handling
+
+## Key Features
+- Handles arbitrarily large numbers (memory permitting)
+- Supports positive and negative integers
+- Removes leading zeros from results
+- Memory-efficient string-based arithmetic
+- Proper error handling for NULL inputs
+
+## Function Signatures
+- `char *infin_add(char const *nb1, char const *nb2)` - Main addition function
+- `char *add_positive(char const *nb1, char const *nb2)` - Addition of positive numbers
+- `char *subtract_positive(char const *nb1, char const *nb2)` - Subtraction of positive numbers
+- `int compare_absolute(char const *nb1, char const *nb2)` - Compare absolute values
+- `char *remove_leading_zeros(char *str)` - Clean up result formatting
+
+## Test Results
+✅ Basic addition: 123 + 456 = 579
+✅ Mixed signs: -876435 + 987143265 = 986266830
+✅ Both negative: -807965 + (-34532) = -842497
+✅ Zero handling: 0 + 0 = 0
+✅ Carry handling: 999 + 1 = 1000
+✅ Cancellation: -999 + 999 = 0
+
+## Compilation Status
+✅ All source files compile without warnings
+✅ Makefile includes all required targets (all, clean, fclean, re, tests_run)
+✅ Project structure follows Epitech standards
+
+## Implementation Notes
+- Uses only allowed system functions: write, malloc, free
+- All memory allocations are properly freed
+- Follows Epitech coding style guidelines
+- Modular design with separate files for different operations
+- Comprehensive error handling and edge case management
+
+## Completion Status: ✅ COMPLETE
+The InfinAdd project is fully implemented and tested, meeting all requirements specified in the subject.

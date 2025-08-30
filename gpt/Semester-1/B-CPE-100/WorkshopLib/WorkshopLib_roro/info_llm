@@ -1,0 +1,13 @@
+RÉSUMÉ DU SUJET
+- Construire une librairie statique `libmy.a` avec fonctions de base
+  (sortie, chaînes, etc.) pour réutilisation dans d'autres projets.
+
+STRATÉGIE
+- Implémenter progressivement les fonctions demandées en respectant
+  signature et comportement, avec tests simples par fonction.
+
+RÉALISATION
+- Fonctions: `my_putchar`, `my_putstr`, `my_strlen`, `my_strcmp`,
+  `my_strcpy`. En-têtes dans `include/my.h`.
+- `Makefile` génère `libmy.a`, cibles standard + `tests_run`.
+- Tests Criterion pour `strlen` et `strcmp`.

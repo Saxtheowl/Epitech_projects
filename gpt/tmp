@@ -1,0 +1,13 @@
+--- Prompt 1 ---
+<environment_context>
+  <cwd>/home/roro/work/projects/Epitech_projects/gpt</cwd>
+  <approval_policy>on-request</approval_policy>
+  <sandbox_mode>workspace-write</sandbox_mode>
+  <network_access>restricted</network_access>
+</environment_context>
+
+--- Prompt 2 ---
+met les derniers prompt que je tai envoyé dans un fichier tmp
+ 
+--- Prompt 3 ---
+met les derniers prompt que je tai envoyé dans un fichier tmp, met les tous la tu en a mis que deux et le dernier est pas bon

@@ -1,0 +1,18 @@
+RÉSUMÉ DU SUJET
+- Générer 5 rectangles (rush1-1 à rush1-5) de largeur W et hauteur H.
+- Chaque binaire imprime une bordure spécifique (coins/arriêtes) et des
+  espaces à l'intérieur, suivi de newline par ligne.
+
+STRATÉGIE
+- Mutualiser l'algorithme (fonction `draw_rect`) et spécialiser par
+  motif via une structure `pattern_t` (coins et arêtes).
+- 5 exécutables séparés, arguments: `W H`; code erreur 84 sinon.
+
+RÉALISATION
+- Motifs implémentés:
+  * rush1-1: coins `o`, horizontales `-`, verticales `|`.
+  * rush1-2: coins `/' \\`, arêtes `*`.
+  * rush1-3: coins `A A / C C`, arêtes `B`.
+  * rush1-4: coins `A C / A C`, arêtes `B`.
+  * rush1-5: coins `A C / C A`, arêtes `B`.
+- Makefile construit `rush1-1` ... `rush1-5`; tests Criterion minimaux.

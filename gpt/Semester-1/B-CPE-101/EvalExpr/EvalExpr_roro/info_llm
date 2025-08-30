@@ -1,0 +1,11 @@
+RÉSUMÉ DU SUJET
+- Évaluer une expression arithmétique avec + - * / %, parenthèses et
+  priorités standard, à partir d'une chaîne.
+
+STRATÉGIE
+- Analyse descendante récursive: factor (*/%) > term (+-), parenthèses.
+- Validation stricte, gestion d'erreurs (division/modulo par zéro,...).
+
+RÉALISATION
+- `eval_expr`: parse et évalue; `main` lit argv[1] et affiche le résultat.
+- Makefile + tests Criterion.

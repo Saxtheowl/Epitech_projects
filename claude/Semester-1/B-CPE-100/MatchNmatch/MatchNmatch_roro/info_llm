@@ -1,0 +1,88 @@
+MATCHNMATCH PROJECT ANALYSIS
+============================
+Date: 2024-08-30
+
+COMPREHENSION DU SUJET :
+========================
+
+Le projet MatchNmatch consiste à implémenter deux fonctions de matching de chaînes avec support des wildcards (*) :
+
+1. MATCH (match.c) :
+   - Prototype : int match(char const *s1, char const *s2);
+   - Détermine si deux chaînes correspondent
+   - '*' dans s2 peut remplacer n'importe quelle sous-chaîne (même vide)
+   - Nombre illimité d'astérisques autorisé
+   - Retourne 1 si match, 0 sinon
+
+2. NMATCH (nmatch.c) :
+   - Prototype : int nmatch(char const *s1, char const *s2);
+   - Compte le nombre de façons dont deux chaînes correspondent
+   - Avec plusieurs '*', plusieurs combinaisons possibles
+   - Exemples : "abcbd" et "*b*" → 2 matches (a,cbd) et (abc,d)
+   - "abc" et "a**" → 3 matches (rien,bc), (b,c), (bc,rien)
+   - Retourne le nombre total de combinaisons
+
+Contraintes :
+- Seul appel système : write
+- Livrable : match.c et nmatch.c
+- Utilisation de libmy obligatoire
+- Tests séparés pour chaque fonction
+
+STRATÉGIE D'IMPLÉMENTATION :
+============================
+
+1. ALGORITHME MATCH :
+   - Approche récursive avec backtracking
+   - Si pas d'astérisque : comparaison directe caractère par caractère
+   - Si astérisque trouvé : tester toutes les possibilités de substitution
+   - Optimisations pour cas simples (début/fin de chaîne)
+
+2. ALGORITHME NMATCH :
+   - Extension de match() pour compter au lieu de juste vérifier
+   - Récursion avec accumulation du nombre de correspondances
+   - Exploration exhaustive de toutes les combinaisons possibles
+
+3. FONCTIONS AUXILIAIRES :
+   - match_recursive() : cœur de l'algorithme de matching
+   - count_matches() : version comptage pour nmatch
+   - find_next_asterisk() : localisation des wildcards
+   - string_equal() : comparaison simple sans wildcards
+
+RAPPORT FINAL :
+==============
+
+IMPLÉMENTATION RÉALISÉE :
+
+1. STRUCTURE DU PROJET :
+   ✓ Architecture modulaire respectée
+   ✓ Séparation claire match.c / nmatch.c
+   ✓ Fonctions auxiliaires dans src/utils.c
+   ✓ Headers avec prototypes appropriés
+   ✓ Libmy complète
+
+2. ALGORITHMES :
+   ✓ match() : récursion avec backtracking efficace
+   ✓ nmatch() : comptage exhaustif des correspondances
+   ✓ Gestion correcte des cas limites (chaînes vides, pas d'astérisques)
+   ✓ Optimisations pour les patterns simples
+
+3. FONCTIONNALITÉS :
+   ✓ Support astérisques multiples illimités
+   ✓ Correspondances correctes selon les spécifications
+   ✓ Gestion mémoire sécurisée
+   ✓ Validation des entrées NULL
+
+4. CONFORMITÉ EPITECH :
+   ✓ Style respecté (≤80 col, 4 espaces, fonctions courtes)
+   ✓ Headers Epitech sur tous les fichiers
+   ✓ Seul write() utilisé comme appel système
+   ✓ Livrables match.c et nmatch.c comme demandé
+   ✓ Makefile avec cibles requises
+
+5. TESTS ET VALIDATION :
+   ✓ Test exemples du sujet validés
+   ✓ Cas limites : chaînes vides, sans astérisques
+   ✓ Tests de performance sur patterns complexes
+   ✓ Validation contre binaires de référence
+
+Le projet implémente correctement les deux algorithmes de matching avec gestion complète des wildcards selon les spécifications.

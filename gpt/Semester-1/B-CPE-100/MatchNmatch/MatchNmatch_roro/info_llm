@@ -1,0 +1,15 @@
+RÉSUMÉ DU SUJET
+- Implémenter `match` (booléen) et `nmatch` (nombre de correspondances)
+  avec joker `*` (correspond à une chaîne de longueur quelconque, y
+  compris vide). Fournir un binaire simple pour tester rapidement.
+
+STRATÉGIE
+- Recursions classiques: pour `*`, on tente (consommer 0 caractère) ou
+  (consommer 1 caractère) — accumulation pour `nmatch`/OR pour `match`.
+- Respecter style Epitech, Makefile conforme, tests Criterion.
+
+RÉALISATION
+- `src/match.c`: implémentations propres, fonctions <20 lignes.
+- `src/main.c`: binaire `matchnmatch` qui affiche `match` puis `nmatch`.
+- Makefile: cibles `all/clean/fclean/re` et `tests_run` + coverage.
+- Tests: cas de base, `*` multiples, vide.

@@ -1,0 +1,12 @@
+RÉSUMÉ DU SUJET
+- Implémenter un `my_printf` minimal gérant les conversions courantes:
+  `%c`, `%s`, `%d`, `%i`, `%u`, `%o`, `%x`, `%X`, `%%`.
+
+STRATÉGIE
+- Parcourir la chaîne de format, dispatcher sur des fonctions d'affichage
+  pour chaque conversion. Pas de flags/largeurs/précisions.
+
+RÉALISATION
+- `my_put.c`: primitives d'affichage (char, string, décimal signé/
+  non signé, bases). `my_printf.c`: parsing et dispatch minimal.
+- `Makefile` conforme + test Criterion basique.

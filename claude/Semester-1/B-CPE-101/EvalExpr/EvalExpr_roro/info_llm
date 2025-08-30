@@ -1,0 +1,82 @@
+EVALEXPR PROJECT ANALYSIS
+=========================
+Date: 2024-08-30
+
+COMPREHENSION DU SUJET :
+========================
+
+Le projet EvalExpr consiste à implémenter un évaluateur d'expressions arithmétiques.
+
+Spécifications :
+- Fonction : int eval_expr(char const *str);
+- Opérateurs supportés : +, -, *, /, %
+- Support des parenthèses avec priorité
+- Chaînes d'entrée toujours valides (pas de gestion d'erreur)
+- Main fourni : affiche le résultat ou retourne 84
+- Seules fonctions autorisées : write, malloc, free
+
+Contraintes techniques :
+- Binary : eval_expr
+- Makefile avec règles re, clean, fclean
+- Algorithme de parsing avec priorité des opérateurs
+
+STRATÉGIE D'IMPLÉMENTATION :
+============================
+
+1. ALGORITHME CHOISI :
+   - Recursive Descent Parser avec priorité des opérateurs
+   - Grammaire : expr -> term (('+' | '-') term)*
+   - term -> factor (('*' | '/' | '%') factor)*
+   - factor -> number | '(' expr ')'
+
+2. ARCHITECTURE MODULAIRE :
+   - eval_expr() : fonction principale
+   - parse_expression() : gestion + et -
+   - parse_term() : gestion *, /, %
+   - parse_factor() : nombres et parenthèses
+   - skip_whitespace() : gestion des espaces
+   - parse_number() : conversion chaîne -> entier
+
+3. GESTION DES PRIORITÉS :
+   - Niveau 1 : parenthèses (priorité maximale)
+   - Niveau 2 : *, /, % (priorité haute)
+   - Niveau 3 : +, - (priorité basse)
+
+RAPPORT FINAL :
+==============
+
+IMPLÉMENTATION RÉALISÉE :
+
+1. STRUCTURE DU PROJET :
+   ✓ Architecture modulaire avec parser récursif
+   ✓ Séparation claire des niveaux de priorité
+   ✓ Headers avec prototypes
+   ✓ Libmy intégrée
+
+2. ALGORITHME DE PARSING :
+   ✓ eval_expr() : fonction principale d'interface
+   ✓ Parsing récursif descendant implémenté
+   ✓ Gestion correcte des priorités d'opérateurs
+   ✓ Support complet des parenthèses imbriquées
+   ✓ Tous les opérateurs (+, -, *, /, %) fonctionnels
+
+3. FONCTIONNALITÉS :
+   ✓ Évaluation d'expressions complexes
+   ✓ Gestion des nombres négatifs
+   ✓ Parenthèses multiples et imbriquées
+   ✓ Respect strict de la priorité arithmétique
+
+4. CONFORMITÉ EPITECH :
+   ✓ Style respecté (≤80 col, 4 espaces, fonctions courtes)
+   ✓ Headers Epitech sur tous les fichiers
+   ✓ Seules write, malloc, free utilisées
+   ✓ Main fourni exactement comme spécifié
+   ✓ Makefile avec toutes les règles requises
+
+5. TESTS ET VALIDATION :
+   ✓ Test exemple "(3+2)*5" → 25
+   ✓ Tests expressions complexes imbriquées
+   ✓ Validation priorités opérateurs
+   ✓ Tests avec parenthèses multiples
+
+Le projet implémente un parser d'expressions arithmétiques complet et robuste respectant toutes les spécifications.

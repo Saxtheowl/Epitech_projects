@@ -1,0 +1,8 @@
+RÉSUMÉ DU SUJET
+- Implémentation minimale de printf: `%c`, `%s`, `%d`, `%i`, `%%`.
+
+STRATÉGIE
+- Parcourir le format et dispatcher par conversion avec `va_list`.
+
+RÉALISATION
+- Fonctions d'affichage de base et parsing simple; Makefile et test.

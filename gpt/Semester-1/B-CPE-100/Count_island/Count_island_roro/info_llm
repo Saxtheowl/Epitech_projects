@@ -1,0 +1,38 @@
+RÉSUMÉ DU SUJET
+- Entrée: un fichier texte. 1ère ligne = nombre de lignes N,
+  puis N lignes d'une carte composée de '.' (mer) et 'X' (terre).
+- Objectif: détecter chaque îlot (composantes connexes de 'X' en 4
+  directions) et remplacer les 'X' d'un même îlot par un même label.
+- Sortie: la carte transformée imprimée sur la sortie standard.
+- Gestion d'erreurs: nb d'arguments, ouverture/lecture fichier, format
+  de la première ligne, cohérence du nombre de lignes et des caractères.
+  En cas d'erreur: code de retour 84.
+
+STRATÉGIE
+- Parser le fichier: lire la 1ère ligne (N), puis N lignes de carte.
+- Valider: même longueur pour toutes les lignes, caractères valides.
+- Parcourir la carte: pour chaque 'X', lancer un flood fill (DFS) en 4
+  directions et étiqueter toutes les cases de l'îlot avec un caractère
+  déterminé (0,1,...,9,a,b,...,A,B,...).
+- Afficher la carte résultante.
+- Organisation: fonctions courtes et dédiées (IO, validation, flood),
+  prototypes dans include/, Makefile avec cibles requises, tests
+  Criterion simples et coverage.
+
+RÉALISATION
+- Arborescence complète: include/, src/, tests/, Makefile, info_llm.
+- Header Epitech dans chaque fichier C et header.
+- Fichiers:
+  * include/count_island.h: prototypes et structure map_t.
+  * src/main.c: parsing arguments, pipeline (load, validate, label,
+    print), gestion des codes de retour.
+  * src/map_io.c: lecture du fichier (getline), validation de la carte,
+    impression et libération mémoire.
+  * src/island.c: flood fill récursif 4 directions, génération du label
+    en fonction de l'index d'îlot (0-9, a-z, A-Z, puis '*').
+  * tests/test_island.c: test unitaire sur une petite carte synthétique.
+- Makefile: cibles all/clean/fclean/re et tests_run (Criterion +
+  coverage). Compilation incrémentale, include/ pris en compte.
+- Respect des contraintes: pas de variables globales non const, noms en
+  snake_case, fonctions courtes, indentation 4 espaces, colonnes < 80,
+  prototypes regroupés, gestion d'erreurs -> 84.

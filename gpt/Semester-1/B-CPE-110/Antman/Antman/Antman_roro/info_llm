@@ -1,0 +1,14 @@
+RÉSUMÉ DU SUJET
+- Implémentation antman/giantman simple via RLE (Run-Length Encoding) sur
+  des fichiers arbitraires. `antman <fichier>` compresse vers stdout par
+  paires (count, byte). `giantman <fichier>` décompresse vers stdout.
+
+STRATÉGIE
+- Lecture binaire complète en mémoire, parcours et agrégat de runs (1..255).
+- Écriture binaire: octet de longueur puis octet de caractère; décodage
+  symétrique.
+
+RÉALISATION
+- Deux exécutables: `antman` et `giantman`. Makefile commun et test de
+  roundtrip minimal.
+- Style Epitech et arborescence propre.

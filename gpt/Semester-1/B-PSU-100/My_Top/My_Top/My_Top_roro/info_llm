@@ -1,0 +1,13 @@
+RÉSUMÉ DU SUJET
+- Afficher un instantané de l'état du système façon `top` (version
+  simplifiée ici): nombre de processus, mémoire totale/libre/disponible.
+
+STRATÉGIE
+- Lire `/proc/meminfo` et parser les champs pertinents.
+- Compter le nombre de répertoires numériques sous `/proc` (PID).
+- Respecter style Epitech, Makefile, tests simples.
+
+RÉALISATION
+- `read_meminfo` et `count_processes` dans `src/proc.c`.
+- `main` affiche 2 lignes de résumé (`Tasks`, `Mem`).
+- Makefile + test Criterion pour la lecture meminfo.

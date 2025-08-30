@@ -1,0 +1,14 @@
+RÉSUMÉ DU SUJET
+- Résoudre une grille de Sudoku 9x9 en lisant un fichier: 9 lignes de 9
+  caractères ('.' pour vide, '1'..'9' pour chiffres). Afficher la grille
+  résolue. Retour 84 en cas d'erreur/insoluble.
+
+STRATÉGIE
+- Chargement et validation: vérifier lignes, caractères, doublons par
+  lignes/colonnes/boîtes 3x3.
+- Résolution: backtracking simple; choisir la prochaine case vide et
+  essayer les chiffres valides.
+
+RÉALISATION
+- `load_grid`, `validate_grid`, `solve_grid`, `print_grid`. Makefile et
+  test Criterion.

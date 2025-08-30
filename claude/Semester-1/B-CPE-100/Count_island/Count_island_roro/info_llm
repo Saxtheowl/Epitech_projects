@@ -1,0 +1,102 @@
+COUNT_ISLAND PROJECT ANALYSIS
+==============================
+
+COMPREHENSION DU SUJET :
+========================
+
+Le projet Count_island consiste à implémenter une fonction qui analyse une grille 2D représentant un monde avec :
+- Des caractères '.' représentant l'eau/terrain vide
+- Des caractères 'X' représentant des îles
+
+La fonction doit :
+1. Parcourir la grille ligne par ligne, de gauche à droite
+2. Identifier les îles (groupes de 'X' connectés)
+3. Remplacer chaque 'X' d'une île par le numéro de l'île (0 pour la première, 1 pour la deuxième, etc.)
+4. Retourner le nombre total d'îles trouvées
+
+Règles de connexion :
+- Deux caractères sont connectés s'ils sont contigus sur la même ligne
+- OU s'ils sont dans la même colonne sur des lignes contiguës
+- Pas de connexion diagonale
+
+Contraintes :
+- Maximum 10 îles dans la grille
+- Seul l'appel système write() est autorisé
+- Utilisation obligatoire de libmy
+- Pas de fonction main à livrer
+
+STRATÉGIE D'IMPLÉMENTATION :
+============================
+
+1. ALGORITHME PRINCIPAL :
+   - Utiliser un algorithme de flood-fill récursif
+   - Parcours ligne par ligne avec deux boucles imbriquées
+   - Quand on trouve un 'X', démarrer flood-fill pour marquer toute l'île
+
+2. ARCHITECTURE MODULAIRE :
+   - count_island() : fonction principale demandée
+   - flood_fill() : fonction récursive pour marquer une île
+   - is_valid_position() : vérifier si position est dans les limites
+   - get_grid_dimensions() : obtenir taille de la grille
+
+3. STRUCTURE DE DONNÉES :
+   - Utiliser char** world directement (modification in-place)
+   - Convertir les numéros d'îles en caractères ('0', '1', etc.)
+
+4. GESTION DES CAS LIMITES :
+   - Grille vide
+   - Grille sans îles
+   - Une seule île couvrant toute la grille
+   - Îles isolées d'un seul caractère
+
+PLAN DE DÉVELOPPEMENT :
+======================
+
+1. Créer libmy avec fonctions utilitaires
+2. Implémenter les fonctions auxiliaires
+3. Développer l'algorithme principal
+4. Écrire tests unitaires complets
+5. Makefile avec toutes les cibles requises
+
+RAPPORT FINAL :
+==============
+
+IMPLÉMENTATION RÉALISÉE :
+
+1. STRUCTURE DU PROJET :
+   ✓ Architecture modulaire respectée
+   ✓ Séparation des responsabilités (utils, flood_fill, count_island)
+   ✓ Headers appropriés avec prototypes
+   ✓ Libmy complète et fonctionnelle
+
+2. ALGORITHME :
+   ✓ count_island() : fonction principale parcourant ligne par ligne
+   ✓ flood_fill() : récursion pour marquer une île complète  
+   ✓ Marquage des îles avec numéros '0', '1', '2', etc.
+   ✓ Gestion correcte des connexions horizontales/verticales uniquement
+
+3. FONCTIONS UTILITAIRES :
+   ✓ get_grid_height() : calcul hauteur de la grille
+   ✓ get_grid_width() : calcul largeur d'une ligne
+   ✓ is_valid_position() : validation des coordonnées
+
+4. TESTS ET VALIDATION :
+   ✓ Test avec îles isolées : 4 îles détectées correctement
+   ✓ Test îles connectées : 1 île avec tous 'X' marqués '0'
+   ✓ Test îles multiples : numérotation séquentielle correcte
+   ✓ Gestion cas limites : grilles NULL, vides
+
+5. CONFORMITÉ EPITECH :
+   ✓ Style de codage respecté (≤80 col, 4 espaces, fonctions courtes)
+   ✓ Headers Epitech sur tous les fichiers
+   ✓ Seul write() utilisé comme appel système
+   ✓ Makefile avec cibles requises : all, clean, fclean, re, tests_run
+   ✓ Pas de fonction main livrée (comme demandé)
+
+6. RÉSULTATS :
+   ✓ Compilation sans erreur ni warning
+   ✓ Algorithme fonctionnel et efficace
+   ✓ Tous les tests unitaires passent
+   ✓ Gestion mémoire correcte (pas de leaks détectés)
+
+Le projet est complet et opérationnel selon les spécifications.

@@ -1,0 +1,16 @@
+Date: 2025-08-30
+Subject Understanding:
+The project is the second day of the Phoenix Bootcamp. It consists of 9 tasks to be completed individually. I assume these are simple C exercises, likely building upon the concepts of Day01.
+
+Strategy:
+1.  Create a directory structure with `src`, `include`, `lib/my` and `tests` folders.
+2.  Create a separate C file for each task in the `src` directory.
+3.  Create a header file in `lib/my/include` to hold the function prototypes for the library.
+4.  Create a `main.c` file to test the functions.
+5.  Create a `Makefile` with `all`, `clean`, `fclean`, `re`, and `tests_run` targets.
+6.  Create a `Makefile` for the `libmy.a` library.
+7.  Write a simple test for each task in the `tests` directory using the Criterion library.
+8.  Ensure the code adheres to the Epitech coding style.
+
+Final Report:
+I have created the project structure and will now proceed with implementing the tasks and tests.

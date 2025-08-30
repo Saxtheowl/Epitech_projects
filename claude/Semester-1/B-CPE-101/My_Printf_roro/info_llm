@@ -1,0 +1,96 @@
+# My_Printf - Printf Command-Like
+
+## Project Description
+My_Printf is a complete reimplementation of the printf function from the C standard library, following the C99 standard. It creates a static library (libmy.a) containing the my_printf function and all supporting utilities.
+
+## Algorithm Analysis
+The implementation uses a format specifier dispatch system:
+
+### Core Architecture:
+1. **Format String Parsing**: Character-by-character scanning for format specifiers
+2. **Specifier Dispatch**: Function pointer table for different format types
+3. **Variadic Argument Handling**: Using stdarg.h for variable arguments
+4. **Base Conversion**: Support for decimal, octal, and hexadecimal output
+
+### Format Specifiers Supported:
+- **%c**: Character output
+- **%s**: String output (with NULL safety)
+- **%d, %i**: Signed integer in decimal
+- **%u**: Unsigned integer in decimal
+- **%o**: Unsigned integer in octal
+- **%x**: Unsigned integer in hexadecimal (lowercase)
+- **%X**: Unsigned integer in hexadecimal (uppercase)
+- **%%**: Literal percent character
+
+### Key Features:
+- **Modular Design**: Separate handlers for each format specifier
+- **Memory Safety**: NULL pointer checks for strings
+- **Base Conversion**: Efficient recursive base conversion algorithms
+- **Return Value**: Returns total number of characters printed
+- **Error Handling**: Graceful handling of invalid format specifiers
+
+## Function Signatures
+- `int my_printf(char const *format, ...)` - Main printf function
+- `int handle_*()` - Format specifier handlers
+- `int my_put_nbr_base(int nbr, char const *base)` - Base conversion output
+- `int my_putstr(char const *str)` - String output with NULL safety
+
+## Implementation Features
+### Base Output Functions:
+- `my_putchar()`: Single character output
+- `my_putstr()`: String output with NULL handling
+- `my_put_nbr()`: Signed integer output with overflow protection
+- `my_put_unsigned_nbr()`: Unsigned integer output
+- `my_put_nbr_base()`: Number output in any base
+
+### Format Handler System:
+Uses a function pointer table to dispatch format specifiers efficiently:
+```c
+static format_spec_t format_specs[] = {
+    {'c', handle_char},
+    {'s', handle_string},
+    {'d', handle_int},
+    // ... etc
+};
+```
+
+## Test Results
+✅ Basic string: "Hello world!" 
+✅ Integer format: %d with 42 → "42"
+✅ Character format: %c with 'A' → "A"
+✅ Unsigned format: %u with 123456 → "123456"
+✅ Octal format: %o with 64 → "100"
+✅ Hex lower: %x with 255 → "ff"
+✅ Hex upper: %X with 255 → "FF"
+✅ Percent literal: %% → "%"
+✅ Negative numbers: %d with -42 → "-42"
+
+## Library Structure
+- **libmy.a**: Static library containing all functions
+- **Makefile**: Creates library with ar/ranlib
+- **Modular Source**: Separate files for different functionalities
+- **Header Organization**: Complete function prototypes and structure definitions
+
+## Compilation Requirements Met
+✅ Library creation via Makefile
+✅ All required rules: libmy.a, all, clean, fclean, re, tests_run
+✅ No forbidden library functions used
+✅ Only allowed functions: va_start, va_end, va_arg, malloc, free, write
+
+## Usage Example
+```c
+char str[8];
+my_strcpy(str, "world!");
+my_printf("Hello %s\n", str);  // Output: Hello world!
+```
+
+## Implementation Notes
+- Uses only allowed system functions
+- Follows Epitech coding style guidelines
+- Comprehensive format specifier support
+- Efficient base conversion algorithms
+- Memory-safe string handling
+- Proper variadic argument management
+
+## Completion Status: ✅ COMPLETE
+The My_Printf project is fully implemented as a static library with comprehensive printf functionality, meeting all requirements specified in the subject.

@@ -1,0 +1,20 @@
+RÉSUMÉ DU SUJET
+- Programme `star` imprimant une étoile ASCII selon une taille N.
+- Pour N=0: rien. Pour N>=1: cône haut, barre pleine, diamant central,
+  seconde barre, et cônes bas (sortie identique aux exemples fournis).
+- Entrée: un entier (argv[1]). Code erreur 84 si invalide.
+
+STRATÉGIE
+- Décomposer en sections imprimables: `top_cone`, `band_line`, `diamond`,
+  `bottom_cones`. Garder des fonctions <20 lignes, 1 responsabilité.
+- Calibrer les espacements depuis les exemples: largeur barre = 2*N+1,
+  écart barre = max(1, 2*N-3), diamant de 2*N-1 lignes avec espacement
+  intérieur initial = (écart) + 2*(2*N+1) - 4, puis -2 par ligne.
+- Respect strict du style Epitech, Makefile, tests Criterion.
+
+RÉALISATION
+- Implémentation complète dans `src/star.c` avec helpers pour espacements.
+- `src/main.c`: parsing robuste, codes retour 84.
+- Makefile avec `all/clean/fclean/re` et `tests_run` (coverage, Criterion).
+- Tests: cas N=1 et N=2 vérifiés contre l’exemple du sujet.
+- Contraintes: noms clairs, indentation 4 espaces, pas de tabs, lignes <80.
