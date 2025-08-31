@@ -1,0 +1,153 @@
+# MyRadar - Air Traffic Control Simulation
+
+## Project Overview
+MyRadar is a real-time air traffic control simulation program that displays aircraft movements and control tower areas. The simulation reads aircraft and control tower data from script files and provides visual representation of air traffic with collision detection and control area protection.
+
+## Technical Architecture
+
+### Core Components
+1. **Radar System (`radar.c`)**: Main simulation loop, window management, and event handling
+2. **Aircraft Management (`aircraft.c`)**: Aircraft spawning, movement, state management, and trajectory calculations
+3. **Collision Detection (`collision.c`)**: Real-time collision detection with control area protection logic
+4. **Script Parser (`script.c`)**: Parses simulation script files for aircraft and tower definitions
+5. **Rendering System (`render.c`)**: Graphics rendering, sprite management, and UI display
+6. **Graphics Creation (`graphics.c`)**: Procedural texture generation for aircraft and towers
+7. **Event Handling (`events.c`)**: Keyboard input processing and simulation controls
+8. **Initialization (`init.c`)**: System initialization and resource setup
+
+### Key Features
+- **Real-time Simulation**: Continuous aircraft movement with accurate trajectory calculations
+- **Collision Detection**: Prevents aircraft collisions outside of control tower areas
+- **Control Tower Protection**: Aircraft within tower radius are protected from collisions
+- **Dynamic Spawning**: Aircraft spawn with individual delays as specified in script
+- **Interactive Controls**: Toggle hitboxes, sprites visibility, and simulation pausing
+- **Timer Display**: Real-time simulation timer with formatted output
+- **Script-based Configuration**: Flexible aircraft and tower setup via external scripts
+
+### Data Structures
+
+#### Aircraft Structure
+```c
+typedef struct aircraft_s {
+    int id;                    // Unique identifier
+    sfVector2f start_pos;      // Starting position
+    sfVector2f end_pos;        // Destination position
+    sfVector2f current_pos;    // Current position
+    sfVector2f velocity;       // Movement vector
+    int speed;                 // Movement speed (pixels/second)
+    int delay;                 // Spawn delay (seconds)
+    aircraft_state_t state;    // Current state (waiting/flying/landed/destroyed)
+    sfSprite *sprite;          // Graphics sprite
+    sfRectangleShape *hitbox;  // Collision hitbox
+    sfClock *spawn_clock;      // Spawn timing
+    int active;                // Active flag
+} aircraft_t;
+```
+
+#### Tower Structure
+```c
+typedef struct tower_s {
+    int id;                        // Unique identifier
+    sfVector2f position;           // Tower position
+    int radius;                    // Control area radius
+    sfSprite *sprite;              // Graphics sprite
+    sfCircleShape *control_area;   // Visual control area
+    int active;                    // Active flag
+} tower_t;
+```
+
+### Script Format
+The simulation uses .rdr script files with the following format:
+- **Aircraft**: `A start_x start_y end_x end_y speed delay`
+- **Control Towers**: `T x y radius`
+
+Example:
+```
+A 815 321 1484 166 5 0    // Aircraft from (815,321) to (1484,166), speed 5, no delay
+A 100 100 800 600 4 2     // Aircraft from (100,100) to (800,600), speed 4, 2s delay
+T 93 47 150               // Control tower at (93,47) with radius 150
+T 960 540 200             // Control tower at (960,540) with radius 200
+```
+
+### Physics and Movement
+- **Trajectory Calculation**: Linear interpolation between start and end positions
+- **Velocity Vectors**: Normalized direction vectors multiplied by speed
+- **Collision Detection**: Distance-based collision using aircraft size threshold
+- **Control Area Logic**: Distance calculation from aircraft to tower centers
+
+### Graphics System
+- **Procedural Textures**: Aircraft and towers created programmatically when external assets unavailable
+- **Sprite Management**: Dynamic sprite creation and positioning
+- **Real-time Rendering**: 60 FPS rendering loop with smooth animations
+- **UI Elements**: Timer display, control indicators, and visual feedback
+
+### State Management
+Aircraft states:
+- `AIRCRAFT_WAITING`: Waiting for spawn delay
+- `AIRCRAFT_FLYING`: Active movement along trajectory
+- `AIRCRAFT_LANDED`: Reached destination
+- `AIRCRAFT_DESTROYED`: Collision occurred
+
+### Controls
+- **L**: Toggle hitbox visibility
+- **S**: Toggle sprite visibility
+- **Escape**: Exit simulation
+
+## Implementation Details
+
+### Memory Management
+- Proper CSFML resource cleanup in `cleanup_radar()`
+- Dynamic allocation for aircraft and tower arrays
+- Clock management for timing systems
+
+### Error Handling
+- File validation for script parsing
+- Parameter validation for aircraft/tower data
+- Boundary checking for simulation area
+- Resource allocation validation
+
+### Testing Framework
+- Mock implementation for systems without CSFML
+- Comprehensive test suite covering parsing and calculations
+- Automated test runner with assertion validation
+
+### Performance Considerations
+- Efficient collision detection algorithms
+- Optimized rendering pipeline
+- Memory-efficient sprite management
+- Real-time performance with smooth 60 FPS
+
+## Compilation and Usage
+
+### Standard Compilation (with CSFML)
+```bash
+make                    # Build the project
+./my_radar script.rdr   # Run simulation with script file
+./my_radar -h           # Display help information
+```
+
+### Mock Version (without CSFML)
+```bash
+make -f Makefile.mock   # Build mock version
+./my_radar script.rdr   # Run text-based simulation
+```
+
+### Testing
+```bash
+make tests_run          # Run complete test suite
+```
+
+## Technical Achievements
+- **Complex Physics**: Accurate trajectory calculations and collision detection
+- **Real-time Graphics**: Smooth animation and rendering system
+- **Modular Architecture**: Clean separation of concerns across multiple modules
+- **Resource Management**: Proper memory and graphics resource handling
+- **Interactive Simulation**: Real-time user controls and visual feedback
+- **Script Integration**: Flexible configuration through external script files
+
+## Dependencies
+- **CSFML**: Graphics, window management, and event handling
+- **libm**: Mathematical calculations for physics and trajectories
+- **Standard C Libraries**: File I/O, string processing, memory management
+
+This implementation provides a complete air traffic control simulation with professional-grade architecture, comprehensive testing, and both full graphics and mock versions for maximum compatibility.

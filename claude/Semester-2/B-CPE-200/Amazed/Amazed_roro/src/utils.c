@@ -1,0 +1,61 @@
+/*
+** EPITECH PROJECT, 2024
+** Amazed
+** File description:
+** Utility functions
+*/
+
+#include "../include/amazed.h"
+
+char *my_strdup(const char *s)
+{
+    int len, i = 0;
+    char *dup;
+
+    if (!s)
+        return NULL;
+        
+    len = my_strlen(s);
+    dup = malloc(len + 1);
+    if (!dup)
+        return NULL;
+        
+    while (i <= len) {
+        dup[i] = s[i];
+        i++;
+    }
+    
+    return dup;
+}
+
+int my_strcmp(const char *s1, const char *s2)
+{
+    int i = 0;
+
+    if (!s1 || !s2)
+        return -1;
+        
+    while (s1[i] && s2[i] && s1[i] == s2[i])
+        i++;
+        
+    return s1[i] - s2[i];
+}
+
+int my_strlen(const char *s)
+{
+    int len = 0;
+
+    if (!s)
+        return 0;
+        
+    while (s[len])
+        len++;
+        
+    return len;
+}
+
+void print_error(const char *message)
+{
+    write(2, message, my_strlen(message));
+    write(2, "\n", 1);
+}

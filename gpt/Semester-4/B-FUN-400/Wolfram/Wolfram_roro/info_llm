@@ -1,0 +1,25 @@
+Date de fin: 2025-08-31
+
+Ce que j'ai compris du sujet:
+- Implémenter l'automate cellulaire élémentaire (Wolfram) en terminal.
+- Règles à supporter: 30, 90, 110 (les autres sont bonus).
+- Options à supporter: --rule (obligatoire), --start (défaut 0),
+  --lines (optionnelle: si omise, affichage infini), --window (défaut 80),
+  --move (translation horizontale, négative à gauche, positive à droite).
+- Fenêtre: largeur fixée; si elle est paire, la cellule centrale est
+  affichée dans la case la plus à droite des deux centres.
+- Build: projet Haskell via stack (hpack), Makefile qui wrappe stack.
+
+Stratégie de réalisation:
+- Parser manuellement les options (Getopt interdit) et valider les valeurs.
+- Représenter la génération comme un ensemble d'indices actifs (Set Int).
+- Calculer la génération suivante en appliquant le masque de bits de la règle
+  au triplet (gauche, milieu, droite) avec l'index (4*a + 2*b + c).
+- Appliquer --start en avançant de N générations avant l'affichage.
+- Afficher exactement --window caractères ('*' ou ' '), décalés par --move.
+
+Ce qui a été fait (rapport final):
+- Projet Haskell complet (stack.yaml, package.yaml, app/Main.hs).
+- Makefile conforme (cibles all/clean/fclean/re, build via stack, binaire wolfram).
+- Gestion de --help (usage), erreurs sur stderr avec code 84.
+- Comportement conforme aux options et à la fenêtre (pair/impair) et à --move.

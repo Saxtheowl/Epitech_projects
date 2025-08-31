@@ -1,0 +1,200 @@
+# Amazed - Maze Pathfinding Solver
+
+## Project Overview
+Amazed is a sophisticated maze pathfinding solver that navigates multiple robots through a labyrinth from entrance to exit using optimal algorithms. The program reads maze descriptions from standard input and outputs the shortest path solution with turn-by-turn robot movements.
+
+## Technical Architecture
+
+### Core Components
+1. **Main Controller (`main.c`)**: Program entry point and flow coordination
+2. **Maze Management (`maze.c`)**: Maze data structure creation, room management, and cleanup
+3. **Input Parser (`parser.c`)**: Comprehensive parsing of maze description format
+4. **Pathfinding Engine (`pathfinding.c`)**: Dijkstra's shortest path algorithm implementation
+5. **Solution Generator (`solver.c`)**: Robot simulation and movement coordination
+6. **Output Formatter (`output.c`)**: Maze description and solution output formatting
+7. **Utilities (`utils.c`)**: String manipulation and error handling functions
+
+### Key Features
+- **Multiple Robot Navigation**: Simultaneously routes multiple robots through maze
+- **Collision Avoidance**: Prevents robots from occupying same room (except start/end)
+- **Optimal Pathfinding**: Uses Dijkstra's algorithm for shortest path calculation
+- **Script-based Input**: Flexible maze definition via standardized input format
+- **Turn-based Simulation**: Coordinates robot movements in discrete turns
+- **Comprehensive Output**: Detailed maze description and solution moves
+
+### Data Structures
+
+#### Maze Structure
+```c
+typedef struct maze_s {
+    int robot_count;           // Number of robots to navigate
+    room_t *rooms;             // Array of all rooms in maze
+    int room_count;            // Total number of rooms
+    tunnel_t *tunnels;         // Array of connections between rooms
+    int tunnel_count;          // Total number of tunnels
+    int start_room;            // Index of entrance room
+    int end_room;              // Index of exit room
+    int **adjacency_matrix;    // Graph representation for pathfinding
+} maze_t;
+```
+
+#### Room Structure
+```c
+typedef struct room_s {
+    char *name;                // Unique room identifier
+    int x, y;                  // Coordinates in maze
+    int id;                    // Internal room index
+    int is_start, is_end;      // Start/end room flags
+    int *connections;          // Array of connected room IDs
+    int connection_count;      // Number of connections
+    int robot_id;              // ID of robot currently in room (-1 if empty)
+} room_t;
+```
+
+#### Robot Structure
+```c
+typedef struct robot_s {
+    int id;                    // Robot identifier (1-based)
+    int current_room;          // Current room index
+    path_t *path;              // Calculated shortest path to exit
+    int path_index;            // Current position in path
+    int finished;              // Completion flag
+} robot_t;
+```
+
+### Pathfinding Algorithm
+
+#### Dijkstra's Algorithm Implementation
+The solver uses Dijkstra's algorithm to find the shortest path from start to end:
+- **Distance Initialization**: All rooms start with infinite distance except start (0)
+- **Priority Selection**: Always processes unvisited room with minimum distance
+- **Distance Relaxation**: Updates neighbor distances if shorter path found
+- **Path Reconstruction**: Backtracks through previous nodes to build complete path
+
+#### Graph Representation
+- **Adjacency Matrix**: 2D matrix representing room connections
+- **Undirected Graph**: Tunnels allow bidirectional movement
+- **Dynamic Construction**: Matrix built from parsed tunnel definitions
+
+### Input Format Processing
+
+#### Maze Description Format
+```
+<number_of_robots>
+##start
+<start_room_name> <x> <y>
+##end  
+<end_room_name> <x> <y>
+<room_name> <x> <y>
+...
+<room1>-<room2>
+...
+```
+
+#### Command Processing
+- **##start**: Marks next room as maze entrance
+- **##end**: Marks next room as maze exit
+- **#comment**: Single-line comments (ignored)
+- **room-room**: Tunnel definitions creating connections
+
+### Solution Generation
+
+#### Robot Movement Simulation
+- **Turn-based Processing**: All robots attempt to move each turn
+- **Collision Detection**: Prevents multiple robots in same room
+- **Path Following**: Each robot follows its calculated shortest path
+- **Completion Tracking**: Monitors robots reaching exit
+
+#### Output Format
+```
+#number_of_robots
+<count>
+#rooms  
+<room_definitions>
+#tunnels
+<tunnel_definitions>
+#moves
+<turn_by_turn_moves>
+```
+
+### Memory Management
+- **Dynamic Allocation**: All data structures sized at runtime
+- **Proper Cleanup**: Comprehensive memory deallocation in cleanup functions
+- **Error Handling**: Safe cleanup on allocation failures
+
+### Error Handling
+- **Input Validation**: Comprehensive parsing error detection
+- **Resource Validation**: Checks for valid start/end rooms
+- **Memory Safety**: Proper error handling with cleanup
+- **Exit Codes**: Returns 84 on error, 0 on success
+
+## Implementation Details
+
+### Parsing System
+- **State Machine**: Tracks parsing context (robot count, rooms, tunnels)
+- **Command Recognition**: Identifies special commands and comments
+- **Room Name Mapping**: Maintains mapping from names to internal IDs
+- **Connection Building**: Builds bidirectional connections from tunnel definitions
+
+### Pathfinding Optimization
+- **Adjacency Matrix**: Efficient O(1) connection lookups
+- **Distance Arrays**: Separate arrays for distances, previous nodes, and visited flags
+- **Early Termination**: Stops when target room reached
+- **Path Reconstruction**: Builds complete path from previous node references
+
+### Robot Coordination
+- **Collision Avoidance**: Checks room occupancy before movement
+- **Turn Synchronization**: All robots move simultaneously per turn
+- **Path Independence**: Each robot follows its own optimal path
+- **Special Rooms**: Start and end rooms allow unlimited occupancy
+
+## Usage Examples
+
+### Basic Maze
+```bash
+echo "1\n##start\n0 1 0\n##end\n1 5 0\n0-1" | ./amazed
+```
+
+### Complex Multi-Robot Maze
+```bash
+./amazed < complex_maze.txt
+```
+
+### Expected Output
+```
+#number_of_robots
+3
+#rooms
+##start
+0 1 0
+##end  
+1 13 0
+2 5 0
+3 9 0
+#tunnels
+0-2
+2-3
+3-1
+#moves
+P1-2
+P1-3 P2-2
+P1-1 P2-3 P3-2
+P2-1 P3-3
+P3-1
+```
+
+## Technical Achievements
+- **Advanced Graph Theory**: Complete implementation of Dijkstra's algorithm
+- **Multi-Agent Pathfinding**: Coordinated navigation of multiple entities
+- **Dynamic Memory Management**: Runtime-sized data structures with proper cleanup
+- **Comprehensive Parsing**: Robust input format processing with error handling
+- **Collision Avoidance**: Sophisticated robot coordination preventing conflicts
+- **Optimal Solution Generation**: Guaranteed shortest path solutions
+
+## Dependencies
+- **Standard C Library**: malloc, free, stdio functions
+- **POSIX Functions**: getline for input processing  
+- **String Processing**: strtok, strchr for parsing
+- **Mathematical Operations**: Basic arithmetic for coordinates and distances
+
+This implementation provides a complete maze pathfinding solution with professional-grade algorithms, comprehensive error handling, and optimal robot coordination for complex multi-agent navigation scenarios.

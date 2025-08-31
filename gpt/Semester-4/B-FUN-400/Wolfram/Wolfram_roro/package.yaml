@@ -1,0 +1,29 @@
+name:                wolfram
+version:             0.1.0.0
+github:              "roro/wolfram"
+license:             BSD3
+author:              "roro"
+maintainer:          "roro@example.com"
+synopsis:            "Wolfram automaton"
+category:            Project
+
+extra-source-files:
+  - README.md
+
+executables:
+  wolfram:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+      - -Wall
+    dependencies:
+      - base >= 4.7 && < 5
+
+tests: {}
+
+library:
+  source-dirs: src
+  exposed-modules: []
+  dependencies:
+    - base >= 4.7 && < 5
+

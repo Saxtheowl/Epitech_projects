@@ -1,0 +1,201 @@
+# Minishell1 - UNIX Command Interpreter
+
+## Project Overview
+Minishell1 is a UNIX command interpreter based on TCSH, serving as a foundational step toward implementing a full 42sh shell. This implementation provides essential shell functionality including command execution, built-in commands, and environment management.
+
+## Technical Architecture
+
+### Core Components
+1. **Shell Core (`main.c`)**: Main entry point with both interactive and pipe mode support
+2. **Shell Loop (`shell_loop.c`)**: Interactive shell prompt and command processing loop
+3. **Environment Management (`environment.c`)**: Dynamic environment variable handling with linked list storage
+4. **Command Parser (`command_parser.c`)**: Command line parsing with argument tokenization
+5. **Command Execution (`command_execution.c`)**: Process creation and external command execution
+6. **Built-in Commands (`builtins.c`)**: Implementation of shell built-in commands
+7. **Utilities (`utils.c`)**: Helper functions for string manipulation and error handling
+
+### Key Features
+- **Interactive Mode**: Displays prompt and processes commands interactively
+- **Pipe Mode**: Supports non-interactive input via pipes for testing
+- **Built-in Commands**: Implements cd, env, setenv, unsetenv, and exit
+- **PATH Resolution**: Finds and executes commands from PATH directories
+- **Environment Management**: Complete environment variable manipulation
+- **Error Handling**: Proper error messages and exit status propagation
+- **Memory Management**: Dynamic allocation with proper cleanup
+
+### Data Structures
+
+#### Shell State Structure
+```c
+typedef struct shell_s {
+    env_t *env_list;        // Linked list of environment variables
+    char **environ_copy;    // Array representation for execve
+    int last_status;        // Last command exit status
+    int running;            // Shell running flag
+} shell_t;
+```
+
+#### Environment Variable Structure
+```c
+typedef struct env_s {
+    char *name;             // Variable name
+    char *value;            // Variable value
+    struct env_s *next;     // Next environment variable
+} env_t;
+```
+
+### Built-in Commands Implementation
+
+#### cd (Change Directory)
+- Changes current working directory
+- Supports relative and absolute paths
+- Uses HOME environment variable when no argument provided
+- Updates PWD environment variable after successful change
+
+#### env (Display Environment)
+- Displays all environment variables in NAME=VALUE format
+- Takes no arguments as per specification
+- Iterates through environment linked list
+
+#### setenv (Set Environment Variable)
+- Sets or updates environment variables
+- Requires exactly two arguments: variable name and value
+- Updates existing variables or creates new ones
+
+#### unsetenv (Remove Environment Variable)
+- Removes environment variables from the environment
+- Requires exactly one argument: variable name
+- Does not support wildcard operations as per specification
+
+#### exit (Exit Shell)
+- Terminates the shell with optional exit code
+- Sets shell running flag to false
+- Propagates exit status properly
+
+### Command Execution System
+
+#### Path Resolution
+- Searches PATH environment variable for executable commands
+- Supports absolute and relative paths
+- Checks file accessibility and execution permissions
+- Returns appropriate error messages for missing commands
+
+#### Process Management
+- Uses fork() to create child processes
+- Executes commands with execve() and proper environment
+- Waits for child processes and captures exit status
+- Handles signals and abnormal terminations
+
+#### Error Handling
+- Provides appropriate error messages matching TCSH behavior
+- Returns correct exit codes (127 for command not found, 126 for permission denied)
+- Propagates child process exit status to shell
+
+### Environment Management System
+
+#### Dynamic Environment Storage
+- Maintains environment variables in linked list structure
+- Supports adding, updating, and removing variables
+- Converts between linked list and array formats for execve
+
+#### Environment Initialization
+- Copies initial environment from parent process
+- Parses NAME=VALUE format into structured data
+- Maintains environment state throughout shell session
+
+### Command Parsing
+
+#### Tokenization
+- Splits command lines into individual arguments
+- Handles multiple spaces and tabs as delimiters
+- Allocates memory dynamically for arguments
+- Provides proper cleanup for parsed commands
+
+#### Argument Handling
+- Supports variable number of arguments
+- Null-terminates argument arrays for execve compatibility
+- Handles empty commands gracefully
+
+## Implementation Details
+
+### Interactive vs Non-Interactive Mode
+- Detects terminal input using isatty()
+- Interactive mode: displays prompt, processes commands in loop
+- Non-interactive mode: reads from stdin, processes single commands
+- Both modes support same command execution functionality
+
+### Memory Management
+- Dynamic allocation for all data structures
+- Proper cleanup on shell exit
+- Environment linked list management
+- Argument array allocation and deallocation
+
+### Error Handling Strategy
+- Uses stderr for error messages
+- Returns appropriate exit codes
+- Provides descriptive error messages
+- Handles system call failures gracefully
+
+### Signal Handling
+- Basic signal handling for child processes
+- Proper cleanup on shell termination
+- Exit status propagation from child processes
+
+## Testing and Validation
+
+### Test Coverage
+- Utility function testing (string operations)
+- Environment management operations
+- Command parsing functionality
+- Built-in command execution
+- Path resolution and command finding
+
+### Integration Testing
+- Interactive shell mode
+- Pipe mode for automated testing
+- Command execution with various argument combinations
+- Environment variable manipulation scenarios
+
+## Usage Examples
+
+### Interactive Mode
+```bash
+./mysh
+$> pwd
+/tmp
+$> cd test
+$> pwd
+/tmp/test
+$> exit
+```
+
+### Non-Interactive Mode
+```bash
+echo "ls -l" | ./mysh
+echo "pwd" | ./mysh
+```
+
+### Built-in Usage
+```bash
+$> setenv MYVAR myvalue
+$> env | grep MYVAR
+MYVAR=myvalue
+$> unsetenv MYVAR
+```
+
+## Technical Achievements
+- **Complete Shell Infrastructure**: Full command interpreter with all required functionality
+- **Advanced Environment Management**: Dynamic environment variable system with linked list storage
+- **Process Management**: Proper fork/exec pattern with signal handling
+- **Path Resolution**: Complete PATH-based command finding system
+- **Memory Safety**: Comprehensive memory management with proper cleanup
+- **TCSH Compatibility**: Error messages and behavior matching TCSH standards
+
+## Dependencies
+- **POSIX System Calls**: fork, execve, wait family, chdir, getcwd
+- **File Operations**: access, stat for command resolution
+- **Memory Management**: malloc, free for dynamic allocation
+- **String Processing**: Custom string manipulation functions
+- **I/O Operations**: getline for input processing
+
+This implementation provides a solid foundation for understanding shell internals and serves as a stepping stone toward more advanced shell features like pipes, redirections, and complex command processing.

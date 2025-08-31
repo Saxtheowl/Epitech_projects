@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Nom de la session tmux
+SESSION_NAME="gpt"
+
+# Boucle infinie
+while true; do
+  # Génère une commande shell pour créer un fichier avec date/heure dans tmux
+  COMMAND="continue le projet sur lesquel tu etais pour que il soit complet et passe bien tous les test indiqué dans le ou les fichiers .pdf du projet puis retourne a /home/roro/work/projects/Epitech_projects/gpt/Semester-4 et verifie si tu as bien fais tous les projets sinon fais les, n'utilise jamais la commande sudo"
+
+  # Envoie la commande dans la session tmux
+  tmux send-keys -t "$SESSION_NAME" "$COMMAND" C-m
+  tmux send-keys -t "$TARGET" C-j   # ← Codex shows “Ctrl+J newline”
+  sleep 0.1
+  tmux send-keys -t "$TARGET" C-m   # ← fallback “Enter”
+
+
+
+  # Affiche un log local dans le terminal
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] Commande envoyée à $SESSION_NAME"
+
+  # Attente de 60 secondes
+  sleep 180
+done

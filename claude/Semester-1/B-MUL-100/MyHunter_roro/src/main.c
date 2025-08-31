@@ -1,0 +1,43 @@
+/*
+** EPITECH PROJECT, 2024
+** MyHunter
+** File description:
+** Main function for my_hunter duck hunt game
+*/
+
+#include "../include/my_hunter.h"
+
+void print_help(void)
+{
+    printf("USAGE: ./my_hunter [-h]\n");
+    printf("Duck Hunt game - Click on ducks to shoot them!\n\n");
+    printf("CONTROLS:\n");
+    printf("  Mouse click: Shoot\n");
+    printf("  ESC: Quit game\n\n");
+    printf("OBJECTIVE:\n");
+    printf("  Shoot flying ducks to earn points\n");
+    printf("  You have limited ammo - make every shot count!\n");
+}
+
+static int parse_arguments(int argc, char **argv)
+{
+    if (argc == 2 && strcmp(argv[1], "-h") == 0) {
+        print_help();
+        return 1;
+    }
+    if (argc > 1) {
+        fprintf(stderr, "Invalid arguments. Use -h for help.\n");
+        return 84;
+    }
+    return 0;
+}
+
+int main(int argc, char **argv)
+{
+    int arg_result;
+
+    arg_result = parse_arguments(argc, argv);
+    if (arg_result != 0)
+        return arg_result;
+    return my_hunter();
+}

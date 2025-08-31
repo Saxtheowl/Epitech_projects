@@ -1,0 +1,27 @@
+Date de fin: 2025-08-31
+
+Compréhension du sujet:
+- Refaire un strace minimal pour x86_64/Linux en C.
+- USAGE: ./strace [-s] [-p <pid>|<command>]
+- Par défaut: afficher arguments et valeur de retour en hexadécimal.
+- Avec -s: afficher les entiers en décimal, les pointeurs sur chaînes
+  en chaînes de caractères (lecture mémoire du tracee), et ‘?’ si
+  retour void (non applicable sur Linux où les appels retournent long).
+- Erreurs sur stderr, exit 84.
+
+Réalisation:
+- Lancement: fork+PTRACE_TRACEME+execvp pour une commande, ou PTRACE_ATTACH
+  pour -p <pid>. Boucle: PTRACE_SINGLESTEP (sans PTRACE_SYSCALL, interdit) et
+  détection d’un syscall exécuté via l’opcode 0x0F 0x05 (lecture à RIP-2),
+  puis affichage d’un appel complet « name(args) = ret ».
+- Récupération architecture x86_64: orig_rax (id), rdi/rsi/rdx/r10/r8/r9
+  (6 args), rax (retour).
+- Lecture de chaînes: PTRACE_PEEKDATA par mots jusqu’à ‘\0’.
+- Table de noms d’appels: sous-ensemble courant (read, write, openat, …).
+- Formatage:
+  - défaut: en hex (ex: write(0x1, 0x..., 0x4) = 0x4),
+  - -s: entiers décimaux et chaînes si détectées.
+
+Remarques:
+- La détection « structures détaillées » n’est pas implémentée (hors scope
+  minimal). Les pointeurs non-chaînes sont affichés en entier décimal avec -s.

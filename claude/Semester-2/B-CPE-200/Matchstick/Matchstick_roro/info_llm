@@ -1,0 +1,141 @@
+# Matchstick - Strategic Game Implementation
+
+## Project Overview
+Matchstick is a classic strategic game implementation where two players take turns removing matchsticks from lines, with the goal of forcing the opponent to take the last matchstick. This implementation features an intelligent AI opponent using optimal game theory strategies.
+
+## Technical Architecture
+
+### Core Components
+1. **Game Engine (`main.c`)**: Main game loop, player alternation, and win condition management
+2. **Game Initialization (`game_init.c`)**: Dynamic board creation and memory management
+3. **Display System (`display.c`)**: ASCII-based visual representation of the game board
+4. **Game Logic (`game_logic.c`)**: Move validation, board state management, and game rules
+5. **Player Input (`player_input.c`)**: User input handling with validation and error recovery
+6. **AI Strategy (`ai_logic.c`)**: Advanced AI using NIM-sum calculations for optimal play
+7. **Utilities (`utils.c`)**: Helper functions for parsing and error handling
+
+### Key Features
+- **Dynamic Board Generation**: Creates pyramid-shaped matchstick arrangements
+- **Intelligent AI**: Implements optimal NIM game strategy with fallback random moves
+- **Input Validation**: Comprehensive error checking for user moves
+- **Memory Management**: Proper allocation and cleanup of dynamic game structures
+- **Strategic AI**: Uses mathematical game theory for competitive gameplay
+
+### Data Structures
+
+#### Game State Structure
+```c
+typedef struct game_s {
+    int **board;           // 2D array representing matchstick positions
+    int lines;             // Number of lines in the game
+    int max_matches;       // Maximum matches removable per turn
+    int total_matches;     // Total matches in the game
+    int current_player;    // Current player (0=human, 1=AI)
+} game_t;
+```
+
+### Game Rules
+- **Board Layout**: Pyramid with line i containing (2*i-1) matchsticks
+- **Turn-based**: Players alternate removing 1 to max_matches from any single line
+- **Removal Direction**: Matchsticks removed from right to left
+- **Win Condition**: Player who takes the last matchstick loses
+- **Line Selection**: Must specify valid line number and match count
+
+### AI Strategy Implementation
+
+#### NIM-Sum Algorithm
+The AI uses the mathematical NIM-sum (XOR of all line counts) to determine optimal moves:
+- **Winning Position**: NIM-sum ≠ 0, AI can force a win
+- **Losing Position**: NIM-sum = 0, AI makes random defensive moves
+- **Optimal Move**: Find move that makes NIM-sum = 0 for opponent
+
+#### Strategy Logic
+```c
+int calculate_nim_sum(game_t *game) {
+    int nim_sum = 0;
+    for (int i = 0; i < game->lines; i++) {
+        nim_sum ^= count_line_matches(game, i);
+    }
+    return nim_sum;
+}
+```
+
+### Input/Output System
+- **Board Display**: ASCII art with numbered lines and visual matchstick representation
+- **User Interface**: Clear prompts for line selection and match count
+- **Error Handling**: Informative error messages with retry functionality
+- **Game Feedback**: AI move announcements and game outcome messages
+
+### Memory Management
+- **Dynamic Allocation**: Board size determined at runtime
+- **Cleanup System**: Proper deallocation of all dynamic structures
+- **Error Recovery**: Safe cleanup even on allocation failures
+
+### Validation System
+- **Parameter Validation**: Command line argument checking
+- **Move Validation**: Line bounds, available matches, and game rules
+- **Input Sanitization**: Robust parsing of user input with error handling
+
+## Implementation Details
+
+### Board Representation
+- Line i contains (2*i-1) matchsticks arranged in pyramid
+- Each matchstick represented as 1 (present) or 0 (removed)
+- Visual display shows '*' borders and '|' for matchsticks
+
+### Error Handling
+- Invalid line numbers: Out of range detection
+- Empty lines: Prevention of moves on exhausted lines
+- Match limits: Enforcement of per-turn maximum
+- Input errors: Graceful recovery with re-prompting
+
+### AI Behavior
+- **Optimal Play**: Uses game theory when in winning position
+- **Defensive Play**: Random moves when in losing position
+- **Move Announcement**: Clear communication of AI decisions
+- **Strategy Adaptation**: Responds to game state changes
+
+## Game Flow
+1. **Initialization**: Create board based on command line parameters
+2. **Display**: Show current board state with line numbers
+3. **Player Turn**: Prompt for line and match count, validate move
+4. **Move Execution**: Remove matches from right side of selected line
+5. **AI Turn**: Calculate optimal move or random fallback
+6. **Win Check**: Determine if game is over, announce winner
+7. **Cleanup**: Free all allocated memory
+
+## Usage and Testing
+
+### Compilation
+```bash
+make                    # Build the game
+make clean              # Remove object files
+make fclean             # Remove all generated files
+make re                 # Rebuild from scratch
+```
+
+### Execution
+```bash
+./matchstick 4 3        # 4 lines, max 3 matches per turn
+./matchstick 7 2        # 7 lines, max 2 matches per turn
+```
+
+### Testing
+```bash
+make tests_run          # Run comprehensive test suite
+```
+
+## Technical Achievements
+- **Advanced AI**: Mathematical NIM strategy implementation
+- **Dynamic Memory**: Runtime board allocation with proper cleanup
+- **User Experience**: Clear interface with comprehensive error handling
+- **Game Theory**: Optimal strategy calculations using XOR operations
+- **Input Validation**: Robust parsing and error recovery
+- **Modular Design**: Clean separation of concerns across multiple files
+
+## Dependencies
+- **Standard C Library**: malloc, free for memory management
+- **POSIX Functions**: getline for input, time/getpid for randomization
+- **System Calls**: read, write for I/O operations
+
+This implementation provides a complete, professionally-structured matchstick game with competitive AI that uses mathematical optimization to provide challenging gameplay while maintaining clean, maintainable code architecture.

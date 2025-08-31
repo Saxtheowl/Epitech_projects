@@ -1,0 +1,210 @@
+# Minishell2 - Enhanced Command Shell with Pipes and Redirections
+
+## Project Overview
+Minishell2 is an advanced command-line shell that extends the basic Minishell1 functionality by adding sophisticated command processing capabilities including semicolons, pipes, and four types of redirections. This project represents a comprehensive implementation of modern shell features with proper priority management and command parsing.
+
+## Technical Architecture
+
+### Core Components
+1. **Main Controller (`main.c`)**: Program initialization and entry point
+2. **Environment Manager (`environment.c`)**: Complete environment variable handling system
+3. **Built-in Commands (`builtins.c`)**: Implementation of shell built-in commands
+4. **Advanced Parser (`parser.c`)**: Sophisticated tokenization and parsing system
+5. **Execution Engine (`execution.c`)**: Pipeline and redirection execution manager
+6. **Shell Loop (`shell_loop.c`)**: Main interactive shell processing loop
+7. **Utilities (`utils.c`)**: String manipulation and helper functions
+
+### Enhanced Features
+- **Semicolon Separation (`;`)**: Sequential command execution with independent status tracking
+- **Pipe Operations (`|`)**: Inter-process communication with data streaming between commands
+- **Output Redirection (`>`)**: Standard output redirection to files with truncation
+- **Input Redirection (`<`)**: Standard input redirection from files
+- **Append Redirection (`>>`)**: Standard output redirection with file appending
+- **Heredoc Redirection (`<<`)**: Multi-line input redirection (framework ready)
+- **Complex Pipelines**: Multi-command chaining with proper file descriptor management
+- **Priority Management**: Correct operator precedence and command grouping
+
+### Data Structures
+
+#### Token System
+```c
+typedef enum {
+    TOKEN_COMMAND,
+    TOKEN_PIPE,
+    TOKEN_SEMICOLON,
+    TOKEN_REDIRECT_IN,
+    TOKEN_REDIRECT_OUT,
+    TOKEN_REDIRECT_APPEND,
+    TOKEN_REDIRECT_HEREDOC,
+    TOKEN_END
+} token_type_t;
+
+typedef struct token_s {
+    token_type_t type;
+    char *value;
+    struct token_s *next;
+} token_t;
+```
+
+#### Command Structure
+```c
+typedef struct command_s {
+    char **args;                // Command arguments array
+    int arg_count;              // Number of arguments
+    redirect_t *redirects;      // Array of redirections
+    int redirect_count;         // Number of redirections
+    struct command_s *next;     // Next command in pipeline
+} command_t;
+```
+
+#### Pipeline Structure
+```c
+typedef struct pipeline_s {
+    command_t *commands;        // Linked list of commands
+    int command_count;          // Number of commands in pipeline
+    struct pipeline_s *next;    // Next pipeline (after semicolon)
+} pipeline_t;
+```
+
+#### Redirection Structure
+```c
+typedef struct redirect_s {
+    int type;                   // Redirection type (>, <, >>, <<)
+    char *file;                 // Target/source filename
+    int fd;                     // File descriptor for redirection
+} redirect_t;
+```
+
+### Advanced Parsing System
+
+#### Tokenization Process
+- **Pre-processing**: Automatic spacing insertion around operators
+- **Token Recognition**: Identification of commands, operators, and arguments
+- **Operator Handling**: Proper parsing of `|`, `;`, `>`, `<`, `>>`, `<<`
+- **Command Grouping**: Logical grouping of tokens into command structures
+
+#### Parser State Machine
+- **Command Phase**: Collecting command arguments and options
+- **Redirect Phase**: Processing redirection operators and targets
+- **Pipeline Phase**: Building command pipelines connected by pipes
+- **Execution Phase**: Sequential processing of semicolon-separated groups
+
+### Execution Architecture
+
+#### Pipeline Execution
+```c
+int execute_pipeline(shell_t *shell, pipeline_t *pipeline) {
+    // Multi-process pipeline with proper pipe setup
+    // File descriptor management and process synchronization
+    // Built-in command special handling
+    // Error propagation and status collection
+}
+```
+
+#### Redirection Management
+- **File Descriptor Backup**: Saving original stdin/stdout/stderr
+- **Redirection Setup**: Proper dup2 operations for stream redirection
+- **File Opening**: Correct flags and permissions for different redirect types
+- **Cleanup Process**: Restoration of original file descriptors
+
+#### Process Management
+- **Fork/Exec Model**: Standard UNIX process creation pattern
+- **Process Synchronization**: Proper waitpid usage for pipeline coordination
+- **Signal Handling**: Basic signal management for process control
+- **Exit Status**: Correct propagation of command exit codes
+
+### Built-in Commands
+- **cd**: Directory navigation with HOME and path resolution
+- **env**: Environment variable display with proper formatting
+- **setenv**: Environment variable setting with validation
+- **unsetenv**: Environment variable removal
+- **exit**: Shell termination with optional exit code
+
+### Input/Output Processing
+
+#### Command Line Parsing
+- **Getline Integration**: POSIX-compliant line input with dynamic allocation
+- **Interactive Detection**: TTY detection for prompt display
+- **EOF Handling**: Graceful handling of input termination
+
+#### Error Handling
+- **Command Not Found**: PATH resolution with comprehensive error reporting
+- **Permission Errors**: File access validation and error messages
+- **Syntax Errors**: Malformed command detection and user feedback
+- **Resource Errors**: Memory allocation and file descriptor management
+
+### Memory Management
+- **Dynamic Allocation**: Runtime-sized data structures for scalability
+- **Proper Cleanup**: Comprehensive deallocation in all code paths
+- **Token Management**: Complete token list cleanup after processing
+- **Pipeline Cleanup**: Recursive freeing of command and pipeline structures
+
+### Priority and Precedence
+1. **Redirections**: Processed first for each command
+2. **Pipes**: Create inter-command data flow
+3. **Semicolons**: Separate independent command sequences
+4. **Built-ins**: Special handling within pipeline context
+
+## Implementation Highlights
+
+### Advanced Features
+- **Multi-Command Pipelines**: Support for complex command chains like `ls -l | grep test | wc -l`
+- **Mixed Operations**: Proper handling of `mkdir test ; cd test ; ls -a | wc -l > count.txt`
+- **Redirection Combinations**: Multiple redirections per command with proper precedence
+- **Process Isolation**: Each pipeline segment runs in isolated processes
+- **Error Propagation**: Correct exit status handling throughout command chains
+
+### Tokenizer Intelligence
+- **Operator Spacing**: Automatic insertion of spaces around operators for proper parsing
+- **Context Awareness**: Different handling for similar characters in different contexts
+- **Quote Handling**: Framework for future quote and escape sequence support
+- **Error Recovery**: Graceful handling of malformed input with user feedback
+
+### Execution Optimization
+- **Built-in Detection**: Efficient identification of shell built-ins vs external commands
+- **PATH Caching**: Optimized command path resolution with proper error handling
+- **File Descriptor Management**: Minimal descriptor usage with proper cleanup
+- **Process Minimization**: Single process for simple commands, multi-process for pipelines
+
+## Usage Examples
+
+### Basic Operations
+```bash
+./mysh
+$> ls ; pwd ; echo "hello world"
+$> ls -l | wc -l
+$> echo "test content" > output.txt
+$> cat < output.txt
+$> echo "more content" >> output.txt
+```
+
+### Advanced Pipelines
+```bash
+$> ls -la | grep "\.c$" | wc -l > c_files_count.txt
+$> mkdir testdir ; cd testdir ; touch file1 file2 ; ls | cat
+$> cat /etc/passwd | head -5 | tail -2 | cut -d: -f1
+```
+
+### Complex Command Sequences
+```bash
+$> export TEST=value ; env | grep TEST ; unset TEST ; env | grep TEST
+$> ls nonexistent 2> errors.txt ; echo "Exit status: $?" ; cat errors.txt
+$> (command1 ; command2) | command3 > output.txt
+```
+
+## Technical Achievements
+- **Advanced Shell Parsing**: Complete tokenization and parsing system for complex command structures
+- **Inter-Process Communication**: Full pipeline implementation with proper process coordination
+- **File Descriptor Management**: Sophisticated redirection handling with proper cleanup
+- **Memory Safety**: Comprehensive allocation tracking and cleanup systems
+- **POSIX Compliance**: Standard-compliant implementation of shell features
+- **Error Handling**: Robust error detection and reporting throughout the system
+
+## Dependencies
+- **Standard C Library**: malloc, free, stdio functions for basic operations
+- **POSIX Functions**: fork, execve, wait, pipe, dup2 for process and IPC management
+- **File Operations**: open, close, read, write with proper flag handling
+- **System Calls**: stat, access for file system interaction
+- **String Processing**: Enhanced parsing with strtok_r for thread safety
+
+This implementation provides a production-quality shell with advanced command processing capabilities, comprehensive error handling, and optimal resource management for complex multi-command scenarios.

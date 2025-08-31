@@ -1,0 +1,25 @@
+Date de fin: 2025-08-31
+
+Compréhension du sujet:
+- Lire en continu des températures (float) sur l'entrée standard jusqu'à STOP.
+- Après suffisamment de données (période n):
+  - g: moyenne des hausses positives sur la fenêtre glissante (n deltas),
+  - r: évolution relative par rapport à la valeur d’il y a n jours (arrondie au %),
+  - s: écart-type des n dernières valeurs,
+  - détecter et signaler rapidement un changement de tendance (switch).
+- À la fin: nombre total de switches et les 5 valeurs les plus « weird ».
+
+Stratégie:
+- Parsing de l’argument period, support de -h (SYNOPSIS/DESCRIPTION).
+- Stockage dynamique des valeurs, calculs incrémentaux par fenêtre:
+  - s via sqrt(mean(x^2) - mean(x)^2),
+  - r = round(((last - value[n]) / value[n]) * 100),
+  - g = somme des deltas positifs des n derniers deltas / n.
+- Détection de switch: changement de signe de r (± → ∓, ou via zéro).
+- Weirdness: score |z| = |(x - mean)/s| quand s>0, top 5 en fin.
+
+Réalisation:
+- Binaire C: Makefile avec all/clean/fclean/re, pas de sudo.
+- Modules: args, io, stats, weird, main. Style Epitech.
+- Respect du format d’affichage et des cas nan avant suffisamment de données.
+

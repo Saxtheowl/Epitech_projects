@@ -1,0 +1,44 @@
+##
+## EPITECH PROJECT, 2024
+## MyHunter
+## File description:
+## Mock Makefile for my_hunter without CSFML
+##
+
+CC = gcc
+
+CFLAGS = -Wall -Wextra -Werror -g -std=c99
+
+NAME = my_hunter
+
+SRCDIR = src
+INCDIR = include
+TESTDIR = tests
+
+SOURCES = $(SRCDIR)/mock_main.c
+
+OBJECTS = $(SOURCES:.c=.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJECTS)
+	$(CC) -o $(NAME) $(OBJECTS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJECTS)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+tests_run:
+	@echo "Running mock tests for my_hunter..."
+	@gcc -o test_my_hunter $(TESTDIR)/test_main.c -DMOCK_VERSION
+	@./test_my_hunter
+	@rm -f test_my_hunter
+
+.PHONY: all clean fclean re tests_run

@@ -1,0 +1,36 @@
+Date de fin: 2025-08-31
+
+Compréhension du sujet:
+- Deux modes:
+  - links: degré de séparation entre deux personnes selon FR.
+  - plots: afficher la liste ordonnée des noms, la matrice des plus courts
+    chemins (<= n) et des chaînes de complot pour éliminer chaque ennemi
+    direct de la Reine (personnes complotant contre "Cersei Lannister").
+- FR: relations d'amitié réciproques (graphe non orienté).
+- CR: complots orientés (qui complote contre qui), pas nécessairement réciproques.
+- Erreurs → stderr, code 84. « -- help » affiche l’usage.
+
+Stratégie:
+- Parser FR et CR au format des exemples (phrases en anglais).
+- Construire un graphe FR (adjacence) et CR (orienté, sorties/entrées).
+- Calculer toutes les distances FR via BFS (une BFS par source).
+- links: BFS entre les deux personnes, afficher -1 si non connectés.
+- plots: noms triés alphabétiquement (affichage), matrice des distances
+  FR bornée à n (sinon 0), puis pour chaque ennemi (CR: ? -> Cersei),
+  rechercher une chaîne CR de complot depuis un « close friend » (distance
+  FR ≤ n) jusqu’à l’ennemi (BFS sur CR inversé). Affichage de la chaîne
+  s’il en existe, sinon message d’impossibilité. Bilan final: "safe"/"treason".
+
+Réalisation:
+- Code C en modules: parse, fr_cr, graph, links, plots, utils.
+- Matrices dynamiques avec reallocation sûre au fur et à mesure des noms.
+- BFS pour distances FR, BFS sur CR inversé pour remonter les chaînes.
+- Makefile avec cibles all/clean/fclean/re.
+
+Remarques:
+- L’ordre exact des chaînes de complot peut varier suivant la politique de
+  sélection (plus court chemin CR, proche ami le plus proche de la cour,
+  ordre alphabétique). Le code actuel cherche une chaîne valide pour chaque
+  ennemi, privilégie une solution trouvée rapidement en respectant l’ordre
+  alphabétique d’exploration des nœuds.
+
