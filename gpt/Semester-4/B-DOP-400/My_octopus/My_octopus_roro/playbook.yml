@@ -1,0 +1,43 @@
+#
+# EPITECH PROJECT, 2025
+# My_octopus
+# File description:
+#   Ansible playbook to deploy poll app
+#
+
+- name: Base configuration on all nodes
+  hosts: all
+  become: true
+  roles:
+    - base
+
+- name: Redis node
+  hosts: redis
+  become: true
+  roles:
+    - redis
+
+- name: PostgreSQL node
+  hosts: postgresql
+  become: true
+  roles:
+    - postgresql
+
+- name: Poll web client
+  hosts: poll
+  become: true
+  roles:
+    - poll
+
+- name: Worker service
+  hosts: worker
+  become: true
+  roles:
+    - worker
+
+- name: Result web client
+  hosts: result
+  become: true
+  roles:
+    - result
+

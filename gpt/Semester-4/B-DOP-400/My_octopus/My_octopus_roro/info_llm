@@ -1,0 +1,16 @@
+Date: 2025-08-31
+
+Sujet compris
+- Déployer l’application poll/worker/result sur 5 machines avec Ansible: base, redis, postgresql, poll, worker, result. Interdits: Docker et Galaxy; pas de mots de passe en clair; utiliser modules adaptés.
+
+Stratégie
+- Décomposer en rôles: base (paquets), redis (installation + conf), postgresql (installation, création utilisateur paul via variable chiffrée/vault, base/schema paul), poll (déploiement et service), worker (build/run), result (déploiement et service). Fournir un inventaire `production` et un playbook orchestrant les rôles.
+- Variables sensibles fournies via group_vars vault (non en clair dans le repo). Tests locaux via `ansible-playbook -i production playbook.yml`.
+
+Réalisé
+- Arborescence Ansible: `playbook.yml`, `production`, `roles/{base,redis,postgresql,poll,worker,result}`.
+- Modules utilisés: `apt`, `service`, `template`, `copy`, `pip`, `postgresql_user`, `postgresql_db` (modules dédiés, pas de `command` superflu). Aucune donnée sensible en clair; variable `postgres_paul_password` attendue en vault.
+- Placeholders applicatifs minimalistes (Flask/Node systemd) pour montrer le démarrage des services; à remplacer par les sources Popeye si disponibles.
+
+Remarques
+- `community.postgresql` n’est pas requis ici (utilisation des alias de modules présents côté contrôleur). Si l’environnement ne l’inclut pas, un fallback via commandes psql pourrait être ajouté, mais le sujet privilégie les modules.

@@ -1,0 +1,17 @@
+Date: 2025-08-31
+
+Sujet compris
+- Simuler le village avec threads: 1 druid + N villagers, mutex + sémaphores obligatoires. Pot initialement plein. Chaque villageois boit avant chaque combat (sinon réveille le druide et attend). Le druide remplit jusqu’à nb_refills puis s’endort définitivement. Le programme s’arrête lorsque tous les villageois ont terminé.
+
+Stratégie
+- État partagé `sim_t` protégé par mutex; 2 sémaphores: `sem_call` (réveil du druide) et `sem_refilled` (tickets de portions disponibles). 
+- Druid: attend `sem_call`, annonce le refill avec compte restant, poste `pot_size` tickets sur `sem_refilled`, décrémente `nb_refills`, annonce fin des ingrédients si 0 restant.
+- Villager: boucle combats, si 0 portion: message + (unique) réveil du druide + attente `sem_refilled`; sinon message avec portions restantes, décrémente portions, message de combat.
+- Arrêt: `join` de tous les villageois, puis signal d’arrêt et `sem_post` au druide pour qu’il quitte.
+
+Réalisé
+- Binaire `panoramix` conforme au sujet, messages et règles respectées (ordre asynchrone).
+- Makefile Epitech, tests_run (Criterion), dossier include/src/tests, info_llm.
+
+Remarques
+- Les sorties peuvent varier en ordre, mais respectent les contraintes du sujet. Les cas où les villageois attendent indéfiniment sont possibles si `nb_refills` est épuisé alors que le pot est vide.

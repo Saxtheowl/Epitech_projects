@@ -1,0 +1,258 @@
+# Tetris - Classic Terminal-Based Puzzle Game
+
+## Project Overview
+Tetris is a comprehensive implementation of the classic 1980s puzzle game using NCurses in a UNIX terminal environment. This project faithfully recreates the Gameboy version rules with falling tetriminos, line clearing mechanics, progressive difficulty, and customizable controls. The implementation features dynamic tetrimino loading, real-time gameplay, and a sophisticated display system.
+
+## Technical Architecture
+
+### Core Components
+1. **Main Controller (`main.c`)**: Program initialization, argument parsing, and game startup
+2. **Configuration System (`config.c`)**: Command-line argument processing and game settings management
+3. **Tetrimino Manager (`tetrimino.c`)**: Dynamic piece loading, rotation, and management system
+4. **Game State Engine (`game_state.c`)**: Complete game state management with board, scoring, and level progression
+5. **Movement System (`movement.c`)**: Piece movement, rotation, and collision detection
+6. **Display Engine (`display.c`)**: Full NCurses-based graphical interface with colors and animations
+7. **Game Loop (`game_loop.c`)**: Real-time game loop with timing, input handling, and game flow
+8. **Utilities (`utils.c`)**: String processing, time formatting, and helper functions
+
+### Key Features
+- **Dynamic Tetrimino Loading**: Automatic discovery and parsing of `.tetrimino` files from dedicated directory
+- **NCurses Graphics**: Full-color terminal interface with borders, info panels, and real-time updates
+- **Customizable Controls**: Complete key remapping for all game functions (movement, rotation, pause, quit)
+- **Progressive Difficulty**: Level-based speed increase with score multipliers
+- **Debug Mode**: Comprehensive diagnostic output showing all configuration and loaded pieces
+- **Flexible Board Size**: Configurable game board dimensions via command-line arguments
+- **Next Piece Preview**: Optional display of upcoming tetrimino with toggle option
+
+### Data Structures
+
+#### Tetrimino Structure
+```c
+typedef struct tetrimino_s {
+    char name[MAX_NAME_LENGTH];    // Piece identifier from filename
+    int width;                     // Piece width in grid units
+    int height;                    // Piece height in grid units
+    int color;                     // NCurses color code for display
+    char **shape;                  // 2D array representing piece shape
+    int valid;                     // Validity flag for error handling
+} tetrimino_t;
+```
+
+#### Game Configuration
+```c
+typedef struct game_config_s {
+    int level;                     // Starting difficulty level
+    int key_left;                  // Left movement key code
+    int key_right;                 // Right movement key code
+    int key_turn;                  // Rotation key code
+    int key_drop;                  // Fast drop key code
+    int key_quit;                  // Game exit key code
+    int key_pause;                 // Pause/resume key code
+    int map_rows;                  // Board height in cells
+    int map_cols;                  // Board width in cells
+    int show_next;                 // Next piece preview flag
+    int debug_mode;                // Debug information flag
+} game_config_t;
+```
+
+#### Game State Management
+```c
+typedef struct game_state_s {
+    int **board;                   // 2D game board with placed pieces
+    int score;                     // Current player score
+    int high_score;                // Session high score
+    int lines_cleared;             // Total lines cleared counter
+    int level;                     // Current difficulty level
+    int running;                   // Game active flag
+    int paused;                    // Game pause state
+    time_t start_time;             // Game start timestamp
+    tetrimino_t *current_piece;    // Currently falling piece
+    tetrimino_t *next_piece;       // Next piece to spawn
+    int current_x;                 // Current piece X position
+    int current_y;                 // Current piece Y position
+    int current_rotation;          // Current piece rotation (0-3)
+    double fall_speed;             // Milliseconds between automatic falls
+    clock_t last_fall;             // Timestamp of last automatic fall
+} game_state_t;
+```
+
+### Tetrimino Loading System
+
+#### File Format Processing
+- **Header Parsing**: `width height color_code` format validation
+- **Shape Loading**: Character-by-character shape matrix construction
+- **Error Handling**: Comprehensive validation with graceful degradation
+- **Alphabetical Sorting**: Automatic ordering for consistent debug output
+
+#### Dynamic Discovery
+```c
+int load_tetriminos(game_t *game) {
+    // Automatic directory scanning for .tetrimino files
+    // Filename-based piece naming system
+    // Runtime validation and error reporting
+    // Alphabetical sorting for debug consistency
+}
+```
+
+### Game Mechanics Implementation
+
+#### Collision Detection
+- **Boundary Checking**: Board edge validation for all piece positions
+- **Overlap Detection**: Existing piece collision prevention
+- **Rotation Validation**: Space requirement checking for piece rotation
+- **Multi-point Validation**: Complete piece shape collision testing
+
+#### Line Clearing Algorithm
+```c
+int check_lines(game_t *game) {
+    // Top-to-bottom line completion scanning
+    // Simultaneous multiple line clearing support
+    // Gravity simulation for remaining pieces
+    // Score calculation with level multipliers
+}
+```
+
+#### Level Progression System
+- **Dynamic Speed**: Fall speed increases proportionally to level
+- **Score Multipliers**: Higher levels provide greater scoring rewards  
+- **Line-based Advancement**: Every 10 cleared lines increases level
+- **Exponential Difficulty**: Speed progression follows classic Tetris formula
+
+### NCurses Display Architecture
+
+#### Multi-Panel Interface
+1. **Game Board**: Central playing field with piece visualization
+2. **Next Piece Preview**: Upcoming tetrimino display with border
+3. **Information Panel**: Score, level, lines, timer, and high score
+4. **Status Indicators**: Pause state and game over notifications
+
+#### Color System
+```c
+void init_ncurses(void) {
+    // Full color pair initialization for 7 tetrimino colors
+    // Background/foreground color management
+    // Color attribute handling for piece differentiation
+}
+```
+
+#### Real-time Updates
+- **Non-blocking Input**: Continuous input polling without game interruption
+- **Smooth Animation**: Proper timing for piece falling and clearing effects
+- **Border Drawing**: ASCII art borders with proper character positioning
+- **Dynamic Resizing**: Terminal size validation and error handling
+
+### Input Processing System
+
+#### Key Mapping Flexibility
+- **Arrow Key Support**: Default movement controls with proper key code handling
+- **Custom Key Binding**: Complete remapping of all game functions
+- **Special Key Handling**: Space bar, control characters, and extended keys
+- **Input Validation**: Comprehensive key code parsing and error handling
+
+#### Game Flow Control
+```c
+int handle_input(game_t *game) {
+    // Non-blocking input processing
+    // Pause state management
+    // Movement and rotation command processing
+    // Game exit handling
+}
+```
+
+### Command-Line Interface
+
+#### Comprehensive Options
+- **Help System**: Complete usage information display
+- **Level Setting**: Starting difficulty configuration
+- **Key Remapping**: Individual key assignment for all functions
+- **Board Customization**: Custom dimensions with validation
+- **Debug Features**: Comprehensive diagnostic information output
+- **Preview Control**: Next piece display toggle
+
+#### Debug Mode Features
+```
+*** DEBUG MODE ***
+Key Left : ^EOD               // Arrow key representation
+Key Right : ^EOC              // Proper key code display
+Key Turn : ^EOA               // Special character handling
+Key Drop : ^EOB               // Default assignments
+Key Quit : q                  // Character keys
+Key Pause : (space)           // Space bar indication
+Next : Yes                    // Preview setting
+Level : 1                     // Starting level
+Size : 20*10                  // Board dimensions
+Tetriminos : 7               // Total pieces loaded
+[Individual piece information with shapes and colors]
+Press any key to start Tetris
+```
+
+### Memory Management
+- **Dynamic Allocation**: Runtime-sized structures for all game components
+- **Comprehensive Cleanup**: Proper deallocation in all exit paths
+- **Error Recovery**: Safe memory handling during allocation failures
+- **Shape Matrix Management**: 2D array allocation and cleanup for tetrimino shapes
+
+### File I/O Processing
+- **Directory Scanning**: Automatic tetrimino file discovery
+- **Format Validation**: Strict adherence to tetrimino file format
+- **Error Tolerance**: Graceful handling of malformed files
+- **Path Management**: Secure file path construction and validation
+
+## Advanced Features
+
+### Rotation Algorithm
+- **90-Degree Rotation**: Clockwise piece rotation with collision checking
+- **Matrix Transformation**: Proper 2D array rotation mathematics
+- **Boundary Validation**: Rotation space requirement verification
+- **Failure Handling**: Graceful rotation denial when space insufficient
+
+### Timing System
+- **Millisecond Precision**: High-resolution timing for smooth gameplay
+- **Level-based Speed**: Exponential fall speed calculation
+- **Input Responsiveness**: Immediate response to player commands
+- **Pause Functionality**: Complete timing suspension during pause
+
+### Score System
+- **Line-based Scoring**: Points awarded for completed lines
+- **Level Multipliers**: Higher levels provide increased scoring
+- **High Score Tracking**: Session-based score persistence
+- **Timer Display**: Formatted game duration tracking
+
+## Technical Achievements
+- **Complete NCurses Implementation**: Full-featured terminal graphics with colors and borders
+- **Dynamic Content Loading**: Runtime tetrimino discovery and validation system
+- **Real-time Game Engine**: Precise timing with non-blocking input processing
+- **Comprehensive Configuration**: Complete customization through command-line arguments
+- **Robust Error Handling**: Graceful degradation and informative error messages
+- **Memory-safe Implementation**: Proper allocation tracking and cleanup procedures
+
+## Dependencies
+- **NCurses Library**: Terminal graphics, color management, and input handling
+- **Standard C Library**: File I/O, memory management, and string processing
+- **POSIX Functions**: Directory scanning, time management, and system calls
+- **GNU Extensions**: Enhanced argument parsing with getopt_long
+
+## Usage Examples
+
+### Basic Gameplay
+```bash
+./tetris                              # Start with default settings
+./tetris -l 5                         # Start at level 5
+./tetris --map-size=15,8             # Custom board size
+./tetris -w                          # Hide next piece preview
+```
+
+### Custom Controls
+```bash
+./tetris -kl 'a' -kr 'd' -kt 'w' -kd 's'    # WASD controls
+./tetris --key-pause='p' --key-quit='e'      # Custom pause/quit keys
+./tetris -kt ' ' -kp 'p'                     # Space for rotation
+```
+
+### Debug and Development
+```bash
+./tetris -d                          # Debug mode with full diagnostics
+./tetris -d --level=3 --map-size=12,6    # Debug with custom settings
+```
+
+This implementation provides a complete, production-quality Tetris game with professional-grade architecture, comprehensive customization options, and robust error handling for an authentic classic gaming experience in the terminal environment.

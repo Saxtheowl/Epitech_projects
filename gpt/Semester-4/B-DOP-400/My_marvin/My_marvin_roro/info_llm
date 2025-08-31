@@ -1,0 +1,19 @@
+Date: 2025-08-31
+
+Sujet compris
+- Jenkins as Code (JCasC) and Job DSL. Provide my_marvin.yml for full Jenkins configuration and a single job_dsl.groovy for all DSL jobs.
+- Constraints: no hardcoded passwords (only env vars), only specified plugins, specific users and role-based permissions, Tools folder, clone-repository job, and an interactive SEED job to create root jobs that poll SCM and run make targets.
+
+Stratégie
+- Encode security realm with allowsSignup=false and users with passwords from env vars.
+- Use role-strategy global roles and minimal permissions (Overall/Administer for admin; exact Job/* perms for ape/gorilla/assist), assign to the right users.
+- Define system message and enable Agent→Master access control (remotingSecurity enabled).
+- Centralize DSL: create Tools folder + clone-repository + SEED, and in the same DSL file, generate jobs at root from parameters (GITHUB_NAME, DISPLAY_NAME) with GitHub project property, SCM poll every minute, ws cleanup, and shell steps: make fclean; make; make tests_run; make clean.
+
+Réalisé
+- my_marvin.yml: JCasC with system message, remoting security, local users (env-based pwds), role-based auth with required roles and assignments.
+- job_dsl.groovy: defines Tools folder, clone-repository job, SEED job, and root job template driven by parameters.
+- Makefile and minimal tests_run target (informational; project is config-only).
+
+Remarques
+- The GitHub SCM is set via the github() DSL method to align with the allowed plugins list. Pre-build cleanup uses ws-cleanup plugin. Jenkins URL is set in location for completeness.

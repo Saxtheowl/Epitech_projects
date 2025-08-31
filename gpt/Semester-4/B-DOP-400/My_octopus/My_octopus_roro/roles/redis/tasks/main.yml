@@ -1,0 +1,25 @@
+#
+# EPITECH PROJECT, 2025
+# My_octopus - redis role
+#
+
+- name: Install Redis server
+  apt:
+    name: redis-server
+    state: present
+
+- name: Deploy Redis configuration
+  template:
+    src: redis.conf.j2
+    dest: /etc/redis/redis.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart redis
+
+- name: Ensure Redis is enabled and running
+  service:
+    name: redis-server
+    state: started
+    enabled: yes
+

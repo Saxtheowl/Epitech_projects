@@ -1,36 +1,24 @@
-Date de fin: 2025-08-31
+Date: 2025-08-31
 
-Compréhension du sujet:
-- Deux modes:
-  - links: degré de séparation entre deux personnes selon FR.
-  - plots: afficher la liste ordonnée des noms, la matrice des plus courts
-    chemins (<= n) et des chaînes de complot pour éliminer chaque ennemi
-    direct de la Reine (personnes complotant contre "Cersei Lannister").
-- FR: relations d'amitié réciproques (graphe non orienté).
-- CR: complots orientés (qui complote contre qui), pas nécessairement réciproques.
-- Erreurs → stderr, code 84. « -- help » affiche l’usage.
+Sujet compris
+- Deux modes: --links (degré de séparation entre deux personnes dans le fichier d'amitiés) et --plots (affiche les noms triés, la matrice des distances d'amitié <= n, puis propose des chaînes de conspiration pour éliminer tous les ennemis directs de la Reine).
+- Amitiés réciproques (graphe non orienté). Complots orientés (u -> v signifie «u complote contre v»). La «Reine» est Cersei Lannister et les «amis proches» sont à distance d'amitié <= n de la Reine.
 
-Stratégie:
-- Parser FR et CR au format des exemples (phrases en anglais).
-- Construire un graphe FR (adjacence) et CR (orienté, sorties/entrées).
-- Calculer toutes les distances FR via BFS (une BFS par source).
-- links: BFS entre les deux personnes, afficher -1 si non connectés.
-- plots: noms triés alphabétiquement (affichage), matrice des distances
-  FR bornée à n (sinon 0), puis pour chaque ennemi (CR: ? -> Cersei),
-  rechercher une chaîne CR de complot depuis un « close friend » (distance
-  FR ≤ n) jusqu’à l’ennemi (BFS sur CR inversé). Affichage de la chaîne
-  s’il en existe, sinon message d’impossibilité. Bilan final: "safe"/"treason".
+Stratégie
+- Parser FR pour bâtir la liste des noms (ordre d'apparition) et les arêtes d'amitié non orientées. Parser CR en vérifiant que tous les noms existent dans FR.
+- Construire deux graphes: amitiés (non orienté) et complots (orienté).
+- --links: BFS sur le graphe d'amitiés pour obtenir le plus court chemin entre P1 et P2 (on renvoie la distance, -1 si non connecté).
+- --plots: 
+  1) Afficher les noms en ordre alphabétique, puis la matrice des plus courtes distances d'amitié, tronquée à n (valeur 0 si > n ou non atteignable, diagonale 0).
+  2) Trouver les ennemis directs: u tels que u -> Reine dans CR.
+  3) Pour chaque ennemi direct E, chercher une chaîne A -> ... -> E où A est un ami proche (distance(Reine, A) <= n). Recherche par BFS sur le graphe des complots inversé, avec priorités: ne pas choisir en priorité un allié qui complote contre la Reine, puis le plus proche de la Reine, puis ordre alphabétique.
+  4) Afficher chaque chaîne trouvée; si aucune n'est possible pour un ennemi, afficher «No conspiracy possible against X». Résumer par «The stone is safe!» si tous couverts, sinon trahison.
 
-Réalisation:
-- Code C en modules: parse, fr_cr, graph, links, plots, utils.
-- Matrices dynamiques avec reallocation sûre au fur et à mesure des noms.
-- BFS pour distances FR, BFS sur CR inversé pour remonter les chaînes.
-- Makefile avec cibles all/clean/fclean/re.
+Réalisé
+- Arborescence conforme Epitech: include/, src/, tests/, Makefile, info_llm.
+- Makefile avec all/clean/fclean/re, compilation incrémentale, tests_run (Criterion + coverage flags) et binaire game_of_stones.
+- Implémentations: parsing (FR/CR), strings utilitaires, graphes (construction, BFS, distances), modes links/plots, et sorties (usage, noms, matrice, chaînes).
+- Un test Criterion minimal pour vérifier l'outillage.
 
-Remarques:
-- L’ordre exact des chaînes de complot peut varier suivant la politique de
-  sélection (plus court chemin CR, proche ami le plus proche de la cour,
-  ordre alphabétique). Le code actuel cherche une chaîne valide pour chaque
-  ennemi, privilégie une solution trouvée rapidement en respectant l’ordre
-  alphabétique d’exploration des nœuds.
-
+Remarques
+- L'algorithme de chaînes suit les règles du sujet et applique des priorités lors de la sélection d'alliés. Les formats d'affichage suivent les exemples du PDF.

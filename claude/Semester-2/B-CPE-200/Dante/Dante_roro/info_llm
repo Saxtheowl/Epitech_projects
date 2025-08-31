@@ -1,0 +1,256 @@
+# Dante's Star - Advanced Maze Generation and Solving System
+
+## Project Overview
+Dante's Star is a sophisticated dual-component system for maze generation and pathfinding, inspired by Dante's journey through the nine circles of Hell. This project implements both perfect and imperfect maze generation algorithms alongside an optimized BFS-based maze solver, providing a complete maze processing pipeline with emphasis on performance and algorithmic efficiency.
+
+## Technical Architecture
+
+### Core Components
+1. **Generator Module (`generator/`)**: Advanced maze generation using recursive backtracking
+2. **Solver Module (`solver/`)**: BFS-based pathfinding with optimal solution discovery
+3. **Shared Headers (`include/`)**: Common data structures and function declarations
+4. **Utility System (`solver/utils.c`)**: Shared maze manipulation and memory management
+5. **Test Suite (`tests/`)**: Comprehensive validation and performance testing
+
+### Dual Binary Architecture
+The project follows Epitech requirements with separate executable programs:
+- **`generator/generator`**: Maze creation binary with perfect/imperfect options
+- **`solver/solver`**: Maze solving binary with BFS pathfinding algorithm
+
+### Key Features
+- **Perfect Maze Generation**: Loop-free mazes using recursive backtracking algorithm
+- **Imperfect Maze Generation**: Cluster-containing mazes with additional path connections
+- **Breadth-First Search Solver**: Optimal pathfinding with guaranteed shortest solutions
+- **ASCII Format Support**: Standard maze format with 'X' walls, '*' paths, and 'o' solutions
+- **Performance Optimization**: Efficient algorithms suitable for large maze dimensions
+- **Memory Management**: Comprehensive allocation tracking and cleanup procedures
+
+## Data Structures
+
+### Maze Structure
+```c
+typedef struct maze_s {
+    char **grid;           // 2D character array representing maze layout
+    int width;             // Maze width in cells
+    int height;            // Maze height in cells  
+} maze_t;
+```
+
+### Point Structure
+```c
+typedef struct point_s {
+    int x;                 // X coordinate
+    int y;                 // Y coordinate
+} point_t;
+```
+
+### Queue System for BFS
+```c
+typedef struct queue_node_s {
+    point_t point;         // Point data
+    struct queue_node_s *next;  // Next node in queue
+} queue_node_t;
+
+typedef struct queue_s {
+    queue_node_t *front;   // Queue front pointer
+    queue_node_t *rear;    // Queue rear pointer
+} queue_t;
+```
+
+## Maze Generation Algorithms
+
+### Perfect Maze Generation - Recursive Backtracking
+```c
+void recursive_backtrack(maze_t *maze, int x, int y, char **visited) {
+    // Mark current cell as visited and create path
+    // Randomly shuffle direction array for maze variety
+    // Recursively explore unvisited neighbors
+    // Carve paths by removing walls between cells
+}
+```
+
+#### Algorithm Features:
+- **Loop-Free Structure**: Guarantees no cycles in generated maze
+- **Complete Connectivity**: Every cell reachable from every other cell
+- **Wall Following Property**: Following any wall leads through entire maze
+- **Randomized Generation**: Different maze layouts on each execution
+- **Optimal Space Usage**: Minimal path-to-wall ratio
+
+### Imperfect Maze Generation
+```c
+void generate_imperfect_maze(maze_t *maze) {
+    // Start with perfect maze as foundation
+    // Add extra path connections to create loops
+    // Validate neighbor connections before creating clusters
+    // Maintain solvability while adding complexity
+}
+```
+
+#### Enhancement Features:
+- **Cluster Creation**: Multiple solution paths and loops
+- **Controlled Randomness**: Strategic placement of additional paths
+- **Neighbor Validation**: Ensures logical path connections
+- **Complexity Scaling**: Extra paths proportional to maze size
+
+## Pathfinding Implementation
+
+### Breadth-First Search Algorithm
+```c
+int bfs_solve(maze_t *maze) {
+    // Initialize BFS queue with starting position (0,0)
+    // Track visited cells and parent relationships
+    // Explore neighbors in four cardinal directions
+    // Reconstruct optimal path from end to start
+    // Mark solution path with 'o' characters
+}
+```
+
+#### BFS Advantages:
+- **Optimal Solution**: Guarantees shortest path discovery
+- **Complete Exploration**: Systematic coverage of all reachable cells
+- **Parent Tracking**: Efficient path reconstruction
+- **Four-Direction Movement**: Standard maze navigation pattern
+
+### Solution Reconstruction
+- **Backward Path Building**: Trace from destination to origin using parent pointers
+- **Path Marking**: Replace path characters with solution markers
+- **Endpoint Preservation**: Maintain start and end positions unchanged
+- **Visual Output**: Clear solution visualization in ASCII format
+
+## Memory Management Architecture
+
+### Dynamic Allocation Strategy
+```c
+maze_t *create_maze(int width, int height) {
+    // Allocate maze structure
+    // Create 2D grid with proper null termination
+    // Initialize all cells as walls
+    // Handle allocation failures gracefully
+}
+```
+
+### Comprehensive Cleanup
+```c
+void free_maze(maze_t *maze) {
+    // Free each grid row individually
+    // Release grid pointer array
+    // Free maze structure itself
+    // Null pointer safety checks
+}
+```
+
+## Performance Characteristics
+
+### Time Complexity Analysis
+- **Perfect Generation**: O(W×H) where W=width, H=height
+- **BFS Solving**: O(W×H) for complete maze exploration
+- **Space Complexity**: O(W×H) for visited arrays and queue storage
+
+### Memory Optimization
+- **Minimal Queue Operations**: Efficient enqueue/dequeue implementations
+- **Visited Array Reuse**: Single allocation for maze dimensions
+- **Parent Pointer Optimization**: Compact path reconstruction storage
+
+## Command-Line Interface
+
+### Generator Usage
+```bash
+./generator width height [perfect]
+```
+- **width**: Maze width in cells (positive integer)
+- **height**: Maze height in cells (positive integer) 
+- **perfect**: Optional flag for perfect maze generation
+- **Default**: Imperfect maze generation without perfect flag
+
+### Solver Usage
+```bash
+./solver maze_file.txt
+```
+- **maze_file.txt**: Input file containing ASCII maze
+- **Output**: Solved maze with 'o' path or "no solution found"
+- **Format**: Standard ASCII with proper line endings
+
+## File Format Specification
+
+### Input Maze Format
+- **Rectangular Structure**: All rows must have equal width
+- **ASCII Characters**: 'X' for walls, '*' for open paths
+- **Start Position**: Top-left corner (0,0)
+- **End Position**: Bottom-right corner (width-1, height-1)
+- **Line Endings**: Standard newline characters except final line
+
+### Solution Output Format
+- **Path Marking**: 'o' characters indicate optimal solution route
+- **Preserved Structure**: Original maze dimensions and wall positions maintained
+- **Clear Visualization**: Easy distinction between walls, paths, and solution
+
+## Build System Architecture
+
+### Hierarchical Makefiles
+```makefile
+# Root Makefile
+all:
+    $(MAKE) -C generator
+    $(MAKE) -C solver
+
+# Individual component Makefiles
+# Proper dependency tracking
+# Standard Epitech rules (re, clean, fclean)
+```
+
+### Compilation Features
+- **Separate Compilation**: Independent building of generator and solver
+- **Shared Headers**: Common interface definitions
+- **Warning Compliance**: Wall and Wextra enabled for code quality
+- **Standard Compliance**: C99 standard enforcement
+
+## Testing and Validation
+
+### Functional Tests
+```bash
+# Basic generation test
+./generator 10 10 > maze.txt
+
+# Perfect maze test  
+./generator 15 8 perfect > perfect_maze.txt
+
+# Solution pipeline test
+./generator 20 12 | ./solver /dev/stdin
+
+# File-based solving
+./solver maze.txt
+```
+
+### Performance Validation
+- **Large Maze Handling**: Testing with dimensions up to 1000x1000
+- **Memory Usage Monitoring**: Ensuring efficient allocation patterns
+- **Algorithm Timing**: Measuring generation and solving speeds
+- **Correctness Verification**: Validating solution optimality
+
+## Error Handling
+
+### Comprehensive Validation
+- **Argument Checking**: Proper command-line parameter validation
+- **File Operations**: Robust file reading with error reporting
+- **Memory Allocation**: Graceful failure handling with cleanup
+- **Maze Format**: Input validation for proper ASCII format
+
+### Exit Codes
+- **Success (0)**: Normal program completion
+- **Error (84)**: Epitech standard error code for all failure cases
+
+## Technical Achievements
+- **Dual Algorithm Implementation**: Both generation and solving algorithms in single project
+- **Optimal Pathfinding**: BFS guarantees shortest solution paths
+- **Memory Efficient Design**: Minimal allocation overhead with proper cleanup
+- **Scalable Architecture**: Suitable for large maze dimensions
+- **Standard Compliance**: Full adherence to Epitech project requirements
+- **Performance Optimization**: Efficient algorithms suitable for complex maze analysis
+
+## Dependencies
+- **Standard C Library**: malloc, free, stdio functions for basic operations
+- **File I/O**: fopen, fclose, getline for maze file processing
+- **Random Generation**: srand, rand for randomized maze creation
+- **System Integration**: Proper UNIX tool integration with stdin/stdout
+
+This implementation provides a complete, production-quality maze generation and solving system with optimal algorithms, comprehensive error handling, and efficient resource management suitable for complex maze analysis and pathfinding applications.

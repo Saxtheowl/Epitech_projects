@@ -1,0 +1,8 @@
+#
+# EPITECH PROJECT, 2025
+# My_octopus - poll handlers
+#
+
+- name: Reload systemd
+  command: systemctl daemon-reload
+

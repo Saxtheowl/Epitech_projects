@@ -1,0 +1,16 @@
+Date: 2025-08-31
+
+Sujet compris
+- Recréer malloc/calloc/realloc/reallocarray/free dans une lib partagée `libmy_malloc.so` sans utiliser *alloc/free/mmap/munmap, uniquement brk/sbrk. Stratégie: alignements puissance de 2, break aligné sur multiple de 2 pages, algorithme best-fit.
+
+Stratégie
+- Liste chaînée de blocs contigus avec en-têtes, allocation best-fit, division de bloc, coalescence à la libération.
+- Alignement: tailles arrondies à une puissance de 2 supérieure ou égale à l’alignement machine. Extension du heap via sbrk en arrondissant l’augmentation pour que le break tombe sur un multiple de 2 pages.
+- realloc/reallocarray/calloc gérés selon les specs, avec vérification de débordement.
+
+Réalisé
+- `libmy_malloc.so` exportant les 5 fonctions, implementation sbrk, best-fit, split, coalesce, alignements. Makefile avec cibles Epitech et tests_run.
+- Tests: sanity simple en Criterion et un binaire `tester` liant la lib.
+
+Remarques
+- Implémentation non-thread-safe (le bonus multi-thread n’est pas demandé). Pour correspondre strictement aux tests, des ajustements d’alignement peuvent être faits si requis.

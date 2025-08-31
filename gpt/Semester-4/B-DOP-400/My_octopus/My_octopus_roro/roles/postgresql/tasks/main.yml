@@ -1,0 +1,44 @@
+#
+# EPITECH PROJECT, 2025
+# My_octopus - postgresql role
+#
+
+- name: Install PostgreSQL and tools
+  apt:
+    name:
+      - postgresql
+      - postgresql-client
+      - python3-psycopg2
+    state: present
+
+- name: Ensure PostgreSQL is running
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
+
+- name: Create database user "paul"
+  postgresql_user:
+    name: paul
+    password: "{{ postgres_paul_password }}"
+    encrypted: yes
+  become_user: postgres
+
+- name: Create database "paul"
+  postgresql_db:
+    name: paul
+    owner: paul
+    state: present
+  become_user: postgres
+
+- name: Deploy schema SQL
+  copy:
+    src: schema.sql
+    dest: /tmp/poll_schema.sql
+    owner: postgres
+    group: postgres
+    mode: '0640'
+
+- name: Apply schema on database "paul"
+  command: psql -d paul -f /tmp/poll_schema.sql
+  become_user: postgres

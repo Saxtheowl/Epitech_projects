@@ -1,0 +1,18 @@
+#
+# EPITECH PROJECT, 2025
+# My_octopus - base role
+#
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install base packages
+  apt:
+    name:
+      - git
+      - curl
+      - python3-venv
+    state: present
+

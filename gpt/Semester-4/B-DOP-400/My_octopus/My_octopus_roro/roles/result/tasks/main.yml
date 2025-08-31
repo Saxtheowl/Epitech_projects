@@ -1,0 +1,45 @@
+#
+# EPITECH PROJECT, 2025
+# My_octopus - result role
+#
+
+- name: Install Node.js
+  apt:
+    name:
+      - nodejs
+      - npm
+    state: present
+
+- name: Create result app
+  copy:
+    dest: /opt/result/app.js
+    content: |
+      const http = require('http');
+      const server = http.createServer((req, res) => {
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end('Result service running');
+      });
+      server.listen(8080, '0.0.0.0');
+
+- name: Install result systemd service
+  copy:
+    dest: /etc/systemd/system/result.service
+    content: |
+      [Unit]
+      Description=Result Web Client
+      After=network.target
+
+      [Service]
+      ExecStart=/usr/bin/node /opt/result/app.js
+      Restart=always
+
+      [Install]
+      WantedBy=multi-user.target
+  notify: Reload systemd
+
+- name: Enable and start result service
+  service:
+    name: result
+    state: started
+    enabled: yes
+

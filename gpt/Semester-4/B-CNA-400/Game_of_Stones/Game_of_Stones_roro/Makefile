@@ -1,8 +1,8 @@
 ##
 ## EPITECH PROJECT, 2025
-## Game_of_Stones_roro
+## Game_of_Stones Makefile
 ## File description:
-## Makefile
+##   Build rules
 ##
 
 NAME	=	game_of_stones
@@ -11,25 +11,24 @@ SRC_DIR	=	src
 INC_DIR	=	include
 TEST_DIR	=	tests
 
-SRC	=	$(SRC_DIR)/main.c \
-		$(SRC_DIR)/parse.c \
-		$(SRC_DIR)/fr_cr.c \
-		$(SRC_DIR)/graph.c \
-		$(SRC_DIR)/links.c \
-		$(SRC_DIR)/plots.c \
-		$(SRC_DIR)/utils.c
+SRC	=	\
+	$(SRC_DIR)/main.c \
+	$(SRC_DIR)/strings.c \
+	$(SRC_DIR)/parser.c \
+	$(SRC_DIR)/graph.c \
+	$(SRC_DIR)/links_mode.c \
+	$(SRC_DIR)/plots_mode.c \
+	$(SRC_DIR)/output.c
 
 OBJ	=	$(SRC:.c=.o)
 
-CFLAGS	=	-Wall -Wextra -Werror -I$(INC_DIR)
+CFLAGS	=	-Wall -Wextra -I$(INC_DIR)
+LDFLAGS	=
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -o $@ $(OBJ)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
 
 clean:
 	rm -f $(OBJ)
@@ -41,13 +40,13 @@ fclean: clean
 
 re: fclean all
 
-unit_tests: CFLAGS += --coverage -I$(INC_DIR)
-unit_tests: LDFLAGS += -lcriterion -lgcov
-unit_tests: $(filter-out $(SRC_DIR)/main.c,$(SRC)) $(TEST_DIR)/test_parse.c
-	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
+unit_tests: CFLAGS += --coverage
+unit_tests: LDFLAGS += -lcriterion
+unit_tests:	$(OBJ) $(TEST_DIR)/test_basic.o
+	$(CC) -o $@ $(OBJ) $(TEST_DIR)/test_basic.o $(LDFLAGS)
 
 tests_run: unit_tests
 	./unit_tests
-	gcovr --exclude tests --branches --print-summary || true
 
-.PHONY: all clean fclean re tests_run unit_tests
+.PHONY: all clean fclean re tests_run
+

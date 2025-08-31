@@ -1,0 +1,10 @@
+#
+# EPITECH PROJECT, 2025
+# My_octopus - redis handlers
+#
+
+- name: Restart redis
+  service:
+    name: redis-server
+    state: restarted
+

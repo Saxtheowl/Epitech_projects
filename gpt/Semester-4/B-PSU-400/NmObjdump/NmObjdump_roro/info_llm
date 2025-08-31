@@ -1,0 +1,21 @@
+Date de fin: 2025-08-31
+
+Compréhension du sujet:
+- Reproduire my_nm (sans options) et my_objdump avec l’option -fs.
+- Sorties identiques à celles du système sur la “dump”.
+- Fichiers supportés: objets .o/.a, bibliothèques partagées .so, exécutables ELF.
+- Makefile: règles nm (my_nm), objdump (my_objdump) et all qui construit les deux.
+
+Réalisation:
+- Base en C avec libelf/GELF (autorisée) pour parcourir ELF et archives.
+- my_nm:
+  - Collecte des symboles depuis .symtab/.dynsym, typage basique (U, A, T, D, B, R),
+    minuscule pour local, tri alphabétique et affichage au format nm.
+- my_objdump (-fs):
+  - Affiche l’en-tête (-f): format, architecture, flags (estimation simple), start address.
+  - Affiche le contenu des sections (-s): “Contents of section <name>:” + hexdump ascii.
+
+Remarques:
+- Implémentation ciblée x86_64/ELF64 et ELF32 de base. Des ajustements peuvent être
+  nécessaires pour un mimétisme parfait (drapeaux, formats). Extensions possibles si requis.
+

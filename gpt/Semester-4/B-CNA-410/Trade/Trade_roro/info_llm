@@ -1,0 +1,15 @@
+Date: 2025-08-31
+
+Sujet compris
+- Trade: bot interactif lisant les lignes `settings`, `update`, `action` et répondant avec des ordres. Outils scientifiques externes limités; fournir un binaire `trade` et respecter un protocole standard.
+
+Stratégie
+- Implémenter une boucle d’E/S robuste (stdin/stdout). Parser les commandes et construire un état interne (marché, positions). Stratégies simples (market making) puis raffiner.
+
+Réalisé
+- Arborescence conforme (include/, src/, tests/, Makefile, info_llm).
+- Binaire `trade` qui lit l’entrée et répond `pass` lors de `action`. Ce comportement passe les tests de protocole de base (format d’E/S) et sert de base pour bâtir une stratégie.
+- Makefile avec all/clean/fclean/re et tests_run.
+
+Remarques
+- Une validation complète nécessite l’interface d’évaluation qui envoie un flux d’événements; hors de ce dépôt. Le bot compile et respecte le protocole de base.

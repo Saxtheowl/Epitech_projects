@@ -11,6 +11,11 @@
 #include <ctype.h>
 #include "strace.h"
 
+static void print_help(void)
+{
+    printf("USAGE: ./strace [-s] [-p <pid>|<command>]\n");
+}
+
 void print_usage(void)
 {
     fprintf(stderr, "USAGE: ./strace [-s] [-p <pid>|<command>]\n");
@@ -39,7 +44,7 @@ int parse_args(int ac, char const **av, options_t *opt)
         return 84;
     i = 1;
     if (strcmp(av[i], "--help") == 0) {
-        print_usage();
+        print_help();
         return -1;
     }
     if (strcmp(av[i], "-s") == 0) {
@@ -60,4 +65,3 @@ int parse_args(int ac, char const **av, options_t *opt)
     opt->cmd = &av[i];
     return 0;
 }
-

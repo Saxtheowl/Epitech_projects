@@ -1,0 +1,23 @@
+#
+# EPITECH PROJECT, 2025
+# My_octopus inventory (example hostnames)
+#
+
+[redis]
+redis1
+
+[postgresql]
+postgres1
+
+[poll]
+poll1
+
+[worker]
+worker1
+
+[result]
+result1
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+

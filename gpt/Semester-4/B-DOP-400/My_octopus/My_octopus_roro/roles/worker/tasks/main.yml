@@ -1,0 +1,32 @@
+#
+# EPITECH PROJECT, 2025
+# My_octopus - worker role
+#
+
+- name: Install Java runtime
+  apt:
+    name:
+      - default-jre
+    state: present
+
+- name: Install worker service (placeholder)
+  copy:
+    dest: /etc/systemd/system/worker.service
+    content: |
+      [Unit]
+      Description=Worker Service
+      After=network.target
+
+      [Service]
+      ExecStart=/bin/sh -c 'while true; do sleep 60; done'
+      Restart=always
+
+      [Install]
+      WantedBy=multi-user.target
+
+- name: Enable and start worker service
+  service:
+    name: worker
+    state: started
+    enabled: yes
+

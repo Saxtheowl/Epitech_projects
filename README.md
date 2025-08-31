@@ -33,7 +33,7 @@
 
 <p><strong>Step 1:</strong></p>
 <p>
-  First, we set up a dedicated Ubuntu VM to let the agent work freely. Then we clean the repo and launch Codex (for GPT) in CLI with maximum permissions so it can run without constant confirmation, then we use a create a tmux session for each llm agents, then  
+  First, we set up a dedicated Ubuntu VM to let the agent work freely. Then we clean the repo and launch Codex (for GPT) in CLI with maximum permissions so it can run without constant confirmation, then we use a a tmux session for each llm agents, then  
   we launch a prompt like the following:
 </p>
 
