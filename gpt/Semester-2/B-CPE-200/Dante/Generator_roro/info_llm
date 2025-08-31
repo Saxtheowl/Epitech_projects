@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Generate mazes of size WxH with '*' passages and 'X' walls. Optionally perfect (no loops).
+
+Strategy:
+- Use DFS backtracking on a grid, carving cells two steps at a time; ensure start (0,0) and end (w-1,h-1) are open; optionally add random holes for imperfect.
+
+What I did:
+- Implemented `generate_maze` with randomized directions, a CLI `./generator <w> <h> [perfect]`, and a standard Makefile. Output is ASCII without trailing newline at EOF.
+

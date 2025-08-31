@@ -1,0 +1,11 @@
+Date: 2025-08-30
+
+Understanding:
+- Count number of lines, words, and characters in a given text string.
+
+Strategy:
+- Iterate once, track word boundaries with a flag, count newlines and characters.
+
+What I did:
+- Implemented `count_text` and a CLI that prints lines/words/chars, plus tests and Makefile.
+

@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Provide a minimal, buildable scaffold for Redemption so the repository remains consistent and testable.
+
+Strategy:
+- Minimal C main + Makefile and a dummy test. Replace with actual exercises as per subject when implementing.
+
+What I did:
+- Added Makefile (all/run/tests_run), minimal main and a Criterion test.
+

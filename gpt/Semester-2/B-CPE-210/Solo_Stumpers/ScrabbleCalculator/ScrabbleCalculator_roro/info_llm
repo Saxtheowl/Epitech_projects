@@ -1,0 +1,11 @@
+Date: 2025-08-30
+
+Understanding:
+- Compute Scrabble score (English letter values) for the input word; ignore non-letters.
+
+Strategy:
+- Map letters to values via a helper and sum; CLI prints integer score.
+
+What I did:
+- Implemented `scrabble_score`, added unit tests and standard Makefile with coverage target.
+

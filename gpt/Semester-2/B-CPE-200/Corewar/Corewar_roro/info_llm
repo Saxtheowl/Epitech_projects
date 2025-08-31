@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Corewar VM has to load compiled champions (.cor) whose header format is defined (magic, name, size, comment) and execute instructions from an op table.
+
+Strategy:
+- Start with a correct loader for champion files using the official header (op.h) and expose a minimal CLI that validates headers and prints loaded champions. Provide op_tab for later use.
+
+What I did:
+- Implemented header parsing (big-endian fields) with `read_header_from_fd` and a `corewar` CLI: `./corewar file.cor [...]` prints name and size or returns 84 on invalid files. Added `op.h`/`op_tab` definitions and Criterion tests for header acceptance/rejection. Standard Makefile with tests/coverage.
+

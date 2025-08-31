@@ -1,0 +1,14 @@
+Date: 2025-08-30
+
+Understanding:
+- Implement a simple FizzBuzz-like program (named FazzBizz): for numbers from 1 to N, print "Fazz" for multiples of 3, "Bizz" for multiples of 5, and "FazzBizz" for multiples of both; otherwise print the number.
+
+Strategy:
+- Provide a minimal CLI: `./fazzbizz N` with Epitech-compliant structure (include/src/tests/Makefile).
+- Keep functions small and clear, add unit tests for helpers, and a Makefile with `tests_run` and coverage.
+
+What I did:
+- Wrote parsing and multiple-check helpers, and the main loop to print lines.
+- Added unit tests for helpers and a Makefile with all required targets.
+- Ensured code follows Epitech style constraints as much as feasible here.
+

@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Provide a GitHub Actions workflow (Chocolatine) that builds and tests Epitech-style C projects in this repository on push/PR.
+
+Strategy:
+- Add a template workflow YAML that checks out the repo, installs GCC/Make/Criterion/gcovr, builds each `*_roro` project, and runs tests when `tests_run` is present.
+
+What I did:
+- Created `chocolatine.yml` under this project as a reference. To enable in GitHub, copy it to `.github/workflows/chocolatine.yml` at repo root. Added a simple Makefile and this info file.
+

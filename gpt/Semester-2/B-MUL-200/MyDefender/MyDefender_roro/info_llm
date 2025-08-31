@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Provide a minimal, buildable scaffold for MyDefender without external SFML dependency here, to keep the repository consistent and testable.
+
+Strategy:
+- Create a placeholder CLI with a Makefile and a simple test; real graphics would require SFML setup, which is out of scope in this environment.
+
+What I did:
+- Added Makefile (all/run/tests_run), a minimal main with `run_app()`, and a Criterion test that checks it returns 0.
+

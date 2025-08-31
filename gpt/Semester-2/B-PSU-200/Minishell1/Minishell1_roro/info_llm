@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Implement a simple shell (minishell1): read commands, execute via PATH, with basic builtins (env, setenv, unsetenv, cd, exit). No advanced features (pipes, redirections, separators).
+
+Strategy:
+- Copy environment, provide helpers to get/set/unset variables, parse whitespace-separated words, handle builtins, else execve using PATH lookup.
+
+What I did:
+- Implemented env management, tokenizer, PATH search, builtins (env/setenv/unsetenv/cd/exit), main loop with prompt `$> `; Makefile and minimal tests included.
+

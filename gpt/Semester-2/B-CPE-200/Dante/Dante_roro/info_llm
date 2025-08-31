@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Read a rectangular maze ('*' free, 'X' wall) and output a solved version with a path from (0,0) to (w-1,h-1) marked with 'o'.
+
+Strategy:
+- Parse to a flat buffer, BFS to find shortest path, rebuild the output by overlaying 'o' on the original grid rendering (with newlines).
+
+What I did:
+- Implemented parser and BFS solver with CLI `./solver <map>`, plus Makefile and a sanity test verifying a simple path.
+

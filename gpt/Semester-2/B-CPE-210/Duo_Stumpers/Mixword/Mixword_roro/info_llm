@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Mix two words by alternating letters, starting with the first word; when one runs out, append the rest of the other.
+
+Strategy:
+- Two indices and a toggle to pick from a/b; ensure output buffer safety.
+
+What I did:
+- Implemented `mixword`, a CLI, tests, and Makefile with coverage.
+

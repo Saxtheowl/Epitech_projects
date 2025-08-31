@@ -1,0 +1,11 @@
+Date: 2025-08-30
+
+Understanding:
+- Decide if two inputs are anagrams, ignoring case and non-letters.
+
+Strategy:
+- Normalize to lowercase-only letters, sort and compare; expose a CLI: `./anagram s1 s2` outputs a verdict.
+
+What I did:
+- Implemented `normalize` and `is_anagram`, plus simple tests, Makefile with standard targets and `tests_run` + coverage.
+

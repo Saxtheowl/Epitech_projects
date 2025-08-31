@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Solve a labyrinth read from a file. Free cells use '.', walls '#'. Optional 'S' start and 'E' end; fallback to (0,0)→(w-1,h-1).
+
+Strategy:
+- Parse rectangular grid, BFS from start to end, then reconstruct and overlay path with 'o' without altering walls.
+
+What I did:
+- Implemented parser, BFS solver and CLI `./amazed_solver <map>`. Added Makefile with all/clean/fclean/re/tests_run and a basic Criterion test.
+

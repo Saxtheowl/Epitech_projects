@@ -1,0 +1,174 @@
+# My_Top - System Process Monitor
+
+## Project Overview
+My_Top is a complete reimplementation of the Unix `top` command, providing real-time system monitoring capabilities using the ncurses library for terminal-based display. This project demonstrates advanced system programming concepts including process management, file system interfaces, and terminal user interface development.
+
+## Technical Architecture
+
+### Core Components
+1. **System Information Collection** (`system_info.c`)
+   - Reads `/proc/uptime` for system uptime
+   - Parses `/proc/loadavg` for load average metrics
+   - Processes `/proc/meminfo` for memory and swap statistics
+   - Implements real-time system monitoring
+
+2. **Process Information Collection** (`processes.c`)
+   - Scans `/proc` directory for process PIDs
+   - Reads `/proc/[pid]/stat` for process statistics (state, CPU time, memory)
+   - Parses `/proc/[pid]/status` for user ownership information
+   - Reads `/proc/[pid]/comm` for process command names
+   - Implements user filtering and task state counting
+
+3. **Display System** (`display.c`)
+   - Header section with system statistics (time, uptime, users, load average)
+   - Memory information display with configurable units (KiB, MiB, GiB, TiB, PiB, EiB)
+   - Process table with columns: PID, USER, PR, NI, VIRT, RES, SHR, S, %CPU, %MEM, TIME+, COMMAND
+   - Dynamic memory unit formatting for different scales
+
+4. **Input Handling** (`input.c`)
+   - Keyboard navigation (UP/DOWN arrows for process selection)
+   - Memory unit cycling (E for processes, Shift+E for system)
+   - Signal sending capability (K key for kill/signal prompt)
+   - Quit functionality (Q key)
+
+5. **Main Loop** (`main_loop.c`)
+   - ncurses initialization and cleanup
+   - Refresh timing control with configurable delay
+   - Frame counting for limited execution
+   - Non-blocking input handling
+
+### Algorithm Implementation
+
+#### Process Discovery Algorithm
+```c
+1. Open /proc directory
+2. Iterate through directory entries
+3. Filter numeric directory names (PIDs)
+4. For each valid PID:
+   - Read stat file for process statistics
+   - Read status file for user information
+   - Read comm file for command name
+   - Apply user filtering if specified
+5. Count processes by state (running, sleeping, stopped, zombie)
+```
+
+#### Memory Formatting System
+```c
+format_memory(bytes, unit, buffer):
+1. Convert bytes to double
+2. Apply unit scaling (divide by 1024^unit_level)
+3. Format with appropriate suffix (k, m, g, t, p, e)
+4. Handle decimal precision
+```
+
+#### Real-time Refresh System
+```c
+main_loop():
+1. Collect system information
+2. Collect process information
+3. Display header and process table
+4. Handle input events
+5. Sleep for configured delay
+6. Repeat until quit or frame limit reached
+```
+
+## Command Line Interface
+
+### Supported Options
+- `-U <username>`: Filter processes by username
+- `-d <seconds[.cents]>`: Set refresh delay (default: 3.0 seconds)
+- `-n <frames>`: Limit number of refresh frames before exit
+
+### Interactive Commands
+- `q` or `Q`: Quit the program
+- `E`: Cycle through memory units for processes
+- `Shift+E`: Cycle through memory units for system section
+- `UP`/`DOWN` arrows: Navigate through process list
+- `K`: Send signal to selected process
+
+## File Structure
+```
+My_Top_roro/
+├── include/
+│   └── my_top.h          # Header with structures and function declarations
+├── src/
+│   ├── main.c            # Main function and state initialization
+│   ├── arguments.c       # Command-line argument parsing
+│   ├── system_info.c     # System information collection from /proc
+│   ├── processes.c       # Process information collection and filtering
+│   ├── display.c         # ncurses display and formatting functions
+│   ├── input.c           # Keyboard input handling
+│   └── main_loop.c       # Main execution loop and ncurses management
+├── tests/
+│   └── test_main.c       # Unit tests for core functionality
+└── Makefile              # Build configuration with ncurses linking
+```
+
+## Key Features Implemented
+
+### System Monitoring
+- Real-time system uptime display
+- Load average monitoring (1, 5, 15 minute averages)
+- Memory usage statistics (total, free, used, buffers/cache)
+- Swap usage monitoring
+- Task state counting (total, running, sleeping, stopped, zombie)
+
+### Process Display
+- Complete process information table
+- User-based process filtering
+- Process state indicators (R, S, D, T, Z)
+- Memory usage display with multiple unit options
+- CPU time accumulation and display
+- Process priority and nice values
+
+### User Interface
+- Terminal-based display using ncurses
+- Real-time refresh with configurable intervals
+- Interactive process selection
+- Signal sending capability
+- Memory unit cycling
+- Proper terminal cleanup on exit
+
+## Technical Challenges Solved
+
+1. **Proc Filesystem Parsing**
+   - Robust parsing of `/proc/[pid]/stat` with variable field counts
+   - Handling of process disappearance during enumeration
+   - Efficient memory usage for process storage
+
+2. **Real-time Display**
+   - Non-blocking input handling
+   - Smooth refresh timing control
+   - Dynamic terminal size adaptation
+   - Proper ncurses resource management
+
+3. **Memory Management**
+   - Dynamic process array management
+   - Proper cleanup of allocated resources
+   - Safe string handling for process information
+
+4. **System Integration**
+   - User ID to username resolution
+   - Signal sending with proper error handling
+   - Process filtering by ownership
+
+## Performance Considerations
+
+- Efficient /proc directory scanning with early filtering
+- Minimal memory allocation per refresh cycle
+- Optimized display updates to reduce screen flicker
+- Proper resource cleanup to prevent memory leaks
+
+## Compilation and Testing
+
+The project compiles with all Epitech standard flags and links against ncurses library. Unit tests cover argument parsing, memory formatting, time formatting, and system information collection.
+
+## Standards Compliance
+
+- Follows Epitech C coding style guidelines
+- All functions respect 20-line limit
+- Maximum 4 parameters per function
+- Proper error handling with 84 return code
+- Complete Epitech header comments
+
+This implementation demonstrates mastery of system programming concepts, process management, terminal interfaces, and real-time data display in C.

@@ -1,0 +1,16 @@
+RÉSUMÉ DU SUJET
+- Rush2 typique (hypothèse):
+  * step01: trier les lettres par fréquence (entrée via stdin), output les
+    lettres présentes par ordre décroissant.
+  * step02: valider un alphabet de substitution (26 lettres uniques).
+  * step03: encoder (substitution) avec l'alphabet; préserve la casse;
+    stdin→stdout.
+  * step04: décoder (substitution inverse) avec l'alphabet.
+
+STRATÉGIE
+- Implémenter un cœur commun: lecture stdin, validation alphabet, mapping
+  direct et inverse.
+
+RÉALISATION
+- 4 exécutables: `step01`, `step02`, `step03`, `step04`. Makefile commun,
+  tests minimal pour step02.

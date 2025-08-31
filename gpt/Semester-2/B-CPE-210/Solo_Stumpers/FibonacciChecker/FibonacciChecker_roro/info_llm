@@ -1,0 +1,11 @@
+Date: 2025-08-30
+
+Understanding:
+- Check if an integer belongs to the Fibonacci sequence (including 0 and 1).
+
+Strategy:
+- Parse integer input and iterate Fibonacci numbers until reaching or exceeding N; compare equality.
+
+What I did:
+- Implemented parser and `is_fibonacci`, added minimal tests and Makefile with required targets.
+

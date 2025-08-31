@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Validate a Connect4 board (6x7) and report the winner (R or Y) or draw, ensuring gravity and turn counts are consistent.
+
+Strategy:
+- Check characters and counts (R==Y or R==Y+1), ensure each column has no floating tokens, detect four-in-a-row in all directions, and cross-check winner consistency with turn counts.
+
+What I did:
+- Implemented index helpers, gravity validation, winner detection, CLI that prints R/Y/Draw and returns 84 on invalid boards; added tests and Makefile with tests_run + coverage.
+

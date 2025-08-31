@@ -1,0 +1,13 @@
+Date: 2025-08-31
+
+Understanding:
+- Process FASTA files: compute reverse-complement of sequences or print basic statistics.
+
+Strategy:
+- Parse headers ('>') and multi-line sequences; operations:
+  - -r: reverse and complement bases (A<->T/U, C<->G, others→N).
+  - -s: output count of sequences and total base count.
+
+What I did:
+- Implemented file IO, FASTA parser, revcomp, and stats in `src/`; added CLI `./fastatools (-r|-s) file.fasta`, Makefile with tests/coverage, and a couple of unit tests.
+

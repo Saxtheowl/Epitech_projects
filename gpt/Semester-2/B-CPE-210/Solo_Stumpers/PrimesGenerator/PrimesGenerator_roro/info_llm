@@ -1,0 +1,11 @@
+Date: 2025-08-30
+
+Understanding:
+- Generate all prime numbers up to N inclusive and print them space-separated.
+
+Strategy:
+- Trial-division `is_prime`, collect primes into an array, then print.
+
+What I did:
+- Implemented parser, primality test, generator, tests, and a Makefile with the required targets and coverage.
+

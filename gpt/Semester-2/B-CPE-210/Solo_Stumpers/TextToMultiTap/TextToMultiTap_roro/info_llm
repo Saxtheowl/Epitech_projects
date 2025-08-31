@@ -1,0 +1,11 @@
+Date: 2025-08-30
+
+Understanding:
+- Convert text to classic mobile multi-tap sequences with rules: letters map to keypad digits repeated by position; insert a space when two consecutive letters share the same key; space character maps to '0'.
+
+Strategy:
+- Map chars to (key, presses), track previous key to insert separators, and build result safely within buffer.
+
+What I did:
+- Implemented converter and a test for "Hello World" behavior; added Makefile with required targets and coverage.
+

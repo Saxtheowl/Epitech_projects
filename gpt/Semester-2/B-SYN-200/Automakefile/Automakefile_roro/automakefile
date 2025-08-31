@@ -1,0 +1,120 @@
+#!/usr/bin/env sh
+#
+# EPITECH PROJECT, 2025
+# Automakefile
+# File description:
+# Generate a simple Epitech-style Makefile for a C project
+#
+
+set -eu
+
+# Usage info
+usage() {
+    echo "Usage: ./automakefile [--name BIN_NAME] [--include include_dir] [--out Makefile] [src_dir ...]" 1>&2
+}
+
+BIN_NAME="$(basename "$PWD")"
+INCLUDE_DIR="include"
+OUTPUT_FILE="Makefile"
+SRC_DIRS="src"
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --name)
+            shift; BIN_NAME="${1:-$BIN_NAME}" ;;
+        --include)
+            shift; INCLUDE_DIR="${1:-$INCLUDE_DIR}" ;;
+        --out)
+            shift; OUTPUT_FILE="${1:-$OUTPUT_FILE}" ;;
+        -h|--help)
+            usage; exit 0 ;;
+        *)
+            if [ -d "$1" ]; then
+                if [ -z "$SRC_DIRS" ]; then SRC_DIRS="$1"; else SRC_DIRS="$SRC_DIRS $1"; fi
+            else
+                echo "Ignoring unknown arg: $1" 1>&2
+            fi
+            ;;
+    esac
+    shift || true
+done
+
+# Collect sources
+SRCS=""
+for d in $SRC_DIRS; do
+    if [ -d "$d" ]; then
+        for f in $(find "$d" -type f -name '*.c' | sort); do
+            SRCS="$SRCS $f"
+        done
+    fi
+done
+
+SRCS=$(echo "$SRCS" | sed -e 's/^ *//' -e 's/  */ /g')
+
+cat > "$OUTPUT_FILE" <<EOF
+##
+## EPITECH PROJECT, 2025
+## $BIN_NAME - Makefile (generated)
+## File description:
+## Standard Makefile with tests
+##
+
+NAME	=	$BIN_NAME
+
+SRC	=	$SRCS
+
+OBJ	=		replace_wildcard
+
+INCLUDE	=	$INCLUDE_DIR
+
+CC	=	gcc
+CFLAGS	=	-Wall -Wextra -Werror -I\\$(INCLUDE)
+LDFLAGS	=
+
+TEST_NAME	=	unit_tests
+TEST_SRC	=		replace_tests
+TEST_FLAGS	=	\\$(CFLAGS) --coverage
+TEST_LDFLAGS	=	\\$(LDFLAGS) --coverage -lcriterion
+
+.PHONY: all clean fclean re tests_run
+
+all: \\$(NAME)
+
+\\$(NAME): \\$(OBJ)
+	\\$(CC) -o \\$@ \\$^ \\$(LDFLAGS)
+
+%.o: %.c
+	\\$(CC) \\$(CFLAGS) -c \\$< -o \\$@
+
+tests_run: CFLAGS=\\$(TEST_FLAGS)
+tests_run: LDFLAGS=\\$(TEST_LDFLAGS)
+tests_run: \\$(OBJ) \\$(TEST_SRC)
+	\\$(CC) -o \\$(TEST_NAME) \\$(OBJ) \\$(TEST_SRC) \\$(TEST_LDFLAGS)
+	./\\$(TEST_NAME)
+	- gcovr -b -e tests --print-summary
+
+clean:
+	rm -f \\$(OBJ)
+	rm -f *.gcno *.gcda *.gcov
+	rm -f \\$(TEST_NAME)
+
+fclean: clean
+	rm -f \\$(NAME)
+
+re: fclean all
+
+EOF
+
+# Replace placeholders
+OBJS=$(echo "$SRCS" | tr ' ' '\n' | sed -n '/./s/\.c$/.o/p' | tr '\n' ' ')
+if [ -z "$OBJS" ]; then OBJS=""; fi
+sed -i "s|replace_wildcard|$OBJS|" "$OUTPUT_FILE"
+
+TESTS=""
+if [ -d tests ]; then
+    TESTS=$(find tests -type f -name '*.c' | sort | tr '\n' ' ')
+fi
+sed -i "s|replace_tests|$TESTS|" "$OUTPUT_FILE"
+
+echo "Generated $OUTPUT_FILE for binary '$BIN_NAME' with sources:$SRCS" 1>&2
+

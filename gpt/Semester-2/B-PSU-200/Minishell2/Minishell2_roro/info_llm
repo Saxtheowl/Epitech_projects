@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Extend minishell with basic command separators: execute multiple commands separated by ';' in sequence. Keep Minishell1 builtins and PATH execution.
+
+Strategy:
+- Reuse env helpers and tokenizer; add `split_commands` on ';', then run each argv through the same exec path (builtins or execve via PATH).
+
+What I did:
+- Implemented environment management, word/command splitters, builtins (env/setenv/unsetenv/cd/exit), and a main loop with a simple prompt. Makefile and minimal tests included.
+

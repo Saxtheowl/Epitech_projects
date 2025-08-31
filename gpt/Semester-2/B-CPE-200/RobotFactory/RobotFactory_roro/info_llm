@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Provide a minimal Corewar robot assembler to generate valid .cor files (header + program bytes) for use with the Corewar loader/VM.
+
+Strategy:
+- CLI accepts name/comment/output and optional program bytes as hex. Writes the standard header (magic big-endian, padded name/comment, prog_size) and appends code.
+
+What I did:
+- Implemented `robot_assembler` with `write_robot()` and `hex_to_bytes()`, plus a basic test invoking the tool and checking the magic number.
+

@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Reverse-and-add palindrome finder in arbitrary base: starting from N, add its base-B reverse until a palindrome is reached or iteration limit is hit.
+
+Strategy:
+- Convert to digits in base B, check palindrome, compute reverse as integer, iterate up to `-imax` (default 100), support `-n` and optional `-b`.
+
+What I did:
+- Implemented parsing, base conversion helpers, palindrome detection, loop with limit; CLI prints `N iterations result` and returns 84 on invalid/unsolved.
+

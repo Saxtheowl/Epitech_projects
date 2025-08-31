@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Provide a minimal, buildable scaffold for My_paint without graphical deps.
+
+Strategy:
+- Placeholder CLI with Makefile + unit test; real UI requires SFML/graphics.
+
+What I did:
+- Makefile (all/run/tests_run), main with `run_app()`, Criterion test.
+

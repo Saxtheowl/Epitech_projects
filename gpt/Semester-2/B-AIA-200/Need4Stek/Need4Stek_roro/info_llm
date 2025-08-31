@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Implement an AI controller for the Need4Stek simulator: parse LIDAR frames and output driving commands (speed, steering) according to obstacles.
+
+Strategy:
+- Read lines on stdin; when a line starts with "LIDAR:", parse numerical values, compute a simple rule-based control (speed depends on forward clearance; steer towards the widest side), and print commands.
+
+What I did:
+- Wrote a small C AI loop with helpers `parse_lidar` and `compute_controls`, plus a CLI `./ai`. Added Criterion tests for parsing and control logic and a standard Makefile with tests/coverage.
+

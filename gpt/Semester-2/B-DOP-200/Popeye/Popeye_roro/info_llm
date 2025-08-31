@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Provide a DevOps pipeline (Popeye) to build and test the semester projects in a controlled container.
+
+Strategy:
+- Dockerfile with toolchain (gcc/make/criterion/gcovr). Compose/Makefile to run `make -C Semester-2 tests_run` inside the container. This validates all *_roro projects consistently.
+
+What I did:
+- Added Dockerfile, docker-compose.yml, and a Makefile with targets `build`, `up`, `down`, and `test`. The `test` target mounts the repo and runs all tests via the aggregator Makefile at Semester-2 root.
+

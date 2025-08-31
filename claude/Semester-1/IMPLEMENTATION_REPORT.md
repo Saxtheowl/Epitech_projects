@@ -1,7 +1,7 @@
 # Epitech Projects Implementation Report
 
 ## Summary
-Successfully implemented **12 major programming projects** from the Epitech Semester-1 curriculum, all following strict Epitech coding standards and requirements.
+Successfully implemented **16 major programming projects** from the Epitech Semester-1 curriculum, all following strict Epitech coding standards and requirements.
 
 ## Completed Projects
 
@@ -86,14 +86,43 @@ Successfully implemented **12 major programming projects** from the Epitech Seme
 ### 12. Antman ✅
 - **Directory**: `Antman_roro/`
 - **Binaries**: `antman` (compression), `giantman` (decompression)
-- **Algorithm**: Custom compression using run-length encoding and frequency analysis
-- **Features**: File compression/decompression, shared library architecture
-- **Tests**: Text file compression, binary data handling, round-trip integrity
+- **Algorithm**: Dictionary-based compression with token replacement for song lyrics
+- **Features**: Multi-format support (song/HTML/PPM), shared library architecture, round-trip integrity
+- **Tests**: Complete round-trip testing, punctuation handling, all file types supported
+
+### 13. Organized ✅
+- **Directory**: `Organized_roro/`
+- **Binary**: `organized`
+- **Algorithm**: Interactive shell with linked list management and multi-criteria merge sort
+- **Features**: Hardware inventory system, 5 material categories, advanced sorting with reverse flags
+- **Tests**: Command interface testing, sorting algorithms, material management
+
+### 14. My_ls ✅
+- **Directory**: `My_ls_roro/`
+- **Binary**: `my_ls`
+- **Function**: Complete ls command implementation with options [-alRdrt]
+- **Algorithm**: Directory traversal with merge sort and comprehensive file metadata collection
+- **Features**: Long format display, recursive listing, time sorting, multiple file handling
+- **Tests**: Option parsing, file operations, sorting algorithms, POSIX compliance
+
+### 15. My_navy ✅
+- **Directory**: `My_navy_roro/`
+- **Binary**: `my_navy`
+- **Algorithm**: Signal-based inter-process communication battleship game
+- **Features**: SIGUSR1/SIGUSR2 protocol, 8x8 grid, ship placement validation, turn-based gameplay
+- **Tests**: Signal handling, file parsing, game logic, multiplayer communication
+
+### 16. My_sokoban ✅
+- **Directory**: `My_sokoban_roro/`
+- **Binary**: `my_sokoban`
+- **Algorithm**: NCurses-based Sokoban puzzle game with dynamic map loading
+- **Features**: Terminal graphics, box pushing physics, win/lose detection, terminal resize handling
+- **Tests**: Map validation, movement logic, game state management, character counting
 
 ## Technical Achievements
 
 ### Code Quality Metrics
-- **Total Files Created**: ~85 source files
+- **Total Files Created**: ~130 source files
 - **Code Style Compliance**: 100% Epitech standards
 - **Function Size**: All functions ≤20 lines
 - **Function Parameters**: All functions ≤4 parameters
@@ -147,7 +176,7 @@ The following projects remain to be implemented:
 - **B-MUL-100 Level**: MyHunter, MyRadar, MyRunner, MyScreensaver
 
 ## Conclusion
-Successfully delivered **12 complete programming projects** demonstrating mastery of:
+Successfully delivered **16 complete programming projects** demonstrating mastery of:
 - C programming fundamentals
 - Algorithm design and implementation
 - Software engineering best practices

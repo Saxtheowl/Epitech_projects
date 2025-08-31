@@ -1,0 +1,11 @@
+Date: 2025-08-30
+
+Understanding:
+- Apply Caesar cipher with integer shift, preserve case, non-letters unchanged.
+
+Strategy:
+- Parse shift, modular arithmetic on alphabet indexes, output transformed string.
+
+What I did:
+- Implemented cipher and tests, with Makefile and coverage-ready tests target.
+

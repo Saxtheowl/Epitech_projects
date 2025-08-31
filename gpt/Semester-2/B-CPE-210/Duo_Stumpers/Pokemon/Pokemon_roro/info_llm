@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Compute simplified Pokemon type effectiveness for a few core types: fire, water, grass, electric, ground.
+
+Strategy:
+- Case-insensitive type matching, return one of: super effective, not very effective, neutral.
+
+What I did:
+- Implemented `effectiveness` and a CLI that prints the verdict; added basic tests and a standard Makefile.
+

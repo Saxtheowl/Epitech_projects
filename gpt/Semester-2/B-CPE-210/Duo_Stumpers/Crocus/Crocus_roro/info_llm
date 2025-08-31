@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Decide whether string B is a circular rotation of string A.
+
+Strategy:
+- If lengths differ → false. Otherwise test if B is a substring of A+A.
+
+What I did:
+- Implemented `is_rotation` and CLI `./crocus A B` printing Yes/No, with tests and standard Makefile.
+

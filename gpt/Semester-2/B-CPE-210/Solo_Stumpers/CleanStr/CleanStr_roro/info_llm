@@ -1,0 +1,11 @@
+Date: 2025-08-30
+
+Understanding:
+- Normalize a string: lowercase alphanumerics, condense any separators to single spaces, trim edges.
+
+Strategy:
+- Single pass with state to control spaces; expose as `./clean_str "input"`.
+
+What I did:
+- Implemented `clean_string` and a small CLI with tests, Makefile, and coverage target.
+

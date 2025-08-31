@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Given a target and a guess of equal length, output a hint string: uppercase letter if correct position, lowercase if present elsewhere (respecting letter counts), '.' otherwise. Case-insensitive matching.
+
+Strategy:
+- Count target letters, mark exact matches first (consume counts), then fill partial matches with remaining counts.
+
+What I did:
+- Implemented `lingo_hint` and a CLI; added a unit test and Makefile with standard targets and coverage.
+

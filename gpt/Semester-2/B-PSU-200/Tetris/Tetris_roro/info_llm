@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Minimal ASCII Tetris: a single I-piece demo that supports moving left/right/down, rotating, solidifying on collision, and clearing full lines.
+
+Strategy:
+- Keep a board array and a current piece; on 's' attempt to move down, else solidify and spawn new piece; render in ASCII; provide unit tests for core helpers.
+
+What I did:
+- Implemented board (print/solidify/clear), piece (init/can_place/move/rotate), simple loop reading commands; Makefile and tests included.
+

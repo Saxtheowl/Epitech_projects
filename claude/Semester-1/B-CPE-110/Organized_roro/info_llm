@@ -1,0 +1,201 @@
+# Organized - Workshop Management System
+
+## Project Description
+Organized is an interactive shell-based workshop management system for organizing hardware materials. It implements a linked list-based inventory system with advanced sorting capabilities, allowing users to add, delete, display, and sort materials across 5 categories through an interactive shell interface.
+
+## Architecture Overview
+The project uses a **shell-driven architecture** with a provided libshell.a library:
+- **Interactive Shell**: Provided workshop_shell() function handles user input
+- **Command Interface**: Four command functions (add, del, disp, sort) implement workshop operations
+- **Data Management**: Linked list structures manage material inventory
+- **Sorting Engine**: Multi-criteria merge sort for efficient organization
+
+## Material Categories
+The system organizes hardware into 5 distinct categories:
+- **ACTUATOR**: Buttons, levers, mechanical components
+- **DEVICE**: Radios, watches, recorders, electronic devices
+- **PROCESSOR**: Intel, AMD, computing components
+- **SENSOR**: Movement, sound, thermal detection components
+- **WIRE**: Type-C, HDMI, jack, connectivity components
+
+## Data Structures
+
+### Material Node:
+```c
+typedef struct material_s {
+    int id;                    // Unique identifier (auto-increment)
+    material_type_t type;      // Material category
+    char *name;                // Material name
+    struct material_s *next;   // Next node pointer
+} material_t;
+```
+
+### Workshop State:
+```c
+typedef struct workshop_s {
+    material_t *materials;     // Head of linked list
+    int next_id;              // Next available ID counter
+} workshop_t;
+```
+
+### Sort Configuration:
+```c
+typedef struct sort_params_s {
+    sort_criterion_t *criteria;  // Array of sort criteria
+    int *reverse_flags;         // Reverse flags for each criterion
+    int count;                  // Number of criteria
+} sort_params_t;
+```
+
+## Command Implementation
+
+### Add Command (`add`):
+- **Syntax**: `add TYPE name [, TYPE name]*`
+- **Function**: Parses comma-separated material specifications
+- **Features**: Auto-incrementing ID assignment, reverse insertion order
+- **Example**: `add WIRE usb, ACTUATOR button, DEVICE recorder`
+
+### Delete Command (`del`):
+- **Syntax**: `del id [, id]*`
+- **Function**: Removes materials by ID from linked list
+- **Features**: Multiple deletion support, proper memory cleanup
+- **Example**: `del 1, 0, 2`
+
+### Display Command (`disp`):
+- **Syntax**: `disp`
+- **Function**: Lists all materials in current order
+- **Output**: `TYPE n°ID - "name"` format
+- **Features**: Real-time inventory display
+
+### Sort Command (`sort`):
+- **Syntax**: `sort CRITERION [-r] [CRITERION [-r]]*`
+- **Criteria**: TYPE (ascii), NAME (ascii), ID (numeric)
+- **Features**: Multi-level sorting, reverse flag support
+- **Example**: `sort TYPE -r NAME ID -r`
+
+## Algorithm Analysis
+
+### Sorting Implementation:
+- **Algorithm**: **Merge Sort** for O(n log n) performance
+- **Multi-Criteria**: Supports hierarchical sorting with multiple criteria
+- **Stability**: Maintains relative order for equal elements
+- **Memory**: O(log n) space complexity with in-place linking
+
+### Comparison Logic:
+```
+For materials A and B with criteria [TYPE, NAME -r, ID]:
+1. Compare TYPE (ascii): if different, return result
+2. Compare NAME (ascii reversed): if different, return -result
+3. Compare ID (numeric): return result
+```
+
+### Linked List Management:
+- **Insertion**: O(1) front insertion (reverse order requirement)
+- **Deletion**: O(n) search with proper node unlinking
+- **Traversal**: O(n) for display and sorting operations
+
+## Key Features
+
+### Command Parsing:
+- **Comma Separation**: Handles `TYPE name, TYPE name` syntax
+- **Multiple Arguments**: Processes batch operations efficiently
+- **Error Validation**: Type checking and parameter validation
+
+### Memory Management:
+- **Dynamic Allocation**: Materials allocated/freed individually
+- **String Duplication**: Safe copying of material names
+- **List Cleanup**: Recursive deallocation of entire workshop
+
+### Interactive Shell:
+- **libshell.a Integration**: Uses provided shell library
+- **Command Dispatch**: Function pointer system for command routing
+- **Error Handling**: Standard exit code 84 for errors
+
+## Implementation Features
+
+### Material Management:
+- **Unique IDs**: Auto-incrementing from 0
+- **Type Safety**: Enum-based material categorization
+- **Name Storage**: Dynamic string allocation for material names
+
+### Sorting Features:
+- **Multi-Level**: Sort by multiple criteria simultaneously
+- **Reversible**: -r flag support for each criterion
+- **Efficient**: O(n log n) merge sort implementation
+
+### Shell Integration:
+- **Command Interface**: Standardized function prototypes
+- **Interactive Mode**: Real-time workshop manipulation
+- **Batch Processing**: File-based command input support
+
+## Testing Methodology
+
+### Unit Tests:
+✅ Material creation and type parsing  
+✅ Workshop initialization and management  
+✅ Linked list operations (add/delete/find)  
+✅ Sorting algorithm verification  
+✅ Command parsing and validation  
+
+### Integration Tests:
+✅ Shell command interface testing  
+✅ Multi-material batch operations  
+✅ Complex sorting scenarios  
+✅ Memory leak detection  
+
+### Command Scenarios:
+```bash
+# Basic operations
+add WIRE usb                    # Single addition
+add WIRE usb, ACTUATOR button   # Multiple additions
+del 1                           # Single deletion
+del 0, 2                        # Multiple deletions
+
+# Sorting examples
+sort NAME                       # Alphabetical by name
+sort TYPE -r                    # Reverse by type
+sort TYPE -r NAME ID -r         # Multi-criteria complex sort
+```
+
+## Performance Characteristics
+- **Add Operation**: O(1) - front insertion
+- **Delete Operation**: O(n) - requires search
+- **Display Operation**: O(n) - full list traversal
+- **Sort Operation**: O(n log n) - merge sort
+- **Memory Usage**: O(n) - linear with material count
+
+## Project Structure Standards
+✅ **Interactive Shell**: libshell.a library integration  
+✅ **Command Functions**: Standardized shell command interface  
+✅ **Modular Design**: Separated concerns (material, workshop, sorting, commands)  
+✅ **Memory Safety**: Proper allocation/cleanup patterns  
+✅ **Error Handling**: Comprehensive validation and error reporting  
+
+## System Requirements
+- **Authorized Functions**: open, read, write, close, malloc, free
+- **Shell Library**: libshell.a and shell.h (provided)
+- **Error Codes**: Standard Epitech error handling (84)
+- **Interactive**: Real-time command processing capability
+
+## Compilation Status
+✅ All source files compile without warnings  
+✅ libshell.a library properly linked  
+✅ Makefile includes all required targets  
+✅ Unit tests demonstrate function correctness  
+✅ Command functions implement required prototypes  
+
+## Algorithm Optimizations
+- **Merge Sort**: Chosen over bubble sort for better performance on large datasets
+- **In-Place Linking**: Sorts by relinking nodes rather than copying data
+- **Multi-Criteria**: Single pass sorting with hierarchical comparison
+- **Memory Efficient**: O(log n) space complexity for sorting
+
+## Shell Integration Notes
+The project integrates with a provided shell library that:
+- Handles interactive command-line interface
+- Provides colored prompt display
+- Dispatches commands to implemented functions
+- Manages shell session lifecycle
+
+## Completion Status: ✅ COMPLETE
+The Organized project is fully implemented with comprehensive material management, advanced multi-criteria sorting algorithms, interactive shell integration, and robust error handling, meeting all specified requirements for workshop organization.

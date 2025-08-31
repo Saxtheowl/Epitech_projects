@@ -1,0 +1,11 @@
+Date: 2025-08-30
+
+Understanding:
+- Normalize a French-style name to title case with hyphenated parts capitalized: "First [Middle ...] Last".
+
+Strategy:
+- Split on spaces, lowercase then capitalize first char (and char after hyphen), then join with single spaces.
+
+What I did:
+- Implemented formatter, added tests, and Makefile with required targets and coverage.
+

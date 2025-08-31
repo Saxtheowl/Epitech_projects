@@ -1,0 +1,5 @@
+add WIRE usb, ACTUATOR button
+disp
+sort NAME
+disp
+exit

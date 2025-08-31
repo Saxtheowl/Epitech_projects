@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Conway's Game of Life on a finite grid. Input rows, cols, steps, and an initial grid as a 1D string of length rows*cols using 'X' for alive and '.' for dead. Output the grid after N steps as the same 1D string.
+
+Strategy:
+- Implement neighbor counting with bounds (no wrapping), cell step by classic rules, grid stepping, and a simple CLI interface.
+
+What I did:
+- Implemented helpers (`idx`, `count_neighbors`, `step_cell`, `step_grid`), a CLI that parses arguments, and a unit test for the blinker oscillator.
+

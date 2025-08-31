@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Render a Sierpinski carpet of order N using '#' for filled and space for holes; output as lines separated by newlines.
+
+Strategy:
+- Recursively carve the center of each 3x3 block; build a 2D buffer and linearize to a string.
+
+What I did:
+- Implemented `sierpinski(n)` with helpers, a CLI to print the pattern, tests for level 1, and Makefile with tests/coverage.
+

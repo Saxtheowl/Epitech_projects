@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Build a more capable shell (42sh) reusing Minishell features and adding pipelines, redirections, conditionals, and variable expansion with basic builtins.
+
+Strategy:
+- Mirror a clean structure (include/src/tests/Makefile). Manage environment in-memory, split lines into commands, handle pipelines and I/O redirections, support &&/|| conditionals, and expand $VARS before exec.
+
+What I did:
+- Implemented env helpers, splitters (words/commands/pipeline), variable expansion, exec with PATH lookup, builtins (env/setenv/unsetenv/cd/exit), pipelines and redirections, and conditionals. Added a Makefile and a minimal env unit test.
+

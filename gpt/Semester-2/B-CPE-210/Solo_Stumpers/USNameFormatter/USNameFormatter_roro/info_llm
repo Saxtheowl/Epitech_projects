@@ -1,0 +1,11 @@
+Date: 2025-08-30
+
+Understanding:
+- Format a personal name into US-style: "LAST, First [Middle...]" with LAST uppercase and others capitalized; trim and normalize spaces.
+
+Strategy:
+- Split on whitespace, title-case given names, uppercase last token as surname, and render accordingly.
+
+What I did:
+- Implemented formatter with simple parsing, added tests and a Makefile with required targets.
+

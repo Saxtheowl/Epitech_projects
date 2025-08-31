@@ -1,0 +1,11 @@
+Date: 2025-08-30
+
+Understanding:
+- Convert a name/text to leetspeak-style: a->4, e->3, i->1, o->0, s->5, t->7.
+
+Strategy:
+- Map characters case-insensitively while preserving non-mapped characters.
+
+What I did:
+- Implemented `geekify` with mapping and added tests; Makefile includes standard targets and coverage.
+

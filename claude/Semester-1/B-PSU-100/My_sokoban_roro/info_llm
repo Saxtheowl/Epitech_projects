@@ -1,0 +1,227 @@
+# My_sokoban - Warehouse Keeper Game
+
+## Project Description
+My_sokoban is a complete implementation of the classic Sokoban warehouse keeper puzzle game using the NCurses library for terminal-based gameplay. Players navigate through warehouses, pushing boxes onto storage locations while navigating around walls and obstacles. The game features real-time terminal-based graphics, win/lose condition detection, and comprehensive map validation.
+
+## Architecture Overview
+The project uses a **modular game architecture** with clear separation of concerns:
+- **NCurses Integration**: Terminal-based graphics with keyboard input handling
+- **Map System**: Dynamic map loading from files with comprehensive validation
+- **Game Engine**: Real-time game loop with state management and collision detection
+- **Movement Logic**: Advanced physics for player and box interactions
+- **Terminal Management**: Dynamic terminal resizing and display adaptation
+
+## Game Mechanics
+The Sokoban game follows traditional rules with enhanced features:
+- **Player Movement**: Arrow key navigation (UP, DOWN, LEFT, RIGHT)
+- **Box Pushing**: Push boxes by walking into them (no pulling allowed)
+- **Storage Goals**: All boxes must be placed on storage locations ('O') to win
+- **Wall Boundaries**: Walls ('#') block all movement for players and boxes
+- **Game Reset**: Space bar resets the current level
+- **Terminal Adaptation**: Dynamic resizing support with user messaging
+
+## Data Structures
+
+### Position Structure:
+```c
+typedef struct position_s {
+    int x;    // X coordinate
+    int y;    // Y coordinate
+} position_t;
+```
+
+### Map Structure:
+```c
+typedef struct map_s {
+    char **grid;              // 2D character grid
+    int width;                // Map width
+    int height;               // Map height
+    position_t player_pos;    // Current player position
+    int boxes_count;          // Total boxes in level
+    int storages_count;       // Total storage locations
+    int boxes_on_storage;     // Boxes currently on storage
+} map_t;
+```
+
+### Game State:
+```c
+typedef struct game_s {
+    map_t *map;               // Current game map
+    int game_over;            // Game termination flag
+    int win;                  // Victory status
+    int terminal_too_small;   // Display limitation flag
+} game_t;
+```
+
+## Map Format Specification
+
+### Valid Characters:
+- **'#'**: Walls (impassable barriers)
+- **' '**: Empty floor spaces
+- **'P'**: Player starting position
+- **'X'**: Movable boxes
+- **'O'**: Storage target locations
+- **'+'**: Player standing on storage location
+- **'*'**: Box placed on storage location
+
+### Map Example:
+```
+############
+#    O     #
+#    P  ####
+#          #
+#######    #
+#    O ##  #
+#      ##  #
+#          #
+#     XX   #
+#      #   #
+############
+```
+
+### Validation Rules:
+- **Single Player**: Exactly one player ('P') must exist
+- **Required Elements**: At least one box ('X') and one storage ('O')
+- **Character Validation**: Only authorized characters allowed
+- **Boundary Checking**: Proper wall enclosure recommended
+
+## Algorithm Analysis
+
+### Movement System:
+- **Collision Detection**: Real-time boundary and obstacle checking
+- **Box Physics**: Advanced pushing logic with cascade prevention
+- **Position Updates**: Atomic player and box coordinate updates
+- **State Preservation**: Storage location preservation during movements
+
+### Win/Lose Logic:
+- **Win Condition**: All boxes placed on storage locations (boxes_on_storage == boxes_count)
+- **Lose Detection**: No movable boxes remaining without victory
+- **Corner Detection**: Boxes trapped in corners (unsolvable states)
+- **Deadlock Prevention**: Advanced stuck-state recognition
+
+### Map Processing:
+- **Dynamic Loading**: Runtime file parsing with memory allocation
+- **Size Calculation**: Automatic width/height detection from file content
+- **Memory Management**: Efficient 2D array allocation and cleanup
+- **Error Handling**: Comprehensive file and format validation
+
+## Key Features
+
+### NCurses Integration:
+- **Terminal Graphics**: Full-screen character-based display
+- **Real-time Input**: Non-blocking keyboard input processing  
+- **Screen Management**: Clear, refresh, and update operations
+- **Cursor Control**: Hidden cursor for clean game display
+- **Centering Logic**: Dynamic content positioning based on terminal size
+
+### Dynamic Terminal Handling:
+- **Size Detection**: Real-time terminal dimension monitoring
+- **Adaptive Display**: Centered game board on larger terminals
+- **Resize Messages**: User guidance for terminal size requirements
+- **Responsive Layout**: Automatic repositioning on terminal changes
+
+### Game State Management:
+- **Level Reset**: Space bar restarts current level from initial state
+- **Victory Detection**: Automatic win condition checking after each move
+- **Defeat Recognition**: Deadlock detection for unsolvable states
+- **Exit Options**: Multiple exit methods (Q, ESC, quit conditions)
+
+## Implementation Features
+
+### File Operations:
+- **Map Loading**: Complete file parsing with getline() for variable-length lines
+- **Error Reporting**: Detailed error messages for file access issues
+- **Memory Allocation**: Dynamic grid allocation based on map dimensions
+- **Resource Cleanup**: Proper file handle and memory management
+
+### Movement Logic:
+- **Collision System**: Multi-layer collision detection for walls, boxes, boundaries
+- **Push Mechanics**: Box-to-box collision prevention, wall collision handling
+- **Player Tracking**: Real-time player position updates with storage awareness
+- **State Consistency**: Coordinated updates between player, boxes, and storage states
+
+### Display System:
+- **Character Rendering**: Direct character placement with mvaddch()
+- **Screen Centering**: Mathematical centering calculations for all terminal sizes
+- **Update Efficiency**: Targeted screen updates with clear/refresh cycles
+- **Error Display**: Centered error messages for terminal size issues
+
+## Testing Methodology
+
+### Unit Tests:
+✅ Player position detection and tracking  
+✅ Map validation with character checking  
+✅ Character counting algorithms  
+✅ Movement validation and collision detection  
+✅ Win condition logic verification  
+
+### Integration Tests:
+✅ Complete map loading and validation pipeline  
+✅ Game loop with input handling and state transitions  
+✅ NCurses integration with display management  
+✅ Terminal resizing and adaptive display  
+✅ File parsing with error handling  
+
+### Game Testing:
+```bash
+# Basic usage
+./my_sokoban map                    # Play game with map file
+./my_sokoban -h                     # Display help information
+
+# Map validation
+./my_sokoban invalid_map.txt        # Tests error handling
+./my_sokoban empty_file.txt         # Tests file error handling
+```
+
+## Performance Characteristics
+- **Map Loading**: O(n×m) where n×m = map dimensions
+- **Movement Processing**: O(1) per move with collision checking
+- **Win Detection**: O(n×m) full map scan for box counting
+- **Display Update**: O(n×m) for complete screen refresh
+- **Memory Usage**: O(n×m) for map storage plus NCurses overhead
+
+## Project Structure Standards
+✅ **NCurses Graphics**: Complete terminal-based game interface  
+✅ **Modular Architecture**: Separated concerns (map, game, input, display)  
+✅ **File Processing**: Robust map file parsing with validation  
+✅ **Error Handling**: Comprehensive error detection and user feedback  
+✅ **Game Logic**: Complete Sokoban rule implementation with physics  
+
+## System Requirements
+- **NCurses Library**: Complete ncurses functionality for terminal graphics
+- **File Functions**: fopen, fclose, fread, fwrite, getline for map loading
+- **Memory Functions**: malloc, free for dynamic map allocation
+- **System Functions**: ioctl for terminal size detection, usleep for timing
+- **Signal Functions**: sigaction, signal for interrupt handling
+- **Stat Functions**: stat, lstat, fstat for file system operations
+
+## Compilation Status
+✅ All source files compile without warnings  
+✅ NCurses library properly linked (-lncurses)  
+✅ Makefile includes all required targets (all, clean, fclean, re, tests_run)  
+✅ Unit tests demonstrate function correctness  
+✅ Integration tests verify complete game functionality  
+
+## Algorithm Optimizations
+- **Efficient Collision**: O(1) boundary and obstacle checking
+- **Smart Rendering**: Only update changed screen regions when possible
+- **Memory Reuse**: Static allocation for position structures where applicable
+- **Input Buffering**: Non-blocking input with timeout for responsive gameplay
+
+## NCurses Integration Notes
+The implementation uses advanced NCurses features:
+- **Screen Management**: initscr(), endwin() for session control
+- **Input Control**: cbreak(), noecho() for raw input mode
+- **Keyboard Handling**: keypad(stdscr, TRUE) for arrow key support
+- **Cursor Management**: curs_set(0) for invisible cursor
+- **Display Updates**: clear(), refresh() for screen synchronization
+
+## Game Design Considerations
+- **User Experience**: Clear visual feedback for all game actions
+- **Accessibility**: Simple controls with intuitive movement mapping
+- **Error Prevention**: Comprehensive input validation and error messaging
+- **Performance**: Smooth gameplay even on slower terminals
+- **Portability**: Cross-platform NCurses compatibility
+
+## Completion Status: ✅ COMPLETE
+The My_sokoban project is fully implemented with comprehensive NCurses-based gameplay, advanced map loading and validation, sophisticated movement physics, win/lose condition detection, terminal adaptation, and complete Sokoban game mechanics, providing an authentic warehouse keeper puzzle experience in the terminal.

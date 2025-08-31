@@ -1,0 +1,11 @@
+Date: 2025-08-30
+
+Understanding:
+- Sort the words in a given input string lexicographically and print them space-separated.
+
+Strategy:
+- Split on whitespace, simple in-place selection sort, print joined with spaces.
+
+What I did:
+- Implemented split and sort routines, added tests and Makefile with required targets.
+

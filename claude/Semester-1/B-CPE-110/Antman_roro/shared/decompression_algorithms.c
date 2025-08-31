@@ -106,8 +106,25 @@ char *decompress_song_lyrics(const char *input, size_t input_size,
     
     for (i = dict_end + 1; i <= input_size; i++) {
         if (i < input_size && input[i] != '@' && input[i] != '\n') {
-            if (token_index < 15)
+            if (token_index < 15 && (input[i] >= '0' && input[i] <= '9'))
                 token[token_index++] = input[i];
+            else if (!(input[i] >= '0' && input[i] <= '9')) {
+                if (token_index > 0) {
+                    token[token_index] = '\0';
+                    
+                    if (!is_first_word)
+                        buffer_append_char(output, ' ');
+                    is_first_word = 0;
+                    
+                    index = my_atoi(token);
+                    if (index >= 0 && index < dict->count &&
+                        dict->tokens[index].word) {
+                        buffer_append_string(output, dict->tokens[index].word);
+                    }
+                    token_index = 0;
+                }
+                buffer_append_char(output, input[i]);
+            }
         } else {
             if (token_index > 0) {
                 token[token_index] = '\0';

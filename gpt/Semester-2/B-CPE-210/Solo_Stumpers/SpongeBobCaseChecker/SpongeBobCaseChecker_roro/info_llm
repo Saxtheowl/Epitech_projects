@@ -1,0 +1,11 @@
+Date: 2025-08-30
+
+Understanding:
+- Check whether a string is in "SpongeBob case": letters strictly alternate lower/upper (ignoring non-letters). Start can be lower or upper.
+
+Strategy:
+- Iterate letters toggling expected case; accept either starting mode.
+
+What I did:
+- Implemented `is_spongebob_case`, minimal tests, and Makefile with the required targets.
+

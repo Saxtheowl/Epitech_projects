@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Decide if a recipe can be prepared from a simple inventory of items with quantities.
+
+Strategy:
+- Parse `name:qty` comma-separated lists for inventory and recipe, compare quantities per item.
+
+What I did:
+- Implemented a parser and `can_prepare`, added tests and Makefile with standard targets.
+

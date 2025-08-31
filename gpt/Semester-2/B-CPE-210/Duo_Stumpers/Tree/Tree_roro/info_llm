@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Print a simple ASCII tree: a centered triangle of height N, followed by a centered trunk of height ~N/2.
+
+Strategy:
+- Validate positive integer input, print foliage lines with spaces and stars, then a centered trunk.
+
+What I did:
+- Implemented `print_tree` with helpers and a CLI; added a parsing test and a standard Makefile.
+

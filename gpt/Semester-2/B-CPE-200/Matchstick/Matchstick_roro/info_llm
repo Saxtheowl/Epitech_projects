@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Implement a basic Matchstick game: board with N lines of matches, players remove 1..max per turn from a single line; borders drawn with '*'. Player vs simple AI.
+
+Strategy:
+- Parse `./matchstick <lines> <max_remove>`, build bordered board with '|' matches, provide player input prompts, simple AI removes from first non-empty line, enforce limits.
+
+What I did:
+- Implemented board creation/print, helpers to count/remove matches, game loop with player and AI turns, end messages, and Makefile + minimal tests.
+

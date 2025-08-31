@@ -1,0 +1,254 @@
+# My_navy - Battleship Game with Signal Communication
+
+## Project Description
+My_navy is a complete implementation of the classic Battleship game using inter-process communication via UNIX signals (SIGUSR1 and SIGUSR2). Two players battle on 8x8 grids, placing ships and taking turns attacking each other's positions until all ships of one player are destroyed. The game features signal-based communication, ship placement validation, and interactive gameplay.
+
+## Architecture Overview
+The project uses a **signal-driven multiplayer architecture** with robust inter-process communication:
+- **Signal Protocol**: SIGUSR1 and SIGUSR2 for binary data transmission between processes  
+- **Game State Management**: Complete game state tracking including boards, ships, and turn management
+- **File Parsing**: Navy position file parsing with comprehensive validation
+- **Display System**: Dual-board ASCII visualization showing player and enemy positions
+- **Communication Layer**: Reliable signal-based data exchange with error handling
+
+## Game Mechanics
+The battleship game follows traditional rules with specific implementations:
+- **Board Size**: 8x8 grid with coordinates A1-H8
+- **Ship Fleet**: Exactly 4 ships with lengths 2, 3, 4, and 5
+- **Ship Placement**: Horizontal or vertical placement with no overlaps
+- **Attack System**: Turn-based coordinate-based attacks
+- **Hit Detection**: Real-time hit/miss feedback with board updates
+- **Victory Conditions**: First player to sink all enemy ships wins
+
+## Data Structures
+
+### Game State:
+```c
+typedef struct game_s {
+    char my_board[BOARD_SIZE][BOARD_SIZE];    // Player's ship positions
+    char enemy_board[BOARD_SIZE][BOARD_SIZE]; // Enemy attack results
+    ship_t ships[NB_SHIPS];                   // Fleet configuration
+    pid_t enemy_pid;                          // Enemy process ID
+    int turn;                                 // Current turn indicator
+    int game_over;                            // Game end flag
+    int winner;                               // Winner determination
+    int attack_x, attack_y;                   // Received attack coordinates
+    int result_received;                      // Signal completion flag
+    int attack_result;                        // Attack outcome
+} game_t;
+```
+
+### Ship Structure:
+```c
+typedef struct ship_s {
+    int length;           // Ship length (2-5)
+    int start_x, start_y; // Starting coordinates
+    int end_x, end_y;     // Ending coordinates
+    int hits;             // Number of hits received
+} ship_t;
+```
+
+## Signal Communication Protocol
+
+### Binary Data Transmission:
+- **SIGUSR1**: Represents binary '1' bit
+- **SIGUSR2**: Represents binary '0' bit
+- **Data Encoding**: 8-bit byte transmission with LSB-first encoding
+- **Coordinate Transfer**: Two-byte packets for (x, y) coordinate pairs
+- **Timing**: 1ms delay between signal transmissions for reliability
+
+### Communication Sequence:
+```
+1. Connection Phase: Player 2 sends PID to Player 1
+2. Turn Exchange: Alternating attack coordinate transmission
+3. Result Feedback: Hit/miss result communication
+4. Game End: Victory/defeat status determination
+```
+
+## File Format Specification
+
+### Navy Position File:
+```
+LENGTH:FIRST_SQUARE:LAST_SQUARE
+```
+
+### Example Format:
+```
+2:C1:C2    # Ship of length 2 from C1 to C2
+3:D4:F4    # Ship of length 3 from D4 to F4  
+4:B5:B8    # Ship of length 4 from B5 to B8
+5:D7:H7    # Ship of length 5 from D7 to H7
+```
+
+### Validation Rules:
+- **Exact Fleet**: Must contain ships of lengths 2, 3, 4, 5
+- **Valid Coordinates**: A1-H8 coordinate system
+- **Linear Placement**: Ships must be horizontal or vertical
+- **No Overlaps**: Ships cannot occupy same positions
+- **Correct Length**: Calculated length must match declared length
+
+## Algorithm Analysis
+
+### Signal Processing:
+- **Bit Assembly**: Real-time bit collection into bytes
+- **State Machine**: Multi-state signal handler for data reconstruction
+- **Error Recovery**: Signal loss detection and retransmission handling
+- **Synchronization**: Process synchronization via pause()/signal mechanism
+
+### Ship Validation:
+- **Length Calculation**: Manhattan distance validation for ship placement
+- **Overlap Detection**: Grid-based collision checking across all ships
+- **Fleet Verification**: Ensuring complete fleet composition (2,3,4,5 length ships)
+- **Boundary Checking**: Grid boundary enforcement for all placements
+
+### Game Logic:
+- **Hit Detection**: Coordinate-based ship segment identification
+- **Board Updates**: Real-time visual feedback for attacks and results
+- **Victory Conditions**: Complete ship destruction tracking
+- **Turn Management**: Alternating player control with signal synchronization
+
+## Key Features
+
+### Inter-Process Communication:
+- **Signal Reliability**: Robust signal handling with proper timing
+- **Data Integrity**: Complete coordinate transmission verification
+- **Process Coordination**: Synchronized turn-based gameplay
+- **Error Handling**: Signal loss detection and recovery mechanisms
+
+### Game Display:
+- **Dual Boards**: Separate visualization of player and enemy grids
+- **Visual Indicators**: Different symbols for ships, hits, misses
+- **Real-time Updates**: Immediate feedback for attacks and results
+- **Coordinate System**: Standard A1-H8 battleship notation
+
+### Input Validation:
+- **Position Format**: Strict A1-H8 coordinate validation
+- **File Parsing**: Comprehensive navy file format checking
+- **Fleet Composition**: Mandatory ship length requirements
+- **Placement Rules**: No-overlap and alignment enforcement
+
+## Implementation Features
+
+### Signal Handling:
+- **Advanced Signal Processing**: Bit-level data reconstruction from signals
+- **Signal Safety**: Proper signal mask management and handler installation
+- **Timing Control**: Microsecond-level transmission timing for reliability
+- **Process Synchronization**: pause()/kill() coordination between players
+
+### File Operations:
+- **Navy File Parsing**: Complete position file interpretation
+- **Format Validation**: Strict adherence to LENGTH:START:END format
+- **Error Reporting**: Comprehensive error messages for invalid files
+- **Read-Only Access**: File access compatible with testing environments
+
+### Memory Management:
+- **Global State**: Single global game state for signal handler access
+- **Static Buffers**: Efficient string handling with static allocation
+- **Resource Cleanup**: Proper cleanup of file handles and resources
+- **Memory Safety**: Bounds checking for all array operations
+
+## Communication Protocol Details
+
+### Connection Establishment:
+```
+Player 1: ./my_navy pos1
+  - Displays PID and waits for connection
+  - Receives PID from Player 2 via signals
+  - Confirms connection and starts game
+
+Player 2: ./my_navy <PID> pos2  
+  - Connects to Player 1 by sending own PID
+  - Confirms successful connection
+  - Waits for Player 1 to make first move
+```
+
+### Turn Sequence:
+```
+1. Active player displays boards and prompts for attack
+2. Player enters coordinates (e.g., "B6")
+3. Coordinates sent via signal protocol to enemy
+4. Enemy processes attack and sends result back
+5. Boards updated with hit/miss information
+6. Turn passes to other player
+7. Repeat until all ships of one player destroyed
+```
+
+## Testing Methodology
+
+### Unit Tests:
+✅ Position validation and parsing functions  
+✅ String utility function correctness  
+✅ Board initialization and management  
+✅ Ship structure creation and validation  
+✅ Signal handling mechanism testing  
+
+### Integration Tests:
+✅ Complete navy file parsing with validation  
+✅ Ship placement validation with overlap detection  
+✅ Signal communication protocol verification  
+✅ Game state management and turn handling  
+✅ Victory condition detection accuracy  
+
+### Communication Testing:
+```bash
+# Basic game setup
+./my_navy pos1                    # Player 1 waits for connection
+./my_navy <PID> pos2              # Player 2 connects to Player 1
+
+# Help display
+./my_navy -h                      # Shows usage information
+
+# File validation
+./my_navy invalid_pos.txt         # Tests error handling
+```
+
+## Performance Characteristics
+- **Signal Processing**: O(1) per bit, O(8) per coordinate
+- **Ship Validation**: O(n²) where n = board size (64 operations max)
+- **Hit Detection**: O(1) direct coordinate lookup
+- **Board Display**: O(n²) full board traversal (64 operations)
+- **Memory Usage**: O(1) fixed game state structure
+
+## Project Structure Standards
+✅ **Signal Communication**: Robust SIGUSR1/SIGUSR2 protocol implementation  
+✅ **Modular Design**: Separated concerns (parsing, validation, communication, game logic)  
+✅ **Error Handling**: Comprehensive validation and error reporting  
+✅ **File Processing**: Complete navy file parsing with strict validation  
+✅ **Interactive Gameplay**: Real-time turn-based battleship experience  
+
+## System Requirements
+- **Authorized Functions**: open, close, read, write, lseek, malloc, free
+- **Signal Functions**: getpid, kill, signal, sigaction, sigemptyset, pause
+- **Context Functions**: setcontext, getcontext (for advanced signal handling)
+- **Timing Functions**: usleep, nanosleep for signal transmission timing
+- **File Functions**: getline, fopen, fclose, fseek for navy file processing
+- **Memory Functions**: memset, memcpy for data manipulation
+
+## Compilation Status
+✅ All source files compile without warnings  
+✅ Proper signal handling system call integration  
+✅ Makefile includes all required targets (all, clean, fclean, re, tests_run)  
+✅ Unit tests demonstrate function correctness  
+✅ Integration tests verify complete gameplay functionality  
+
+## Algorithm Optimizations
+- **Signal Batching**: Efficient byte-level signal transmission
+- **State Caching**: Minimal signal handler state for fast processing
+- **Direct Access**: O(1) coordinate-based hit detection
+- **Linear Validation**: Single-pass ship placement verification
+
+## Signal Protocol Notes
+The implementation uses a custom binary protocol over UNIX signals:
+- Each coordinate requires 16 signals (2 bytes × 8 bits)
+- 1ms delay between signals prevents signal loss
+- Signal handler uses static variables for state persistence
+- Process synchronization via pause() ensures reliable communication
+
+## Security Considerations
+- **Process Validation**: PID validation prevents unauthorized connections
+- **Signal Safety**: Proper signal handler implementation prevents race conditions  
+- **Input Sanitization**: Complete validation of all user inputs and file data
+- **Resource Limits**: Bounded memory usage and file access patterns
+
+## Completion Status: ✅ COMPLETE
+The My_navy project is fully implemented with comprehensive signal-based communication, advanced battleship game logic, robust ship placement validation, interactive dual-board display system, and complete multiplayer functionality, providing an authentic battleship gaming experience using UNIX inter-process communication.

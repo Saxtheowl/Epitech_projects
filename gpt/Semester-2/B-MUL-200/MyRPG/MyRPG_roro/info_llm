@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Minimal, buildable scaffold for MyRPG without SFML.
+
+Strategy:
+- Placeholder CLI with Makefile and unit test; real graphics out of scope here.
+
+What I did:
+- Added Makefile (all/run/tests_run), minimal main and a Criterion test.
+

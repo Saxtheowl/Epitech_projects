@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Provide a small utility that generates a standard Epitech-style Makefile for C projects (NAME, SRC→OBJ, include path, tests_run with Criterion/coverage).
+
+Strategy:
+- POSIX sh script scans one or more source directories (default: src) for .c files, collects tests under tests/, and writes a Makefile with required targets.
+
+What I did:
+- Wrote `automakefile` script with options `--name`, `--include`, `--out`, and optional source dirs. Added a supporting Makefile (no build artifacts) and usage notes.
+

@@ -1,0 +1,11 @@
+Date: 2025-08-31
+
+Understanding:
+- Validate a TicTacToe board (3x3, string of 9 chars using X/O/.) and report the winner or draw.
+
+Strategy:
+- Enforce counts (X==O or X==O+1) and winner consistency; check all rows/cols/diagonals; print X/O/Draw.
+
+What I did:
+- Implemented `check_winner` and `validate_board`, added unit tests and a standard Makefile with tests_run and coverage.
+

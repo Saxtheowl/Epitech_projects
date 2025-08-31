@@ -140,8 +140,10 @@ int run_game(game_t *g)
                 g->my_hits += 1;
             if (g->my_hits >= TOTAL_SHIP_CELLS) {
                 print_boards(g);
+                printf("\nI won\n");
                 return 0;
             }
+            print_boards(g);
         } else {
             int v = recv_value();
             int r;
@@ -156,6 +158,7 @@ int run_game(game_t *g)
             if (hit)
                 g->enemy_hits += 1;
             if (g->enemy_hits >= TOTAL_SHIP_CELLS) {
+                printf("\nEnemy won\n");
                 return 1;
             }
         }

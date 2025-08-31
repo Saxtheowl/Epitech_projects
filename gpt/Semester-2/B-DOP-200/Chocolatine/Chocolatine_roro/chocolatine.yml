@@ -1,0 +1,42 @@
+name: Chocolatine
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc make criterion-dev gcovr
+
+      - name: Build all roro projects
+        run: |
+          set -e
+          for mk in $(git ls-files "Semester-2/**/_roro/Makefile"); do
+            dir=$(dirname "$mk")
+            echo "::group::Building $dir"
+            make -C "$dir" all || exit 1
+            echo "::endgroup::"
+          done
+
+      - name: Run tests where available
+        run: |
+          set -e
+          for mk in $(git ls-files "Semester-2/**/_roro/Makefile"); do
+            dir=$(dirname "$mk")
+            if grep -q "tests_run:" "$mk"; then
+              echo "::group::Testing $dir"
+              make -C "$dir" tests_run || true
+              echo "::endgroup::"
+            fi
+          done
+

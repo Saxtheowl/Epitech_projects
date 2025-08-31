@@ -1,0 +1,11 @@
+Date: 2025-08-30
+
+Understanding:
+- Compute GPA average from a list of letter grades (A..F with optional +/-), separated by spaces or commas.
+
+Strategy:
+- Map grades to a 4.0 scale with +/- worth 0.3, clamp to [0.0, 4.0], average the values.
+
+What I did:
+- Implemented grade parsing and average computation, plus tests and a standard Makefile.
+
