@@ -10,10 +10,10 @@
 
 <h3>AI Assistants</h3>
 <ul>
-  <li>GPT-5</li>
+  <li>Codex GPT-5 Medium</li>
   <li>Sonnet 4.1</li>
   <li>Claude Code</li>
-  <li>Gemini 2.5 Pro</li>
+  <li>Gemini 2.5 Pro (cancelled due to usage limit)</li>
 </ul>
 
 <h3>Environment</h3>
