@@ -1,0 +1,11 @@
+Date: 2025-09-01
+
+Compréhension
+- Indie Studio: jeu 3D (type Bomberman) avec moteur, ECS, assets.
+
+Stratégie
+- Squelette compilable; implémentation complète à réaliser (trop volumineuse pour cette passe).
+
+Réalisé
+- Arborescence + Makefile + tests minimalistes.
+

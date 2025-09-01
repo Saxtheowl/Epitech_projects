@@ -1,0 +1,21 @@
+[Unit]
+Description=Poll Flask Application
+After=network.target redis-server.service
+Requires=network.target
+
+[Service]
+Type=simple
+User=poll
+Group=poll
+WorkingDirectory=/opt/poll/poll
+Environment=PYTHONPATH=/opt/poll/poll
+Environment=REDIS_HOST={{ redis_host }}
+Environment=REDIS_PORT={{ redis_port }}
+Environment=FLASK_APP=app.py
+Environment=FLASK_ENV=production
+ExecStart=/opt/poll/venv/bin/python app.py
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

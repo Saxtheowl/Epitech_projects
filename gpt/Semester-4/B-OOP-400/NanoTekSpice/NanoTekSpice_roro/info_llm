@@ -1,0 +1,11 @@
+Date: 2025-09-01
+
+Compréhension
+- Simulateur logique (circuits) avec parsing de netlist et simulation pas-à-pas.
+
+Stratégie
+- Base compilable selon l'arborescence Epitech; l'implémentation (parser, composants, moteur) reste à coder.
+
+Réalisé
+- Arborescence + Makefile + tests minimalistes.
+

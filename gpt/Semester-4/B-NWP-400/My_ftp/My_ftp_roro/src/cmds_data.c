@@ -172,8 +172,8 @@ void cmd_retr(client_t *c, const char *home, const char *arg)
         client_write(c->fd, "501 Syntax error in parameters.\r\n");
         return;
     }
-    if (c->pasv_fd <= 0) {
-        client_write(c->fd, "425 Use PASV first.\r\n");
+    if (c->pasv_fd <= 0 && !c->data_active) {
+        client_write(c->fd, "425 Use PORT or PASV first.\r\n");
         return;
     }
     if (path_resolve(path, sizeof(path), home, c->cwd, arg) != 0) {
@@ -227,8 +227,8 @@ void cmd_stor(client_t *c, const char *home, const char *arg)
         client_write(c->fd, "501 Syntax error in parameters.\r\n");
         return;
     }
-    if (c->pasv_fd <= 0) {
-        client_write(c->fd, "425 Use PASV first.\r\n");
+    if (c->pasv_fd <= 0 && !c->data_active) {
+        client_write(c->fd, "425 Use PORT or PASV first.\r\n");
         return;
     }
     if (path_resolve(path, sizeof(path), home, c->cwd, arg) != 0) {

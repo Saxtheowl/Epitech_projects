@@ -1,0 +1,48 @@
+/*
+** EPITECH PROJECT, 2025
+** My_octopus
+** File description:
+** info_llm - Project completion report
+** Date: 2025-09-01
+*/
+
+=== PROJET MY_OCTOPUS ===
+
+DATE DE FINITION: 2025-09-01
+
+COMPREHENSION DU SUJET:
+Le projet Octopus consiste à déployer une application de vote distribuée sur 5 machines différentes en utilisant Ansible. L'application se compose de:
+- Un front-end Flask (poll) qui collecte les votes et les pousse dans Redis
+- Un worker Java qui consomme les votes de Redis et les pousse en base PostgreSQL
+- Un front-end Node.js (result) qui affiche les résultats depuis PostgreSQL
+- Un serveur Redis pour la queue de messages
+- Un serveur PostgreSQL pour la persistance des données
+
+Le but est d'automatiser le déploiement sans conteneurs, en utilisant des rôles Ansible avec systemd pour la gestion des services.
+
+STRATEGIE DE REALISATION:
+1. Création d'une structure Ansible avec 6 rôles (base, redis, postgresql, poll, worker, result)
+2. Configuration de l'inventaire avec 5 groupes d'hôtes
+3. Utilisation d'Ansible Vault pour sécuriser les mots de passe
+4. Configuration des services systemd pour chaque application
+5. Respect de l'idempotence Ansible
+6. Configuration des variables d'environnement selon les 12 factor
+
+REALISATIONS FINALES:
+✓ Structure de projet complète avec arborescence Ansible
+✓ Fichier playbook.yml principal orchestrant le déploiement
+✓ Inventaire production avec 5 groupes (redis, postgres, poll, result, worker)
+✓ Variables globales chiffrées avec Ansible Vault
+✓ Rôle base: installation des packages essentiels
+✓ Rôle redis: installation et configuration Redis
+✓ Rôle postgresql: installation PostgreSQL 12, création utilisateur et base
+✓ Rôle poll: déploiement application Flask Python
+✓ Rôle worker: déploiement et compilation application Java
+✓ Rôle result: déploiement application Node.js
+✓ Services systemd pour chaque application avec auto-start
+✓ Handlers pour le redémarrage des services
+✓ Configuration 12-factor avec variables d'environnement
+✓ Sécurisation des mots de passe (aucun mot de passe en clair)
+
+Le projet est prêt pour le déploiement avec la commande:
+ansible-playbook -i production playbook.yml

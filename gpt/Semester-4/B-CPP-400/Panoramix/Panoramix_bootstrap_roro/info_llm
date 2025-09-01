@@ -1,0 +1,16 @@
+Date: 2025-09-01
+
+Compréhension
+- Bootstrap concurrence: trains sur des rails parallèles avec un pont fragile.
+  Étape 1: un seul train sur le pont à la fois (mutex). Étape 2: jusqu'à NB_MAX
+  trains simultanément (compteur + mutex + condition).
+
+Stratégie
+- Un thread par train. Un objet `bridge_t` gère le nombre de trains sur le pont,
+  borné par `NB_MAX`. `bridge_enter` attend (cond) si `slots >= max`, `bridge_leave`
+  décrémente et réveille un train.
+
+Réalisé
+- Implémentation C (pthread): `NB_TRAINS` et `NB_MAX` configurables via macros.
+- Affichages: approche, entrée sur le pont, sortie du pont.
+- Makefile avec `-pthread` et cibles Epitech.

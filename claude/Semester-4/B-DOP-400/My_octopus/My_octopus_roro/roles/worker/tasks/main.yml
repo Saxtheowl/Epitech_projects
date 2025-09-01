@@ -1,0 +1,51 @@
+---
+- name: Install Java 11
+  apt:
+    name:
+      - openjdk-11-jdk
+      - maven
+    state: present
+
+- name: Create worker user
+  user:
+    name: worker
+    system: yes
+    home: /opt/worker
+    shell: /bin/false
+
+- name: Create worker directory
+  file:
+    path: /opt/worker
+    state: directory
+    owner: worker
+    group: worker
+    mode: '0755'
+
+- name: Extract worker application
+  unarchive:
+    src: worker.tar
+    dest: /opt/worker
+    owner: worker
+    group: worker
+    remote_src: no
+
+- name: Build worker application
+  command: mvn package
+  args:
+    chdir: /opt/worker/worker
+  become_user: worker
+
+- name: Copy worker systemd service
+  copy:
+    src: worker.service
+    dest: /etc/systemd/system/worker.service
+  notify:
+    - reload systemd
+    - restart worker
+
+- name: Enable and start worker service
+  systemd:
+    name: worker
+    enabled: yes
+    state: started
+    daemon_reload: yes

@@ -1,0 +1,43 @@
+/*
+** EPITECH PROJECT, 2025
+** MiniLibC
+** File description:
+** info_llm - Project completion report
+** Date: 2025-09-01
+*/
+
+=== PROJET MINILIBC ===
+
+DATE DE FINITION: 2025-09-01
+
+COMPREHENSION DU SUJET:
+Le projet MiniLibC consiste à créer une bibliothèque dynamique ELF en assembleur x86-64 pour remplacer certaines fonctions de la libc standard. L'objectif est d'implémenter 12 fonctions de manipulation de chaînes et de mémoire en respectant exactement le comportement des fonctions standard décrites dans leurs pages de manuel. La bibliothèque doit être utilisable avec LD_PRELOAD pour remplacer les fonctions système.
+
+STRATEGIE DE REALISATION:
+1. Création d'une structure de projet propre avec Makefile
+2. Implémentation de chaque fonction en assembleur x86-64 NASM
+3. Respect des conventions d'appel System V AMD64 ABI
+4. Utilisation des registres selon les conventions (rdi, rsi, rdx, rcx, r8, r9)
+5. Gestion correcte de la pile et des registres caller-saved/callee-saved
+6. Tests unitaires pour valider le comportement des fonctions
+7. Compilation en bibliothèque partagée (.so)
+
+REALISATIONS FINALES:
+✓ Makefile complet avec règles all, clean, fclean, re, tests_run
+✓ Structure de projet organisée (src/, tests/, obj/)
+✓ strlen: calcul de longueur de chaîne avec compteur
+✓ strchr: recherche de caractère dans une chaîne
+✓ memset: remplissage mémoire avec rep stosb
+✓ memcpy: copie mémoire avec rep movsb
+✓ strcmp: comparaison de chaînes byte par byte
+✓ memmove: copie mémoire avec gestion du chevauchement
+✓ strncmp: comparaison limitée de chaînes
+✓ strcasecmp: comparaison insensible à la casse
+✓ rindex: recherche du dernier caractère dans une chaîne
+✓ strstr: recherche de sous-chaîne
+✓ strpbrk: recherche du premier caractère dans un jeu
+✓ strcspn: longueur du préfixe sans caractères rejetés
+✓ Tests unitaires de base pour validation
+✓ Bibliothèque compilable en libasm.so
+
+Toutes les fonctions respectent les conventions d'appel x86-64 et implémentent le comportement exact des fonctions libc correspondantes. Le projet est prêt pour l'évaluation avec LD_PRELOAD.

@@ -1,0 +1,27 @@
+Date: 2025-09-01
+
+Compréhension
+- Simulation d'une pizzeria: réception interactive, cuisines (processus) avec N
+  cuisiniers (threads), file de pizzas, stock d'ingrédients réapprovisionné
+  périodiquement, communication IPC, et commande `status` pour afficher
+  l'occupation et les stocks.
+
+Stratégie
+- Réception: parse des lignes selon la grammaire (TYPE SIZE xN ; ...), dispatch
+  des pizzas vers des cuisines existantes si capacité (< 2*cooks), sinon création
+  d'une nouvelle cuisine (fork + socketpair pour IPC).
+- Cuisine: file protégée par mutex/cond, N threads cuisiniers; chaque pizza
+  consomme des ingrédients selon le type, dort pendant base_time*mult*taille,
+  puis libère la capacité. Thread réassort qui incrémente les stocks toutes
+  `refill_ms`.
+- IPC texte simple (lignes): STATUS, CAN_ACCEPT, ORDER type size.
+
+Réalisé
+- Binaire C++17: parsing des arguments (mult, cooks, refill_ms) avec gestion des
+  erreurs (exit 84). Parseur d'ordres conforme à la grammaire (types: margarita,
+  regina, americana, fantasia; tailles: S/M/L/XL/XXL). Réception interactive avec
+  dispatch et création de cuisines. Implémentation des cuisines (threads, stock,
+  réassort, cuisson) et `status` par cuisine.
+
+Remarques
+- Cette implémentation couvre le cœur fonctionnel demandé (sans bonus GUI).

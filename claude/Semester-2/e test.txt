@@ -1,0 +1,33 @@
+╭─────────────────────────────────────────────────────────────────────╮
+│ ✻ Welcome to Claude Code!                                           │
+│                                                                     │
+│   /help for help, /status for your current setup                    │
+│                                                                     │
+│   cwd: /home/roro/work/projects/Epitech_projects/claude/Semester-2  │
+╰─────────────────────────────────────────────────────────────────────╯
+
+ Tips for getting started:
+
+  Run /init to create a CLAUDE.md file with instructions for Claude
+  Use Claude to help with file analysis, editing, bash commands and git
+  Be as specific as you would with another engineer for the best results
+  ⎿  Read B-CPE-200/RobotFactory/RobotFactory_roro/jon.cor (1 lines)
+  ⎿  Read B-CPE-200/RobotFactory/RobotFactory_roro/jon.s (7 lines)
+  ⎿  Read B-CPE-200/RobotFactory/RobotFactory_roro/src/parser.c (130 lines)
+  ⎿  Read B-CPE-200/RobotFactory/RobotFactory_roro/champion.cor (1 lines)
+  ⎿  Read B-CPE-200/RobotFactory/RobotFactory_roro/champion.s (9 lines)
+  ⎿  5-hour limit reached ∙ resets 10am
+     /upgrade to increase your usage limit.
+
+> /vim 
+  ⎿  Editor mode set to vim. Use Escape key to toggle between INSERT and NORMAL modes.
+
+> /vim 
+  ⎿  Editor mode set to normal. Using standard (readline) keyboard bindings.
+
+> /todos 
+  ⎿  No todos currently tracked
+
+> /export 
+  ⎿  Failed to copy to clipboard. Make sure `xclip` or `wl-copy` is installed on your system and try again.
+

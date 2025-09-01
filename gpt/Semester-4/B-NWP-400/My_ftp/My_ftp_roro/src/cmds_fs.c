@@ -41,10 +41,10 @@ void cmd_cdup(client_t *c, const char *home)
 
 void cmd_noop(client_t *c)
 {
-    client_write(c->fd, "200 NOOP ok.\\r\\n");
+    client_write(c->fd, "200 NOOP ok.\r\n");
 }
 
 void cmd_syst(client_t *c)
 {
-    client_write(c->fd, "215 UNIX Type: L8\\r\\n");
+    client_write(c->fd, "215 UNIX Type: L8\r\n");
 }

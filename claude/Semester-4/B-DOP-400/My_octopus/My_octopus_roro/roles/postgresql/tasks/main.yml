@@ -1,0 +1,64 @@
+---
+- name: Install PostgreSQL 12 and dependencies
+  apt:
+    name:
+      - postgresql-12
+      - postgresql-client-12
+      - postgresql-contrib-12
+      - python3-psycopg2
+    state: present
+
+- name: Copy pg_hba.conf configuration
+  copy:
+    src: pg_hba.conf
+    dest: /etc/postgresql/12/main/pg_hba.conf
+    backup: yes
+  notify: restart postgresql
+
+- name: Configure PostgreSQL to listen on all addresses
+  lineinfile:
+    path: /etc/postgresql/12/main/postgresql.conf
+    regexp: "^#?listen_addresses"
+    line: "listen_addresses = '*'"
+    backup: yes
+  notify: restart postgresql
+
+- name: Enable and start PostgreSQL service
+  systemd:
+    name: postgresql
+    enabled: yes
+    state: started
+
+- name: Create database user paul
+  postgresql_user:
+    name: paul
+    password: "{{ db_password }}"
+    state: present
+  become_user: postgres
+
+- name: Create database paul
+  postgresql_db:
+    name: paul
+    owner: paul
+    state: present
+  become_user: postgres
+
+- name: Copy database schema
+  copy:
+    src: schema.sql
+    dest: /tmp/schema.sql
+
+- name: Apply database schema
+  postgresql_db:
+    name: paul
+    state: restore
+    target: /tmp/schema.sql
+  become_user: postgres
+
+- name: Grant privileges to paul user
+  postgresql_privs:
+    db: paul
+    role: paul
+    privs: ALL
+    type: database
+  become_user: postgres

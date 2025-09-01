@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <limits.h>
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -20,7 +21,8 @@ int server_init(server_t *srv, int port, const char *home)
     int yes = 1;
 
     memset(srv, 0, sizeof(*srv));
-    my_strcpy(srv->home, home, sizeof(srv->home));
+    if (!realpath(home, srv->home))
+        my_strcpy(srv->home, home, sizeof(srv->home));
     fd = socket(AF_INET, SOCK_STREAM, 0);
     if (fd < 0)
         return -1;
@@ -50,4 +52,3 @@ void server_run(server_t *srv)
             break;
     }
 }
-

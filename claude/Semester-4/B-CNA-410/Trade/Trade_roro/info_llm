@@ -1,0 +1,49 @@
+/*
+** EPITECH PROJECT, 2025
+** Trade
+** File description:
+** info_llm - Project completion report
+** Date: 2025-09-01
+*/
+
+=== PROJET TRADE ===
+
+DATE DE FINITION: 2025-09-01
+
+COMPREHENSION DU SUJET:
+Le projet Trade consiste à créer un bot de trading algorithmique capable d'analyser des données de marché en temps réel et de prendre des décisions d'achat/vente automatisées sur les cryptomonnaies (BTC, ETH, USDT). Le bot doit :
+- Parser les données de marché reçues du serveur
+- Analyser les tendances avec des indicateurs techniques
+- Prendre des décisions de trading pour maximiser les profits
+- Respecter une grammaire stricte pour les ordres
+- Gérer les stacks de devises disponibles
+
+STRATEGIE DE REALISATION:
+1. Implémentation en Python pour la flexibilité d'analyse
+2. Classe TradingBot avec parsing des données serveur
+3. Indicateurs techniques : moyennes mobiles et RSI
+4. Stratégie basée sur le croisement de moyennes mobiles
+5. Gestion des risques avec montants limités par transaction
+6. Tests unitaires pour valider le comportement
+7. Makefile pour compilation et tests
+
+REALISATIONS FINALES:
+✓ Bot de trading en Python avec architecture modulaire
+✓ Parser pour les messages serveur (settings, candles, stacks)
+✓ Calcul des moyennes mobiles (court et long terme)
+✓ Implémentation du RSI (Relative Strength Index)
+✓ Stratégie de trading basée sur les indicateurs techniques
+✓ Gestion des ordres d'achat/vente avec validation
+✓ Protection contre la survente/surachat
+✓ Historique des prix avec limitation mémoire
+✓ Gestion des exceptions et signaux d'arrêt
+✓ Tests unitaires pour validation du code
+✓ Makefile conforme aux standards Epitech
+
+Le bot utilise une stratégie simple mais efficace :
+- Achat quand MA courte > MA longue et RSI < seuil
+- Vente quand MA courte < MA longue et RSI > seuil
+- Gestion du risque avec montants limités (10% du capital)
+- Support des paires BTC/USDT et ETH/USDT
+
+Le projet est prêt pour l'évaluation automatisée.

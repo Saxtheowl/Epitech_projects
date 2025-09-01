@@ -1,0 +1,25 @@
+---
+# Database configuration
+db_host: "{{ hostvars[groups['postgres'][0]]['ansible_host'] }}"
+db_port: 5432
+db_name: paul
+db_user: paul
+db_password: "{{ vault_db_password }}"
+
+# Redis configuration
+redis_host: "{{ hostvars[groups['redis'][0]]['ansible_host'] }}"
+redis_port: 6379
+
+# Application ports
+poll_port: 5000
+result_port: 3000
+worker_java_opts: "-Xmx256m"
+
+# Vault encrypted password
+vault_db_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          64383437393664393765666135323935346530343465636233316664366530653365303465343766
+          3633323435303335636566373036313532643232373461610a613938633766653066346230376631
+          39363635313162613133633938333064656263383738623830393030356265366432353362323933
+          3230393639366330650a613037393361346166333963323565326666656537396232373731643865
+          63353533323931366334363935306538333163643330376536643934303937306536

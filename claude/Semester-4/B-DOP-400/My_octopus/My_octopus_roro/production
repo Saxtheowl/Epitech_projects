@@ -1,0 +1,14 @@
+[redis]
+redis_server ansible_host=10.0.0.1 ansible_user=admin
+
+[postgres]
+postgres_server ansible_host=10.0.0.2 ansible_user=admin
+
+[poll]
+poll_server ansible_host=10.0.0.3 ansible_user=admin
+
+[result]
+result_server ansible_host=10.0.0.4 ansible_user=admin
+
+[worker]
+worker_server ansible_host=10.0.0.5 ansible_user=admin

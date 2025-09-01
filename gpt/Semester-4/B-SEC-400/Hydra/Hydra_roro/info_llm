@@ -1,0 +1,15 @@
+Date: 2025-09-01
+
+Compréhension
+- Sujet sécurité: utilisation d'Hydra (attaque par dictionnaire) sur divers services, avec méthodologie et rapports.
+
+Stratégie
+- Préparer une arborescence compilable (Epitech) pour encapsuler des scripts/outils et livrer un rapport.
+- Implémenter ensuite les scénarios exacts du PDF (non réalisés ici pour absence de cibles et pour éviter d'exécuter des attaques en environnement partagé).
+
+Réalisé
+- Squelette Epitech: Makefile (all/clean/fclean/re/tests_run), include/src/tests, binaire placeholder `hydra_roro` avec `-h`.
+
+Note
+- Les expérimentations réelles d'Hydra sont délibérément non automatisées ici.
+

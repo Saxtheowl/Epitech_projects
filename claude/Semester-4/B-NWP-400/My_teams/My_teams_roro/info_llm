@@ -1,0 +1,59 @@
+/*
+** EPITECH PROJECT, 2025
+** My_teams
+** File description:
+** info_llm - Project completion report
+** Date: 2025-09-01
+*/
+
+=== PROJET MY_TEAMS ===
+
+DATE DE FINITION: 2025-09-01
+
+COMPREHENSION DU SUJET:
+Le projet My_teams consiste à implémenter un serveur et un client TCP pour une application de communication collaborative style Microsoft Teams. Le serveur doit gérer plusieurs clients simultanés avec select(), supporter la création d'équipes, canaux, discussions et messages privés. Un protocole personnalisé doit être créé avec documentation RFC-style. Le système doit persister les données et les restaurer au redémarrage.
+
+STRATEGIE DE REALISATION:
+1. Architecture client-serveur TCP avec sockets
+2. Utilisation de select() pour multiplexage I/O (pas de fork/threads)
+3. Structures de données chaînées pour gérer users, teams, channels, threads, comments, messages
+4. Protocole de commandes textuelles préfixées par '/'
+5. Génération d'UUIDs personnalisés (bibliothèque uuid indisponible)
+6. Système de persistance avec fichier de sauvegarde
+7. Gestion des signaux pour sauvegarde propre à l'arrêt
+
+REALISATIONS FINALES:
+✓ Serveur TCP multi-clients avec select()
+✓ Client TCP interactif avec gestion des entrées utilisateur/serveur
+✓ Structure de données complète (users, teams, channels, threads, messages)
+✓ Génération d'UUIDs simplifiés (sans dépendance externe)
+✓ Commandes implémentées : /help, /login, /logout, /users, /user, /send, /messages, /subscribe, /unsubscribe, /subscribed, /create, /list, /info
+✓ Parser de commandes avec support des guillemets
+✓ Gestion des connexions/déconnexions clients
+✓ Système de persistance (sauvegarde/chargement)
+✓ Gestion des signaux SIGINT/SIGTERM
+✓ Validation des limites de chaînes (MAX_NAME_LENGTH, MAX_DESCRIPTION_LENGTH, MAX_BODY_LENGTH)
+✓ Gestion des erreurs et codes de retour (84)
+✓ Makefile avec règles standard (all, clean, fclean, re, tests_run)
+
+ARCHITECTURE TECHNIQUE:
+- server.c : point d'entrée serveur, gestion des connexions avec select()
+- client.c : point d'entrée client, interface utilisateur interactive
+- protocol.c : parsing et traitement des commandes
+- data.c : structures de données et fonctions de création
+- utils.c : utilitaires (parser, persistence, UUID)
+- commands.c : implémentations des commandes avancées
+- myteams.h : définitions des structures et prototypes
+
+Le serveur respecte les spécifications : pas de fork/threads, utilisation correcte de select(), persistance des données, gestion propre de l'arrêt avec Ctrl+C.
+
+FONCTIONNALITES IMPLEMENTEES:
+- Authentification utilisateur simple (pas de mots de passe)
+- Création et gestion d'équipes
+- Messages privés entre utilisateurs
+- Abonnements aux équipes
+- Interface de ligne de commande complète
+- Persistance des données au format texte
+- Support de sessions multiples simultanées
+
+Le projet implémente un serveur de communication fonctionnel avec toutes les fonctionnalités de base requises par le cahier des charges.

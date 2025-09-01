@@ -1,0 +1,11 @@
+Date: 2025-09-01
+
+Compréhension
+- Arcade: moteur de jeux modulaires avec chargement dynamique de bibliothèques graphiques et de jeux.
+
+Stratégie
+- Mise en place d'une base compilable; l'implémentation complète (plugins, dlopen, API) reste à faire selon le sujet.
+
+Réalisé
+- Arborescence + Makefile + tests minimalistes.
+

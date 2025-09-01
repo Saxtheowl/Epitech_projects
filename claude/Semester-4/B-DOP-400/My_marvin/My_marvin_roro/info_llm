@@ -1,0 +1,47 @@
+/*
+** EPITECH PROJECT, 2025
+** My_marvin
+** File description:
+** info_llm - Project completion report
+** Date: 2025-09-01
+*/
+
+=== PROJET MY_MARVIN ===
+
+DATE DE FINITION: 2025-09-01
+
+COMPREHENSION DU SUJET:
+Le projet My_marvin consiste à configurer automatiquement une instance Jenkins en utilisant Configuration as Code (JCasC) et Job DSL. L'objectif est de créer un pipeline CI/CD automatisé avec :
+- Configuration système avec message d'accueil spécifique
+- Gestion des utilisateurs avec mots de passe depuis variables d'environnement
+- Stratégie d'autorisation basée sur les rôles (admin, ape, gorilla, assist)
+- Dossier Tools avec jobs clone-repository et SEED
+- Job SEED qui génère dynamiquement des jobs de compilation/test Epitech
+
+STRATEGIE DE REALISATION:
+1. Création du fichier my_marvin.yml avec configuration JCasC complète
+2. Définition des utilisateurs Hugo, Garance, Jeremy, Nassim avec IDs et mots de passe
+3. Configuration des rôles avec permissions spécifiques
+4. Création du dossier Tools et des jobs de base
+5. Création du script job_dsl.groovy pour générer les jobs Epitech
+6. Respect des contraintes sécuritaires (pas de mots de passe en dur)
+
+REALISATIONS FINALES:
+✓ Fichier my_marvin.yml avec configuration JCasC
+✓ Message système "Welcome to the Chocolatine-Powered Marvin Jenkins Instance."
+✓ Agent -> Master Access Control activé
+✓ Désactivation des inscriptions
+✓ 4 utilisateurs créés avec mots de passe depuis variables d'environnement
+✓ Stratégie d'autorisation basée sur les rôles
+✓ Rôle admin (Hugo) avec toutes les permissions
+✓ Rôle ape (Jeremy) pour équipe pédagogique
+✓ Rôle gorilla (Garance) avec permissions étendues
+✓ Rôle assist (Nassim) en lecture seule
+✓ Dossier Tools créé à la racine
+✓ Job clone-repository avec paramètre GIT_REPOSITORY_URL
+✓ Job SEED avec paramètres GITHUB_NAME et DISPLAY_NAME
+✓ Script job_dsl.groovy pour générer jobs avec make fclean/make/make tests_run/make clean
+✓ Configuration SCM polling chaque minute
+✓ Pre-build workspace cleanup
+
+Le projet respecte toutes les spécifications et contraintes sécuritaires.

@@ -1,0 +1,15 @@
+Date: 2025-09-01
+
+Compréhension
+- Sujet orienté sécurité autour de Shodan (usage de l'API/outils) pour collecter/analyser des hôtes et services. Livrables généralement sous forme de scripts et rapport.
+
+Stratégie
+- Préparer une arborescence de projet conforme (Makefile, include/src/tests).
+- Implémenter ensuite les scripts/outils requis par le PDF (non réalisé ici faute de spécifications exécutables/offline et de clé API).
+
+Réalisé
+- Squelette Epitech: Makefile (all/clean/fclean/re/tests_run), include/src/tests, binaire placeholder `shodan_roro` avec `-h`.
+
+Note
+- Les fonctionnalités concrètes (requêtes Shodan, parsing, reporting) nécessitent l'accès à l'API et au contenu détaillé du sujet; elles ne sont pas implémentées dans ce squelette.
+

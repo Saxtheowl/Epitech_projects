@@ -24,12 +24,11 @@ void cmd_user(client_t *c, const char *arg)
 
 void cmd_pass(client_t *c, const char *arg)
 {
-    (void)arg;
-    if (c->has_user) {
+    if (c->has_user && (!arg || arg[0] == '\0')) {
         c->logged = true;
         client_write(c->fd, "230 User logged in, proceed.\r\n");
     } else {
-        client_write(c->fd, "503 Bad sequence of commands.\r\n");
+        client_write(c->fd, "530 Not logged in.\r\n");
     }
 }
 
@@ -39,4 +38,3 @@ void cmd_quit(server_t *srv, client_t *c)
     client_write(c->fd, "221 Service closing control connection.\r\n");
     client_close(c);
 }
-

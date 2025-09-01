@@ -1,0 +1,24 @@
+[Unit]
+Description=Worker Java Application
+After=network.target postgresql.service redis-server.service
+Requires=network.target
+
+[Service]
+Type=simple
+User=worker
+Group=worker
+WorkingDirectory=/opt/worker/worker
+Environment=REDIS_HOST={{ redis_host }}
+Environment=REDIS_PORT={{ redis_port }}
+Environment=DB_HOST={{ db_host }}
+Environment=DB_PORT={{ db_port }}
+Environment=DB_NAME={{ db_name }}
+Environment=DB_USER={{ db_user }}
+Environment=DB_PASSWORD={{ db_password }}
+Environment=JAVA_OPTS={{ worker_java_opts }}
+ExecStart=/usr/bin/java -jar target/worker-1.0-jar-with-dependencies.jar
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -26,16 +26,43 @@ int path_resolve(char *out, size_t out_cap, const char *home, const char *cwd,
     const char *inp)
 {
     char combined[PATH_MAX];
-    char real[PATH_MAX];
+    char real_full[PATH_MAX];
+    char real_dir[PATH_MAX];
+    const char *last = NULL;
+    size_t len = 0;
 
     if (inp[0] == '/')
         join_path(combined, sizeof(combined), home, inp + 1);
     else
         join_path(combined, sizeof(combined), cwd, inp);
-    if (!realpath(combined, real))
+    /* try full path first (works for existing files/dirs) */
+    if (realpath(combined, real_full)) {
+        if (strncmp(real_full, home, strlen(home)) != 0)
+            return -1;
+        my_strcpy(out, real_full, out_cap);
+        return 0;
+    }
+    /* handle non-existent final component (e.g., STOR newfile) */
+    len = my_strlen(combined);
+    last = combined + len;
+    while (last > combined && *(last - 1) != '/')
+        last--;
+    if (last == combined)
         return -1;
-    if (strncmp(real, home, strlen(home)) != 0)
+    /* temporarily terminate at directory slash */
+    {
+        char saved = *last;
+        * (char *) last = '\0';
+        if (!realpath(combined, real_dir)) {
+            * (char *) last = saved;
+            return -1;
+        }
+        * (char *) last = saved;
+    }
+    /* rebuild: real_dir + '/' + filename */
+    join_path(real_full, sizeof(real_full), real_dir, last);
+    if (strncmp(real_full, home, strlen(home)) != 0)
         return -1;
-    my_strcpy(out, real, out_cap);
+    my_strcpy(out, real_full, out_cap);
     return 0;
 }

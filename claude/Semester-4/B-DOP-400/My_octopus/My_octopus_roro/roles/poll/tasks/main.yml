@@ -1,0 +1,53 @@
+---
+- name: Install Python dependencies
+  apt:
+    name:
+      - python3
+      - python3-pip
+      - python3-venv
+    state: present
+
+- name: Create poll user
+  user:
+    name: poll
+    system: yes
+    home: /opt/poll
+    shell: /bin/false
+
+- name: Create poll directory
+  file:
+    path: /opt/poll
+    state: directory
+    owner: poll
+    group: poll
+    mode: '0755'
+
+- name: Extract poll application
+  unarchive:
+    src: poll.tar
+    dest: /opt/poll
+    owner: poll
+    group: poll
+    remote_src: no
+
+- name: Install Python requirements
+  pip:
+    requirements: /opt/poll/poll/requirements.txt
+    virtualenv: /opt/poll/venv
+    virtualenv_python: python3
+  become_user: poll
+
+- name: Copy poll systemd service
+  copy:
+    src: poll.service
+    dest: /etc/systemd/system/poll.service
+  notify:
+    - reload systemd
+    - restart poll
+
+- name: Enable and start poll service
+  systemd:
+    name: poll
+    enabled: yes
+    state: started
+    daemon_reload: yes

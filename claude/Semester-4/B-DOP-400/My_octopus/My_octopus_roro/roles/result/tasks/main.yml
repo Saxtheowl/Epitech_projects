@@ -1,0 +1,50 @@
+---
+- name: Install Node.js and npm
+  apt:
+    name:
+      - nodejs
+      - npm
+    state: present
+
+- name: Create result user
+  user:
+    name: result
+    system: yes
+    home: /opt/result
+    shell: /bin/false
+
+- name: Create result directory
+  file:
+    path: /opt/result
+    state: directory
+    owner: result
+    group: result
+    mode: '0755'
+
+- name: Extract result application
+  unarchive:
+    src: result.tar
+    dest: /opt/result
+    owner: result
+    group: result
+    remote_src: no
+
+- name: Install npm dependencies
+  npm:
+    path: /opt/result/result
+  become_user: result
+
+- name: Copy result systemd service
+  copy:
+    src: result.service
+    dest: /etc/systemd/system/result.service
+  notify:
+    - reload systemd
+    - restart result
+
+- name: Enable and start result service
+  systemd:
+    name: result
+    enabled: yes
+    state: started
+    daemon_reload: yes

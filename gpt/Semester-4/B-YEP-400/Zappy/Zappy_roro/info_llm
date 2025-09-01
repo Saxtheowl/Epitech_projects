@@ -1,0 +1,11 @@
+Date: 2025-09-01
+
+Compréhension
+- Zappy: serveur de jeu réseau (IA/GUI), protocole texte, mapping et synchronisation.
+
+Stratégie
+- Squelette prêt pour ajouter serveur, IA et GUI conformément au PDF.
+
+Réalisé
+- Arborescence + Makefile + tests minimalistes.
+

@@ -22,5 +22,5 @@ while true; do
   echo "[$(date '+%Y-%m-%d %H:%M:%S')] Commande envoyée à $SESSION_NAME"
 
   # Attente avant le prochain envoi
-  sleep 600
+  sleep 1200
 done

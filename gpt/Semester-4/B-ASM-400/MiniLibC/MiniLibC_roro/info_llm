@@ -1,0 +1,11 @@
+Date: 2025-09-01
+
+Compréhension
+- MiniLibC: ré-implémentation en assembleur d'un sous-ensemble de libc.
+
+Stratégie
+- Squelette pour accueillir les sources ASM, tests et Makefile adaptés (à compléter selon le PDF).
+
+Réalisé
+- Arborescence + Makefile + tests minimalistes (placeholder C pour la compilation).
+

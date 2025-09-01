@@ -1,7 +1,7 @@
-Date: 2025-08-31
+Date: 2025-09-01
 
 Sujet compris
-- Serveur FTP (RFC959) avec gestion multi-clients via poll pour la connexion de contrôle, et fork pour les transferts de données. Authentification avec Anonymous, modes de transfert actifs/passifs (au moins passif), commandes de base et séquences conformes aux exemples.
+- Serveur FTP (RFC959) avec gestion multi-clients via poll pour la connexion de contrôle, et fork pour les transferts de données. Authentification avec Anonymous, modes de transfert actif (PORT) et passif (PASV), commandes de base et séquences conformes aux exemples.
 
 Stratégie
 - Boucle poll acceptant des clients et lisant les lignes de commande. Par client: état (USER/PASS), cwd restreint au répertoire home. Commandes mises en œuvre: USER, PASS, QUIT, PWD, CWD, CDUP, PASV, LIST, TYPE, NOOP, SYST, RETR, STOR. Données: ouverture d’un socket passif (PASV), accept puis fork pour envoyer/recevoir (LIST/RETR/STOR), messages 1xx/2xx/5xx conformes.
@@ -9,7 +9,20 @@ Stratégie
 
 Réalisé
 - Arborescence conforme Epitech, Makefile (all/clean/fclean/re/tests_run), include/src/tests, info_llm. Binaire `myftp`.
-- Multi-clients via poll, authentification Anonymous vide, PASV + LIST/RETR/STOR via fork et transfert de données.
+- Multi-clients via poll, authentification Anonymous vide, modes PASSIF (PASV) et ACTIF (PORT), commandes: USER, PASS, QUIT, PWD, CWD, CDUP, PASV, PORT, LIST, TYPE, NOOP, SYST, RETR, STOR, DELE, MKD, RMD, RNFR, RNTO.
+
+Validation rapide (local)
+- Retour 84 si arguments invalides (aucun, port invalide, chemin inexistant).
+- Dialogue de base vérifié via netcat:
+  220, USER/PASS (331/230), PWD, QUIT (221).
+- Données: PASV + LIST/RETR/STOR testés avec connexion data côté client
+  (accept côté serveur), messages 150/226 conformes, transfert ok.
+- Authentification: USER Anonymous + PASS vide obligatoire (PASS non vide → 530).
+- La cible tests_run est fournie (Criterion + coverage). L'environnement actuel n'inclut pas Criterion, donc exécution des tests impossible ici, mais la cible est conforme au sujet.
 
 Remarques
-- Active mode (PORT) non implémenté; le sujet exige au moins un mode (passif couvert) et fork pour les transferts.
+- Respect strict du home pour les opérations de fichiers/chemins.
+- Correction: normalisation du chemin home (realpath) et résolution de
+  chemins pour fichiers non existants (STOR) en résolvant le dossier parent.
+- Correction: réponses NOOP/SYST en CRLF, et acceptation des transferts via
+  PORT ou PASV.
