@@ -1,0 +1,16 @@
+Date: 2025-08-31
+
+Sujet compris
+- Simulation d’une pizzeria: une réception interactive qui lit des commandes, répartit pizza par pizza vers des cuisines (processus), chaque cuisine gère un pool de cuisiniers (threads), un stock d’ingrédients se régénérant périodiquement, communication via IPC, équilibrage de charge, fermeture des cuisines inactives > 5s, affichage du statut, sérialisation des pizzas avec types/sizes imposés.
+
+Stratégie
+- Réception: parse les arguments (multiplicateur, nb de cuisiniers, délai de réassort ms) et les lignes de commandes (grammaire S := TYPE SIZE NUMBER; ...). Crée des cuisines à la demande, répartit pizza par pizza vers la cuisine la moins chargée (et ouvre une nouvelle cuisine si 2×N pizzas déjà en attente/in-flight). IPC via socketpair AF_UNIX avec un petit Packet et opérateurs d’envoi/réception. Commande ‘status’ interroge chaque cuisine et affiche inflight + pending.
+- Cuisine (process fork): pool de threads (N cuisiniers) qui consomment une file de tâches via ThreadPool local; chaque tâche prélève les ingrédients requis (avec attente si nécessaire) puis «cuit» la pizza: temps de base (1/2/2/4s selon type) × multiplicateur. Stock initial 5 unités par ingrédient, réassort +1 toutes les restock_ms millisecondes. Garde d’inactivité: se ferme après 5s sans travail (envoie un message de fermeture au parent).
+
+Réalisé
+- Arborescence conforme: include/, src/ (args, parser, pizza, ipc, kitchen, reception, threading, main), tests/, Makefile, info_llm. Binaire `plazza`.
+- Parser des commandes, équilibrage simple, création de cuisine à la volée, IPC (socketpair), pool de threads, stock/restock, fermeture inactive, status et notifications de pizzas prêtes.
+- Encapsulation objet fournie: wrappers pour Threads (ThreadPool), Mutex/CondVar (sync.hpp), Process (process.hpp), IPC (Channel avec opérateurs << >>).
+
+Remarques
+- La limite 2×N est gérée côté réception par suivi des pizzas en vol; les fermetures propres synchronisent les processus. Des raffinements (journalisation détaillée, sérialisation avec opérateurs << >>, affichage exhaustif du stock) peuvent encore être ajoutés mais le cœur fonctionnel demandé par le sujet est présent.

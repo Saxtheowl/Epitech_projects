@@ -1,0 +1,15 @@
+Date: 2025-08-31
+
+Sujet compris
+- Serveur FTP (RFC959) avec gestion multi-clients via poll pour la connexion de contrôle, et fork pour les transferts de données. Authentification avec Anonymous, modes de transfert actifs/passifs (au moins passif), commandes de base et séquences conformes aux exemples.
+
+Stratégie
+- Boucle poll acceptant des clients et lisant les lignes de commande. Par client: état (USER/PASS), cwd restreint au répertoire home. Commandes mises en œuvre: USER, PASS, QUIT, PWD, CWD, CDUP, PASV, LIST, TYPE, NOOP, SYST, RETR, STOR. Données: ouverture d’un socket passif (PASV), accept puis fork pour envoyer/recevoir (LIST/RETR/STOR), messages 1xx/2xx/5xx conformes.
+- Chemins résolus via realpath et vérifiés pour rester sous home.
+
+Réalisé
+- Arborescence conforme Epitech, Makefile (all/clean/fclean/re/tests_run), include/src/tests, info_llm. Binaire `myftp`.
+- Multi-clients via poll, authentification Anonymous vide, PASV + LIST/RETR/STOR via fork et transfert de données.
+
+Remarques
+- Active mode (PORT) non implémenté; le sujet exige au moins un mode (passif couvert) et fork pour les transferts.

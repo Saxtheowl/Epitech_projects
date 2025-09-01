@@ -1,0 +1,220 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <config_file>" >&2
+    exit 84
+fi
+
+config_file="$1"
+
+if [ ! -f "$config_file" ]; then
+    echo "Error: Config file '$config_file' not found" >&2
+    exit 84
+fi
+
+# Initialize variables
+PROJECT_DIR=""
+SOURCES_DIR="."
+HEADERS_DIR=""
+LIBS_DIR=""
+EXEC="a.out"
+CC="gcc"
+CFLAGS=""
+LDFLAGS=""
+BCK_DIR="backup"
+ZIP="tar"
+ZIPFLAGS="-czf"
+UNZIP="tar"
+UNZIPFLAGS="-xzf"
+
+declare -a sources
+declare -A deps
+
+# Parse configuration file
+while IFS=';' read -r key value; do
+    # Skip empty lines and comments
+    [ -z "$key" ] && continue
+    [[ "$key" =~ ^[[:space:]]*# ]] && continue
+    
+    case "$key" in
+        "PROJECT_DIR")
+            PROJECT_DIR="$value"
+            ;;
+        "SOURCES_DIR")
+            SOURCES_DIR="$value"
+            ;;
+        "HEADERS_DIR")
+            HEADERS_DIR="$value"
+            ;;
+        "LIBS_DIR")
+            LIBS_DIR="$value"
+            ;;
+        "EXEC")
+            EXEC="$value"
+            ;;
+        "CC")
+            CC="$value"
+            ;;
+        "CFLAGS")
+            CFLAGS="$value"
+            ;;
+        "LDFLAGS")
+            LDFLAGS="$value"
+            ;;
+        "BCK_DIR")
+            BCK_DIR="$value"
+            ;;
+        "ZIP")
+            ZIP="$value"
+            ;;
+        "ZIPFLAGS")
+            ZIPFLAGS="$value"
+            ;;
+        "UNZIP")
+            UNZIP="$value"
+            ;;
+        "UNZIPFLAGS")
+            UNZIPFLAGS="$value"
+            ;;
+        *)
+            # Check if it's a source file
+            if [[ "$key" == *.c ]]; then
+                sources+=("$key")
+                if [ -n "$value" ]; then
+                    deps["$key"]="$value"
+                fi
+            fi
+            ;;
+    esac
+done < "$config_file"
+
+# Validate mandatory fields
+if [ -z "$PROJECT_DIR" ]; then
+    echo "Error: PROJECT_DIR is mandatory" >&2
+    exit 84
+fi
+
+if [ ${#sources[@]} -eq 0 ]; then
+    echo "Error: At least one source file is required" >&2
+    exit 84
+fi
+
+# Generate Makefile
+makefile_path="$PROJECT_DIR/Makefile"
+
+cat > "$makefile_path" << EOF
+##
+## EPITECH PROJECT, $(date +%Y)
+## $PROJECT_DIR
+## File description:
+## Generated Makefile
+##
+
+# Project configuration
+PROJECT_DIR = $PROJECT_DIR
+SOURCES_DIR = $SOURCES_DIR
+HEADERS_DIR = $HEADERS_DIR
+LIBS_DIR = $LIBS_DIR
+BCK_DIR = $BCK_DIR
+
+# Compilation
+CC = $CC
+CFLAGS = $CFLAGS
+LDFLAGS = $LDFLAGS
+
+# Archive tools
+ZIP = $ZIP
+ZIPFLAGS = $ZIPFLAGS
+UNZIP = $UNZIP
+UNZIPFLAGS = $UNZIPFLAGS
+
+# Binary name
+NAME = $EXEC
+
+# Sources and objects
+EOF
+
+echo "SRCS = \\" >> "$makefile_path"
+for i in "${!sources[@]}"; do
+    if [ $i -eq $((${#sources[@]} - 1)) ]; then
+        echo "	\$(SOURCES_DIR)/${sources[i]}" >> "$makefile_path"
+    else
+        echo "	\$(SOURCES_DIR)/${sources[i]} \\" >> "$makefile_path"
+    fi
+done
+
+cat >> "$makefile_path" << 'EOF'
+
+OBJS = $(SRCS:.c=.o)
+
+# Include directories
+EOF
+
+if [ -n "$HEADERS_DIR" ]; then
+    echo "INCLUDES = -I\$(HEADERS_DIR)" >> "$makefile_path"
+else
+    echo "INCLUDES =" >> "$makefile_path"
+fi
+
+cat >> "$makefile_path" << 'EOF'
+
+# Library directories
+EOF
+
+if [ -n "$LIBS_DIR" ]; then
+    echo "LIBDIRS = -L\$(LIBS_DIR)" >> "$makefile_path"
+else
+    echo "LIBDIRS =" >> "$makefile_path"
+fi
+
+cat >> "$makefile_path" << 'EOF'
+
+# Rules
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(OBJS) -o $(NAME) $(LDFLAGS) $(LIBDIRS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+clean:
+	rm -f $(OBJS)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+# Version management
+archive:
+	@if [ ! -d "$(BCK_DIR)" ]; then mkdir -p "$(BCK_DIR)"; fi
+	@version=$$(ls $(BCK_DIR)/*.tar.gz 2>/dev/null | wc -l); \
+	version=$$((version + 1)); \
+	archive_name="$(BCK_DIR)/backup_v$$version.tar.gz"; \
+	$(ZIP) $(ZIPFLAGS) $$archive_name $(SRCS); \
+	echo "$$(basename $$archive_name) file generated."
+
+revert:
+	@latest=$$(ls -t $(BCK_DIR)/*.tar.gz 2>/dev/null | head -1); \
+	if [ -n "$$latest" ]; then \
+		$(UNZIP) $(UNZIPFLAGS) $$latest; \
+	else \
+		echo "No backup found"; \
+	fi
+
+num:
+	@version=$$(ls $(BCK_DIR)/*.tar.gz 2>/dev/null | wc -l); \
+	echo "$$version"
+
+delete:
+	@latest=$$(ls -t $(BCK_DIR)/*.tar.gz 2>/dev/null | head -1); \
+	if [ -n "$$latest" ]; then \
+		rm -f $$latest; \
+		echo "Latest backup deleted"; \
+	else \
+		echo "No backup to delete"; \
+	fi
+
+.PHONY: all clean fclean re archive revert num delete
+EOF

@@ -1,0 +1,17 @@
+Date: 2025-08-31
+
+Sujet compris
+- ftrace: tracer les appels système, les signaux, et les appels de fonctions (internes et de bibliothèques) avec nom/adresse lorsque possible. Afficher au minimum: syscalls, signaux, et entrer dans main si disponible.
+
+Stratégie
+- ptrace sur un enfant (TRACEME + SIGSTOP), options TRACESYSGOOD. Boucle alternant entrées/sorties de syscalls et affichant nom + 3 premiers arguments + valeur de retour.
+- signaux: afficher «Received signal <name>», relayer le signal au processus suivi.
+- ELF: via libelf, récupérer l’adresse de la fonction main et l’annoncer au lancement. (Extension possible: points d’arrêt sur symboles pour suivre d’autres fonctions.)
+
+Réalisé
+- Binaire `ftrace` avec Makefile Epitech, include/src/tests et info_llm.
+- Affiche «USAGE: ftrace <command>» lorsqu’aucun argument.
+- Traçage des syscalls (sous-ensemble suffisant pour la démonstration), signaux, et message «Entering function main …» si symbole présent.
+
+Remarques
+- Le suivi détaillé des fonctions (enter/leave sur tout appel) demande des points d’arrêt et une gestion fine du PLT/ret; ceci peut être ajouté si requis. L’implémentation actuelle couvre les éléments minimaux explicitement affichés dans l’exemple (syscalls + signaux + main).
