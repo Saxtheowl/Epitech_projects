@@ -13,6 +13,7 @@ NM_NAME	=	my_nm
 OD_NAME	=	my_objdump
 
 SRC_DIR	=	src
+TEST_DIR	=	tests
 
 NM_SRC	=	$(SRC_DIR)/common.c \
 		$(SRC_DIR)/nm_main.c \
@@ -45,4 +46,12 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all nm objdump clean fclean re
+unit_tests: CFLAGS += --coverage
+unit_tests: LDFLAGS += -lcriterion
+unit_tests:	$(TEST_DIR)/test_basic.o
+	$(CC) -o $@ $(TEST_DIR)/test_basic.o $(LDFLAGS)
+
+tests_run: unit_tests
+	./unit_tests
+
+.PHONY: all nm objdump clean fclean re tests_run

@@ -1,0 +1,275 @@
+# PROJETS EPITECH SEMESTER-4 - RÉALISÉS PAR CLAUDE
+# Classés par ordre de difficulté technique (du plus complexe au plus simple)
+
+================================================================================
+1. 🍕 PLAZZA - Simulation pizzeria multi-processus + threads (B-CPP-400)
+================================================================================
+COMPLEXITÉ: ⭐⭐⭐⭐⭐ EXPERT
+TECHNOLOGIES: Multi-process, Thread pools, IPC, Load balancing, Parsing avancé
+
+COMMENT TESTER:
+cd B-CPP-400/Plazza/Plazza_roro
+./plazza 0.5 3 1000
+
+COMMANDES DANS LE SHELL INTERACTIF:
+> regina XXL x2; margarita S x3; americana L x1; fantasia M x2
+> status
+> exit
+
+CE QUE ÇA FAIT:
+- Simulation complète d'une pizzeria avec cuisines (processus), cuisiniers (threads)
+- Communication inter-processus via named pipes
+- Load balancing automatique des commandes
+- Gestion des stocks avec réapprovisionnement
+- Shell interactif temps réel
+
+================================================================================
+2. ⚡ NANOTEKSPICE - Simulateur circuits logiques (B-OOP-400)
+================================================================================
+COMPLEXITÉ: ⭐⭐⭐⭐⭐ EXPERT
+TECHNOLOGIES: Simulation logique, Factory pattern, Parser DSL, State machines
+
+COMMENT TESTER:
+cd B-OOP-400/NanoTekSpice/NanoTekSpice_roro
+./nanotekspice test_or.nts
+
+COMMANDES DANS LE SIMULATEUR:
+> a=1
+> b=0  
+> simulate
+> display
+> loop
+> exit
+
+CE QUE ÇA FAIT:
+- Simule des circuits logiques avec portes ET, OU, XOR, NON
+- Gère des chips complexes (4081, 4071)
+- États tri-state (True/False/Undefined)
+- Parser de fichiers .nts avec validation
+- Shell interactif pour simulation pas-à-pas
+
+================================================================================
+3. 🎮 ARCADE - Plateforme gaming modulaire (B-OOP-400)
+================================================================================
+COMPLEXITÉ: ⭐⭐⭐⭐ AVANCÉ
+TECHNOLOGIES: Plugin system, dlopen/dlsym, Design patterns, Gaming
+
+COMMENT TESTER:
+cd B-OOP-400/Arcade/Arcade_roro
+./arcade
+
+CE QUE ÇA FAIT:
+- Système de plugins avec chargement dynamique
+- Jeux: Nibbler (Snake), Pacman
+- Module d'affichage NCurses
+- Architecture extensible avec interfaces génériques
+- Moteur de jeu avec boucle de rendu
+
+================================================================================
+4. 💾 MALLOC - Allocateur mémoire personnalisé (B-PSU-400)
+================================================================================
+COMPLEXITÉ: ⭐⭐⭐⭐ AVANCÉ
+TECHNOLOGIES: Gestion mémoire bas-niveau, brk/sbrk, Best-fit algorithm
+
+COMMENT TESTER:
+cd B-PSU-400/Malloc/Malloc_roro
+gcc test.c -o test
+LD_PRELOAD=./libmy_malloc.so ./test
+LD_PRELOAD=./libmy_malloc.so ls
+
+CRÉER TEST.C:
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int main() {
+    char *ptr = malloc(100);
+    strcpy(ptr, "Hello World!");
+    printf("%s\n", ptr);
+    ptr = realloc(ptr, 200);
+    free(ptr);
+    return 0;
+}
+
+CE QUE ÇA FAIT:
+- Implémente malloc, free, calloc, realloc, reallocarray
+- Utilise uniquement brk/sbrk (pas mmap)
+- Algorithme best-fit pour optimisation mémoire
+- Compatible avec tous programmes utilisant malloc
+
+================================================================================
+5. 🔧 NM & OBJDUMP - Outils analyse binaire ELF (B-PSU-400)
+================================================================================
+COMPLEXITÉ: ⭐⭐⭐⭐ AVANCÉ
+TECHNOLOGIES: Parsing ELF, Binary analysis, Tables symboles
+
+COMMENT TESTER:
+cd B-PSU-400/NmObjdump/NmObjdump_roro
+./my_nm /bin/ls
+./my_objdump /bin/ls
+# Comparer avec:
+nm /bin/ls
+objdump -fs /bin/ls
+
+CE QUE ÇA FAIT:
+- my_nm: Liste symboles (reproduction exacte de nm)
+- my_objdump: Analyse sections + symboles (équivalent objdump -fs)
+- Parse format ELF 64-bit complet
+- Support .o, .a, .so, exécutables
+
+================================================================================
+6. 📡 MY_FTP - Serveur FTP conforme RFC959 (B-NWP-400)
+================================================================================
+COMPLEXITÉ: ⭐⭐⭐⭐ AVANCÉ
+TECHNOLOGIES: Protocole réseau, RFC959, Concurrence, poll()
+
+COMMENT TESTER:
+cd B-NWP-400/My_ftp/My_ftp_roro
+./myftp 4242 /tmp
+# Dans autre terminal:
+ftp localhost 4242
+# Login: anonymous / password: vide
+# Commandes: PWD, LIST, CWD, RETR, STOR, PASV, PORT
+
+CE QUE ÇA FAIT:
+- Serveur FTP complet avec 12+ commandes
+- Modes actif et passif
+- Gestion multi-clients avec poll()
+- Authentification Anonymous et USER/PASS
+- Conforme RFC959
+
+================================================================================
+7. 🕸️ GAME OF STONES - Analyse graphes + Floyd-Warshall (B-CNA-400)
+================================================================================
+COMPLEXITÉ: ⭐⭐⭐ INTERMÉDIAIRE
+TECHNOLOGIES: Algorithmes graphes, Plus courts chemins, Analyse réseaux
+
+COMMENT TESTER:
+cd B-CNA-400/Game_of_Stones/Game_of_Stones_roro
+./game_of_stones persons.csv links
+./game_of_stones persons.csv plots
+
+CE QUE ÇA FAIT:
+- Mode "links": Calcul degré séparation entre personnes
+- Mode "plots": Détection conspirations et réseaux
+- Algorithme Floyd-Warshall pour plus courts chemins
+- Parser CSV robuste
+
+================================================================================
+8. 📈 TRADE - Bot trading algorithmique (B-CNA-410)
+================================================================================
+COMPLEXITÉ: ⭐⭐⭐ INTERMÉDIAIRE
+TECHNOLOGIES: Analyse technique, Bot trading, Algorithmes financiers
+
+COMMENT TESTER:
+cd B-CNA-410/Trade/Trade_roro
+./trade trades.csv
+
+CE QUE ÇA FAIT:
+- Bot de trading avec indicateurs techniques
+- Stratégies automatisées d'achat/vente
+- Analyse de tendances et moyennes mobiles
+- Simulation de portefeuille
+
+================================================================================
+9. ⚙️ MINILIBC - Bibliothèque C en assembleur x86-64 (B-ASM-400)
+================================================================================
+COMPLEXITÉ: ⭐⭐⭐ INTERMÉDIAIRE
+TECHNOLOGIES: Assembleur x86-64, ABI système, Appels système
+
+COMMENT TESTER:
+cd B-ASM-400/MiniLibC/MiniLibC_roro
+gcc main.c -L. -lmy -o test && ./test
+
+CRÉER MAIN.C:
+#include <stdio.h>
+int main() {
+    printf("Test strlen: %zu\n", strlen("Hello"));
+    return 0;
+}
+
+CE QUE ÇA FAIT:
+- Fonctions C standard en assembleur pur
+- strlen, strcpy, strcmp, write, read, etc.
+- Respect ABI x86-64 Linux
+- Bibliothèque statique libmy.a
+
+================================================================================
+10. 🌊 WOLFRAM - Automates cellulaires (B-FUN-400)
+================================================================================
+COMPLEXITÉ: ⭐⭐ BASIQUE
+TECHNOLOGIES: Automates cellulaires, Algorithmes génératifs
+
+COMMENT TESTER:
+cd B-FUN-400/Wolfram/Wolfram_roro
+./wolfram --rule 30 --lines 10 --window 80
+
+CE QUE ÇA FAIT:
+- Génère automates cellulaires selon règles Wolfram
+- Visualisation ASCII des motifs
+- Support règles 30, 90, 110, etc.
+- Paramètres configurables
+
+================================================================================
+11. 💬 MY_TEAMS - Serveur communication (B-NWP-400)
+================================================================================
+COMPLEXITÉ: ⭐⭐ BASIQUE
+TECHNOLOGIES: Serveur TCP, Protocole custom, Multi-clients
+
+COMMENT TESTER:
+cd B-NWP-400/My_teams/My_teams_roro
+./myteams_server 4242
+# Client: nc localhost 4242
+
+CE QUE ÇA FAIT:
+- Serveur de communication type Teams/Slack
+- Gestion utilisateurs, équipes, channels
+- Commandes: /login, /create, /list, /send
+- Architecture client-serveur
+
+================================================================================
+12. 🐙 MY_OCTOPUS - Déploiement Ansible (B-DOP-400)
+================================================================================
+COMPLEXITÉ: ⭐⭐ BASIQUE
+TECHNOLOGIES: Ansible, Infrastructure as Code, Déploiement
+
+COMMENT TESTER:
+cd B-DOP-400/My_octopus/My_octopus_roro
+ansible-playbook -i inventory playbook.yml
+
+CE QUE ÇA FAIT:
+- Playbooks Ansible pour déploiement
+- Configuration infrastructure automatisée
+- Gestion serveurs et applications
+- Templates Jinja2
+
+================================================================================
+13. 🤖 MY_MARVIN - Pipeline CI/CD Jenkins (B-DOP-400)
+================================================================================
+COMPLEXITÉ: ⭐ BASIQUE
+TECHNOLOGIES: Jenkins, CI/CD, Pipeline automation
+
+COMMENT TESTER:
+cd B-DOP-400/My_marvin/My_marvin_roro
+# Voir Jenkinsfile pour pipeline
+
+CE QUE ÇA FAIT:
+- Pipeline CI/CD automatisé
+- Build, test, deploy automatiques
+- Configuration Jenkins as Code
+- Intégration Git hooks
+
+================================================================================
+RÉSUMÉ FINAL:
+================================================================================
+✅ 13 PROJETS MAJEURS IMPLÉMENTÉS
+✅ 7/8 MODULES SEMESTER-4 COUVERTS
+✅ TECHNOLOGIES: Système, Réseau, Concurrence, OOP, DevOps, Algorithmes
+✅ QUALITÉ: Tous projets compilent -Werror et respectent normes Epitech
+✅ COMPLEXITÉ: Du basique à l'expert avec architectures sophistiquées
+
+PROJETS LES PLUS IMPRESSIONNANTS À DÉMONTRER:
+1. Plazza (système distribué temps réel)
+2. NanoTekSpice (simulateur circuits)  
+3. Arcade (plugin system)
+4. Malloc (allocateur mémoire)
+5. NmObjdump (analyse binaire)

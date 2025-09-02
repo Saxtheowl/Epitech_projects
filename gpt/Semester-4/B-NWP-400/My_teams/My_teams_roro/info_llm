@@ -1,0 +1,22 @@
+Date: 2025-09-01
+
+Compréhension
+- Projet My_teams: serveur TCP (select) multi-clients sans threads/fork + client CLI.
+- Protocole à définir (RFC), commandes côté client (/help, /login, /logout, ...), persistance.
+- Utilisation de la lib myteams pour log (non présente ici; prévoir intégration sous libs/).
+
+Stratégie
+- Arborescence Epitech, Makefile générant `myteams_server` et `myteams_cli`.
+- Serveur: squelette avec select, gestion basique des clients, parsing minimal
+  des commandes /help, /login, /logout (placeholder). Client interactif simple.
+- Étapes suivantes: définir RFC interne, intégrer libs/myteams, compléter toutes
+  commandes (/users, /user, /send, /messages, /subscribe, /subscribed, /unsubscribe,
+  /use, /create, /list, /info), et persistance (save/load).
+
+Réalisé
+- Binaire serveur/cli, boucle select, aide/usage, mini-protocole de test.
+
+Remarques
+- Sans la bibliothèque myteams fournie par le sujet, les logs d’événements ne sont
+  pas intégrés ici; ils seront ajoutés une fois la lib disponible.
+

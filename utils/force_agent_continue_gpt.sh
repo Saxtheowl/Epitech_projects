@@ -6,7 +6,8 @@ SESSION_NAME="gpt"
 # Boucle infinie
 while true; do
   # Texte complet à envoyer
-  COMMAND="continue le projet sur lesquel tu etais si il est pas complet et verifie que il passe bien tous les test indiqué dans le ou les fichiers .pdf du projet puis retourne a /home/roro/work/projects/Epitech_projects/gpt/Semester-4 et verifie si tu as bien fais tous les projets sinon fais les, n'utilise jamais la commande sudo"
+  COMMAND="si tu ne peux pas terminé le projet sans mon intervention passe a un projet pas terminé dans /home/roro/work/\
+projects/Epitech_projects/gpt/Semester-4 sinon continue le projet sur lesquel tu etais si il est pas complet et verifie que il passe bien tous les test indiqué dans le ou les fichiers .pdf, n'utilise jamais sudo" 
 
   # Place le texte dans un buffer tmux pour éviter les coupures
 #  tmux set-buffer -b force_cmd "$COMMAND"

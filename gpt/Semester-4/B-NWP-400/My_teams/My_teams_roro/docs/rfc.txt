@@ -1,0 +1,53 @@
+my_teams_roro protocol (draft)
+
+Client connects (TCP). Server greets with:
+  220 Welcome\r\n
+Commands (client → server):
+- /help
+- /login "name"
+- /logout
+- /users
+- /user "uuid"
+- /send "uuid" "message_body"
+- /messages "uuid"
+- /subscribe "team_uuid"
+- /unsubscribe "team_uuid"
+- /subscribed ["team_uuid"]
+- /use ?"team_uuid" ?"channel_uuid" ?"thread_uuid"
+- /create "name" ["description"|"message"|"comment"] depending on context
+- /list (lists entities according to context)
+- /info (prints entity according to context)
+
+Replies (server → client):
+- 2xx ok responses:
+  200 Logged in / Logged out / Context set / Team/Channel/Thread/Reply created
+  201 <uuid> <name> <status>               (users)
+  202 <uuid> <name> <status>               (user)
+  203 Sent                                  (send ack)
+  210 Message <from_uuid> <body>           (incoming private msg)
+  211 <from_uuid> <body>                   (messages listing)
+  214 End                                  (end of multi-line listing)
+  220 <uuid> <name>                        (info user)
+  221 <team_uuid> <name> <desc>            (info team)
+  222 <chan_uuid> <name> <desc>            (info channel)
+  223 <thread_uuid> <title> <message>      (info thread)
+  231 <team_uuid> <team_name>              (teams subscribed)
+  232 <user_uuid> <user_name>              (users subscribed to team)
+  301 <team_uuid> <name> <desc>            (list teams)
+  302 <chan_uuid> <name> <desc>            (list channels)
+  303 <thread_uuid> <title> <message>      (list threads)
+  304 <reply_uuid> <author_uuid> <body>    (list replies)
+
+- 4xx/5xx errors:
+  404 User/Team/Channel/Thread            (not found)
+  501 Syntax                               (invalid command/args)
+  530 Not logged                           (auth required)
+  550 Not subscribed                       (access forbidden)
+  451 Temp fail                            (capacity/persistence error)
+
+Persistence:
+- TSV files users.db, teams.db, channels.db, threads.db, replies.db, subs.db, messages.db
+  saved at shutdown (SIGINT) and loaded at startup.
+
+Notes:
+- In production, all events and data must be printed via the provided myteams logging library.

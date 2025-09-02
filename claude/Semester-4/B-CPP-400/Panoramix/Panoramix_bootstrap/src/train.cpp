@@ -10,8 +10,8 @@
 #include <iomanip>
 
 std::mutex Train::bridgeMutex;
-std::counting_semaphore<NB_MAX> Train::bridgeSemaphore(NB_MAX);
 std::mutex Train::displayMutex;
+int Train::bridgeCount = 0;
 
 Train::Train(int trainId) : id(trainId), position(0) {}
 
@@ -51,14 +51,21 @@ void Train::displayAllTrains(const std::vector<Train>& trains) {
 void Train::run() {
     while (position <= TRACK_LENGTH) {
         if (position == BRIDGE_START) {
-            bridgeSemaphore.acquire();
+            std::unique_lock<std::mutex> lock(bridgeMutex);
+            while (bridgeCount >= NB_MAX) {
+                lock.unlock();
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                lock.lock();
+            }
+            bridgeCount++;
         }
         
         position++;
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
         
         if (position == BRIDGE_END + 1) {
-            bridgeSemaphore.release();
+            std::lock_guard<std::mutex> lock(bridgeMutex);
+            bridgeCount--;
         }
         
         if (position > TRACK_LENGTH) {

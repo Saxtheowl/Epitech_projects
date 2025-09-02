@@ -33,10 +33,12 @@ fclean: clean
 
 re: fclean all
 
+TU_OBJ	=	$(filter-out $(SRC_DIR)/main.o,$(OBJ))
+
 unit_tests: CFLAGS += --coverage
-unit_tests: LDFLAGS += -lcriterion
-unit_tests:	$(OBJ) $(TEST_DIR)/test_basic.o
-	$(CC) -o $@ $(OBJ) $(TEST_DIR)/test_basic.o $(LDFLAGS)
+unit_tests: LDFLAGS += -lcriterion -pthread
+unit_tests:	$(TU_OBJ) $(TEST_DIR)/test_basic.o
+	$(CC) -o $@ $(TU_OBJ) $(TEST_DIR)/test_basic.o $(LDFLAGS)
 
 tests_run: unit_tests
 	./unit_tests

@@ -5,23 +5,25 @@
 ##   Build rules
 ##
 
-NAME	=	arcade_roro
+NAME	=	arcade
 
 SRC_DIR	=	src
 INC_DIR	=	include
 TEST_DIR	=	tests
 
-SRC	=	$(SRC_DIR)/main.c
+SRC	=	$(SRC_DIR)/main.cpp \
+	$(SRC_DIR)/core.cpp
 
-OBJ	=	$(SRC:.c=.o)
+OBJ	=	$(SRC:.cpp=.o)
 
-CFLAGS	=	-Wall -Wextra -I$(INC_DIR)
-LDFLAGS	=
+CXX	=	g++
+CXXFLAGS	=	-Wall -Wextra -std=c++17 -I$(INC_DIR)
+LDFLAGS	=	-ldl
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
+	$(CXX) -o $(NAME) $(OBJ) $(LDFLAGS)
 
 clean:
 	rm -f $(OBJ)
@@ -33,13 +35,12 @@ fclean: clean
 
 re: fclean all
 
-unit_tests: CFLAGS += --coverage
+unit_tests: CXXFLAGS += --coverage
 unit_tests: LDFLAGS += -lcriterion
 unit_tests:	$(OBJ) $(TEST_DIR)/test_basic.o
-	$(CC) -o $@ $(OBJ) $(TEST_DIR)/test_basic.o $(LDFLAGS)
+	$(CXX) -o $@ $(OBJ) $(TEST_DIR)/test_basic.o $(LDFLAGS)
 
 tests_run: unit_tests
 	./unit_tests
 
 .PHONY: all clean fclean re tests_run
-

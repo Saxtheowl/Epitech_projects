@@ -14,6 +14,7 @@
 #include <chrono>
 #include "plazza.hpp"
 #include "kitchen.hpp"
+#include "ipc.hpp"
 
 static void write_all(int fd, const char *buf, std::size_t len)
 {
@@ -50,9 +51,29 @@ static int base_time(const Pizza &p)
     return 1;
 }
 
-static int size_factor(PizzaSize sz)
+static int size_factor(PizzaSize sz) { return (int)sz; }
+
+static const char *type_name(PizzaType t)
 {
-    return (int)sz;
+    switch (t) {
+        case PizzaType::Margarita: return "margarita";
+        case PizzaType::Regina: return "regina";
+        case PizzaType::Americana: return "americana";
+        case PizzaType::Fantasia: return "fantasia";
+    }
+    return "unknown";
+}
+
+static const char *size_name(PizzaSize s)
+{
+    switch (s) {
+        case PizzaSize::S: return "S";
+        case PizzaSize::M: return "M";
+        case PizzaSize::L: return "L";
+        case PizzaSize::XL: return "XL";
+        case PizzaSize::XXL: return "XXL";
+    }
+    return "?";
 }
 
 static bool needs_for(const Pizza &p, KitchenStock &need)
@@ -71,6 +92,8 @@ Kitchen::Kitchen(int fd, const KitchenCfg &cfg)
     : m_fd(fd), m_cfg(cfg), m_active(0), m_stop(false)
 {
     m_stock = {5,5,5,5,5,5,5,5,5};
+    using namespace std::chrono;
+    m_last_ms.store(duration_cast<milliseconds>(steady_clock::now().time_since_epoch()).count());
 }
 
 Kitchen::~Kitchen() {}
@@ -90,7 +113,7 @@ bool Kitchen::take_ingredients(const Pizza &p)
 {
     KitchenStock need{};
     needs_for(p, need);
-    std::lock_guard<std::mutex> lk(m_mtx);
+    std::lock_guard<std::mutex> lk(m_mtx.native());
     if (m_stock.dough < need.dough || m_stock.tomato < need.tomato ||
         m_stock.gruyere < need.gruyere || m_stock.ham < need.ham ||
         m_stock.mushrooms < need.mushrooms || m_stock.steak < need.steak ||
@@ -109,7 +132,7 @@ void Kitchen::refiller_loop()
 {
     while (!m_stop.load()) {
         std::this_thread::sleep_for(std::chrono::milliseconds(m_cfg.refill_ms));
-        std::lock_guard<std::mutex> lk(m_mtx);
+        std::lock_guard<std::mutex> lk(m_mtx.native());
         m_stock.dough++; m_stock.tomato++; m_stock.gruyere++;
         m_stock.ham++; m_stock.mushrooms++; m_stock.steak++;
         m_stock.eggplant++; m_stock.goat++; m_stock.love++;
@@ -122,38 +145,57 @@ void Kitchen::cook_loop()
     while (!m_stop.load()) {
         Pizza p;
         {
-            std::unique_lock<std::mutex> lk(m_mtx);
-            m_cv.wait(lk, [&]{ return m_stop.load() || !m_queue.empty(); });
-            if (m_stop.load()) break;
-            p = m_queue.front();
-            m_queue.erase(m_queue.begin());
+        std::unique_lock<std::mutex> lk(m_mtx.native());
+        m_cv.wait(lk);
+        if (m_stop.load()) break;
+        if (m_queue.empty()) continue;
+        if (m_stop.load()) break;
+        p = m_queue.front();
+        m_queue.erase(m_queue.begin());
         }
         /* wait for ingredients */
         while (!take_ingredients(p)) {
-            std::unique_lock<std::mutex> lk(m_mtx);
+            std::unique_lock<std::mutex> lk(m_mtx.native());
             m_cv.wait_for(lk, std::chrono::milliseconds(m_cfg.refill_ms));
             if (m_stop.load()) break;
         }
         m_active.fetch_add(1);
+        m_last_ms.store((long long)std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::steady_clock::now().time_since_epoch()).count());
         std::this_thread::sleep_for(std::chrono::milliseconds(cook_time_ms(p)));
         m_active.fetch_sub(1);
+        {
+            std::ostringstream os;
+            os << "DONE " << type_name(p.type) << ' ' << size_name(p.size);
+            send_line(os.str());
+        }
+        m_last_ms.store((long long)std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::steady_clock::now().time_since_epoch()).count());
     }
 }
 
 void Kitchen::on_line(const std::string &line)
 {
     if (line == "STATUS") {
-        std::lock_guard<std::mutex> lk(m_mtx);
+        std::lock_guard<std::mutex> lk(m_mtx.native());
         std::ostringstream os;
         os << "busy " << m_active.load() << "/" << m_cfg.cooks
            << " queue " << m_queue.size()
-           << " stock " << m_stock.dough << "," << m_stock.tomato
-           << "," << m_stock.gruyere;
+           << " stock "
+           << "dough=" << m_stock.dough << ","
+           << "tomato=" << m_stock.tomato << ","
+           << "gruyere=" << m_stock.gruyere << ","
+           << "ham=" << m_stock.ham << ","
+           << "mushrooms=" << m_stock.mushrooms << ","
+           << "steak=" << m_stock.steak << ","
+           << "eggplant=" << m_stock.eggplant << ","
+           << "goat=" << m_stock.goat << ","
+           << "love=" << m_stock.love;
         send_line(os.str());
         return;
     }
     if (line == "CAN_ACCEPT") {
-        std::lock_guard<std::mutex> lk(m_mtx);
+        std::lock_guard<std::mutex> lk(m_mtx.native());
         int cap = m_cfg.cooks * 2;
         int load = (int)m_queue.size() + m_active.load();
         send_line(load < cap ? "YES" : "NO");
@@ -168,10 +210,15 @@ void Kitchen::on_line(const std::string &line)
             send_line("ERR"); return;
         }
         {
-            std::lock_guard<std::mutex> lk(m_mtx);
+            std::lock_guard<std::mutex> lk(m_mtx.native());
+            int load = (int)m_queue.size() + m_active.load();
+            int cap = m_cfg.cooks * 2;
+            if (load >= cap) { send_line("NO"); return; }
             m_queue.push_back({pt, psz});
         }
         m_cv.notify_one();
+        m_last_ms.store((long long)std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::steady_clock::now().time_since_epoch()).count());
         send_line("OK");
         return;
     }
@@ -179,16 +226,36 @@ void Kitchen::on_line(const std::string &line)
 
 void Kitchen::run()
 {
-    m_refiller = std::thread(&Kitchen::refiller_loop, this);
+    m_refiller = Thread(&Kitchen::refiller_loop, this);
     for (int i = 0; i < m_cfg.cooks; ++i)
         m_threads.emplace_back(&Kitchen::cook_loop, this);
+    /* inactivity watcher */
+    m_watch = Thread([this]{
+        using namespace std::chrono;
+        while (!m_stop.load()) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(200));
+            long long now = duration_cast<milliseconds>(steady_clock::now().time_since_epoch()).count();
+            bool idle = false;
+            {
+                std::lock_guard<std::mutex> lk(m_mtx.native());
+                idle = (m_queue.empty() && m_active.load() == 0);
+            }
+            if (idle && (now - m_last_ms.load()) > 5000) {
+                m_stop.store(true);
+                shutdown(m_fd, SHUT_RDWR);
+                close(m_fd);
+                break;
+            }
+        }
+    });
     std::string line;
     while (read_line(m_fd, line))
         on_line(line);
     m_stop.store(true);
     m_cv.notify_all();
     for (auto &t : m_threads) t.join();
-    if (m_refiller.joinable()) m_refiller.join();
+    m_refiller.join();
+    m_watch.join();
 }
 
 int spawn_kitchen(int cooks, int refill_ms, double mult, int &fd_parent)
@@ -230,15 +297,10 @@ std::string kitchen_status_request(int fd)
 
 bool kitchen_queue_pizza(int fd, const Pizza &p)
 {
-    std::ostringstream os;
     std::string r;
-    const char *tn = (p.type==PizzaType::Margarita?"margarita":
-        p.type==PizzaType::Regina?"regina":
-        p.type==PizzaType::Americana?"americana":"fantasia");
-    const char *sn = (p.size==PizzaSize::S?"S": p.size==PizzaSize::M?"M":
-        p.size==PizzaSize::L?"L": p.size==PizzaSize::XL?"XL":"XXL");
-    os << "ORDER " << tn << " " << sn;
-    if (!send_cmd(fd, os.str(), r)) return false;
+    IpcChannel ch(fd);
+    ch << p;
+    if (!read_line(fd, r)) return false;
     return r == "OK";
 }
 
@@ -269,4 +331,3 @@ bool parse_size(const std::string &s, PizzaSize &sz)
     if (s == "XXL") { sz = PizzaSize::XXL; return true; }
     return false;
 }
-

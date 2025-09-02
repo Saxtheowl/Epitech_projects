@@ -5,17 +5,20 @@
 ##   Build rules
 ##
 
-NAME	=	plazza_roro
+NAME	=	plazza
 
 SRC_DIR	=	src
 INC_DIR	=	include
 TEST_DIR	=	tests
 
+
 SRC	=	$(SRC_DIR)/main.cpp \
 	$(SRC_DIR)/parser.cpp \
 	$(SRC_DIR)/args.cpp \
 	$(SRC_DIR)/reception.cpp \
-	$(SRC_DIR)/kitchen.cpp
+	$(SRC_DIR)/kitchen.cpp \
+	$(SRC_DIR)/ipc.cpp \
+	$(SRC_DIR)/rt.cpp
 
 OBJ	=	$(SRC:.cpp=.o)
 

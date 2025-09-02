@@ -13,10 +13,11 @@
 #include <thread>
 #include <mutex>
 #include <condition_variable>
+#include "rt.hpp"
 #include <atomic>
 
-enum class PizzaType { Margarita, Regina, Americana, Fantasia };
-enum class PizzaSize { S=1, M=2, L=3, XL=4, XXL=5 };
+enum class PizzaType { Regina=1, Margarita=2, Americana=4, Fantasia=8 };
+enum class PizzaSize { S=1, M=2, L=4, XL=8, XXL=16 };
 
 struct Pizza {
     PizzaType type;
@@ -49,14 +50,16 @@ public:
 private:
     int m_fd;
     KitchenCfg m_cfg;
-    std::vector<std::thread> m_threads;
-    std::thread m_refiller;
-    std::mutex m_mtx;
-    std::condition_variable m_cv;
+    std::vector<Thread> m_threads;
+    Thread m_refiller;
+    Thread m_watch;
+    Mutex m_mtx;
+    CondVar m_cv;
     std::vector<Pizza> m_queue;
     std::atomic<int> m_active;
     KitchenStock m_stock;
     std::atomic<bool> m_stop;
+    std::atomic<long long> m_last_ms;
 
     void refiller_loop();
     void cook_loop();
@@ -77,4 +80,3 @@ bool parse_type(const std::string &s, PizzaType &t);
 bool parse_size(const std::string &s, PizzaSize &sz);
 
 #endif /* KITCHEN_HPP */
-

@@ -23,3 +23,7 @@ Réalisation:
 - Modules: args, io, stats, weird, main. Style Epitech.
 - Respect du format d’affichage et des cas nan avant suffisamment de données.
 
+Mise à jour LLM (2025-09-02):
+- Ajout de tests Criterion couvrant parse_args, calcul des moyennes/écarts-types,
+  computation de g/r, détection des switches et enregistrement des valeurs
+  « weird » (tests/test_dummy.c). Cible tests_run prête.

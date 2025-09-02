@@ -15,13 +15,17 @@ Stratégie
   puis libère la capacité. Thread réassort qui incrémente les stocks toutes
   `refill_ms`.
 - IPC texte simple (lignes): STATUS, CAN_ACCEPT, ORDER type size.
+ - IPC texte simple (lignes): STATUS, CAN_ACCEPT, ORDER type size. Commandes
+   réception: status, quit/exit (fermeture propre).
 
 Réalisé
 - Binaire C++17: parsing des arguments (mult, cooks, refill_ms) avec gestion des
   erreurs (exit 84). Parseur d'ordres conforme à la grammaire (types: margarita,
   regina, americana, fantasia; tailles: S/M/L/XL/XXL). Réception interactive avec
   dispatch et création de cuisines. Implémentation des cuisines (threads, stock,
-  réassort, cuisson) et `status` par cuisine.
+  réassort, cuisson) et `status` par cuisine. Les cuisines se ferment
+  automatiquement après ~5s d'inactivité (aucune pizza en file ni en cours).
+  Les processus cuisines sont correctement réclamés (waitpid) côté réception.
 
 Remarques
 - Cette implémentation couvre le cœur fonctionnel demandé (sans bonus GUI).

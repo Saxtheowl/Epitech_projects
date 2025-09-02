@@ -10,6 +10,8 @@ NAME	=	game_of_stones
 SRC_DIR	=	src
 INC_DIR	=	include
 TEST_DIR	=	tests
+TESTS	=	$(wildcard $(TEST_DIR)/*.c)
+TEST_OBJ	=	$(TESTS:.c=.o)
 
 SRC	=	\
 	$(SRC_DIR)/main.c \
@@ -40,13 +42,12 @@ fclean: clean
 
 re: fclean all
 
-unit_tests: CFLAGS += --coverage
+unit_tests: CFLAGS += --coverage -I$(INC_DIR)
 unit_tests: LDFLAGS += -lcriterion
-unit_tests:	$(OBJ) $(TEST_DIR)/test_basic.o
-	$(CC) -o $@ $(OBJ) $(TEST_DIR)/test_basic.o $(LDFLAGS)
+unit_tests: $(filter-out $(SRC_DIR)/main.c,$(SRC)) $(TEST_OBJ)
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 tests_run: unit_tests
 	./unit_tests
 
 .PHONY: all clean fclean re tests_run
-

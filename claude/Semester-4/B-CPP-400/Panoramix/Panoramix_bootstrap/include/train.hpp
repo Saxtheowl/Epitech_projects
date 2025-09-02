@@ -12,7 +12,7 @@
 #include <mutex>
 #include <iostream>
 #include <chrono>
-#include <semaphore>
+#include <vector>
 
 #define NB_TRAINS 3
 #define NB_MAX 2
@@ -21,14 +21,13 @@
 #define BRIDGE_END 10
 
 class Train {
-private:
+public:
     int id;
     int position;
     static std::mutex bridgeMutex;
-    static std::counting_semaphore<NB_MAX> bridgeSemaphore;
     static std::mutex displayMutex;
-
-public:
+    static int bridgeCount;
+    
     Train(int trainId);
     void run();
     void displayState();

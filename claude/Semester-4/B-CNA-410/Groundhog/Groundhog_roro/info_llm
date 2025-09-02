@@ -1,0 +1,40 @@
+Date de fin : 02/09/2025
+
+=== Compréhension du sujet ===
+Groundhog est un projet d'analyse météorologique qui doit :
+1. Lire des températures en temps réel depuis stdin
+2. Calculer 3 indicateurs techniques pour chaque nouvelle température :
+   - g : moyenne des augmentations de température sur la période
+   - r : évolution relative entre température actuelle et celle d'il y a n jours
+   - s : écart-type des températures sur la période
+3. Détecter les changements de tendance (switch) et les signaler
+4. À la fin (mot "STOP"), afficher le nombre total de switches et les 5 plus grandes aberrations
+
+=== Stratégie de réalisation ===
+1. Structure modulaire avec séparation des responsabilités :
+   - main.c : boucle principale et orchestration
+   - args.c : parsing des arguments et aide
+   - temperature_data.c : gestion des données de température (structure dynamique)
+   - indicators.c : calcul des 3 indicateurs techniques
+   - switch_detection.c : détection des changements de tendance et tracking des aberrations
+
+2. Structures de données :
+   - temperature_data_t : stockage dynamique des températures
+   - indicators_t : structure pour les 3 indicateurs
+   - switch_detection_t : tracking des switches et aberrations
+
+3. Algorithmes :
+   - g : moyenne des différences positives entre températures consécutives
+   - r : ((temp_courante - temp_n_jours_avant) / temp_n_jours_avant) * 100
+   - s : écart-type classique sur la fenêtre glissante
+   - switch : détection basée sur la tendance moyenne d'augmentation
+
+=== Réalisation finale ===
+- Implémentation complète avec gestion d'erreurs
+- Respect du format de sortie exact (g=nan r=nan% s=nan pour les premiers résultats)
+- Structure Epitech respectée avec headers appropriés
+- Makefile avec toutes les règles requises (all, clean, fclean, re, tests_run)
+- Tests unitaires avec Criterion pour validation
+- Code modulaire et maintenable
+- Gestion mémoire correcte avec free appropriés
+- Support de périodes variables en argument

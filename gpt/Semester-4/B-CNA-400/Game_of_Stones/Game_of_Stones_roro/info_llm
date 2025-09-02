@@ -20,5 +20,13 @@ Réalisé
 - Implémentations: parsing (FR/CR), strings utilitaires, graphes (construction, BFS, distances), modes links/plots, et sorties (usage, noms, matrice, chaînes).
 - Un test Criterion minimal pour vérifier l'outillage.
 
+Validation (2025-09-02)
+- ./game_of_stones --links tests/resources/friends.txt "Jon Snow" "Cersei Lannister" -> distance 2.
+- ./game_of_stones --plots tests/resources/friends.txt tests/resources/plots.txt 3 -> "The stone is safe!".
+
+Tests ajoutés
+- tests/test_cli.c: tests d'intégration CLI avec redirection stdout pour vérifier
+  les sorties des modes links et plots sur les jeux de données fournis.
+
 Remarques
 - L'algorithme de chaînes suit les règles du sujet et applique des priorités lors de la sélection d'alliés. Les formats d'affichage suivent les exemples du PDF.

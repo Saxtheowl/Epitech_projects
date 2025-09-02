@@ -19,3 +19,6 @@ Remarques:
 - Implémentation ciblée x86_64/ELF64 et ELF32 de base. Des ajustements peuvent être
   nécessaires pour un mimétisme parfait (drapeaux, formats). Extensions possibles si requis.
 
+Mise à jour LLM (2025-09-02):
+- Ajout d'un dossier tests/ avec un test Criterion minimal.
+- Ajout des cibles unit_tests et tests_run dans le Makefile (coverage inclus).

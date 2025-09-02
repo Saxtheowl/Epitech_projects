@@ -25,3 +25,7 @@ Réalisation:
 Remarques:
 - La détection « structures détaillées » n’est pas implémentée (hors scope
   minimal). Les pointeurs non-chaînes sont affichés en entier décimal avec -s.
+
+Mise à jour LLM (2025-09-02):
+- Ajout d'un dossier tests/ avec un test Criterion minimal.
+- Ajout des cibles unit_tests et tests_run dans le Makefile (coverage inclus).
