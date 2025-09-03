@@ -1,0 +1,23 @@
+Date de fin: 2025-09-02 22:20:00
+
+Compréhension du sujet
+- MyScreensaver: afficher des animations graphiques en C (SFML), sélectionnées
+  par un identifiant passé en argument. Respecter l’API/CLI décrite dans le PDF
+  (par ex. `./myscreensaver 1` pour lancer l’animation 1). Aucune animation bonus.
+
+Stratégie
+- Arborescence conforme Epitech, Makefile et tests. Implémenter une structure
+  d’aiguillage: parse de l’ID → fonction d’animation dédiée. Boucle SFML:
+  création de fenêtre, gestion d’événements, dessin, timing, fermeture propre.
+
+Réalisation (à faire)
+- Squelette compilable: Makefile, include/src/tests, binaire `myscreensaver`
+  avec `-h`. À implémenter: initialisation SFML, animations demandées par le PDF,
+  et gestion d’arguments/erreurs.
+
+Commandes
+- Compilation: `make`
+- Nettoyage: `make clean` / `make fclean` / `make re`
+- Exécution: `./myscreensaver 1`
+- Tests: `make tests_run` (si Criterion installé)
+

@@ -37,16 +37,15 @@ void free_switch_detection(switch_detection_t *detection)
 int detect_switch(temperature_data_t *data, switch_detection_t *detection,
     int period)
 {
-    double current_increase = 0.0;
+    double relative_evolution = 0.0;
     int current_trend = 0;
-    int half_period = period / 2 + 1;
 
-    if (!data || !detection || data->count < period + half_period)
+    if (!data || !detection || data->count < period + 5)
         return 0;
-    current_increase = calculate_temperature_increase_average(data, period);
-    if (isnan(current_increase))
+    relative_evolution = calculate_relative_evolution(data, period);
+    if (isnan(relative_evolution))
         return 0;
-    current_trend = (current_increase > 0.5) ? 1 : -1;
+    current_trend = (relative_evolution > 0) ? 1 : -1;
     if (detection->last_trend != 0 && detection->last_trend != current_trend) {
         detection->total_switches++;
         detection->last_trend = current_trend;

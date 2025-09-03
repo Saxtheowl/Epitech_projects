@@ -1,0 +1,20 @@
+Date: 2025-09-02
+
+Compréhension du sujet:
+- R-Type en C++ (client/serveur), réseau, ECS, rendu, gameplay.
+- Attendus: architecture modulaire, communication réseau, boucle de jeu, assets.
+
+Stratégie:
+- Étape 1: squelette compilable (Makefile, include/src/tests, binaire -h).
+- Étape 2: définir interfaces (network, ecs, rendering), setup CI/tests unitaires.
+- Étape 3: implémentation incrémentale (réseau UDP/TCP selon sujet, ECS minimale).
+
+Réalisé (cette passe):
+- Squelette C++ conforme: Makefile (all/clean/fclean/re/tests_run), include/src/tests,
+  binaire placeholder rtype_roro avec option -h.
+- Test Criterion minimal (compilable en C++).
+
+Remarques:
+- L’implémentation complète (réseau/ECS/rendu) n’est pas faite ici. Étapes suivantes
+  à réaliser selon le PDF.
+

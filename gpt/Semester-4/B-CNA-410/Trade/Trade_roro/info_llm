@@ -8,8 +8,26 @@ Stratégie
 
 Réalisé
 - Arborescence conforme (include/, src/, tests/, Makefile, info_llm).
-- Binaire `trade` qui lit l’entrée et répond `pass` lors de `action`. Ce comportement passe les tests de protocole de base (format d’E/S) et sert de base pour bâtir une stratégie.
+- Ajout d'un parser minimal des lignes "settings" (clé=valeur) et
+  "update game next_candles" (PAIR;time,open,high,low,close,volume|...).
+- Décision d'ordre basique basée sur SMA 5 vs 10 bougies:
+  buy 1 si SMA5 > SMA10, sell 1 si SMA5 < SMA10, sinon pass.
+- Tests unitaires couvrant parsing et décision.
 - Makefile avec all/clean/fclean/re et tests_run.
 
 Remarques
 - Une validation complète nécessite l’interface d’évaluation qui envoie un flux d’événements; hors de ce dépôt. Le bot compile et respecte le protocole de base.
+
+Mise à jour LLM (2025-09-02)
+- Alignement sur la grammaire du PDF:
+  - settings key=value (timebank, time_per_move, candle_interval, candle_count,
+    initial_stack, transaction_fee_percent, candle_format, your_bot).
+  - update game next_candles: forme PDF «PAIR,6-nombres;PAIR,6-nombres;PAIR,6-nombres»
+    et prise en charge de la forme legacy «PAIR;time,open,high,low,close,volume|…».
+  - update game candle: «PAIR time,open,high,low,close,volume» (une bougie).
+  - update game stacks: «ETH:val,BTC:val,USDT:val».
+  - action order <time_left> → réponse unique: pass | buy <PAIR> 1 | sell <PAIR> 1.
+- Validité: ne jamais vendre plus que le stock de base, ni acheter sans fonds quote
+  (pris en compte avec les frais transaction_fee_percent).
+- Tests: ajout/ajustement pour couvrir parsing (PDF), décisions (buy/sell/pass), stacks
+  et update candle.

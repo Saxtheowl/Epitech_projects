@@ -1,0 +1,24 @@
+Date de fin: 2025-09-02 22:24:00
+
+Compréhension du sujet
+- MyHunter: mini jeu 2D en C (SFML) où l'on vise/clique sur des cibles en
+  mouvement pour marquer des points. Respecter les exigences minimales du PDF:
+  fenêtre, sprites, déplacements des cibles, gestion du clic et scoring. Pas de bonus.
+
+Stratégie
+- Arborescence Epitech + Makefile/tests. Boucle SFML: fenêtre, événements,
+  horloge. Charger les textures/sprites, gérer les trajectoires simples des
+  cibles (vitesse constante), détecter les clics sur sprite (point-in-rect),
+  incrémenter le score. Afficher score et fermer proprement.
+
+Réalisation (à faire)
+- Squelette compilable: Makefile, include/src/tests, binaire `my_hunter` avec `-h`.
+- À implémenter: init SFML, chargement assets, animations/déplacements, clics,
+  gestion score/fin.
+
+Commandes
+- Compilation: `make`
+- Nettoyage: `make clean` / `make fclean` / `make re`
+- Exécution: `./my_hunter`
+- Tests: `make tests_run` (si Criterion installé)
+

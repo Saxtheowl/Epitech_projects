@@ -1,3 +1,5 @@
+Date de fin: 2025-09-02 22:13:00
+
 RÉSUMÉ DU SUJET
 - Jeu Navy à 2 processus communiquant via signaux. Chaque joueur charge
   sa carte (format `size:CA:CB`), affiche ses cartes, puis alterne les
@@ -16,3 +18,11 @@ RÉALISATION
 - `map.c`: chargement/affichage. `signals.c`: handlers, connexion,
   envoi/réception valeur, boucle de jeu. `main.c`: gestion des modes.
 - Makefile + test placeholder (les signaux ne sont pas testés ici).
+
+COMMANDES
+- Compilation: `make`
+- Nettoyage: `make clean` / `make fclean` / `make re`
+- Exécution:
+  - Joueur 1: `./my_navy positions.txt`
+  - Joueur 2: `./my_navy <pid_joueur1> positions.txt`
+- Tests: `make tests_run` (tests unitaires limités, pas de signaux)

@@ -1,0 +1,28 @@
+Date de fin: 2025-09-02 22:18:00
+
+Compréhension du sujet
+- Recréer le jeu Sokoban en terminal (ncurses), lisant une carte depuis un
+  fichier: murs (#), caisses (X), cibles (O), joueur (P), espaces. Le but est de
+  pousser les caisses sur toutes les cibles. Déplacements via flèches; R pour
+  réinitialiser la carte. Retour 0 si victoire, 1 si bloqué, 84 en cas d’erreur.
+
+Stratégie
+- Parser la carte (format/rectangularité/symboles) et construire une grille.
+- Boucle d’événements ncurses: lire les touches, tenter les mouvements, gérer
+  poussée d’une caisse si la case suivante est libre. Conserver les cibles pour
+  l’affichage (P et X ne doivent pas effacer O).
+- Détection de victoire: toutes les cibles couvertes par des caisses.
+- Détection de blocage: toutes les caisses non sur cible bloquées contre murs/coins.
+
+Réalisation (à faire)
+- Modules prévus: parsing/validation, rendu ncurses, logique de mouvement,
+  détection victoire/blocage, gestion reset.
+- Conformité Epitech: Makefile (all/clean/fclean/re/tests_run), arborescence,
+  style et tests de base.
+
+Commandes
+- Compilation: `make`
+- Nettoyage: `make clean` / `make fclean` / `make re`
+- Exécution: `./my_sokoban map.txt`
+- Tests: `make tests_run` (si Criterion installé)
+

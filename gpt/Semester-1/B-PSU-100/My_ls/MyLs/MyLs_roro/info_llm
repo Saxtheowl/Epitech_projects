@@ -1,3 +1,5 @@
+Date de fin: 2025-09-02 22:05:33
+
 RÉSUMÉ DU SUJET
 - Reproduire `ls` avec options usuelles: `-l, -R, -d, -r, -t, -a` et
   multi-chemins, affichages triés, et formats longs.
@@ -13,3 +15,16 @@ STRATÉGIE
 RÉALISATION
 - Code modulaire: `parse.c`, `ls.c`, `sort.c`, `format.c`, `util.c`.
 - `Makefile` complet et test Criterion pour le parsing des flags.
+
+COMMANDES
+- Compilation: `make`
+- Nettoyage: `make clean` / `make fclean` / `make re`
+- Exécution (exemples):
+  - `./my_ls`
+  - `./my_ls -l`
+  - `./my_ls -a`
+  - `./my_ls -R`
+  - `./my_ls -t`
+  - `./my_ls -r`
+  - `./my_ls -la dir1 dir2`
+- Tests: `make tests_run` (si Criterion installé)

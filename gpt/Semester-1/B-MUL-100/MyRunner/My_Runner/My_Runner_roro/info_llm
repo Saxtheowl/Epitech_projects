@@ -1,0 +1,23 @@
+Date de fin: 2025-09-02 22:22:00
+
+Compréhension du sujet
+- MyRunner: jeu «runner» 2D en C (SFML). Lire une map (obstacles) et faire
+  courir/booster/sauter le personnage. Respecter l’API/CLI du PDF (chemin
+  de la map optionnel) et les comportements obligatoires.
+
+Stratégie
+- Arborescence Epitech; parsing map → représentation des tuiles; boucle SFML
+  (fenêtre, événements, horloge); gestion des états du joueur et collisions;
+  fin de partie/gagné selon la map.
+
+Réalisation (à faire)
+- Squelette compilable: Makefile, include/src/tests, binaire `my_runner` avec
+  `-h`. À implémenter: chargement et validation de la map, création de fenêtre,
+  sprites/rectangles, physique simple (gravité/sauts), collisions.
+
+Commandes
+- Compilation: `make`
+- Nettoyage: `make clean` / `make fclean` / `make re`
+- Exécution: `./my_runner map.txt`
+- Tests: `make tests_run` (si Criterion installé)
+

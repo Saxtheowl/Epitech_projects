@@ -5,7 +5,7 @@
 ## Build and test via Docker/Compose
 ##
 
-.PHONY: all build up down test clean fclean re
+.PHONY: all build up down test clean fclean re tests_run
 
 IMAGE	=	popeye-ci:latest
 
@@ -23,6 +23,9 @@ down:
 test: build
 	docker run --rm -v "$(PWD)/../../..:/workspace" $(IMAGE) /bin/sh -lc "make -C /workspace/Semester-2 tests_run"
 
+tests_run:
+	@echo "No local unit tests; use 'make test' to run CI pipeline in Docker"
+
 clean:
 	@true
 
@@ -30,4 +33,3 @@ fclean: down
 	@true
 
 re: fclean all
-

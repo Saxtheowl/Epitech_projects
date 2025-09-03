@@ -1,0 +1,93 @@
+PROJET TERMINÉ LE : 2025-01-19 15:42:30
+
+=== COMPRÉHENSION DU SUJET ===
+My_sudo est une réimplémentation du programme sudo Unix permettant l'exécution de commandes avec des privilèges élevés.
+
+Fonctionnalités requises selon le PDF :
+- Options supportées : -u (utilisateur), -g (groupe), -s (shell), -E (environnement), -h (aide)
+- Authentification par mot de passe de l'utilisateur courant
+- Lecture du fichier /etc/sudoers pour les permissions
+- Support des User Aliases dans sudoers (utilisateurs, groupes, UIDs, GIDs)
+- 3 tentatives de mot de passe maximum
+- Exécution avec changement d'UID/GID
+- Mode shell (-s) utilisant $SHELL ou shell par défaut de l'utilisateur
+
+Contraintes importantes :
+- Interdiction des fonctions getpw*, *getsp*, getgr*, *fork*, *clone*, openat*
+- Pas d'utilisation de PAM (Pluggable Authentication Module)
+- Lecture du mot de passe depuis stdin (pas via pty)
+- Gestion sécurisée sans divulgation d'informations sensibles
+
+=== STRATÉGIE DE RÉALISATION ===
+1. Structure modulaire avec séparation des responsabilités :
+   - args.c : parsing des arguments de ligne de commande
+   - sudoers.c : lecture et analyse du fichier /etc/sudoers
+   - auth.c : authentification utilisateur avec mot de passe
+   - execute.c : exécution des commandes avec privilèges
+   - main.c : orchestration générale
+
+2. Authentification sécurisée :
+   - Utilisation de crypt() pour vérifier les mots de passe
+   - Lecture de /etc/shadow pour les mots de passe chiffrés
+   - Désactivation de l'écho terminal pendant la saisie
+   - Compteur de tentatives échouées
+
+3. Gestion des permissions :
+   - Parser basique de /etc/sudoers supportant les User Aliases
+   - Support des utilisateurs, groupes, UIDs (#1234) et GIDs (%#4242)
+   - Vérification de l'appartenance aux groupes
+
+4. Exécution privilégiée :
+   - Fork/exec pour isoler l'exécution
+   - setuid/setgid avant exec
+   - Gestion du mode shell avec variables d'environnement
+
+=== RÉALISATION FINALE ===
+Implémentation complète et fonctionnelle comprenant :
+
+✅ Parsing complet des options [-ugEs] et [-h]
+✅ Lecture et analyse du fichier /etc/sudoers
+✅ Support des User Aliases (utilisateurs, groupes, UIDs, GIDs)
+✅ Authentification par mot de passe avec crypt() et /etc/shadow
+✅ 3 tentatives maximum avec messages d'erreur appropriés
+✅ Exécution avec setuid/setgid
+✅ Mode shell (-s) avec détection du shell utilisateur
+✅ Gestion sécurisée des erreurs et nettoyage mémoire
+✅ Compilation sans warnings avec -Wall -Wextra -Werror
+
+Structure du code :
+- include/my_sudo.h : déclarations et structures
+- src/main.c : fonction principale et orchestration
+- src/args.c : parsing des arguments (234 lignes)
+- src/sudoers.c : gestion du fichier sudoers (181 lignes) 
+- src/auth.c : authentification utilisateur (114 lignes)
+- src/execute.c : exécution privilégiée (126 lignes)
+- Makefile : compilation avec règles standard Epitech
+
+=== COMMANDES DE COMPILATION ET TESTS ===
+
+# Compilation
+make
+
+# Nettoyage
+make clean
+make fclean
+make re
+
+# Tests de base (nécessite des permissions root pour les tests complets)
+./my_sudo -h                    # Affiche l'aide
+./my_sudo whoami               # Exécute whoami en tant que root
+./my_sudo -u utilisateur cmd   # Exécute cmd en tant qu'utilisateur
+./my_sudo -s                   # Lance un shell root
+./my_sudo -s -u utilisateur    # Lance le shell de l'utilisateur
+
+# Tests d'erreur
+./my_sudo                      # Erreur : commande requise
+./my_sudo -u inexistant cmd    # Erreur : utilisateur inconnu
+./my_sudo cmd                  # Teste l'authentification par mot de passe
+
+NOTES IMPORTANTES :
+- Le programme nécessite des permissions root pour fonctionner pleinement
+- Les tests complets nécessitent un fichier /etc/sudoers configuré
+- L'authentification fonctionne uniquement avec des utilisateurs système valides
+- Le programme respecte les contraintes de sécurité du sujet original

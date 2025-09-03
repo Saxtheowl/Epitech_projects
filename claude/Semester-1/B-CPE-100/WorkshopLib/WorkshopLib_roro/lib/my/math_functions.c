@@ -34,7 +34,7 @@ int my_compute_square_root(int nb)
 
 int my_is_prime(int nb)
 {
-    int i = 2;
+    int i = 3;
 
     if (nb <= 1)
         return 0;

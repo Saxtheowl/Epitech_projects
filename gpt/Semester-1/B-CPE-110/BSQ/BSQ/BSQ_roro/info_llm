@@ -1,3 +1,5 @@
+Date de fin: 2025-09-02 22:10:00
+
 RÉSUMÉ DU SUJET
 - Trouver le plus grand carré de '.' dans une carte ('.' libre, 'o' obstacle),
   marquer ce carré avec 'x' et afficher la carte.
@@ -12,3 +14,9 @@ RÉALISATION
 - `solve_bsq` calcule dp sur un tableau 1D; puis marque le carré.
 - `map_io.c`: lecture/validation/affichage/libération.
 - Makefile avec cibles requises; test unitaire simple.
+
+COMMANDES
+- Compilation: `make`
+- Nettoyage: `make clean` / `make fclean` / `make re`
+- Exécution: `./bsq < map.txt` ou `./bsq map.txt`
+- Tests: `make tests_run` (si Criterion installé)

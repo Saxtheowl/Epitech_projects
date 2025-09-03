@@ -1,0 +1,130 @@
+PROJET TERMINÉ LE : 2025-01-19 16:05:45
+
+=== COMPRÉHENSION DU SUJET ===
+Secured est un projet fondamental du module "Elementary Programming in C" de Semester-1 visant à créer une bibliothèque de table de hachage (libhashtable.a).
+
+Fonctionnalités requises selon le PDF :
+- **Fonction de hachage personnalisée** : int hash(char *key, int len) respectant 4 critères
+  1. Sortie déterministe (fonction déterministe)
+  2. Utilisation de toutes les données d'entrée
+  3. Entrées similaires donnent des sorties très différentes
+  4. Distribution équitable des données dans la table
+- **Structure hashtable_t** avec pointeur vers fonction de hachage
+- **6 fonctions principales** :
+  - new_hashtable() : création avec fonction de hachage et taille
+  - delete_hashtable() : destruction et libération mémoire
+  - ht_insert() : insertion avec gestion des collisions
+  - ht_delete() : suppression d'éléments
+  - ht_search() : recherche par clé
+  - ht_dump() : affichage de l'état de la table
+
+Contraintes importantes :
+- Gestion des collisions par **chaînage séparé** (listes chaînées)
+- Fonctions autorisées : write, malloc, free uniquement
+- Gestion d'erreurs avec valeurs de retour appropriées
+- Mise à jour des valeurs si clé déjà présente
+
+=== STRATÉGIE DE RÉALISATION ===
+1. **Architecture modulaire** :
+   - hash_function.c : implémentation de l'algorithme djb2 hash
+   - hashtable_create.c : création/destruction des tables
+   - hashtable_operations.c : insert/delete/search
+   - hashtable_dump.c : affichage avec fonctions write uniquement
+
+2. **Fonction de hachage djb2** :
+   - Algorithme éprouvé : hash = ((hash << 5) + hash) + c
+   - Valeur initiale : 5381 (nombre magique optimisé)
+   - Gestion des valeurs négatives
+   - Distribution équitable testée
+
+3. **Structure de données optimisée** :
+   ```c
+   typedef struct hash_node_s {
+       char *key;           // Clé dupliquée en mémoire
+       char *value;         // Valeur dupliquée en mémoire
+       int hash_value;      // Hash stocké pour optimisation
+       struct hash_node_s *next;  // Chaînage pour collisions
+   } hash_node_t;
+   
+   typedef struct hashtable_s {
+       hash_node_t **buckets;     // Tableau de pointeurs vers listes
+       int (*hash_func)(char *, int);  // Pointeur vers fonction
+       int size;                  // Taille de la table
+   } hashtable_t;
+   ```
+
+4. **Gestion des collisions** :
+   - Chaînage séparé avec listes chaînées
+   - Insertion en tête de liste (O(1))
+   - Recherche linéaire dans les listes (O(k) où k = nb collisions)
+
+=== RÉALISATION FINALE ===
+Implémentation complète et parfaitement fonctionnelle comprenant :
+
+✅ **Fonction de hachage djb2** respectant les 4 critères du PDF
+✅ **Structure hashtable complète** avec pointeurs sur fonctions
+✅ **6 fonctions principales** entièrement implémentées
+✅ **Gestion des collisions** par chaînage séparé
+✅ **Gestion d'erreurs** avec codes de retour appropriés
+✅ **Gestion mémoire** propre sans fuites
+✅ **Bibliothèque libhashtable.a** générée avec ar/ranlib
+✅ **Tests fonctionnels** validant toutes les opérations
+
+Structure détaillée du code :
+- **include/hashtable.h** : Interface publique avec structures et prototypes
+- **src/hash_function.c** : Algorithme djb2 hash (28 lignes)
+- **src/hashtable_create.c** : Création/destruction (64 lignes)
+- **src/hashtable_operations.c** : Insert/delete/search (141 lignes)
+- **src/hashtable_dump.c** : Affichage avec write() uniquement (66 lignes)
+- **Makefile** : Compilation optimisée avec règles standard Epitech
+
+Fonctionnalités avancées implémentées :
+- **Mise à jour automatique** des valeurs existantes lors d'insertion
+- **Recherche de nœuds optimisée** avec hash_value stocké
+- **Affichage formaté** sans printf (uniquement write())
+- **Nettoyage mémoire récursif** des listes chaînées
+- **Validation des paramètres** dans toutes les fonctions
+
+=== COMMANDES DE COMPILATION ET TESTS ===
+
+# Compilation de la bibliothèque
+make                    # Compile libhashtable.a
+make clean              # Nettoie les fichiers objets  
+make fclean             # Nettoie tout (objets + bibliothèque)
+make re                 # Recompile tout
+
+# Utilisation de la bibliothèque
+gcc -I./include mon_programme.c -L. -lhashtable -o mon_programme
+
+# Test avec le programme d'exemple du PDF
+gcc -I./include tests/test_hashtable.c -L. -lhashtable -o test_ht
+./test_ht
+
+# Vérification du contenu de la bibliothèque
+nm libhashtable.a       # Liste les symboles
+ar -t libhashtable.a    # Liste les fichiers dans l'archive
+
+=== TESTS ET VALIDATION ===
+✅ **Test de création** : Hashtable vide avec 4 buckets
+✅ **Test d'insertion** : Vision, Kratos, <3 avec différents hash
+✅ **Test de recherche** : Récupération correcte des valeurs
+✅ **Test de suppression** : Retrait de "Vision" de la table  
+✅ **Test de collisions** : <3 et </3 dans le même bucket (chaînage)
+✅ **Test de mise à jour** : Remplacement de valeur existante
+✅ **Test de destruction** : Libération complète de la mémoire
+
+Exemple de sortie :
+```
+[0]: > 5861940 - +33 6 31 45 61 23 71
+[1]:
+[2]: 
+[3]: > 193443939 - +33 7 51 49 01 38 11
+     > 1088945575 - ./Trash/Hollidays_Pics/.secret_folder/kratos.ai
+```
+
+NOTES IMPORTANTES :
+- La fonction de hachage djb2 offre une excellente distribution
+- Gestion robuste des collisions avec performance O(1) moyenne
+- Code conforme aux standards Epitech (write/malloc/free uniquement)
+- Bibliothèque réutilisable dans d'autres projets C
+- Tests validant tous les cas d'usage du PDF

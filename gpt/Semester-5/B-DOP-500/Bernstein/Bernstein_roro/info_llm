@@ -1,0 +1,11 @@
+Date: 2025-09-02
+
+Compréhension du sujet:
+- Projet DevOps (Bernstein): pipelines CI/CD, orchestration.
+
+Stratégie:
+- Arborescence et Makefile conformes; implémentation pipeline ensuite.
+
+Réalisé:
+- Squelette avec Makefile standard.
+

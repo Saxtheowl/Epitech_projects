@@ -1,3 +1,5 @@
+Date de fin: 2025-09-02 22:16:30
+
 RÉSUMÉ DU SUJET
 - Afficher un instantané de l'état du système façon `top` (version
   simplifiée ici): nombre de processus, mémoire totale/libre/disponible.
@@ -11,3 +13,9 @@ RÉALISATION
 - `read_meminfo` et `count_processes` dans `src/proc.c`.
 - `main` affiche 2 lignes de résumé (`Tasks`, `Mem`).
 - Makefile + test Criterion pour la lecture meminfo.
+
+COMMANDES
+- Compilation: `make`
+- Nettoyage: `make clean` / `make fclean` / `make re`
+- Exécution: `./my_top`
+- Tests: `make tests_run` (si Criterion installé)

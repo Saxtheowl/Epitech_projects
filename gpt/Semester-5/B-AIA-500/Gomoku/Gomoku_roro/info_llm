@@ -1,0 +1,22 @@
+Date: 2025-09-02
+
+Compréhension du sujet:
+- Jeu Gomoku (Five-in-a-Row) avec IA compétitive sur plateau 19x19.
+- Entrées/sorties standardisées pour interagir avec un referee (protocoles du PDF).
+- Implémentation attendue: parsing des commandes, gestion de plateau, moteur de jeu,
+  IA (heuristiques/minimax/alpha-beta), performance temps réel.
+
+Stratégie:
+- Étape 1: Arborescence conforme (Makefile, include/src/tests) et binaire.
+- Étape 2: Parser protocole I/O, représentation du plateau, coups légaux.
+- Étape 3: Évaluation statique et recherche (itérative) avec limites temps.
+
+Réalisé (cette passe):
+- Squelette compilable: Makefile avec all/clean/fclean/re/tests_run, include/src/tests,
+  binaire placeholder gomoku_roro avec option -h et code de retour 84 par défaut.
+- Test Criterion minimal pour valider l’infrastructure tests.
+
+Remarques:
+- L’IA complète n’est pas implémentée dans cette passe. Prochaines étapes: parser
+  du protocole et moteur de recherche, conformément au PDF.
+

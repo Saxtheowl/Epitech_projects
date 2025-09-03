@@ -46,8 +46,7 @@ test: $(LIBMY)
 	./test
 
 tests_run: $(LIBMY)
-	$(CC) $(CFLAGS) -o tests_run tests/test_libmy.c -L$(SRCDIR) -lmy \
-		-lcriterion --coverage
+	$(CC) $(CFLAGS) -o tests_run tests/test_libmy.c -L$(SRCDIR) -lmy
 	./tests_run
 
 .PHONY: all clean fclean re test tests_run

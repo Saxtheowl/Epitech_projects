@@ -62,7 +62,7 @@ double calculate_standard_deviation(temperature_data_t *data, int period)
 
     if (!data || data->count < period)
         return NAN;
-    start = (data->count > period) ? data->count - period : 0;
+    start = (data->count >= period) ? data->count - period : 0;
     count = data->count - start;
     for (i = start; i < data->count; i++)
         sum += data->values[i];

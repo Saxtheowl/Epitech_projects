@@ -1,3 +1,5 @@
+Date de fin: 2025-09-02 22:15:00
+
 RÉSUMÉ DU SUJET
 - Évaluer une expression arithmétique avec + - * / %, parenthèses et
   priorités standard, à partir d'une chaîne.
@@ -9,3 +11,9 @@ STRATÉGIE
 RÉALISATION
 - `eval_expr`: parse et évalue; `main` lit argv[1] et affiche le résultat.
 - Makefile + tests Criterion.
+
+COMMANDES
+- Compilation: `make`
+- Nettoyage: `make clean` / `make fclean` / `make re`
+- Exécution: `./eval_expr "(1+2)*3-4/2"`
+- Tests: `make tests_run` (si Criterion installé)

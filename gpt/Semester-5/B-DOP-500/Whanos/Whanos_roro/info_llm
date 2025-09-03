@@ -1,0 +1,11 @@
+Date: 2025-09-02
+
+Compréhension du sujet:
+- Whanos: outillage de déploiement/CI orchestré.
+
+Stratégie:
+- Préparer livraison (Makefile), implémenter scripts/outils selon PDF ensuite.
+
+Réalisé:
+- Squelette avec Makefile standard.
+
