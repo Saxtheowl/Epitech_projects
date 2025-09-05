@@ -1,0 +1,27 @@
+FazzBizz Project Understanding:
+
+Objectif: Créer un programme qui affiche les nombres entre deux bornes avec des règles spéciales.
+
+Spécifications:
+- Binary name: fazzbizz
+- Langage: C
+- Fonctions autorisées: write, atoi, printf
+- Compilation: via Makefile avec rules re, clean, fclean
+
+Comportement:
+1. Prend deux nombres en paramètres (start et end)
+2. Le second paramètre doit être >= au premier
+3. Affiche tous les nombres entre start et end (inclus) selon ces règles:
+   - Multiple de 10 → "Fazz\n"
+   - Multiple de 9 → "Bizz\n"
+   - Multiple de 9 ET 10 → "FazzBizz\n" (priorité sur les autres)
+   - Sinon → affiche le nombre + "\n"
+4. Gestion d'erreurs:
+   - Si second < premier → "Error: the second parameter must be greater than the first one." sur stderr + code 84
+   - Si pas assez d'arguments → code 84
+
+Exemples:
+- 8 12 → "8\nBizz\nFazz\n11\n12\n" (9=Bizz, 10=Fazz)
+- 89 91 → "89\nFazzBizz\n91\n" (90=multiple de 9 et 10)
+- 2 1 → Erreur 84
+- Pas d'arguments → Erreur 84

@@ -1,0 +1,44 @@
+Rapport Final - CleanStr Project
+
+Date de completion: 2025-09-05
+
+Statut: TERMINÉ ET FONCTIONNEL
+
+Implémentation réalisée:
+✅ Structure de projet complète (include/, src/, tests/, info_llm/)
+✅ Makefile avec toutes les cibles requises (all, clean, fclean, re, tests_run)
+✅ Code source en C respectant les normes Epitech
+✅ Header dans chaque fichier
+✅ Fonctions ≤20 lignes chacune
+✅ Utilisation uniquement de la fonction autorisée: write
+
+Fonctionnalités implémentées:
+✅ Nettoyage des espaces/tabulations multiples
+✅ Conservation des mots dans l'ordre original
+✅ Un seul espace entre chaque mot en sortie
+✅ Pas d'espaces au début/fin de la sortie
+✅ Gestion du cas sans paramètres (affiche \n)
+✅ Traitement en une seule passe
+
+Tests effectués:
+✅ "abc cba abc cab cba" → "abc cba abc cab cba" ✓
+✅ " Remus and Romulus are the two mammals of Rome " → "Remus and Romulus are the two mammals of Rome" ✓
+✅ Chaîne avec tabs → "Hello how are you?" ✓
+✅ Sans paramètre → code de sortie 0 + \n ✓
+✅ Compilation sans warnings ✓
+
+Architecture du code:
+- main.c: gestion des arguments
+- clean_str.c: logique principale de nettoyage
+- utils.c: fonctions utilitaires (is_separator, my_putchar)
+- Algorithme en une passe avec gestion d'état
+- Utilisation exclusive de write() pour l'affichage
+
+Algorithme utilisé:
+- État: in_word (dans un mot) et first_word (premier mot)
+- Parcours caractère par caractère
+- Si non-séparateur et pas in_word → nouveau mot (avec espace si pas premier)
+- Si séparateur → fin de mot
+- Écriture directe avec write, pas de buffer intermédiaire
+
+Le projet respecte toutes les contraintes et produit les sorties attendues selon les exemples du sujet.

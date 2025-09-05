@@ -1,0 +1,33 @@
+Stratégie d'implémentation Anagram:
+
+1. Contrainte majeure: Seule la fonction write est autorisée
+   - Pas de malloc → utiliser des tableaux statiques
+   - Pas de strlen → implémenter une fonction de calcul de longueur
+   - Pas de strcmp → implémenter une fonction de comparaison
+
+2. Algorithme pour vérifier les anagrammes:
+   - Compter les occurrences de chaque caractère dans les deux chaînes
+   - Ignorer la casse (convertir tout en minuscules)
+   - Comparer les compteurs : si identiques → anagramme
+
+3. Structure:
+   - main.c: gestion des arguments, point d'entrée
+   - anagram.c: logique principale de vérification
+   - utils.c: fonctions utilitaires (my_strlen, to_lower, etc.)
+   - output.c: fonctions d'affichage
+   - anagram.h: déclarations
+
+4. Fonctions à implémenter:
+   - my_strlen(): calculer longueur (sans library)
+   - to_lower(): convertir caractère en minuscule
+   - count_chars(): compter occurrences des caractères
+   - compare_counts(): comparer les compteurs
+   - is_anagram(): fonction principale de vérification
+   - print_result(): afficher le résultat
+   - print_error(): afficher erreur sur stderr
+
+5. Approche comptage:
+   - Utiliser un tableau de 256 int (ASCII complet)
+   - Parcourir première chaîne: incrémenter compteurs
+   - Parcourir deuxième chaîne: décrémenter compteurs
+   - Si tous les compteurs sont à 0 → anagramme

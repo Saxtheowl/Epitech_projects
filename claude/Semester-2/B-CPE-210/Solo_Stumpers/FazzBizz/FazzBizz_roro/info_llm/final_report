@@ -1,0 +1,46 @@
+Rapport Final - FazzBizz Project
+
+Date de completion: 2025-09-05
+
+Statut: TERMINÉ ET FONCTIONNEL
+
+Implémentation réalisée:
+✅ Structure de projet complète (include/, src/, tests/, info_llm/)
+✅ Makefile avec toutes les cibles requises (all, clean, fclean, re, tests_run)
+✅ Code source en C respectant les normes Epitech
+✅ Header dans chaque fichier
+✅ Fonctions ≤20 lignes chacune
+✅ Utilisation uniquement des fonctions autorisées: write, atoi, printf
+
+Fonctionnalités implémentées:
+✅ Validation des arguments (exactement 2 paramètres)
+✅ Conversion des arguments avec atoi()
+✅ Vérification que second >= premier
+✅ Logique FazzBizz avec priorités correctes:
+   - Multiple de 90 (9 ET 10) → "FazzBizz"
+   - Multiple de 10 → "Fazz"
+   - Multiple de 9 → "Bizz"  
+   - Sinon → affichage du nombre
+✅ Gestion des erreurs avec messages sur stderr
+✅ Codes de sortie appropriés (84 pour erreurs, 0 sinon)
+
+Tests effectués:
+✅ 8 12 → "8\nBizz\nFazz\n11\n12" ✓
+✅ 89 91 → "89\nFazzBizz\n91" ✓ (90 = multiple de 9 et 10)
+✅ 2 1 → Erreur 84 + message d'erreur ✓
+✅ Pas d'arguments → Erreur 84 ✓
+✅ Compilation sans warnings ✓
+
+Architecture du code:
+- main.c: gestion des arguments, validation
+- fazzbizz.c: logique principale avec boucle et règles
+- utils.c: fonction d'affichage d'erreur
+- Utilisation de printf pour l'affichage des résultats
+- Utilisation de write pour les erreurs sur stderr
+
+Algorithme:
+- Boucle de start à end inclus
+- Test des multiples dans l'ordre de priorité (90 > 10 > 9)
+- Affichage conditionnel selon les règles FazzBizz
+
+Le projet respecte toutes les contraintes et produit les sorties attendues selon les exemples du sujet.

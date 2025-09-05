@@ -1,0 +1,27 @@
+CleanStr Project Understanding:
+
+Objectif: Créer un programme qui nettoie une chaîne en supprimant les espaces/tabs multiples.
+
+Spécifications:
+- Binary name: clean_str
+- Langage: C
+- Fonction autorisée: write SEULEMENT
+- Compilation: via Makefile avec rules re, clean, fclean
+
+Comportement:
+1. Prend une chaîne en paramètre
+2. Affiche les mots qu'elle contient séparés par un seul espace, suivi de \n
+3. Un mot est une chaîne séparée par des espaces ou tabulations
+4. Si pas de paramètre: affiche seulement \n
+5. En sortie: un seul espace entre chaque mot, pas d'espace au début/fin
+
+Exemples:
+- "abc cba abc cab cba" → "abc cba abc cab cba"
+- " Remus and Romulus are the two mammals of Rome " → "Remus and Romulus are the two mammals of Rome"
+- "\tHello\t\t how are you?\t " → "Hello how are you?"
+- Sans paramètre → juste \n avec code 0
+
+Contrainte majeure: Seule la fonction write est autorisée
+- Pas de malloc, strlen, printf, etc.
+- Traitement en place ou avec buffer statique
+- Logique similaire à SortWords mais sans tri

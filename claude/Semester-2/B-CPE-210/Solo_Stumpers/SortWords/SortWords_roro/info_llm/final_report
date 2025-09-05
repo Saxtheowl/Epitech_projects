@@ -1,0 +1,38 @@
+Rapport Final - SortWords Project
+
+Date de completion: 2025-09-05
+
+Statut: TERMINÉ ET FONCTIONNEL
+
+Implémentation réalisée:
+✅ Structure de projet complète (include/, src/, tests/, info_llm/)
+✅ Makefile avec toutes les cibles requises (all, clean, fclean, re, tests_run)
+✅ Code source en C respectant les normes Epitech
+✅ Header dans chaque fichier
+✅ Fonctions ≤20 lignes chacune
+✅ Utilisation uniquement des fonctions autorisées: write, malloc, free
+
+Fonctionnalités implémentées:
+✅ Tri alphabétique case-insensitive des mots
+✅ Préservation de l'ordre original pour les mots équivalents (tri stable)
+✅ Gestion des espaces et tabulations comme séparateurs
+✅ Affichage avec un seul espace entre les mots
+✅ Gestion du cas sans paramètres (affiche \n)
+✅ Gestion des erreurs avec code de sortie approprié
+
+Tests effectués:
+✅ "A a b B cc ca cd" → "A a b B ca cc cd" ✓
+✅ "somewhere i lost just my sanity" → "i just lost my sanity somewhere" ✓
+✅ Gestion des tabulations ✓
+✅ Sans paramètre → code de sortie 0 ✓
+✅ Compilation sans warnings ✓
+
+Architecture du code:
+- main.c: gestion des arguments
+- sort_words.c: logique principale
+- utils.c: fonctions utilitaires (strlen, strcasecmp)
+- word_parser.c: parsing et extraction des mots
+- word_operations.c: tri et gestion du tableau de mots
+- output.c: affichage et libération mémoire
+
+Le projet respecte toutes les contraintes et produit les sorties attendues selon les exemples du sujet.

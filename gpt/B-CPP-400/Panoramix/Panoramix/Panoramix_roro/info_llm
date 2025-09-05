@@ -1,0 +1,29 @@
+Date: 2025-09-05
+
+Sujet compris:
+- Simulation Panoramix: druid + villageois, potions limitées.
+- Threads: 1 druid + N villageois, mutex + sémaphores obligatoires.
+- Sorties textuelles exactes (voir sujet), arrêt gracieux.
+
+Stratégie:
+- Sémaphore `sem_refill` pour réveiller le druide.
+- Mutex + condvar pour protéger le pot et réveiller les villageois.
+- Compteur `servings`, `nb_refills`, drapeau `need_refill`.
+- Impression protégée par mutex pour éviter les mélanges.
+
+Réalisation:
+- `run_panoramix` lance tous les threads et attend leur fin.
+- `druid_thread` attend `sem_refill`, remplit le pot, affiche et décrémente
+  `nb_refills`, annonce la fin quand épuisé.
+- `villager_thread` boit avant chaque combat, appelle le druide si besoin,
+  attend la recharge; combat et messages conformes.
+
+Tests (CLI):
+- `make && ./panoramix 3 5 3 1` -> sorties similaires à l’exemple du sujet.
+- `./panoramix -1 3 2 1 >/dev/null; echo $?` -> affiche l’usage et `84`.
+- `make tests_run` -> exécute un test simple (Criterion requis localement).
+
+Rapport:
+- Respect des contraintes: sémaphores + mutex, threads dédiés, messages,
+  erreurs gérées, Makefile standard.
+

@@ -1,0 +1,44 @@
+Date de fin: 2025-09-05
+
+Compréhension du sujet:
+- Simulateur de réfrigérateur interactif avec 8 ingrédients prédéfinis
+- Commandes: "disp fridge", "addToFridge [ingredient] [quantity]", "make pizza", "make pasta", "exit"
+- Sauvegarde automatique dans fichier .save au démarrage et à la sortie
+- Recettes avec ingrédients requis: Pizza (5 tomates, 1 pâte, 3 oignons, 8 olives, 8 poivrons, 4 jambon, 3 fromage)
+- Pasta (5 tomates, 2 pâtes, 6 olives, 3 fromage, 4 jambon)
+- Gestion d'erreurs pour ingrédients manquants ou inconnus
+
+Stratégie de réalisation:
+1. Initialiser réfrigérateur avec 8 ingrédients à quantité 0
+2. Parser les commandes utilisateur avec arguments
+3. Implémenter affichage état du frigo
+4. Gestion ajout d'ingrédients avec validation
+5. Système de recettes avec vérification et consommation des ingrédients
+6. Sauvegarde/chargement persistant du state
+
+Implémentation finale:
+- Structure fridge_t avec tableau d'ingrédients
+- Parsing flexible des commandes avec extraction des arguments
+- Système de recettes modulaire avec vérification des quantités
+- Save/load avec format "ingredient:quantity" par ligne
+- Interface interactive avec prompt ">"
+- Gestion mémoire propre avec libération des allocations
+- Tests unitaires avec Criterion
+- Makefile conforme Epitech
+
+Tests CLI simples:
+./fridge
+> disp fridge
+→ Affiche l'état actuel du réfrigérateur
+
+> addToFridge tomato 10
+→ Ajoute 10 tomates au frigo
+
+> make pizza
+→ Crée une pizza si assez d'ingrédients
+
+> exit
+→ Sauvegarde et quitte le programme
+
+make && make tests_run
+→ Compilation et tests unitaires

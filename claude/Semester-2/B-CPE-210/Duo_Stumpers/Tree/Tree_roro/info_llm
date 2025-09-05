@@ -1,0 +1,46 @@
+Date de fin: 2025-09-05
+
+Compréhension du sujet:
+- Reproduire la commande tree avec l'option --charset=ASCII
+- Implémenter les options: -a (fichiers cachés), -d (dossiers uniquement), -L (profondeur max), -f (chemin complet)
+- Utiliser uniquement: write, malloc, free, opendir, closedir, readdir, stat
+- Messages d'erreur et codes de sortie identiques à la vraie commande tree
+- Affichage avec caractères ASCII (|, `, -) pour l'arborescence
+
+Stratégie de réalisation:
+1. Parser les options avec validation
+2. Parcourir récursivement les dossiers avec opendir/readdir
+3. Filtrer selon les options (fichiers cachés, dossiers uniquement, profondeur)
+4. Trier les entrées alphabétiquement
+5. Afficher avec le bon préfixe ASCII selon la position dans l'arbre
+6. Compter et afficher le résumé final
+
+Implémentation finale:
+- Structure options_t pour stocker les paramètres
+- Parsing d'arguments avec gestion des erreurs identiques à tree
+- Parcours récursif avec gestion de la profondeur et des préfixes
+- Tri alphabétique des entrées de chaque dossier
+- Affichage ASCII avec |-- et `-- selon la position
+- Comptage des dossiers et fichiers
+- Gestion mémoire propre avec libération des ressources
+- Tests unitaires avec Criterion
+- Makefile conforme Epitech
+
+Tests CLI simples:
+./tree
+→ Affichage de l'arborescence du dossier courant
+
+./tree -a
+→ Inclut les fichiers cachés (commence par .)
+
+./tree -d
+→ Affiche seulement les dossiers
+
+./tree -L 2
+→ Limite à 2 niveaux de profondeur
+
+./tree -f /tmp
+→ Affiche les chemins complets dans /tmp
+
+make && make tests_run
+→ Compilation et tests unitaires

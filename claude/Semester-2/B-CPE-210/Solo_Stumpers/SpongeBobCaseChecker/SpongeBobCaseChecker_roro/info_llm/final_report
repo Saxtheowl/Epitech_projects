@@ -1,0 +1,7 @@
+Rapport Final - SpongeBobCaseChecker Project
+
+Date de completion: 2025-09-05
+Statut: TERMINÉ ET FONCTIONNEL
+
+Le projet vérifie si une chaîne respecte le style "SpongeBob case" (pas plus de 3 lettres consécutives de même casse).
+Tests réussis: ✅ OK pour textes valides, ✅ Invalid pour 4+ lettres consécutives de même casse.

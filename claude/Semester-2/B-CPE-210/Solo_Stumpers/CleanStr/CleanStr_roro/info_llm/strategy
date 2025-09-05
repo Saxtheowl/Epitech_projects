@@ -1,0 +1,30 @@
+Stratégie d'implémentation CleanStr:
+
+1. Contrainte majeure: Seule la fonction write est autorisée
+   - Pas de malloc → traitement en place ou buffer statique
+   - Pas de printf → utiliser write pour tout l'affichage
+   - Pas de strlen → implémenter ma propre fonction si nécessaire
+
+2. Algorithme simple:
+   - Parcourir la chaîne caractère par caractère
+   - État: dans un mot (in_word) ou pas
+   - Si caractère non-séparateur et pas in_word → commencer un nouveau mot
+   - Si caractère séparateur et in_word → finir le mot, ajouter espace si pas premier mot
+   - Accumuler les caractères des mots et les écrire
+
+3. Structure:
+   - main.c: gestion des arguments
+   - clean_str.c: logique principale de nettoyage
+   - utils.c: fonctions utilitaires (détection séparateurs)
+   - clean_str.h: déclarations
+
+4. Approche optimisée:
+   - Parcours en une seule passe
+   - Écriture directe avec write, caractère par caractère
+   - Gestion d'état pour éviter les espaces multiples
+   - Pas de stockage intermédiaire
+
+5. Fonctions à implémenter:
+   - is_separator(): détecte espace/tab
+   - clean_and_print(): logique principale
+   - my_putchar(): wrapper pour write

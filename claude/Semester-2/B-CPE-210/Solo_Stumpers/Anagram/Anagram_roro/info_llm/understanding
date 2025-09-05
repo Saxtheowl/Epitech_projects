@@ -1,0 +1,24 @@
+Anagram Project Understanding:
+
+Objectif: Créer un programme qui détermine si deux chaînes sont des anagrammes l'une de l'autre.
+
+Spécifications:
+- Binary name: anagram
+- Langage: C
+- Fonction autorisée: write SEULEMENT
+- Compilation: via Makefile avec rules re, clean, fclean
+
+Comportement:
+1. Prend deux chaînes en paramètres
+2. Affiche "anagram!\n" si les deux chaînes sont des anagrammes
+3. Affiche "no anagrams.\n" sinon
+4. Les anagrammes sont case insensitive (majuscules/minuscules identiques)
+5. Un anagramme est une chaîne formée en réarrangeant tous les caractères d'une autre chaîne
+6. Gestion d'erreurs: si pas assez d'arguments, afficher "Error: not enough arguments." sur stderr et sortir avec code 84
+
+Exemples:
+- "Rail Safety" "Fairy tales" → "anagram!"
+- "moo" "moon" → "no anagrams."
+- Un seul argument → Erreur 84
+
+Contrainte majeure: Seule la fonction write est autorisée, donc pas de malloc, strlen, etc.

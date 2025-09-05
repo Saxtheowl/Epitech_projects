@@ -1,0 +1,42 @@
+Date de fin: 2025-09-05
+
+Compréhension du sujet:
+- Créer un jeu de Tic-Tac-Toe (morpion) avec grille personnalisable
+- Paramètres: -p1/-p2 pour les symboles des joueurs, -s pour la taille de grille
+- Interface en mode texte avec affichage de grille en ASCII
+- Coordonnées saisies au format x,y (coin supérieur gauche = 0,0)
+- Vérification des victoires (lignes, colonnes, diagonales)
+- Fonctions autorisées: libc standard
+
+Stratégie de réalisation:
+1. Parser les arguments avec validation (symboles différents, taille positive)
+2. Initialiser structure de jeu avec grille dynamique
+3. Boucle de jeu: affichage → saisie → validation → placement → vérification victoire
+4. Vérification des conditions de victoire et de match nul
+5. Gestion mémoire propre avec libération des ressources
+
+Implémentation finale:
+- Structure game_t pour l'état du jeu (grille, taille, symboles, joueur actuel)
+- Parsing d'arguments avec validation des contraintes
+- Affichage de grille avec bordures ASCII selon le format attendu  
+- Saisie utilisateur avec parsing des coordonnées x,y
+- Logique de victoire pour lignes, colonnes et diagonales
+- Gestion des erreurs et validation des mouvements
+- Tests unitaires avec Criterion
+- Makefile conforme Epitech
+
+Tests CLI simples:
+./tictactoe 
+→ Jeu standard 3x3 avec X et O
+
+./tictactoe -p1 A -p2 B -s 4
+→ Grille 4x4 avec symboles A et B
+
+echo -e "1,1\n0,0\n1,0\n1,2\n2,0\n2,2\n0,2" | ./tictactoe
+→ Partie automatique, Player 1 gagne
+
+./tictactoe -p1 X -p2 X
+→ Erreur 84 (même symbole)
+
+make && make tests_run
+→ Compilation et tests unitaires

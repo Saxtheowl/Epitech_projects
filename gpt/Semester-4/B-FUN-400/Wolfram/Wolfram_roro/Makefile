@@ -5,22 +5,36 @@
 ## Makefile
 ##
 
-NAME=	wolfram
+NAME	=	wolfram
 
-all:
-	stack build --quiet
-	cp $$(stack path --local-install-root)/bin/$(NAME) $(NAME)
+SRC	=	$(wildcard src/*.c)
+OBJ	=	$(SRC:.c=.o)
+INCDIR	=	include
+
+CFLAGS	=	-Wall -Wextra -Werror -I $(INCDIR)
+
+TEST_NAME	=	unit_tests
+TEST_SRC	=	tests/test_basic.c \
+			src/parse.c \
+			src/sim.c
+TEST_FLAGS	=	-lcriterion -lgcov --coverage -I $(INCDIR)
+
+all:	$(NAME)
+
+$(NAME):	$(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
 
 clean:
-	stack clean --quiet || true
-	rm -f $(NAME)
+	rm -f $(OBJ)
+	rm -f *.gcno *.gcda
 
 fclean: clean
-	rm -rf .stack-work
+	rm -f $(NAME) $(TEST_NAME)
 
 re: fclean all
 
 tests_run:
-	@echo "No tests for this project" && true
+	$(CC) $(TEST_SRC) -o $(TEST_NAME) $(TEST_FLAGS)
+	./$(TEST_NAME)
 
-.PHONY: all clean fclean re tests_run
+.PHONY:	all clean fclean re tests_run

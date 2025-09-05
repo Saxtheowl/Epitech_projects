@@ -2,84 +2,67 @@
 ** EPITECH PROJECT, 2025
 ** Wolfram_roro
 ** File description:
-** parse
+** parse.c
 */
 
 #include <stdio.h>
 #include <string.h>
-#include <stdbool.h>
+#include <stdlib.h>
 #include "wolfram.h"
 
-static bool match(const char *a, const char *b)
+static int parse_int(const char *s, int *out)
 {
-    return strcmp(a, b) == 0;
+    char *end;
+    long v;
+
+    if (!s)
+        return 0;
+    v = strtol(s, &end, 10);
+    if (*s == '\0' || *end != '\0')
+        return 0;
+    *out = (int)v;
+    return 1;
 }
 
-static bool parse_opt(int *i, int ac, char const **av, args_t *out)
+static int usage_err(void)
 {
-    bool ok;
-    const char *arg;
-    int val;
-
-    arg = av[*i];
-    if (match(arg, "--help"))
-        return false;
-    if (*i + 1 >= ac)
-        return false;
-    val = str_to_int(av[*i + 1], &ok);
-    if (!ok)
-        return false;
-    if (match(arg, "--rule"))
-        out->rule = val;
-    else if (match(arg, "--lines"))
-        out->lines = val;
-    else if (match(arg, "--start"))
-        out->start = val;
-    else if (match(arg, "--window"))
-        out->window = val;
-    else
-        return false;
-    *i += 1;
-    return true;
+    fprintf(stderr, "Usage: wolfram --rule N [--start N] [--lines N] [--window N] [--move N]\n");
+    return 84;
 }
 
-static bool validate(const args_t *cfg)
-{
-    if (cfg->rule < 0 || cfg->rule > 255)
-        return false;
-    if (cfg->lines < 0)
-        return false;
-    if (cfg->start < 0)
-        return false;
-    if (cfg->window <= 0)
-        return false;
-    return true;
-}
-
-int parse_args(int ac, char const **av, args_t *out)
+int parse_args(int ac, char **av, Config *cfg)
 {
     int i;
+    int v;
 
-    out->rule = -1;
-    out->lines = -1;
-    out->start = 0;
-    out->window = 80;
-    if (ac == 2 && strcmp(av[1], "--help") == 0)
-        return -1;
+    cfg->rule = -1;
+    cfg->start = 0;
+    cfg->lines = -1;
+    cfg->window = 80;
+    cfg->move = 0;
     for (i = 1; i < ac; ++i) {
-        if (!parse_opt(&i, ac, av, out))
-            return 1;
+        if (strcmp(av[i], "--help") == 0)
+            return usage_err();
+        if (strcmp(av[i], "--rule") == 0 && i + 1 < ac && parse_int(av[i+1], &v)) {
+            cfg->rule = v; i += 1; continue;
+        }
+        if (strcmp(av[i], "--start") == 0 && i + 1 < ac && parse_int(av[i+1], &v)) {
+            cfg->start = v; i += 1; continue;
+        }
+        if (strcmp(av[i], "--lines") == 0 && i + 1 < ac && parse_int(av[i+1], &v)) {
+            cfg->lines = v; i += 1; continue;
+        }
+        if (strcmp(av[i], "--window") == 0 && i + 1 < ac && parse_int(av[i+1], &v)) {
+            cfg->window = v; i += 1; continue;
+        }
+        if (strcmp(av[i], "--move") == 0 && i + 1 < ac && parse_int(av[i+1], &v)) {
+            cfg->move = v; i += 1; continue;
+        }
+        return usage_err();
     }
-    if (out->rule < 0 || out->lines < 0)
-        return 1;
-    if (!validate(out))
-        return 1;
+    if (cfg->rule < 0 || cfg->rule > 255 || cfg->window <= 0 ||
+        cfg->start < 0 || (cfg->lines != -1 && cfg->lines < 0))
+        return usage_err();
     return 0;
-}
-
-void print_usage(const char *bin)
-{
-    printf("Usage: %s --rule N --lines N [--start N] [--window N]\n",
-        bin);
 }
 

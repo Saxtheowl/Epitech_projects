@@ -1,0 +1,43 @@
+Date de fin: 2025-09-05
+
+Compréhension du sujet:
+- Créer un programme text_count qui compte les occurrences de chaque caractère dans une chaîne
+- Flags optionnels: -r (grouper par nombre d'occurrences), -t (trier par nombre d'occurrences)
+- Paramètre optionnel SEARCHED_CHARACTERS pour filtrer les caractères à compter
+- Affichage par ordre d'apparition par défaut
+- Utilisation uniquement des fonctions de la libc standard
+
+Stratégie de réalisation:
+1. Parser les arguments pour extraire les flags et paramètres
+2. Compter les occurrences de chaque caractère dans la chaîne
+3. Appliquer les filtres (SEARCHED_CHARACTERS) si nécessaire
+4. Trier les résultats selon les flags
+5. Afficher les résultats dans le bon format
+
+Implémentation finale:
+- Structure char_count_t pour stocker caractère, count et position d'apparition
+- Parsing des arguments avec gestion des flags -r et -t
+- Algorithme de comptage avec support du filtrage
+- Fonctions de tri par count ou par apparition
+- Affichage groupé ou normal selon les flags
+- Tests unitaires avec Criterion
+- Makefile conforme Epitech
+
+Tests CLI simples:
+./text_count "abcdef" 
+→ Attendu: a:1, b:1, c:1, d:1, e:1, f:1
+
+./text_count "!!!!!!!!" 
+→ Attendu: !:8
+
+./text_count "aaffbcdef" "abdfg" 
+→ Attendu: a:2, f:3, b:1, d:1, g:0
+
+./text_count -t "aaffbcdef" "abdfg" 
+→ Attendu: f:3, a:2, b:1, d:1, g:0 (trié par count)
+
+./text_count -r "ffbaacdef" 
+→ Attendu: f:3, b,c,d,e:1, a:2 (groupé par count)
+
+make && make tests_run 
+→ Compilation et tests unitaires

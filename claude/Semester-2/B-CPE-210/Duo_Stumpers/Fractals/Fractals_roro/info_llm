@@ -1,0 +1,40 @@
+Date de fin: 2025-09-05
+
+Compréhension du sujet:
+- Créer un programme fractals qui génère des fractales en remplaçant récursivement les caractères # et .
+- Prend en paramètres: nombre d'itérations, motif de remplacement pour #, motif de remplacement pour .
+- Les motifs utilisent @ pour représenter les retours à la ligne
+- À l'itération 0, affiche simplement "#"
+- Fonctions autorisées: write, malloc, free uniquement
+
+Stratégie de réalisation:
+1. Parser les arguments et valider les motifs
+2. Convertir les motifs avec @ en structures 2D 
+3. Générer la fractale en appliquant les transformations itérativement
+4. Chaque caractère # ou . est remplacé par son motif correspondant
+5. Afficher le résultat final
+
+Implémentation finale:
+- Structure pattern_t pour stocker motifs avec largeur/hauteur
+- Parsing des motifs avec gestion des @ (retours à la ligne)
+- Algorithme de transformation récursive
+- Application des motifs caractère par caractère
+- Gestion mémoire avec malloc/free uniquement
+- Tests unitaires avec Criterion
+- Makefile conforme Epitech
+
+Tests CLI simples:
+./fractals 0 "##@#." "..@.." 
+→ Attendu: #
+
+./fractals 1 "##@#." "..@.." 
+→ Attendu: ##\n#.
+
+./fractals 2 "##@#." "..@.." 
+→ Attendu: ####\n#.#.\n##..\n#...
+
+./fractals 1 "###@#.#@###" "...@...@..." 
+→ Attendu: ###\n#.#\n###
+
+make && make tests_run 
+→ Compilation et tests unitaires

@@ -1,0 +1,23 @@
+Date de completion: 2025-09-05
+
+Compréhension du sujet:
+Le projet ScrabbleCalculator consiste à créer un programme qui calcule la valeur d'un mot selon les règles du Scrabble. Le programme prend deux paramètres :
+1. Une chaîne de 26 entiers séparés par des virgules représentant les valeurs de chaque lettre de A à Z
+2. Un mot dont on veut calculer la valeur
+
+Stratégie de réalisation:
+1. Vérifier que le programme reçoit exactement 2 arguments
+2. Parser la première chaîne pour extraire les 26 valeurs des lettres
+3. Valider que le second argument ne contient que des lettres
+4. Calculer la somme des valeurs des lettres du mot (insensible à la casse)
+5. Afficher le résultat suivi d'un retour à la ligne
+6. Gérer les cas d'erreur avec le code de sortie 84
+
+Fonctions autorisées: write, atoi, strtok, printf, malloc, free
+
+Rapport final:
+- Implémentation complète du calculateur Scrabble
+- Gestion des erreurs d'arguments et de validation
+- Code respectant les normes Epitech
+- Makefile avec les cibles requises
+- Tests unitaires avec Criterion

@@ -1,0 +1,24 @@
+SortWords Project Understanding:
+
+Objectif: Créer un programme qui trie les mots d'une chaîne par ordre alphabétique.
+
+Spécifications:
+- Binary name: sort_words
+- Langage: C
+- Fonctions autorisées: write, malloc, free SEULEMENT
+- Compilation: via Makefile avec rules re, clean, fclean
+
+Comportement:
+1. Prend une chaîne en paramètre et affiche ses mots triés par ordre alphabétique
+2. Minuscules et majuscules sont identiques dans l'ordre alphabétique
+3. Si deux mots ont le même ordre alphabétique, ils gardent leur ordre d'origine
+4. Les mots sont séparés par espaces ou tabulations
+5. En sortie: un seul espace entre chaque mot, pas d'espace au début/fin
+6. Si pas de paramètre: affiche seulement \n
+7. Code de sortie: 84 si erreur, 0 sinon
+
+Exemples:
+- "A a b B cc ca cd" → "A a b B ca cc cd"
+- "somewhere i lost just my sanity" → "i just lost my sanity somewhere"
+- "you\t\tlost" → "lost you"
+- Sans paramètre → juste \n

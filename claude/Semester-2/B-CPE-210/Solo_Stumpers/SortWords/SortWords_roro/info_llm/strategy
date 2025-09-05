@@ -1,0 +1,28 @@
+Stratégie d'implémentation SortWords:
+
+1. Structure:
+   - main.c: point d'entrée, gestion des arguments
+   - sort_words.c: logique principale
+   - utils.c: fonctions utilitaires (strlen, parsing, etc.)
+   - sort_words.h: déclarations des fonctions
+
+2. Algorithme:
+   - Parser l'input pour extraire les mots (séparer par espaces/tabs)
+   - Stocker les mots dans un tableau dynamique
+   - Trier le tableau selon l'ordre alphabétique case-insensitive
+   - Pour les mots égaux, préserver l'ordre original (tri stable)
+   - Afficher le résultat avec un espace entre chaque mot
+
+3. Fonctions à implémenter:
+   - my_strlen(): calculer longueur chaîne
+   - my_strcasecmp(): comparer chaînes sans case sensitivity
+   - parse_words(): extraire mots de la chaîne
+   - sort_words(): trier le tableau de mots
+   - print_words(): afficher les mots triés
+   - free_words(): libérer la mémoire
+
+4. Contraintes respectées:
+   - Seulement write, malloc, free
+   - Tri stable pour préserver ordre original des mots équivalents
+   - Gestion des espaces/tabs comme séparateurs
+   - Gestion des erreurs avec code de sortie 84

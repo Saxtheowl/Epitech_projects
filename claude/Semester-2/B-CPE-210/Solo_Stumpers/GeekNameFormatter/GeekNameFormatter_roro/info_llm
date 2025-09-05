@@ -1,0 +1,27 @@
+Date de completion: 2025-09-05
+
+Compréhension du sujet:
+Le projet GeekNameFormatter consiste à créer un programme qui formate un nom selon des règles spécifiques :
+1. Chaque mot a ses caractères alternés entre majuscules et minuscules (commence par majuscule)
+2. Remplacements de lettres : o->0, i->1, u->2, e->3, a->4, y->5
+3. Le programme prend un seul paramètre string
+4. Seule fonction autorisée : write
+
+Stratégie de réalisation:
+1. Vérifier qu'un seul argument est fourni
+2. Pour chaque caractère du string :
+   - Appliquer l'alternance majuscule/minuscule par mot
+   - Appliquer les remplacements de lettres spécifiques
+   - Gérer les espaces qui réinitialisent l'alternance
+3. Utiliser uniquement la fonction write pour l'affichage
+4. Gérer les erreurs avec le code de sortie 84
+
+Fonction autorisée: write uniquement
+
+Rapport final:
+- Implémentation complète du formateur de nom geek
+- Gestion de l'alternance majuscule/minuscule par mot
+- Remplacements de lettres selon les règles
+- Code respectant les normes Epitech
+- Makefile avec les cibles requises
+- Tests unitaires avec Criterion

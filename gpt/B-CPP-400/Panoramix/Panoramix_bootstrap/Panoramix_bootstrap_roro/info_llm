@@ -1,0 +1,29 @@
+Date: 2025-09-05
+
+Sujet compris:
+- Simuler des trains sur des rails parallèles qui traversent un pont.
+- Étape 1: un seul train à la fois (mutex).
+- Étape 2: jusqu’à NB_MAX trains simultanément (compteur + condition).
+
+Stratégie:
+- Implémenter une simulation threadée (pthread), limiter l’accès au pont via
+  un mutex + condition variable et un compteur de trains sur le pont.
+- Exposer une fonction testable `run_simulation(trains, max, quiet)` pour les
+  tests Criterion.
+- Garder l’I/O simple (messages texte), pas de bonus.
+
+Réalisation:
+- `bridge_enter/leave` gère l’entrée/sortie et la synchronisation.
+- `run_simulation` lance `nb_trains` threads, mesure la concurrence max.
+- `main` permet d’overrider NB_TRAINS / NB_MAX via arguments (optionnel),
+  et d’exécuter en silencieux pour les tests.
+
+Tests (CLI):
+- `make && ./pano_bootstrap 5 1 q` -> ne doit jamais dépasser 1 train.
+- `make && ./pano_bootstrap 6 3 q` -> concurrence max observée ≤ 3.
+- `make tests_run` -> lance les tests Criterion (succès attendu).
+
+Résultat attendu (exemple non contractuel):
+- En mode verbeux (sans 'q') des lignes "id: entering/leaving bridge" et
+  un résumé `max on bridge: X` cohérent avec NB_MAX.
+

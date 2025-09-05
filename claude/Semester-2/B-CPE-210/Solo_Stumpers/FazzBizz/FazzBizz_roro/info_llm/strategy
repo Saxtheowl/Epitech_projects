@@ -1,0 +1,32 @@
+Stratégie d'implémentation FazzBizz:
+
+1. Fonctions autorisées: write, atoi, printf
+   - atoi(): conversion string vers int
+   - printf(): affichage formaté (plus pratique que write pour les nombres)
+   - write(): pour messages d'erreur sur stderr
+
+2. Structure:
+   - main.c: gestion des arguments, validation, boucle principale
+   - fazzbizz.c: logique de traitement des nombres
+   - utils.c: fonctions utilitaires si nécessaire
+   - fazzbizz.h: déclarations
+
+3. Algorithme:
+   - Vérifier nombre d'arguments (doit être 3: program + 2 params)
+   - Convertir les arguments avec atoi()
+   - Valider: second >= premier
+   - Boucle de premier à second inclus:
+     * Si (i % 90 == 0) → "FazzBizz" (multiple de 9 ET 10)
+     * Sinon si (i % 10 == 0) → "Fazz"
+     * Sinon si (i % 9 == 0) → "Bizz" 
+     * Sinon → printf("%d", i)
+
+4. Gestion des erreurs:
+   - argc != 3 → exit code 84 (pas de message spécifique visible)
+   - second < premier → write sur stderr + exit 84
+
+5. Points importants:
+   - Priorité: FazzBizz > Fazz/Bizz
+   - 90 est multiple de 9 ET 10 → "FazzBizz"
+   - Utiliser printf pour affichage des nombres et textes
+   - write() pour stderr

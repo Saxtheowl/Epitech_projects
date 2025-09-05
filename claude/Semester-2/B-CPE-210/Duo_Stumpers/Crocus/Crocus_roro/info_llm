@@ -1,0 +1,41 @@
+Date de fin: 2025-09-05
+
+Compréhension du sujet:
+- Créer un programme crocus qui affiche des nombres en ASCII art
+- Paramètres: -n number (nombre à afficher), -s string (caractères de remplacement)
+- Chaque chiffre utilise un motif ASCII fixe 5x5, où les 'X' sont remplacés par les caractères
+- Si -s fourni, utilise les caractères selon l'index du chiffre modulo la taille de la chaîne
+- Par défaut, utilise '0' comme caractère de remplacement
+- Fonctions autorisées: libc standard
+
+Stratégie de réalisation:
+1. Parser les arguments -n et -s avec validation
+2. Valider que le nombre ne contient que des chiffres
+3. Définir les motifs ASCII pour chaque chiffre (0-9)
+4. Pour chaque ligne (5 lignes), afficher tous les chiffres côte à côte
+5. Remplacer les 'X' par le caractère approprié selon l'index
+
+Implémentation finale:
+- Structure args_t pour stocker number et string
+- Motifs de chiffres pré-définis dans tableau 3D
+- Parsing des arguments avec gestion des erreurs
+- Affichage ligne par ligne avec espaces entre les chiffres
+- Gestion modulo pour les caractères de remplacement
+- Tests unitaires avec Criterion
+- Makefile conforme Epitech
+
+Tests CLI simples:
+./crocus -n 1 
+→ Attendu: affichage ASCII du chiffre 1 avec des '0'
+
+./crocus -n 0123456789 
+→ Attendu: affichage ASCII de tous les chiffres alignés
+
+./crocus -s "astek" -n "0453" 
+→ Attendu: 0->a, 4->k, 5->a (5%5=0), 3->e
+
+./crocus -n "astek" 
+→ Attendu: erreur 84 (lettres non autorisées)
+
+make && make tests_run 
+→ Compilation et tests unitaires

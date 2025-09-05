@@ -1,0 +1,41 @@
+Rapport Final - Anagram Project
+
+Date de completion: 2025-09-05
+
+Statut: TERMINÉ ET FONCTIONNEL
+
+Implémentation réalisée:
+✅ Structure de projet complète (include/, src/, tests/, info_llm/)
+✅ Makefile avec toutes les cibles requises (all, clean, fclean, re, tests_run)
+✅ Code source en C respectant les normes Epitech
+✅ Header dans chaque fichier
+✅ Fonctions ≤20 lignes chacune
+✅ Utilisation uniquement de la fonction autorisée: write
+
+Fonctionnalités implémentées:
+✅ Vérification d'anagrammes case-insensitive
+✅ Comptage des caractères avec tableau ASCII
+✅ Gestion des erreurs avec message sur stderr
+✅ Code de sortie approprié (84 pour erreurs, 0 sinon)
+✅ Affichage correct selon les cas
+
+Tests effectués:
+✅ "Rail Safety" "Fairy tales" → "anagram!" ✓
+✅ "moo" "moon" → "no anagrams." ✓
+✅ Un seul argument → Erreur 84 + message d'erreur ✓
+✅ Compilation sans warnings ✓
+
+Architecture du code:
+- main.c: gestion des arguments
+- anagram.c: logique principale
+- utils.c: fonctions utilitaires (my_strlen, to_lower)
+- anagram_logic.c: algorithme de vérification d'anagrammes
+- output.c: fonctions d'affichage et gestion erreurs
+
+Algorithme utilisé:
+- Comptage des occurrences de caractères dans un tableau ASCII
+- Incrémentation pour la première chaîne, décrémentation pour la seconde
+- Si tous les compteurs sont à 0 → anagramme
+- Conversion en minuscules pour case-insensitivity
+
+Le projet respecte toutes les contraintes et produit les sorties attendues selon les exemples du sujet.

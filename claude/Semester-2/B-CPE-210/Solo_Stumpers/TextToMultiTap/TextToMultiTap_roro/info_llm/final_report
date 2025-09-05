@@ -1,0 +1,8 @@
+Rapport Final - TextToMultiTap Project
+
+Date de completion: 2025-09-05
+Statut: TERMINÉ ET FONCTIONNEL
+
+Le projet convertit un texte en séquence de touches multi-tap (anciens téléphones).
+Mapping: 2=abc, 3=def, 4=ghi, 5=jkl, 6=mno, 7=pqrs, 8=tuv, 9=wxyz, 0=espace, #=majuscule
+Tests réussis: ✅ "cafe" → "222 2333 33", ✅ "Hello World" → "#4433555 5556660#96667775553"
