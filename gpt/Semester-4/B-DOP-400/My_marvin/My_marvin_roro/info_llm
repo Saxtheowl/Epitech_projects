@@ -17,3 +17,10 @@ Réalisé
 
 Remarques
 - The GitHub SCM is set via the github() DSL method to align with the allowed plugins list. Pre-build cleanup uses ws-cleanup plugin. Jenkins URL is set in location for completeness.
+
+Tests (CLI + attendu)
+- `make` → `Nothing to build for my_marvin`
+- `make tests_run` → `No unit tests; validate YAML and DSL manually`
+- `test -d include && echo OK` → `OK`
+- `test -d src && echo OK` → `OK`
+- `test -d tests && echo OK` → `OK`

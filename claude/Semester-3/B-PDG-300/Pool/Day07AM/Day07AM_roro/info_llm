@@ -1,0 +1,60 @@
+Date de fin: 2025-09-05
+
+Sujet compris:
+- Day07AM "The Federation" - Exercise 0 sur les namespaces C++
+- Compilation avec g++ -std=c++20 -Wall -Wextra -Werror
+- Créer namespace Federation avec nested Starfleet namespace
+- Classe Ship dans Federation::Starfleet avec attributs const non modifiables
+- Constructeur qui affiche les informations du vaisseau
+- Namespace WarpSystem séparé pour les systèmes de navigation
+
+Stratégie de réalisation:
+1. WarpSystem.hpp/cpp avec namespace vide (selon spécifications)
+2. Federation.hpp avec nested namespaces et classe Ship
+3. Federation.cpp avec constructeur qui print les messages requis
+4. Attributs privés const pour respecter l'immutabilité
+5. Tests manuels pour vérifier les outputs PDF
+
+Ce qui a été réalisé:
+- Federation.hpp avec namespace Federation::Starfleet et classe Ship
+- Attributs const: _length, _width, _name, _maxWarp (privés)
+- Constructeur avec initializer list pour les const membres
+- Messages de sortie exactement conformes aux spécifications PDF
+- WarpSystem.hpp/cpp créés selon les requis
+- Makefile avec règles standards et tests_run
+- Tests manuels validés avec outputs corrects
+
+Tests à lancer:
+# Compilation
+make
+# Résultat attendu: Federation.o et WarpSystem.o créés
+
+# Test manuel avec example ships
+g++ -std=c++20 -Wall -Wextra -Werror test_main.cpp Federation.cpp WarpSystem.cpp -o test_federation && ./test_federation
+# Résultat attendu:
+# The ship USS Enterprise has been finished.
+# It is 295 m in length and 76 m in width.
+# It can go to Warp 9!
+# The ship USS Voyager has been finished.
+# It is 344 m in length and 103 m in width.
+# It can go to Warp 10!
+
+# Vérification compilation stricte
+g++ -std=c++20 -Wall -Wextra -Werror -c Federation.cpp
+# Résultat attendu: compilation sans warnings
+
+# Test avec différentes valeurs
+echo '#include "Federation.hpp"
+int main() {
+    Federation::Starfleet::Ship test(100, 50, "TestShip", 5);
+    return 0;
+}' > temp_test.cpp && g++ -std=c++20 temp_test.cpp Federation.cpp WarpSystem.cpp -o temp_test && ./temp_test
+# Résultat attendu: messages avec valeurs TestShip
+
+# Nettoyage
+make fclean && rm -f test_federation temp_test temp_test.cpp
+# Résultat attendu: fichiers supprimés
+
+Note: Implémentation complète de l'exercice 0 avec nested namespaces et classe immutable.
+Tous les messages respectent exactement les spécifications PDF.
+Attributs const garantissent l'immutabilité après construction.

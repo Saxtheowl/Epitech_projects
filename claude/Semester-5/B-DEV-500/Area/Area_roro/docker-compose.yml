@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=development
+      - PORT=8080
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=area
+      - DB_USER=area_user
+      - DB_PASSWORD=area_password
+      - JWT_SECRET=your-jwt-secret-key
+      - GOOGLE_CLIENT_ID=your-google-client-id
+      - GOOGLE_CLIENT_SECRET=your-google-client-secret
+    depends_on:
+      - db
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    networks:
+      - area-network
+
+  client_web:
+    build:
+      context: ./web_client
+      dockerfile: Dockerfile
+    ports:
+      - "8081:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080
+      - REACT_APP_GOOGLE_CLIENT_ID=your-google-client-id
+    depends_on:
+      - server
+    volumes:
+      - ./web_client:/app
+      - /app/node_modules
+    networks:
+      - area-network
+
+  client_mobile:
+    build:
+      context: ./mobile_client
+      dockerfile: Dockerfile
+    ports:
+      - "19000:19000"
+      - "19001:19001"
+      - "19002:19002"
+    environment:
+      - EXPO_DEVTOOLS_LISTEN_ADDRESS=0.0.0.0
+      - REACT_NATIVE_PACKAGER_HOSTNAME=0.0.0.0
+      - API_URL=http://localhost:8080
+    depends_on:
+      - server
+    volumes:
+      - ./mobile_client:/app
+      - /app/node_modules
+    networks:
+      - area-network
+
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=area
+      - POSTGRES_USER=area_user
+      - POSTGRES_PASSWORD=area_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./server/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - area-network
+
+volumes:
+  postgres_data:
+
+networks:
+  area-network:
+    driver: bridge

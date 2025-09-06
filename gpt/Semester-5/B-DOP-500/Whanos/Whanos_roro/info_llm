@@ -9,3 +9,9 @@ Stratégie:
 Réalisé:
 - Squelette avec Makefile standard.
 
+Tests simples:
+- cd B-DOP-500/Whanos/Whanos_roro
+- make all
+  Attendu: affiche "Nothing to build for Whanos_roro"
+- make tests_run
+  Attendu: Criterion affiche "Passing: 1"

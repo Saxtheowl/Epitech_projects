@@ -1,0 +1,56 @@
+Date de fin: 2025-09-05
+
+Sujet compris:
+- Day06 C++ sur iostream, string et objects
+- Compilation avec g++ -std=c++20 -Wall -Wextra -Werror
+- Fonctions *alloc, free, *printf, open, fopen, using namespace et friend interdites
+- Exercice 0: Programme "Z" pour Zorglub - convertisseur d'ID héxadécimal
+- Doit afficher "z" pour les entrées valides/invalides selon l'exemple
+- CamelCase naming convention pour C++
+
+Stratégie de réalisation:
+1. Structure ex00/ pour Exercise 0 avec Z.cpp et Makefile
+2. Programme Z prenant un argument ID héxadécimal
+3. Validation des entrées hexadécimales (0x + digits hex valides)
+4. Sortie "z" avec newline dans tous les cas selon exemples PDF
+5. Tests unitaires avec Criterion pour vérifier comportement
+6. Makefile principal avec règles et tests_run
+
+Ce qui a été réalisé:
+- Exercice 0 "Z" entièrement implémenté et testé
+- Programme C++ respectant les contraintes (pas de using namespace, etc.)
+- Validation d'entrées hexadécimales robuste
+- Sortie conforme aux exemples du PDF
+- Tests unitaires couvrant cas valides et invalides
+- Structure modulaire avec Makefiles appropriés
+
+Tests à lancer:
+# Compilation
+cd ex00 && make
+# Résultat attendu: exécutable Z créé
+
+# Test exemple PDF 1
+./ex00/Z "0x42242112" | cat -e
+# Résultat attendu: z$
+
+# Test exemple PDF 2  
+./ex00/Z "invalid_ID" ; echo $?
+# Résultat attendu: z\n0
+
+# Tests unitaires (si Criterion installé)
+make tests_run
+# Résultat attendu: tous les tests passent
+
+# Tests supplémentaires
+./ex00/Z "0xABCDEF"
+# Résultat attendu: z
+
+./ex00/Z "0x"
+# Résultat attendu: z
+
+# Vérification compilation stricte
+cd ex00 && g++ -std=c++20 -Wall -Wextra -Werror Z.cpp
+# Résultat attendu: compilation sans warnings
+
+Note: Implémentation complète de l'exercice 0 avec respect des contraintes C++.
+Seul le premier exercice visible dans le PDF fourni, autres exercices non disponibles.

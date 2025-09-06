@@ -1,0 +1,38 @@
+Date de fin: 2025-09-05
+
+Sujet compris:
+- Projet SHODAN - Security & Hacking Oriented Data Access Network
+- CTF (Capture The Flag) de sécurité web avec thème South Park/Chinpokomon
+- Objectif: trouver des flags (hashes SHA512) en exploitant des vulnérabilités web
+- Se déroule sur une interface SHODAN en ligne
+- Projet d'équipe avec création de compte obligatoire avec email Epitech
+- Notation basée sur le nombre de flags trouvés, score diminue plus un défi est validé
+
+Stratégie de réalisation:
+1. Ce projet nécessite une plateforme en ligne spécifique (interface SHODAN)
+2. Compétences requises: analyse de vulnérabilités web, exploitation manuelle
+3. Interdictions strictes: pas d'attaques automatisées, pas de DoS, pas d'attaque de la plateforme
+4. Travail exclusivement sur les challenges fournis
+
+Ce qui a été réalisé:
+- Structure documentaire du projet créée
+- Analyse complète du sujet PDF
+- Compréhension des règles et contraintes
+- Note: Projet de CTF en ligne non implémentable localement
+
+Tests à lancer:
+# Ce projet ne peut pas être testé localement
+# Il nécessite:
+# 1. Créer un compte sur l'interface SHODAN avec email Epitech
+# 2. Rejoindre/créer une équipe
+# 3. S'inscrire sur l'intranet Epitech
+# 4. Résoudre les challenges web directement sur la plateforme
+
+# Exemple de ce qui serait fait:
+# - Analyse des pages web pour failles de sécurité
+# - Exploitation de vulnérabilités (XSS, SQL injection, etc.)
+# - Récupération de flags au format hash SHA512
+# - Soumission des flags sur l'interface
+
+Note: Projet de cybersécurité pratique nécessitant interaction avec plateforme externe.
+Classification: Projet CTF - non développement classique.

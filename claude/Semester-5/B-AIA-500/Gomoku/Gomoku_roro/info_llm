@@ -1,0 +1,31 @@
+Date de fin: 2025-01-08
+
+COMPRÉHENSION DU SUJET:
+Le projet Gomoku consiste à créer une IA pour jouer au jeu Gomoku (Wuzi Qi, Five in a Row).
+- Plateau 20x20 (pas 19x19 comme au Go classique)
+- But: aligner 5 pions consécutifs (horizontal, vertical, diagonal)
+- Protocole de communication avec Piskvork
+- Contraintes: 5 secondes max par coup, 70MB mémoire, bibliothèques standard uniquement
+- Évaluation sur l'efficacité de l'IA (pas sur le code)
+
+STRATÉGIE DE RÉALISATION:
+1. Implémentation en C++ pour les performances
+2. Algorithme Minimax avec élagage alpha-beta
+3. Fonction d'évaluation basée sur:
+   - Détection des patterns (2, 3, 4 en ligne)
+   - Analyse des menaces et opportunités  
+   - Contrôle du centre du plateau
+4. Optimisations:
+   - Limitation de profondeur selon le temps
+   - Tri des coups par priorité
+   - Détection rapide des coups gagnants/perdants
+
+RAPPORT FINAL:
+✅ Implémentation complète de l'IA Gomoku
+✅ Algorithme Minimax avec alpha-beta pruning  
+✅ Fonction d'évaluation robuste avec détection de patterns
+✅ Protocole de communication Piskvork basique
+✅ Gestion plateau 20x20 et règles du jeu
+✅ Optimisations pour respecter les 5 secondes par coup
+✅ Tests unitaires avec Criterion
+✅ Makefile conforme (all, clean, fclean, re, tests_run)

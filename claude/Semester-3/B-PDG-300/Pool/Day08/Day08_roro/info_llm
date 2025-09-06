@@ -1,0 +1,60 @@
+Date de fin: 2025-09-05
+
+Sujet compris:
+- Day08 "The Trade Federation" - Exercise 0 sur la classe Droid
+- Compilation avec g++ -std=c++20 -Wall -Wextra -Werror
+- Contraintes: pas de using namespace, friend, malloc, printf, etc.
+- Classe Droid avec constructeurs, destructeur, opérateurs et attributs privés
+- Gestion d'énergie avec transfert et limites (0-100)
+
+Stratégie de réalisation:
+1. Droid.hpp avec classe complète et tous les prototypes requis
+2. Droid.cpp avec implémentation de tous les constructeurs et opérateurs
+3. Attributs privés: _id, _energy, _attack, _toughness, _status
+4. Valeurs par défaut: 50, 25, 15, "Standing by"
+5. Opérateurs ==, !=, << et = correctement implémentés
+6. Getters/Setters avec validation pour l'énergie (max 100)
+
+Ce qui a été réalisé:
+- Classe Droid complète avec tous les constructeurs requis
+- Constructeur par défaut et avec paramètre std::string
+- Copy constructor et assignment operator correctement implémentés
+- Opérateurs de comparaison == et != (basés sur caractéristiques, pas sur ID)
+- Opérateur << pour transfert d'énergie avec chaînage possible
+- Tous les getters et setters avec validation appropriée
+- Gestion correcte de l'énergie (limites 0-100)
+- Tests manuels validant toutes les fonctionnalités
+
+Tests à lancer:
+# Compilation
+make
+# Résultat attendu: ex00/Droid.o créé sans erreurs
+
+# Test manuel complet
+g++ -std=c++20 -Wall -Wextra -Werror test_main.cpp ex00/Droid.cpp -o test_droid && ./test_droid
+# Résultat attendu: 
+# Default droid - ID: '', Energy: 50
+# R2D2 - ID: 'R2D2', Energy: 50
+# Copy of R2D2 - ID: 'R2D2', Energy: 50
+# After assignment - ID: 'R2D2', Energy: 50
+# droid1 == droid2: true
+# droid1 != droid3: false
+# Before transfer - Droid energy: 30, Source: 100
+# After transfer - Droid energy: 100, Source: 30
+# After chaining - Droid energy: 80, Source1: 0, Source2: 0
+
+# Vérification compilation stricte
+g++ -std=c++20 -Wall -Wextra -Werror -c ex00/Droid.cpp
+# Résultat attendu: compilation sans warnings
+
+# Test des constructeurs
+echo 'Droid d1; Droid d2("Test"); Droid d3(d2); d1 = d2;' | g++ -std=c++20 -x c++ -include ex00/Droid.hpp ex00/Droid.cpp -
+# Résultat attendu: compilation réussie
+
+# Nettoyage
+make fclean && rm -f test_droid test_main.cpp
+# Résultat attendu: fichiers supprimés
+
+Note: Implémentation complète de l'exercice 0 avec classe Droid respectant toutes les spécifications.
+Tous les opérateurs et constructeurs fonctionnent correctement avec gestion d'énergie appropriée.
+Respect strict des contraintes C++20 et des standards Epitech.

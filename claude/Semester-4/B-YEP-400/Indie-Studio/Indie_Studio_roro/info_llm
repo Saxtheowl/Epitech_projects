@@ -1,0 +1,54 @@
+Date de fin: 2025-09-05
+
+Sujet compris:
+- Créer un jeu Bomberman 3D cross-platform avec raylib
+- Compilation via CMake 3.17 (Linux: Makefile, Windows: Visual Studio .sln)
+- Jeu 3D avec gameplay 2D inspiré de Neo Bomberman (1997)
+- Multijoueur local + IA, menus, cartes procédurales, sauvegarde/chargement
+- Power-ups: Bomb Up, Speed Up, Fire Up, Wall Pass
+- Animations, sons, polish complet du jeu
+
+Stratégie de réalisation:
+1. Architecture C++ avec encapsulation de raylib (bibliothèque C)
+2. Système de composants pour entités (joueurs, bombes, power-ups)
+3. Gestionnaire de scènes (menu, jeu, pause)
+4. Génération procédurale de cartes avec obstacles et bonus aléatoires
+5. Système de sauvegarde/chargement de parties
+6. Moteur d'animations et gestionnaire de sons
+7. IA pour bots avec comportements différenciés
+8. Interface utilisateur complète avec menus
+
+Ce qui serait à réaliser:
+- Projet de très haute complexité nécessitant plusieurs semaines de développement
+- Architecture complète de moteur de jeu 3D
+- Intégration raylib avec C++ moderne
+- Système de rendu 3D avec caméra optimisée
+- Logique de jeu Bomberman complète (explosions, collisions, power-ups)
+- Génération procédurale de niveaux
+- Système audio et animations fluides
+- Multijoueur local avec gestion d'inputs multiples
+- Save/Load système avec sérialisation de l'état de jeu
+
+Tests à lancer:
+# Ce projet nécessiterait plusieurs heures de développement
+# Tests qui seraient implémentés:
+
+mkdir build && cd build
+cmake .. -DCMAKE_MODULE_PATH=/path/to/raylib/cmake
+make
+./bomberman
+
+# Tests fonctionnels:
+# - Menu principal avec options New Game/Load Game
+# - Génération de carte procédurale différente à chaque partie
+# - Contrôles joueur (WASD + Espace pour bombe)
+# - Explosions de bombes avec propagation et obstacles
+# - Collecte de power-ups et effets visibles
+# - IA des bots avec comportements logiques
+# - Sauvegarde/chargement de partie en cours
+# - Sons et animations fluides
+# - Caméra stable suivant l'action
+
+Note: Projet de fin d'année de très haute complexité technique.
+Classification: Moteur de jeu 3D complet - nécessite expertise raylib + architecture avancée.
+Temps estimé: 2-3 semaines de développement intensif.

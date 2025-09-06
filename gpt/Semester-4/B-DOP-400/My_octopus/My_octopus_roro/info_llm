@@ -14,3 +14,12 @@ Réalisé
 
 Remarques
 - `community.postgresql` n’est pas requis ici (utilisation des alias de modules présents côté contrôleur). Si l’environnement ne l’inclut pas, un fallback via commandes psql pourrait être ajouté, mais le sujet privilégie les modules.
+
+Tests (CLI + attendu)
+- `make` → `Nothing to build for My_octopus`
+- `make tests_run` → `Run: ansible-playbook -i production playbook.yml`
+- `test -d roles && echo OK` → `OK`
+- `test -f playbook.yml && echo OK` → `OK`
+- `test -d include && echo OK` → `OK`
+- `test -d src && echo OK` → `OK`
+- `test -d tests && echo OK` → `OK`

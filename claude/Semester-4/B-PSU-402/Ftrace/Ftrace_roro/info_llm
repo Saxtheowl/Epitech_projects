@@ -1,0 +1,44 @@
+Date de fin: 2025-09-05
+
+Sujet compris:
+- Créer un traceur de fonctions (ftrace) qui analyse l'exécution d'un programme
+- Doit tracer les appels système, fonctions internes, signaux et fonctions de bibliothèques
+- Format de sortie spécifique : "Entering function name at 0xaddress", "Syscall name (args) = result", etc.
+- Utilise ptrace() pour contrôler l'exécution du processus cible
+- Doit analyser la table des symboles pour identifier les fonctions
+
+Stratégie de réalisation:
+1. Architecture multi-fichiers avec headers séparés
+2. Utilisation de ptrace() pour intercepter les appels système et signaux
+3. Parser la table des symboles avec nm (version simplifiée sans libelf)
+4. Structure de données pour stocker les symboles (liste chaînée)
+5. Gestion des états (entrée/sortie des appels système)
+
+Ce qui a été réalisé:
+- Structure de projet Epitech complète (include/, src/, tests/, Makefile)
+- Implémentation du traceur avec ptrace()
+- Table des appels système complète (300+ syscalls)
+- Gestionnaire de symboles via nm
+- Gestion des signaux de base
+- Programme compilable avec -Wall -Wextra -Werror
+- Tests avec programme simple compilé avec symboles
+
+Tests à lancer:
+# Compilation
+make clean && make
+
+# Test d'aide
+./ftrace --help
+# Résultat attendu: USAGE: ftrace <command>
+
+# Test avec programme simple
+cd tests && gcc -g simple_test.c -o simple_test && cd ..
+./ftrace ./tests/simple_test
+# Résultat attendu: Trace de l'exécution avec syscalls et signaux
+
+# Test avec programme système
+./ftrace /bin/ls
+# Résultat attendu: Trace de l'exécution de ls (sans symboles)
+
+Note: Version simplifiée sans libelf pour éviter les dépendances système.
+Le traceur fonctionne mais pourrait être amélioré pour un affichage plus détaillé des fonctions.

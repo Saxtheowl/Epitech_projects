@@ -1,0 +1,53 @@
+Date de fin: 2025-09-05
+
+Sujet compris:
+- Panoramix (B-CCP-400) - Programmation concurrente avec threads
+- Simulation de gaulois buvant des potions magiques avant de combattre des romains
+- Usage: ./panoramix <nb_villagers> <pot_size> <nb_fights> <nb_refills>
+- Contraintes: DOIT utiliser semaphores et mutexes, chaque villageois et druide dans son thread
+- Pot plein au démarrage, villageois s'arrêtent après tous les combats, druide après nb_refills
+
+Stratégie de réalisation:
+1. Structure shared_data_t avec mutex pour le pot et sémaphores pour synchronisation
+2. Thread druide qui attend d'être réveillé puis replit le pot
+3. Threads villageois qui boivent des potions et combattent
+4. Gestion de la terminaison propre des threads
+5. Messages conformes aux spécifications PDF
+
+Ce qui a été réalisé:
+- Programme panoramix.c complet avec gestion des threads POSIX
+- Synchronisation avec pthread_mutex et sem_t (semaphores POSIX)
+- Thread druide qui dort et se réveille sur demande
+- Threads villageois avec boucle combat et gestion des potions
+- Gestion d'erreurs pour arguments invalides (retour 84)
+- Messages de sortie exactement conformes aux exemples PDF
+- Makefile avec règles standard Epitech
+
+Tests à lancer:
+# Compilation
+make
+# Résultat attendu: exécutable panoramix créé
+
+# Test erreur arguments invalides
+./panoramix -1 3 2 1 >/dev/null; echo $?
+# Résultat attendu: 84
+
+# Test exemple PDF basique
+timeout 10s ./panoramix 3 5 3 1
+# Résultat attendu: messages de druid, villagers avec synchronisation
+
+# Test minimal
+timeout 5s ./panoramix 1 2 1 1
+# Résultat attendu: 1 villager, 1 combat, pas de refill nécessaire
+
+# Test avec refills multiples
+timeout 10s ./panoramix 2 2 3 2
+# Résultat attendu: plusieurs refills du druide
+
+# Nettoyage
+make fclean
+# Résultat attendu: fichiers binaires supprimés
+
+Note: Implémentation complète du projet Panoramix avec threads, mutexes et sémaphores.
+Tous les messages de sortie respectent exactement les spécifications PDF.
+Gestion propre de la terminaison des threads et synchronisation sans deadlock.

@@ -1,0 +1,13 @@
+/*
+** EPITECH PROJECT, 2025
+** my_marvin
+** File description:
+** Tests information and manual validation notes
+*/
+
+This project is DevOps configuration (Jenkinsfile DSL + YAML).
+No unit tests are provided. Use the Makefile target:
+
+    make tests_run
+
+to see manual validation instructions.

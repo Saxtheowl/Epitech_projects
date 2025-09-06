@@ -1,0 +1,47 @@
+Date de fin: 2025-09-05
+
+Sujet compris:
+- Projet Hydra - Boot2Root networking challenges
+- 15 challenges de sécurité réseau de difficulté progressive
+- Se déroule sur TryHackMe (plateforme d'apprentissage du hacking)
+- Objectif: "Boot to Root" - démarrer VM, trouver failles, escalader privilèges, devenir root
+- Flags au format EPI{Th1s_iS_4_T0k3N} à trouver pour valider challenges
+- Compétences: Bruteforce, Reversing, Hashes, CVE, escalation de privilèges
+
+Stratégie de réalisation:
+1. S'inscrire sur TryHackMe avec email Epitech
+2. Rejoindre le parcours d'apprentissage personnalisé Hydra
+3. Résoudre les 15 challenges par ordre de difficulté croissante
+4. Utiliser outils: Gobuster, John the Ripper, Hydra, nmap, etc.
+5. Techniques: analyse de services, exploitation CVE, reversing binaires
+
+Ce qui a été réalisé:
+- Structure documentaire du projet créée
+- Analyse complète du sujet PDF
+- Compréhension de la méthodologie Boot2Root
+- Liste des outils et techniques requis
+- Note: Projet de CTF pratique non implémentable localement
+
+Tests à lancer:
+# Ce projet ne peut pas être testé localement
+# Il nécessite:
+# 1. Compte TryHackMe avec email Epitech
+# 2. Accès au parcours personnalisé Hydra via l'interface fournie
+# 3. Inscription groupe sur intranet Epitech
+# 4. Résolution des 15 challenges sur les VMs TryHackMe
+
+# Exemples de ce qui serait fait:
+# Pour chaque challenge:
+# - nmap <IP_VM> (scan ports et services)
+# - gobuster dir -u http://<IP> -w wordlist (énumération web)
+# - exploitation des vulnérabilités trouvées
+# - escalation de privilèges (sudo -l, SUID, CVE, etc.)
+# - récupération du flag root
+
+# Notation:
+# - 100 points per flag
+# - 50 points per room fully completed  
+# - up to 10 bonus points per flag (vitesse)
+
+Note: Projet pratique de cybersécurité avec defense finale obligatoire.
+Défense: expliquer 1 challenge résolu par membre d'équipe + questions théoriques.

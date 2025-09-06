@@ -9,3 +9,9 @@ Stratégie:
 Réalisé:
 - Squelette avec Makefile standard.
 
+Tests simples:
+- cd B-FUN-500/GlaDOS/GlaDOS_roro
+- make all
+  Attendu: affiche "Nothing to build for GLaDOS_roro"
+- make tests_run
+  Attendu: Criterion affiche "Passing: 1"

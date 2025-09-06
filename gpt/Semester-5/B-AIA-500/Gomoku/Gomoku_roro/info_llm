@@ -12,11 +12,36 @@ Stratégie:
 - Étape 3: Évaluation statique et recherche (itérative) avec limites temps.
 
 Réalisé (cette passe):
-- Squelette compilable: Makefile avec all/clean/fclean/re/tests_run, include/src/tests,
-  binaire placeholder gomoku_roro avec option -h et code de retour 84 par défaut.
-- Test Criterion minimal pour valider l’infrastructure tests.
+- Implémentation protocole (Gomocup-like): START, BEGIN, TURN, BOARD, ABOUT,
+  INFO, TAKEBACK, END.
+- Sélection de coup:
+  1) joue un coup gagnant immédiat si possible (5 alignés),
+  2) sinon bloque un coup gagnant adverse immédiat,
+  3) sinon centre puis recherche en spirale (coup légal).
+- Makefile mis à jour (sources multiples), binaire `gomoku_roro`.
+- Test Criterion minimal pour l’infrastructure.
 
 Remarques:
 - L’IA complète n’est pas implémentée dans cette passe. Prochaines étapes: parser
   du protocole et moteur de recherche, conformément au PDF.
 
+Tests simples:
+- cd B-AIA-500/Gomoku/Gomoku_roro
+- make re
+  Attendu: compilation OK (binaire ./gomoku_roro créé)
+- printf "START 5\nBEGIN\nEND\n" | ./gomoku_roro
+  Attendu: "OK" puis un coup (ex: "2,2")
+- printf "START 5\nTURN 2,2\nEND\n" | ./gomoku_roro
+  Attendu: "OK" puis un coup légal différent (ex: "1,1")
+- printf "START 5\nBOARD\n2,2,2\nDONE\nEND\n" | ./gomoku_roro
+  Attendu: "OK" puis un coup légal
+- Test "coup gagnant":
+  printf "START 10\nBOARD\n0,2,1\n1,2,1\n2,2,1\n3,2,1\nDONE\nEND\n" | ./gomoku_roro
+  Attendu: "OK" puis "4,2"
+- Test "blocage":
+  printf "START 10\nBOARD\n0,5,2\n1,5,2\n2,5,2\n3,5,2\nDONE\nEND\n" | ./gomoku_roro
+  Attendu: "OK" puis "4,5"
+- printf "ABOUT\nEND\n" | ./gomoku_roro
+  Attendu: ligne avec name/version/author/country
+- make tests_run
+  Attendu: Criterion affiche "Passing: 1"

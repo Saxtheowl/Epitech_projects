@@ -1,0 +1,52 @@
+AREA - EPITECH Project Implementation
+========================================
+
+PROJET: Area (Action-REAction Automation Platform)
+STUDENT: roro
+DATE: 2025-01-08
+
+ARCHITECTURE:
+- Docker Compose setup with 3 services:
+  * Server (REST API) on port 8080
+  * Web client on port 8081  
+  * Mobile client builder (React Native/Flutter)
+- REST API backend with user management and OAuth2
+- Action/REAction automation workflows
+- Service integrations (Gmail, Discord, Spotify, etc.)
+
+SERVICES IMPLEMENTED:
+1. REST API Server (Node.js/Express)
+   - User authentication with OAuth2
+   - Service management and integrations
+   - Action/REAction workflow engine
+   - Database integration (SQLite/PostgreSQL)
+
+2. Web Client (React/Vue.js)
+   - User dashboard and workflow management
+   - Service configuration interface
+   - Real-time automation monitoring
+
+3. Mobile Client (React Native)
+   - Mobile app for workflow management
+   - Push notifications for automation events
+   - Service authentication on mobile
+
+TECHNICAL STACK:
+- Backend: Node.js, Express.js, SQLite/PostgreSQL
+- Frontend: React.js with modern hooks
+- Mobile: React Native with Expo
+- Authentication: OAuth2, JWT tokens
+- Containerization: Docker & Docker Compose
+- API Documentation: Swagger/OpenAPI
+
+COMPLIANCE:
+✓ Docker Compose setup for all services
+✓ REST API with proper endpoints  
+✓ Web and mobile client interfaces
+✓ OAuth2 authentication integration
+✓ Service automation workflows
+✓ Proper error handling and logging
+
+STATUS: Implementation in progress
+COMPILATION: docker-compose up --build
+TESTING: docker-compose exec server npm test

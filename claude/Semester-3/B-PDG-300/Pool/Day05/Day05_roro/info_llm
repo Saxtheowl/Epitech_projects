@@ -1,0 +1,50 @@
+Date de fin: 2025-09-05
+
+Sujet compris:
+- Créer un module string_t en C avec structure contenant char *str
+- Implémenter string_init() et string_destroy() 
+- Compiler avec -std=gnu17 -Wall -Wextra
+- Créer une bibliothèque statique libstring.a
+- Fournir un header string.h avec prototypes
+- Ajouter des tests unitaires avec Criterion
+
+Stratégie de réalisation:
+1. Définir structure string_t avec membre char *str dans header
+2. Implémenter string_init() avec allocation dynamique et copie de chaîne
+3. Implémenter string_destroy() avec libération mémoire et sécurisation
+4. Makefile pour créer libstring.a avec ar rcs
+5. Gestion des cas d'erreur (pointeurs NULL)
+6. Tests unitaires couvrant cas nominaux et limites
+
+Ce qui a été réalisé:
+- Module string complet avec initialisation/destruction
+- Gestion robuste des erreurs (NULL pointers)
+- Allocation dynamique avec malloc/free
+- Bibliothèque statique libstring.a générée avec ar
+- Header string.h avec prototypes corrects
+- Tests unitaires Criterion pour tous les cas
+- Programme de test reproduisant exactement l'exemple PDF
+
+Tests à lancer:
+# Compilation de la bibliothèque
+make clean && make
+# Résultat attendu: libstring.a créé
+
+# Test avec l'exemple du PDF
+gcc test_main.c -L. -lstring -o test && ./test
+# Résultat attendu: "Hello World"
+
+# Tests unitaires (si Criterion installé)
+gcc tests.c -L. -lstring -lcriterion -o test_unit && ./test_unit
+# Résultat attendu: tous les tests passent
+
+# Vérification de la bibliothèque
+ar -t libstring.a
+# Résultat attendu: string_init.o string_destroy.o
+
+# Test de gestion d'erreur
+gcc -c -std=gnu17 -Wall -Wextra *.c
+# Résultat attendu: compilation sans warnings
+
+Note: Implémentation complète du module string selon spécifications PDF.
+Gestion robuste des erreurs et respect des standards Epitech.

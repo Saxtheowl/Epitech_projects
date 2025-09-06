@@ -13,8 +13,21 @@ Réalisé (cette passe):
 - Squelette C++ conforme: Makefile (all/clean/fclean/re/tests_run), include/src/tests,
   binaire placeholder rtype_roro avec option -h.
 - Test Criterion minimal (compilable en C++).
+ - Symlinks de conformité PDF: r-type_server, r-type_client -> rtype_roro.
 
 Remarques:
 - L’implémentation complète (réseau/ECS/rendu) n’est pas faite ici. Étapes suivantes
   à réaliser selon le PDF.
 
+Tests simples:
+- cd B-CPP-500/Rtype/Rtype_roro
+- make re
+  Attendu: compilation OK (binaire ./rtype_roro créé)
+- ./rtype_roro -h; echo $?
+  Attendu: affiche "USAGE" et code 0
+- ./rtype_roro; echo $?
+  Attendu: affiche l’usage et code 84 (placeholder)
+- ./r-type_server -h; ./r-type_client -h
+  Attendu: mêmes sorties (symlinks vers rtype_roro)
+- make tests_run
+  Attendu: Criterion affiche "Passing: 1"
