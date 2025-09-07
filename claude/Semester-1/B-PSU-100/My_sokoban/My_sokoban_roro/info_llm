@@ -1,0 +1,57 @@
+Date de finalisation: 06/09/2025
+
+Compréhension du sujet:
+======================
+My_sokoban est un jeu de puzzle classique à implémenter en terminal avec ncurses.
+
+Fonctionnalités principales:
+- Jeu Sokoban (gardien d'entrepôt) en mode terminal
+- Déplacement avec les flèches directionnelles
+- Pousser des caisses (X) vers les emplacements de stockage (O)
+- Joueur représenté par 'P', murs par '#', espaces vides par ' '
+- Victoire: toutes les caisses sur les emplacements (retour 0)
+- Défaite: aucune caisse ne peut plus bouger (retour 1)
+- Redimensionnement terminal géré
+- Reset avec espace
+- Aide avec -h
+
+Contraintes techniques:
+- Language: C
+- Bibliothèque: ncurses
+- Fonctions autorisées: malloc, free, exit, open/close/read/write, getline, ioctl, usleep, sigaction, signal
+- Gestion d'erreurs avec exit code 84
+- Makefile avec règles standard (all, clean, fclean, re)
+
+Stratégie de réalisation:
+========================
+1. Structure de données pour représenter la carte
+2. Parser de fichier carte avec validation
+3. Moteur de jeu avec logique de déplacement
+4. Interface ncurses avec gestion des entrées
+5. Système de détection de victoire/défaite
+6. Gestion du redimensionnement terminal
+7. Tests unitaires avec Criterion
+
+Architecture:
+- src/main.c: Point d'entrée et interface utilisateur
+- src/game.c: Logique du jeu
+- src/map.c: Gestion de la carte
+- src/display.c: Affichage ncurses
+- include/sokoban.h: Définitions et prototypes
+- tests/: Tests unitaires
+
+Ce que j'ai finalement fait:
+===========================
+Implémentation complète du jeu Sokoban avec:
+- Parser de carte robuste avec validation
+- Moteur de jeu complet avec toute la logique
+- Interface ncurses responsive
+- Gestion complète des entrées clavier
+- Détection automatique des conditions de fin
+- Gestion du redimensionnement terminal
+- Tests unitaires avec Criterion
+- Code modulaire et bien structuré
+- Gestion d'erreurs appropriée
+- Respect strict des contraintes Epitech
+
+Le jeu est entièrement fonctionnel et respecte toutes les spécifications du sujet.

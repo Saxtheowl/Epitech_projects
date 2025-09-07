@@ -1,0 +1,158 @@
+jenkins:
+  systemMessage: "Whanos - DevOps Infrastructure"
+  numExecutors: 4
+  mode: NORMAL
+  scmCheckoutRetryCount: 3
+  
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: admin
+          password: ${JENKINS_ADMIN_PASSWORD}
+          
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+
+  nodes:
+    - permanent:
+        name: "docker-node"
+        remoteFS: "/home/jenkins/agent"
+        launcher:
+          ssh:
+            host: "localhost"
+            port: 22
+            credentialsId: "jenkins-ssh-key"
+            
+unclassified:
+  location:
+    adminAddress: admin@whanos.local
+    url: ${JENKINS_URL}
+    
+  dockerRegistry:
+    url: "http://localhost:5000"
+    
+jobs:
+  - folder:
+      name: "Whanos base images"
+      displayName: "Whanos Base Images"
+      
+  - folder:
+      name: "Projects"
+      displayName: "Projects"
+      
+  - job:
+      name: "Whanos base images/whanos-c"
+      project-type: freestyle
+      builders:
+        - shell: |
+            cd /whanos/images/c
+            docker build -f Dockerfile.base -t whanos-c .
+            docker build -f Dockerfile.standalone -t whanos-c-standalone .
+            
+  - job:
+      name: "Whanos base images/whanos-java"
+      project-type: freestyle
+      builders:
+        - shell: |
+            cd /whanos/images/java
+            docker build -f Dockerfile.base -t whanos-java .
+            docker build -f Dockerfile.standalone -t whanos-java-standalone .
+            
+  - job:
+      name: "Whanos base images/whanos-javascript"
+      project-type: freestyle
+      builders:
+        - shell: |
+            cd /whanos/images/javascript
+            docker build -f Dockerfile.base -t whanos-javascript .
+            docker build -f Dockerfile.standalone -t whanos-javascript-standalone .
+            
+  - job:
+      name: "Whanos base images/whanos-python"
+      project-type: freestyle
+      builders:
+        - shell: |
+            cd /whanos/images/python
+            docker build -f Dockerfile.base -t whanos-python .
+            docker build -f Dockerfile.standalone -t whanos-python-standalone .
+            
+  - job:
+      name: "Whanos base images/whanos-befunge"
+      project-type: freestyle
+      builders:
+        - shell: |
+            cd /whanos/images/befunge
+            docker build -f Dockerfile.base -t whanos-befunge .
+            docker build -f Dockerfile.standalone -t whanos-befunge-standalone .
+            
+  - job:
+      name: "Whanos base images/Build all base images"
+      project-type: freestyle
+      builders:
+        - build-other-projects:
+            projects: "whanos-c,whanos-java,whanos-javascript,whanos-python,whanos-befunge"
+            
+  - job:
+      name: "link-project"
+      project-type: freestyle
+      parameters:
+        - string:
+            name: REPO_URL
+            description: "Git repository URL"
+        - string:
+            name: PROJECT_NAME
+            description: "Project name"
+      builders:
+        - shell: |
+            #!/bin/bash
+            set -e
+            
+            # Create new job for the project
+            cat > /tmp/job-config.xml << EOF
+            <?xml version='1.0' encoding='UTF-8'?>
+            <project>
+              <actions/>
+              <description>Auto-generated job for project ${PROJECT_NAME}</description>
+              <keepDependencies>false</keepDependencies>
+              <properties/>
+              <scm class="hudson.plugins.git.GitSCM">
+                <configVersion>2</configVersion>
+                <userRemoteConfigs>
+                  <hudson.plugins.git.UserRemoteConfig>
+                    <url>${REPO_URL}</url>
+                  </hudson.plugins.git.UserRemoteConfig>
+                </userRemoteConfigs>
+                <branches>
+                  <hudson.plugins.git.BranchSpec>
+                    <name>*/main</name>
+                  </hudson.plugins.git.BranchSpec>
+                </branches>
+              </scm>
+              <triggers>
+                <hudson.triggers.SCMTrigger>
+                  <spec>* * * * *</spec>
+                </hudson.triggers.SCMTrigger>
+              </triggers>
+              <builders>
+                <hudson.tasks.Shell>
+                  <command>
+                    #!/bin/bash
+                    set -e
+                    
+                    # Containerize the application
+                    /whanos/scripts/containerize.sh \$PWD ${PROJECT_NAME}
+                    
+                    # Deploy if whanos.yml exists
+                    if [ -f "whanos.yml" ]; then
+                        /whanos/scripts/deploy_k8s.sh \$PWD ${PROJECT_NAME}
+                    fi
+                  </command>
+                </hudson.tasks.Shell>
+              </builders>
+            </project>
+            EOF
+            
+            # Create the job using Jenkins CLI
+            java -jar /var/jenkins_home/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-job "Projects/${PROJECT_NAME}" < /tmp/job-config.xml

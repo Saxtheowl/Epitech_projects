@@ -1,4 +1,4 @@
-Date: 2025-09-02
+Date: 2025-09-06
 
 Compréhension du sujet:
 - Projet DevOps (Bernstein): pipelines CI/CD, orchestration.
@@ -8,6 +8,14 @@ Stratégie:
 
 Réalisé:
 - Squelette avec Makefile standard.
+- Ajout des manifestes Kubernetes conformes au PDF:
+  - k8s/redis.yaml (redis:5.0, port 6379)
+  - k8s/postgres.yaml (postgres:12, PVC, env vars)
+  - k8s/poll.yaml (2 replicas, 128Mi, Ingress poll.dop.io)
+  - k8s/worker.yaml (256Mi, env vers redis/postgres)
+  - k8s/result.yaml (2 replicas, 128Mi, Ingress result.dop.io)
+  - k8s/traefik.yaml (traefik:2.7, RBAC, NodePort 30021/30042)
+  - k8s/monitoring.yaml (metrics-server minimal)
 
 Tests simples:
 - cd B-DOP-500/Bernstein/Bernstein_roro
@@ -15,3 +23,16 @@ Tests simples:
   Attendu: affiche "Nothing to build for Bernstein_roro"
 - make tests_run
   Attendu: Criterion affiche "Passing: 1"
+
+ Déploiement (à exécuter sur un cluster de test):
+ - kubectl apply -f k8s/traefik.yaml
+ - kubectl apply -f k8s/redis.yaml
+ - kubectl apply -f k8s/postgres.yaml
+ - kubectl apply -f k8s/worker.yaml
+ - kubectl apply -f k8s/poll.yaml
+ - kubectl apply -f k8s/result.yaml
+ - kubectl apply -f k8s/monitoring.yaml
+   Attendu:
+   - 2 pods traefik Running, Service NodePort sur 30021/30042
+   - Services poll/result accessibles via hosts
+     poll.dop.io et result.dop.io (ingress Traefik)

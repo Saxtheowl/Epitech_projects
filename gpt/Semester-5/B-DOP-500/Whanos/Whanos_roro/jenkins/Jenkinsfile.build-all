@@ -1,0 +1,32 @@
+//
+// EPITECH PROJECT, 2025
+// Whanos_roro
+// File description:
+//   Jenkins pipeline to build all base images
+//
+
+pipeline {
+  agent any
+  stages {
+    stage('Build base images') {
+      matrix {
+        axes {
+          axis { name 'LANG'; values 'C', 'Java', 'JavaScript', 'Python', 'Befunge' }
+        }
+        stages {
+          stage('Build') {
+            steps {
+              script {
+                def lname = LANG.toLowerCase()
+                def df = "images/${lname}/Dockerfile.base"
+                def tag = "whanos-${lname}"
+                sh "docker build -f ${df} -t ${tag} ${WORKSPACE}/.. || true"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

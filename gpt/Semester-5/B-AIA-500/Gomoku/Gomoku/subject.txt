@@ -1,0 +1,99 @@
+B5 - Artificial Intelligence
+
+B-AIA-500
+
+Gomoku
+
+Smart Bots for a Simple Game
+
+3.1.2
+
+Gomoku
+
+binary name: pbrain-gomoku-ai
+
+language: C, C++, python 3 (only standard distribution)
+
+compilation: via Makefile, including re, clean and fclean
+
+• The totality of your source files, except all useless files (binary, temp files, obj
+
+files,...), must be included in your delivery.
+
+• All the bonus files (including a potential specific Makefile) should be in a directory
+
+named bonus.
+
+The goal of this project is to implement a Gomoku Narabe game bot (also called Wuzi Qi, Slope, Darpion or
+Five in a Row), focusing on the performance of its artificial intelligence.
+
+Your bot must be compliant with the communication protocol, but only the mandatory part.
+
+Piskvork is freely available on the Internet, along with some bots.
+Challenge them to evaluate your bot’s strength!
+
+Feel free to implement an algorithm of your choice for your bot (Min-max, Monte-Carlo, Machine Learning
+or other). You will be evaluated on the efficiency of your bot, and on this criterion alone.
+
+1
+
+You may need to develop a rules management algorithm; do not hesitate to enrich your
+board representation and your data structures to optimize this algorithm!
+
+There are some technical constraints you must comply with:
+
+• whatever development language you choose, your program must compile both on Windows (for the
+
+final tournament) and on Linux (for the automated tests) using your makefile
+
+• only standard libraries are allowed. No tensorflow or scikit-learn here
+
+Your program is to be compiled and tested versus other programs automatically
+
+GAME RULES
+
+This is a 2-player game that is played on a 20x20 game board (called goban). We use a very simplified
+version of the game. Every player plays a stone at his/her turn, and the game ends as soon as one has a 5
+stones in a row (vertically, horizontally or diagonaly) - and thus wins.
+
+Watch out! The goban size on Piskvork is 20x20 (and not 19x19) by default. . .
+
+GRAND TOURNAMENT
+
+Your bot will be evaluated based on its results in actual game playing, via a 3-step process:
+
+• play to win
+
+In order to validate the module, your program is intended to understand some winning situations and
+play the right move. We will send you pre-filled board and your programm must make the right move,
+for example if there is a winnig move your program must play it.
+
+• outsmart local bots
+
+Programs are matched against bots of low to medium levels. The aim is to maximize your number of
+victories. Those who accumulate enough victories qualify for the tournament
+
+2
+
+• tournament phase (maybe)
+
+It is a pool with the 16 best bots based on the evaluation on previous steps. Every pair is matched,
+and the best score wins the tournament (length of game breaks ties)
+
+3
+
+TOURNAMENT RULES
+
+During the whole process, the rules are as follows:
+
+• 5 seconds maximum per move,
+
+• 70 MB of memory per bot,
+
+• a forbidden move automatically leads to defeat,
+
+• the use of a forbidden library leads to elimination.
+
+4
+
+

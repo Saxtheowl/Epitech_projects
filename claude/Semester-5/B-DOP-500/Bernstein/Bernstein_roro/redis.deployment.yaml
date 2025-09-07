@@ -1,0 +1,31 @@
+##
+## EPITECH PROJECT, 2025
+## Bernstein
+## File description:
+## Redis deployment configuration
+##
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: default
+  labels:
+    app: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:5.0
+        ports:
+        - containerPort: 6379
+        restartPolicy: Always
+      restartPolicy: Always

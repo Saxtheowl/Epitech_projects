@@ -1,0 +1,204 @@
+---
+- name: Deploy Whanos Infrastructure
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  vars:
+    docker_version: "5:20.10.*"
+    kubectl_version: "1.24.*"
+    jenkins_version: "2.401.*"
+    
+  tasks:
+    - name: Update system packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+        
+    - name: Install common dependencies
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg
+          - lsb-release
+          - software-properties-common
+        state: present
+
+- name: Setup Docker Registry
+  hosts: registry_servers
+  become: yes
+  tasks:
+    - name: Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+        
+    - name: Add Docker repository
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+        state: present
+        
+    - name: Install Docker
+      apt:
+        name: 
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: present
+        
+    - name: Start Docker service
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+        
+    - name: Run Docker Registry
+      docker_container:
+        name: registry
+        image: registry:2
+        state: started
+        restart_policy: always
+        ports:
+          - "5000:5000"
+        volumes:
+          - "/var/lib/registry:/var/lib/registry"
+
+- name: Setup Kubernetes Cluster
+  hosts: whanos_cluster
+  become: yes
+  tasks:
+    - name: Add Kubernetes GPG key
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+        
+    - name: Add Kubernetes repository
+      apt_repository:
+        repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+        state: present
+        
+    - name: Install Kubernetes components
+      apt:
+        name:
+          - kubelet={{ kubectl_version }}
+          - kubeadm={{ kubectl_version }}
+          - kubectl={{ kubectl_version }}
+        state: present
+        
+    - name: Hold Kubernetes packages
+      dpkg_selections:
+        name: "{{ item }}"
+        selection: hold
+      loop:
+        - kubelet
+        - kubeadm  
+        - kubectl
+
+- name: Initialize Kubernetes Master
+  hosts: masters
+  become: yes
+  tasks:
+    - name: Initialize Kubernetes cluster
+      command: kubeadm init --pod-network-cidr=10.244.0.0/16
+      register: kubeadm_init
+      
+    - name: Create .kube directory
+      file:
+        path: /home/{{ ansible_user }}/.kube
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        
+    - name: Copy admin.conf
+      copy:
+        src: /etc/kubernetes/admin.conf
+        dest: /home/{{ ansible_user }}/.kube/config
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        remote_src: yes
+        
+    - name: Install Flannel network plugin
+      command: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+      become_user: "{{ ansible_user }}"
+      
+    - name: Get join command
+      command: kubeadm token create --print-join-command
+      register: join_command
+      
+    - name: Save join command
+      set_fact:
+        kubernetes_join_command: "{{ join_command.stdout }}"
+
+- name: Join Worker Nodes
+  hosts: workers
+  become: yes
+  tasks:
+    - name: Join cluster
+      command: "{{ hostvars[groups['masters'][0]]['kubernetes_join_command'] }}"
+
+- name: Setup Jenkins
+  hosts: jenkins_servers
+  become: yes
+  tasks:
+    - name: Add Jenkins GPG key
+      apt_key:
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+        state: present
+        
+    - name: Add Jenkins repository
+      apt_repository:
+        repo: "deb https://pkg.jenkins.io/debian-stable binary/"
+        state: present
+        
+    - name: Install Java
+      apt:
+        name: openjdk-11-jdk
+        state: present
+        
+    - name: Install Jenkins
+      apt:
+        name: jenkins={{ jenkins_version }}
+        state: present
+        
+    - name: Start Jenkins service
+      systemd:
+        name: jenkins
+        state: started
+        enabled: yes
+        
+    - name: Wait for Jenkins to start
+      wait_for:
+        port: 8080
+        delay: 30
+        
+    - name: Copy Whanos images
+      copy:
+        src: "{{ playbook_dir }}/../images/"
+        dest: /whanos/images/
+        mode: '0755'
+        
+    - name: Copy Whanos scripts
+      copy:
+        src: "{{ playbook_dir }}/../scripts/"
+        dest: /whanos/scripts/
+        mode: '0755'
+        
+    - name: Copy Jenkins configuration
+      copy:
+        src: "{{ playbook_dir }}/../jenkins/jenkins.yml"
+        dest: /var/lib/jenkins/casc.yaml
+        owner: jenkins
+        group: jenkins
+        
+    - name: Install Jenkins Configuration as Code plugin
+      jenkins_plugin:
+        name: configuration-as-code
+        state: present
+        url: http://localhost:8080
+        
+    - name: Restart Jenkins
+      systemd:
+        name: jenkins
+        state: restarted

@@ -1,0 +1,52 @@
+##
+## EPITECH PROJECT, 2025
+## Bernstein
+## File description:
+## Traefik load balancer deployment configuration
+##
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traefik
+  namespace: kube-public
+  labels:
+    app: traefik
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: traefik
+  template:
+    metadata:
+      labels:
+        app: traefik
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - traefik
+            topologyKey: kubernetes.io/hostname
+      serviceAccountName: traefik-ingress-controller
+      containers:
+      - name: traefik
+        image: traefik:2.7
+        args:
+        - --api.dashboard=true
+        - --api.insecure=true
+        - --entrypoints.web.address=:80
+        - --entrypoints.web-admin.address=:8080
+        - --providers.kubernetesingress
+        - --log.level=INFO
+        ports:
+        - name: web
+          containerPort: 80
+        - name: admin
+          containerPort: 8080
+        restartPolicy: Always
+      restartPolicy: Always

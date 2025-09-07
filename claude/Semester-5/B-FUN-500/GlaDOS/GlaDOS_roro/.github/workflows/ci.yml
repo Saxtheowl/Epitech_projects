@@ -1,0 +1,75 @@
+name: GLaDOS CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Haskell Stack
+      uses: haskell/actions/setup@v2
+      with:
+        ghc-version: '8.10.7'
+        stack-version: 'latest'
+        
+    - name: Cache Stack dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.stack
+          .stack-work
+        key: ${{ runner.os }}-stack-${{ hashFiles('**/stack.yaml.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-stack-
+          
+    - name: Install dependencies
+      run: make deps
+      
+    - name: Build project
+      run: make ci-build
+      
+    - name: Run tests
+      run: make ci-test
+      
+    - name: Check code quality
+      run: make check
+
+  build-release:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Haskell Stack
+      uses: haskell/actions/setup@v2
+      with:
+        ghc-version: '8.10.7'
+        stack-version: 'latest'
+        
+    - name: Cache Stack dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.stack
+          .stack-work
+        key: ${{ runner.os }}-stack-${{ hashFiles('**/stack.yaml.lock') }}
+        
+    - name: Build release
+      run: |
+        make deps
+        make build
+        
+    - name: Upload binary
+      uses: actions/upload-artifact@v3
+      with:
+        name: glados-binary
+        path: glados

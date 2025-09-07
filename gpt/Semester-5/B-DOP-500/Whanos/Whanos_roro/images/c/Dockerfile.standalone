@@ -1,0 +1,30 @@
+##
+## EPITECH PROJECT, 2025
+## Whanos_roro
+## File description:
+##   Standalone image for C apps
+##
+
+FROM debian:12-slim AS build
+SHELL ["/bin/bash", "-lc"]
+WORKDIR /app
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+        build-essential ca-certificates make \
+ && rm -rf /var/lib/apt/lists/*
+
+# Build from repository root context
+COPY . /app/
+RUN make \
+ && test -x /app/compiled-app
+
+FROM debian:12-slim
+SHELL ["/bin/bash", "-lc"]
+WORKDIR /app
+
+COPY --from=build /app/compiled-app /app/compiled-app
+RUN chmod +x /app/compiled-app
+
+CMD ["./compiled-app"]
+

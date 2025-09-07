@@ -5,7 +5,8 @@
 ##   Build rules (C++)
 ##
 
-NAME	=	rtype_roro
+SERVER	=	r-type_server
+CLIENT	=	r-type_client
 
 SRC_DIR	=	src
 INC_DIR	=	include
@@ -14,30 +15,32 @@ CRIT_DIR	=	lib/criterion
 CRIT_VER	=	v2.4.2
 CRIT_ARCH	=	linux-x86_64
 
-SRC	=	$(SRC_DIR)/main.cpp
+SRC_SERVER	=	$(SRC_DIR)/server_main.cpp $(SRC_DIR)/net_udp.cpp $(SRC_DIR)/util.cpp
+SRC_CLIENT	=	$(SRC_DIR)/client_main.cpp $(SRC_DIR)/net_udp.cpp $(SRC_DIR)/util.cpp
 
-OBJ	=	$(SRC:.cpp=.o)
+OBJ_SERVER	=	$(SRC_SERVER:.cpp=.o)
+OBJ_CLIENT	=	$(SRC_CLIENT:.cpp=.o)
 
 CXX	=	g++
 CXXFLAGS	=	-std=c++17 -Wall -Wextra -I$(INC_DIR)
 LDFLAGS	=
 
-all: $(NAME)
+all: $(SERVER) $(CLIENT)
 
-$(NAME): $(OBJ)
-	$(CXX) -o $@ $(OBJ) $(LDFLAGS)
-	ln -sf $(NAME) r-type_server
-	ln -sf $(NAME) r-type_client
+$(SERVER): $(OBJ_SERVER)
+	$(CXX) -o $@ $(OBJ_SERVER) $(LDFLAGS)
+
+$(CLIENT): $(OBJ_CLIENT)
+	$(CXX) -o $@ $(OBJ_CLIENT) $(LDFLAGS)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ_SERVER) $(OBJ_CLIENT)
 
 fclean: clean
-	rm -f $(NAME)
-	rm -f r-type_server r-type_client
+	rm -f $(SERVER) $(CLIENT)
 	rm -f unit_tests
 	rm -f *.gcno *.gcda *.gcov
 

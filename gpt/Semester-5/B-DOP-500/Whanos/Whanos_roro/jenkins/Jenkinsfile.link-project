@@ -1,0 +1,47 @@
+//
+// EPITECH PROJECT, 2025
+// Whanos_roro
+// File description:
+//   Jenkins pipeline to link a project to Whanos
+//
+
+pipeline {
+  agent any
+  parameters {
+    string(name: 'GIT_URL', defaultValue: '', description: 'Repository URL')
+    string(name: 'BRANCH', defaultValue: 'main', description: 'Default branch')
+    string(name: 'CREDENTIALS_ID', defaultValue: '', description: 'Jenkins cred id (optional)')
+    string(name: 'IMAGE_TAG', defaultValue: 'app:latest', description: 'Tag for built image (can include registry)')
+    booleanParam(name: 'PUSH', defaultValue: true, description: 'Push the built image')
+  }
+  triggers {
+    pollSCM('* * * * *')
+  }
+  stages {
+    stage('Checkout') {
+      steps {
+        script {
+          def scmConf = [$class: 'GitSCM', branches: [[name: params.BRANCH]],
+            userRemoteConfigs: [[url: params.GIT_URL, credentialsId: params.CREDENTIALS_ID]]]
+          checkout(scmConf)
+        }
+      }
+    }
+    stage('Detect & Build') {
+      steps {
+        sh 'python3 ${WORKSPACE}/../Whanos_roro/src/whanos_build.py ${WORKSPACE} ${IMAGE_TAG} ${PUSH ? "--push" : ""} || true'
+      }
+    }
+    stage('Deploy (if whanos.yml)') {
+      when { expression { fileExists('whanos.yml') } }
+      steps {
+        sh '''python3 ${WORKSPACE}/../Whanos_roro/src/whanos_k8s_gen.py whanos.yml ${IMAGE_TAG} > k8s_out.yaml || true
+if command -v kubectl >/dev/null 2>&1; then
+  kubectl apply -f k8s_out.yaml || true
+else
+  echo "kubectl not found, skipping apply"
+fi'''
+      }
+    }
+  }
+}

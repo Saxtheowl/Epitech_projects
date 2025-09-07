@@ -1,0 +1,68 @@
+#
+# EPITECH PROJECT, 2025
+# Bernstein_roro
+# File description:
+#   Poll service (Flask) + Ingress
+#
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poll
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: poll
+  template:
+    metadata:
+      labels:
+        app: poll
+    spec:
+      containers:
+      - name: poll
+        image: epitechcontent/t-dop-600-poll:k8s
+        env:
+        - name: REDIS_HOST
+          value: "redis"
+        resources:
+          limits:
+            memory: "128Mi"
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: poll
+  namespace: default
+spec:
+  selector:
+    app: poll
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: poll
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: poll.dop.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: poll
+            port:
+              number: 80
+

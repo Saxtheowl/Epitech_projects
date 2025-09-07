@@ -1,0 +1,13 @@
+##
+## EPITECH PROJECT, 2025
+## Whanos_roro
+## File description:
+##   Base image for Java
+##
+
+FROM eclipse-temurin:17-jre
+SHELL ["/bin/bash", "-lc"]
+WORKDIR /app
+
+CMD ["java", "-jar", "app.jar"]
+

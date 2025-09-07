@@ -1,0 +1,16 @@
+##
+## EPITECH PROJECT, 2025
+## Whanos_roro
+## File description:
+##   Base image for JavaScript (Node.js)
+##
+
+FROM node:14.17.5-bullseye-slim
+SHELL ["/bin/bash", "-lc"]
+WORKDIR /app
+
+# No app copied; intended as base for custom images
+ENV NODE_ENV=production
+
+CMD ["node", "."]
+

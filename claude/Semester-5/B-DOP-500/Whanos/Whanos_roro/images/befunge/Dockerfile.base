@@ -1,0 +1,14 @@
+FROM ubuntu:20.04
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    gcc \
+    make \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN wget -O /usr/local/bin/bef https://github.com/catseye/Befunge-93/releases/download/rel_2_25_2018_1120/bef-linux64 \
+    && chmod +x /usr/local/bin/bef
+
+CMD ["/bin/bash"]

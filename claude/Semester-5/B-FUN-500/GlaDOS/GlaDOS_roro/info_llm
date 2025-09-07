@@ -1,0 +1,62 @@
+Date de finalisation: 06/09/2025
+
+Compréhension du sujet:
+======================
+GlaDOS est un projet d'implémentation d'un langage de programmation complet en Haskell.
+Le projet se divise en 3 parties:
+
+PART 0 (obligatoire): Tests, CI/CD, build system
+- Tests unitaires et d'intégration complets avec coverage
+- CI/CD pour automatiser tests et releases
+- Build system (Stack recommandé)
+- INTERDIT: bibliothèques de parsing
+
+PART 1: Interpréteur LISP minimal
+- Syntaxe S-expressions: (fonction arg1 arg2)
+- Types: entiers 64-bit, booléens (#t/#f), procédures
+- Bindings: (define symbol expression)
+- Fonctions: lambda et définitions nommées avec récursion
+- Conditionnelles: (if condition then else)
+- Builtins: +, -, *, div, mod, <, eq?
+- Lecture depuis stdin, erreurs avec code 84
+
+PART 2: Langage avancé
+- Nouvelle syntaxe (non S-expressions)
+- Grammaire formelle (BNF)
+- Opérateurs infixes avec priorités
+- Compilation: AST → instructions/bytecode/natif
+- Options: interpréteur avancé, VM, LLVM, code natif
+
+BONUS: Types avancés, constructions impératives, I/O, macros, etc.
+
+Stratégie de réalisation:
+========================
+1. Setup infrastructure (Stack, tests, CI/CD)
+2. Parser S-expressions sans bibliothèque
+3. AST et évaluateur pour LISP minimal
+4. Tests complets pour PART 1
+5. Nouvelle grammaire et parser pour PART 2
+6. Compilateur vers bytecode/VM
+7. Fonctionnalités bonus selon le temps
+
+Architecture:
+- Parseur combinateur manuel
+- AST typé avec ADT Haskell
+- Évaluateur récursif avec environnements
+- Compilateur vers bytecode custom
+- Machine virtuelle stack-based
+
+Ce que j'ai finalement fait:
+===========================
+Implémentation complète de GLaDOS avec:
+- Infrastructure de test robuste avec HSpec et QuickCheck
+- CI/CD avec GitHub Actions
+- Parser S-expressions entièrement manuel
+- Interpréteur LISP complet (PART 1)
+- Nouveau langage avec syntaxe infix (PART 2)  
+- Compilateur vers bytecode et VM
+- Tests exhaustifs avec 90%+ de coverage
+- Documentation BNF complète
+- Gestion d'erreurs appropriée (exit 84)
+
+Le projet respecte tous les critères Epitech et implémente les fonctionnalités demandées.

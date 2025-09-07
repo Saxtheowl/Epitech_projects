@@ -1,0 +1,32 @@
+all:
+  children:
+    whanos_cluster:
+      children:
+        masters:
+          hosts:
+            master-1:
+              ansible_host: "{{ master_1_ip | default('10.0.0.10') }}"
+              ansible_user: "{{ ansible_user | default('ubuntu') }}"
+              ansible_ssh_private_key_file: "{{ ssh_key_path }}"
+        workers:
+          hosts:
+            worker-1:
+              ansible_host: "{{ worker_1_ip | default('10.0.0.11') }}"
+              ansible_user: "{{ ansible_user | default('ubuntu') }}"
+              ansible_ssh_private_key_file: "{{ ssh_key_path }}"
+            worker-2:
+              ansible_host: "{{ worker_2_ip | default('10.0.0.12') }}"
+              ansible_user: "{{ ansible_user | default('ubuntu') }}"
+              ansible_ssh_private_key_file: "{{ ssh_key_path }}"
+    jenkins_servers:
+      hosts:
+        jenkins:
+          ansible_host: "{{ jenkins_ip | default('10.0.0.20') }}"
+          ansible_user: "{{ ansible_user | default('ubuntu') }}"
+          ansible_ssh_private_key_file: "{{ ssh_key_path }}"
+    registry_servers:
+      hosts:
+        registry:
+          ansible_host: "{{ registry_ip | default('10.0.0.30') }}"
+          ansible_user: "{{ ansible_user | default('ubuntu') }}"
+          ansible_ssh_private_key_file: "{{ ssh_key_path }}"

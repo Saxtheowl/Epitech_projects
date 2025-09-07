@@ -1,0 +1,21 @@
+##
+## EPITECH PROJECT, 2025
+## Whanos_roro
+## File description:
+##   Ansible inventory (sample)
+##
+
+[jenkins]
+jenkins1 ansible_host=YOUR_JENKINS_IP
+
+[registry]
+registry1 ansible_host=YOUR_REGISTRY_IP
+
+[k8s]
+node1 ansible_host=K8S_NODE1_IP
+node2 ansible_host=K8S_NODE2_IP
+
+[all:vars]
+ansible_user=YOUR_USER
+ansible_become=true
+

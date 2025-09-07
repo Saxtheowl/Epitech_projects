@@ -1,4 +1,4 @@
-Date: 2025-09-02
+Date: 2025-09-06
 
 Compréhension du sujet:
 - Whanos: outillage de déploiement/CI orchestré.
@@ -8,10 +8,78 @@ Stratégie:
 
 Réalisé:
 - Squelette avec Makefile standard.
+- Ajout d'un détecteur de langage (src/whanos_detect.py) suivant le
+  PDF: Java (app/pom.xml), JavaScript (package.json racine), Python
+  (requirements.txt racine), Befunge (app/main.bf), C (Makefile racine).
+  Sortie JSON: {language, base_image, reason}. Gestion du cas ambigu.
+- Ajout des images Docker conformes à la section "Delivery repository":
+  images/{c,java,javascript,python,befunge}/Dockerfile.{base,standalone}.
+  - base: image officielle, WORKDIR /app, CMD du langage.
+  - standalone: construit depuis le repo (C: make→compiled-app,
+    Java: mvn package depuis app/, JS: npm ci, Python: pip install,
+    Befunge: runner minimal Python), copie l'exécutable et nettoie.
+- Générateur K8s: `src/whanos_k8s_gen.py` → lit `whanos.yml` (replicas/ports),
+  génère Deployment + Service NodePort accessibles de l'extérieur.
+  Support ressources (limits/requests cpu/memory) via `deployment.resources`,
+  variables d'environnement via `deployment.env`, `deployment.namespace`,
+  type de service via `deployment.service.type` (NodePort|ClusterIP|LoadBalancer)
+  et `deployment.ingress.hosts` (génération d'un Ingress Traefik).
+  Support des volumes via `deployment.volumes` (PVC + volumeMounts).
+  Option CLI `--name` pour nommer explicitement les ressources K8s.
+- Jenkins (livrables):
+  - `jenkins/Jenkinsfile.base` (job base images par LANG)
+  - `jenkins/Jenkinsfile.build-all` (matrix: build toutes les images de base)
+  - `jenkins/Jenkinsfile.link-project` (poll SCM/checkout/build/deploy si whanos.yml, param `PUSH` pour `docker push`)
+  - `jenkins/casc.yaml` (JCasC optionnelle: user Admin/admin, no signup)
+  - Job DSL: `jenkins/jobs/base_images.groovy`, `jenkins/jobs/link_project.groovy`
+  - `docs/README.md` (récapitulatif d'usage)
+  - `ansible/` (squelette inventaire+playbook pour provision Docker/Jenkins/registry/kubectl)
 
 Tests simples:
 - cd B-DOP-500/Whanos/Whanos_roro
 - make all
   Attendu: affiche "Nothing to build for Whanos_roro"
+- ./src/whanos_detect.py /tmp/repo_js  (préparer un repo de test)
+  Préparation:
+    mkdir -p /tmp/repo_js && echo '{}' > /tmp/repo_js/package.json
+  Attendu: {"language":"JavaScript","base_image":"whanos-javascript",...}
+- ./src/whanos_detect.py /tmp/repo_py
+  Préparation:
+    mkdir -p /tmp/repo_py && echo 'requests' > /tmp/repo_py/requirements.txt
+  Attendu: {"language":"Python","base_image":"whanos-python",...}
+- ./src/whanos_detect.py /tmp/repo_java
+  Préparation:
+    mkdir -p /tmp/repo_java/app && echo '<project/>' > /tmp/repo_java/app/pom.xml
+  Attendu: {"language":"Java","base_image":"whanos-java",...}
+- ./src/whanos_detect.py /tmp/repo_c
+  Préparation:
+    mkdir -p /tmp/repo_c && echo 'all:' > /tmp/repo_c/Makefile
+  Attendu: {"language":"C","base_image":"whanos-c",...}
+- ./src/whanos_detect.py /tmp/repo_bf
+  Préparation:
+    mkdir -p /tmp/repo_bf/app && echo '>v\n ^' > /tmp/repo_bf/app/main.bf
+  Attendu: {"language":"Befunge","base_image":"whanos-befunge",...}
 - make tests_run
   Attendu: Criterion affiche "Passing: 1"
+  
+  Build images (exemples) sans exécution réseau:
+  - C base:
+    docker build -f images/c/Dockerfile.base -t whanos-c .
+  - C standalone (dans un repo C whanos-compatible):
+    docker build -f images/c/Dockerfile.standalone -t app-c .
+  - Java standalone (repo avec app/pom.xml):
+    docker build -f images/java/Dockerfile.standalone -t app-java .
+  - JS standalone:
+    docker build -f images/javascript/Dockerfile.standalone -t app-js .
+  - Python standalone:
+    docker build -f images/python/Dockerfile.standalone -t app-py .
+  - Befunge standalone:
+    docker build -f images/befunge/Dockerfile.standalone -t app-bf .
+
+  Jenkins (démo locale):
+  - Importer `jenkins/Jenkinsfile.base` et lancer LANG=C
+  - Importer `jenkins/Jenkinsfile.link-project` et configurer GIT_URL/BRANCH
+    puis lancer; vérifie logs (build et application de `k8s_out.yaml`).
+  Ansible (squelette non destructif):
+  - Copier `ansible/inventory.sample` → `ansible/inventory` et adapter
+  - `ansible-playbook -i ansible/inventory ansible/playbook.yml` (idempotent)

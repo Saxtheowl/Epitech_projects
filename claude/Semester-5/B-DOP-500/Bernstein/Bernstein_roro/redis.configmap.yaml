@@ -1,0 +1,14 @@
+##
+## EPITECH PROJECT, 2025
+## Bernstein
+## File description:
+## Redis configuration map
+##
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-config
+  namespace: default
+data:
+  REDIS_HOST: redis

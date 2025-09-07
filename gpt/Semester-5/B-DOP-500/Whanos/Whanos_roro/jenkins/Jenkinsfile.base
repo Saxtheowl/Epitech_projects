@@ -1,0 +1,28 @@
+//
+// EPITECH PROJECT, 2025
+// Whanos_roro
+// File description:
+//   Jenkins pipeline to build a base image for a given language
+//
+
+pipeline {
+  agent any
+  parameters {
+    choice(name: 'LANG', choices: ['C','Java','JavaScript','Python','Befunge'], description: 'Language')
+    string(name: 'IMAGE_TAG', defaultValue: '', description: 'Override tag (defaults to whanos-<lang>)')
+  }
+  stages {
+    stage('Build') {
+      steps {
+        script {
+          def lname = params.LANG.toLowerCase()
+          def df = "images/${lname}/Dockerfile.base"
+          def tag = params.IMAGE_TAG?.trim()
+          if (!tag) { tag = "whanos-${lname}" }
+          sh "docker build -f ${df} -t ${tag} ${WORKSPACE}/.. || true"
+        }
+      }
+    }
+  }
+}
+

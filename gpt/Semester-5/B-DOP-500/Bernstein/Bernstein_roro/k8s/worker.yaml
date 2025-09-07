@@ -1,0 +1,42 @@
+#
+# EPITECH PROJECT, 2025
+# Bernstein_roro
+# File description:
+#   Worker service (Java)
+#
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      containers:
+      - name: worker
+        image: epitechcontent/t-dop-600-worker:k8s
+        resources:
+          limits:
+            memory: "256Mi"
+        env:
+        - name: REDIS_HOST
+          value: "redis"
+        - name: POSTGRES_HOST
+          value: "postgres"
+        - name: POSTGRES_PORT
+          value: "5432"
+        - name: POSTGRES_DB
+          value: "votes"
+        - name: POSTGRES_USER
+          value: "user"
+        - name: POSTGRES_PASSWORD
+          value: "password"
+

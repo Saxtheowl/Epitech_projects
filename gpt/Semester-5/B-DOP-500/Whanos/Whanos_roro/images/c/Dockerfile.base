@@ -1,0 +1,21 @@
+##
+## EPITECH PROJECT, 2025
+## Whanos_roro
+## File description:
+##   Base image for C
+##
+
+FROM debian:12-slim
+SHELL ["/bin/bash", "-lc"]
+WORKDIR /app
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+        build-essential ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+# No app here; used as base for custom Dockerfile
+ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+CMD ["./compiled-app"]
+

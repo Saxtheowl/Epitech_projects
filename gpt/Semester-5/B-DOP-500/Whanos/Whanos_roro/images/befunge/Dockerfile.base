@@ -1,0 +1,16 @@
+##
+## EPITECH PROJECT, 2025
+## Whanos_roro
+## File description:
+##   Base image for Befunge (using Python runner)
+##
+
+FROM python:3.10-slim
+SHELL ["/bin/bash", "-lc"]
+WORKDIR /app
+
+COPY --chown=root:root befunge_runner.py /usr/local/bin/befunge_runner.py
+RUN chmod +x /usr/local/bin/befunge_runner.py
+
+CMD ["python", "/usr/local/bin/befunge_runner.py", "app/main.bf"]
+

@@ -1,0 +1,64 @@
+##
+## EPITECH PROJECT, 2025
+## Whanos_roro
+## File description:
+##   Ansible playbook (skeleton)
+##
+
+---
+- name: Provision Docker on all hosts
+  hosts: all
+  become: true
+  tasks:
+    - name: Ensure packages present
+      package:
+        name: [curl, ca-certificates]
+        state: present
+
+- name: Setup registry
+  hosts: registry
+  become: true
+  tasks:
+    - name: Run docker registry container
+      community.docker.docker_container:
+        name: registry
+        image: registry:2
+        state: started
+        restart_policy: always
+        published_ports:
+          - "5000:5000"
+
+- name: Setup Jenkins
+  hosts: jenkins
+  become: true
+  vars:
+    jenkins_home: /var/lib/jenkins
+  tasks:
+    - name: Create Jenkins home
+      file:
+        path: "{{ jenkins_home }}"
+        state: directory
+        owner: jenkins
+        group: jenkins
+        mode: '0755'
+    - name: Place JCasC file
+      copy:
+        src: ../jenkins/casc.yaml
+        dest: "{{ jenkins_home }}/casc.yaml"
+        owner: jenkins
+        group: jenkins
+        mode: '0644'
+      when: ansible_facts is defined
+    - name: Note
+      debug:
+        msg: "Install Jenkins via your preferred method; point JCasC to casc.yaml"
+
+- name: Setup K8s tooling
+  hosts: k8s
+  become: true
+  tasks:
+    - name: Ensure kubectl present
+      package:
+        name: kubectl
+        state: present
+

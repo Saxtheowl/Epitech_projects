@@ -1,0 +1,20 @@
+##
+## EPITECH PROJECT, 2025
+## Whanos_roro
+## File description:
+##   Standalone image for JavaScript apps
+##
+
+FROM node:14.17.5-bullseye-slim
+SHELL ["/bin/bash", "-lc"]
+WORKDIR /app
+
+# Install deps
+COPY package*.json /app/
+RUN if [ -f package.json ]; then npm ci --only=production; fi
+
+# Copy sources
+COPY . /app/
+
+CMD ["node", "."]
+

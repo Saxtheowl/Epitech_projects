@@ -1,0 +1,70 @@
+BERNSTEIN - EPITECH Project Implementation
+==========================================
+
+PROJET: Bernstein (Kubernetes Container Orchestration)
+STUDENT: roro
+DATE: 2025-01-08
+
+DESCRIPTION:
+Kubernetes orchestration project deploying a web poll application
+with microservices architecture using containers and Traefik load balancer.
+
+ARCHITECTURE:
+- 5-component voting application (Poll, Redis, Worker, PostgreSQL, Result)
+- Kubernetes deployment with 1 master + 2 worker nodes
+- Traefik reverse proxy and load balancer
+- cAdvisor monitoring tool for container metrics
+- ConfigMaps and Secrets for configuration management
+
+SERVICES DEPLOYED:
+1. **Databases:**
+   - Redis (queue): redis:5.0, port 6379, default namespace
+   - PostgreSQL (storage): postgres:12, port 5432, persistent volume
+
+2. **Application Services:**
+   - Poll (Flask): epitechcontent/t-dop-600-poll:k8s, 2 replicas, 128M limit
+   - Worker (Java): epitechcontent/t-dop-600-worker:k8s, 1 replica, 256M limit  
+   - Result (Node.js): epitechcontent/t-dop-600-result:k8s, 2 replicas, 128M limit
+
+3. **Infrastructure:**
+   - Traefik: traefik:2.7, 2 replicas, kube-public namespace
+   - cAdvisor: google/cadvisor:latest, DaemonSet on all nodes
+
+NETWORK CONFIGURATION:
+- Traefik routes: poll.dop.io:30021 → Poll, result.dop.io:30021 → Result
+- Admin dashboard: localhost:30042 (Traefik UI)
+- High availability: replicated services on different nodes
+
+KUBERNETES FEATURES:
+✓ ConfigMaps for common environment variables
+✓ Secrets for PostgreSQL credentials (POSTGRES_USER, POSTGRES_PASSWORD)
+✓ Persistent Volumes for database storage
+✓ RBAC authorization for Traefik API access
+✓ Ingress routing with hostname-based rules
+✓ DaemonSet scheduling for monitoring
+
+TECHNICAL STACK:
+- Container Orchestration: Kubernetes
+- Load Balancer: Traefik 2.7
+- Monitoring: Google cAdvisor
+- Frontend: Flask (Python) + Node.js
+- Backend: Java Worker
+- Databases: Redis + PostgreSQL
+- Networking: Ingress + Services + NodePort
+
+DEPLOYMENT FILES:
+- cadvisor.daemonset.yaml
+- postgres.{secret,configmap,volume,deployment,service}.yaml
+- redis.{configmap,deployment,service}.yaml  
+- {poll,worker,result}.deployment.yaml
+- {poll,result}.{service,ingress}.yaml
+- traefik.{rbac,deployment,service}.yaml
+
+ACCESS URLS:
+- Poll Application: http://poll.dop.io:30021
+- Results Dashboard: http://result.dop.io:30021
+- Traefik Dashboard: http://localhost:30042
+
+STATUS: Complete Kubernetes orchestration implementation
+TESTING: kubectl apply -f *.yaml (in deployment order)
+VALIDATION: Automated tests via configuration file analysis

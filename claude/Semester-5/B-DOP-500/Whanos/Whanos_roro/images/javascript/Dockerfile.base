@@ -1,0 +1,5 @@
+FROM node:14.17.5-slim
+
+WORKDIR /app
+
+CMD ["/bin/bash"]

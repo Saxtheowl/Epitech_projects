@@ -74,7 +74,8 @@ static int cmd_board(gomoku_t *g)
 
 static int cmd_about(void)
 {
-    printf("name=\"gomoku_roro\", version=\"1.0\", author=\"roro\", country=\"FR\"\n");
+    printf("name=\"pbrain-gomoku-ai\", version=\"1.0\", ");
+    printf("author=\"roro\", country=\"FR\"\n");
     return 0;
 }
 
@@ -94,17 +95,8 @@ static int cmd_takeback(gomoku_t *g, const char *arg)
     return 0;
 }
 
-int handle_line(gomoku_t *g, const char *line)
+static int do_dispatch(gomoku_t *g, const char *cmd, const char *arg)
 {
-    char cmd[32];
-    const char *arg;
-
-    line = str_trim((char *)line);
-    if (sscanf(line, "%31s", cmd) != 1)
-        return 0;
-    arg = line + strlen(cmd);
-    while (*arg == ' ')
-        arg++;
     if (strcmp(cmd, "START") == 0)
         return cmd_start(g, arg);
     if (strcmp(cmd, "TURN") == 0)
@@ -119,9 +111,30 @@ int handle_line(gomoku_t *g, const char *line)
         return 0;
     if (strcmp(cmd, "TAKEBACK") == 0)
         return cmd_takeback(g, arg);
+    if (strcmp(cmd, "RESTART") == 0) {
+        board_clear(g);
+        printf("OK\n");
+        return 0;
+    }
     if (strcmp(cmd, "END") == 0)
         return 1;
-    printf("UNKNOWN\n");
-    return 0;
+    return -1;
 }
 
+int handle_line(gomoku_t *g, const char *line)
+{
+    char cmd[32];
+    const char *arg;
+    int r;
+
+    line = str_trim((char *)line);
+    if (sscanf(line, "%31s", cmd) != 1)
+        return 0;
+    arg = line + strlen(cmd);
+    while (*arg == ' ')
+        arg++;
+    r = do_dispatch(g, cmd, arg);
+    if (r == -1)
+        printf("UNKNOWN\n");
+    return r < 0 ? 0 : r;
+}

@@ -1,0 +1,26 @@
+##
+## EPITECH PROJECT, 2025
+## Whanos_roro
+## File description:
+##   Standalone image for Java apps
+##
+
+FROM maven:3.9.6-eclipse-temurin-17 AS build
+SHELL ["/bin/bash", "-lc"]
+WORKDIR /app
+
+# Build using pom.xml in app/
+COPY app/pom.xml /app/app/pom.xml
+RUN mvn -B -f /app/app/pom.xml -q -e -DskipTests dependency:resolve \
+    dependency:resolve-plugins
+COPY app /app/app
+RUN mvn -B -f /app/app/pom.xml -q -e -DskipTests package
+
+FROM eclipse-temurin:17-jre
+SHELL ["/bin/bash", "-lc"]
+WORKDIR /app
+
+COPY --from=build /app/app/target/*.jar /app/app.jar
+
+CMD ["java", "-jar", "app.jar"]
+

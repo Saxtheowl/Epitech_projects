@@ -10,10 +10,13 @@ Stratégie:
 - Étape 3: implémentation incrémentale (réseau UDP/TCP selon sujet, ECS minimale).
 
 Réalisé (cette passe):
-- Squelette C++ conforme: Makefile (all/clean/fclean/re/tests_run), include/src/tests,
-  binaire placeholder rtype_roro avec option -h.
-- Test Criterion minimal (compilable en C++).
- - Symlinks de conformité PDF: r-type_server, r-type_client -> rtype_roro.
+- Deux binaires séparés: r-type_server et r-type_client.
+- Réseau minimal UDP: serveur echo un datagramme, client envoie et affiche la réponse.
+- Réseau minimal UDP: serveur non-bloquant (select) avec mini-protocole PING/PONG,
+  ECHO <msg>, JOIN <name>→JOINED 1, QUIT pour arrêter le serveur.
+  MOVE <id> <dx> <dy> pour définir la vitesse d’un joueur,
+  STATE <id>? pour interroger sa position (entiers).
+- Makefile mis à jour (build séparé server/client), tests Criterion minimal conservé.
 
 Remarques:
 - L’implémentation complète (réseau/ECS/rendu) n’est pas faite ici. Étapes suivantes
@@ -22,12 +25,23 @@ Remarques:
 Tests simples:
 - cd B-CPP-500/Rtype/Rtype_roro
 - make re
-  Attendu: compilation OK (binaire ./rtype_roro créé)
-- ./rtype_roro -h; echo $?
-  Attendu: affiche "USAGE" et code 0
-- ./rtype_roro; echo $?
-  Attendu: affiche l’usage et code 84 (placeholder)
-- ./r-type_server -h; ./r-type_client -h
-  Attendu: mêmes sorties (symlinks vers rtype_roro)
+  Attendu: compilation OK (binaires ./r-type_server et ./r-type_client créés)
+- ./r-type_server -h; echo $?
+  Attendu: affiche USAGE et code 0
+- ./r-type_client -h; echo $?
+  Attendu: affiche USAGE et code 0
+- (./r-type_server 12345 &); sleep 0.2; ./r-type_client 127.0.0.1 12345 hello
+  Attendu: affiche "hello"
+- (./r-type_server 12346 &); sleep 0.2; ./r-type_client 127.0.0.1 12346 PING
+  Attendu: affiche "PONG"
+- (./r-type_server 12347 &); sleep 0.2; ./r-type_client 127.0.0.1 12347 "JOIN bob"
+  Attendu: affiche "JOINED 1"
+- (./r-type_server 12349 &); sleep 0.2; id=$(./r-type_client 127.0.0.1 12349 "JOIN a"|awk '{print $2}'); \
+  ./r-type_client 127.0.0.1 12349 "STATE ${id}?"; \
+  ./r-type_client 127.0.0.1 12349 "MOVE ${id} 1 0"; sleep 1.2; \
+  ./r-type_client 127.0.0.1 12349 "STATE ${id}?"
+  Attendu: affiche d’abord "STATE 0 0", puis "OK", puis "STATE 1 0"
+- (./r-type_server 12348 &); sleep 0.2; ./r-type_client 127.0.0.1 12348 QUIT
+  Attendu: affiche "QUIT" et le serveur se termine
 - make tests_run
   Attendu: Criterion affiche "Passing: 1"

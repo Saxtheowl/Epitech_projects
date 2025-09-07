@@ -1,0 +1,22 @@
+##
+## EPITECH PROJECT, 2025
+## Whanos_roro
+## File description:
+##   Jenkins Configuration as Code (sample)
+##
+
+jenkins:
+  systemMessage: "Whanos Jenkins (sample JCasC)"
+  numExecutors: 2
+  mode: NORMAL
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          name: "Admin"
+          password: "admin"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+

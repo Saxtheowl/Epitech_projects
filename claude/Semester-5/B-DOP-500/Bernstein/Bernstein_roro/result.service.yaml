@@ -1,0 +1,22 @@
+##
+## EPITECH PROJECT, 2025
+## Bernstein
+## File description:
+## Result service configuration
+##
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: result
+  namespace: default
+  labels:
+    app: result
+spec:
+  selector:
+    app: result
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  type: ClusterIP

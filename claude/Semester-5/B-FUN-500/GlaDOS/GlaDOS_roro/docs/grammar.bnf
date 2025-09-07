@@ -1,0 +1,51 @@
+/*
+** EPITECH PROJECT, 2025
+** GLaDOS
+** File description:
+** BNF Grammar for GLaDOS LISP language
+*/
+
+/* GLaDOS LISP Grammar in Extended BNF */
+
+<program>       ::= <expression>*
+
+<expression>    ::= <atom>
+                  | <number>  
+                  | <list>
+
+<list>          ::= "(" <expression>* ")"
+
+<atom>          ::= <boolean>
+                  | <symbol>
+
+<boolean>       ::= "#t" | "#f"
+
+<symbol>        ::= <symbol_start> <symbol_char>*
+
+<symbol_start>  ::= [a-zA-Z] | "+" | "-" | "*" | "/" | "<" | ">" | "=" | "?" | "!" | "#"
+
+<symbol_char>   ::= <symbol_start> | [0-9]
+
+<number>        ::= <sign>? <digit>+
+
+<sign>          ::= "+" | "-"
+
+<digit>         ::= [0-9]
+
+<whitespace>    ::= " " | "\t" | "\n" | "\r"
+
+/* Special Forms */
+<define>        ::= "(" "define" <symbol> <expression> ")"
+                  | "(" "define" "(" <symbol> <symbol>* ")" <expression> ")"
+
+<lambda>        ::= "(" "lambda" "(" <symbol>* ")" <expression> ")"
+
+<if>            ::= "(" "if" <expression> <expression> <expression> ")"
+
+<application>   ::= "(" <expression> <expression>* ")"
+
+/* Built-in Functions */
+<builtin>       ::= "+" | "-" | "*" | "div" | "mod" | "<" | "eq?"
+
+/* Comments (ignored) */
+<comment>       ::= ";" [^\n]* "\n"

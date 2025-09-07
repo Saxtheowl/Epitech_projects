@@ -8,7 +8,7 @@
 #ifndef RTYPE_HPP
 #define RTYPE_HPP
 
-int rtype_main(int ac, char **av);
+int rtype_server_main(int ac, char **av);
+int rtype_client_main(int ac, char **av);
 
 #endif /* RTYPE_HPP */
-

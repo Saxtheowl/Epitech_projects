@@ -1,4 +1,4 @@
-Date: 2025-09-02
+Date: 2025-09-06
 
 Compréhension du sujet:
 - Jeu Gomoku (Five-in-a-Row) avec IA compétitive sur plateau 19x19.
@@ -25,6 +25,16 @@ Remarques:
 - L’IA complète n’est pas implémentée dans cette passe. Prochaines étapes: parser
   du protocole et moteur de recherche, conformément au PDF.
 
+Vérifications vs PDF:
+- Binaire conforme: nom exigé "pbrain-gomoku-ai" (lien symbolique vers
+  gomoku_roro), Makefile all/clean/fclean/re.
+- Plateau par défaut 20x20.
+- Respect du protocole (partie obligatoire): START n, BEGIN, TURN x,y,
+  BOARD ... DONE, ABOUT, END, RESTART (RESET du plateau), INFO (ignoré),
+  erreurs paramètre -> "ERROR".
+- Scénarios "play to win": coup gagnant immédiat joué, blocage coup
+  gagnant adverse immédiat.
+
 Tests simples:
 - cd B-AIA-500/Gomoku/Gomoku_roro
 - make re
@@ -35,6 +45,8 @@ Tests simples:
   Attendu: "OK" puis un coup légal différent (ex: "1,1")
 - printf "START 5\nBOARD\n2,2,2\nDONE\nEND\n" | ./gomoku_roro
   Attendu: "OK" puis un coup légal
+- printf "START 5\nTURN 2,2\nRESTART\nBEGIN\nEND\n" | ./gomoku_roro
+  Attendu: "OK" puis un coup à TURN, "OK" au RESTART, puis un nouveau coup après BEGIN
 - Test "coup gagnant":
   printf "START 10\nBOARD\n0,2,1\n1,2,1\n2,2,1\n3,2,1\nDONE\nEND\n" | ./gomoku_roro
   Attendu: "OK" puis "4,2"

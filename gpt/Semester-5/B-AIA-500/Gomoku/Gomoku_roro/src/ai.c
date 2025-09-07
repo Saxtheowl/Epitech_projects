@@ -67,27 +67,34 @@ static int try_center(gomoku_t *g, int *ox, int *oy)
     return 1;
 }
 
+static int pick_if_free(gomoku_t *g, int x, int y, int *ox, int *oy)
+{
+    if (!board_in_bounds(g, x, y))
+        return 1;
+    if (board_get(g, x, y) != 0)
+        return 1;
+    *ox = x;
+    *oy = y;
+    return 0;
+}
+
 static int try_spiral(gomoku_t *g, int *ox, int *oy)
 {
-    int c, r, x, y, d;
+    int c;
+    int r;
+    int d;
 
     c = g->size / 2;
     for (r = 0; r < g->size; ++r) {
         for (d = -r; d <= r; ++d) {
-            x = c + d;
-            y = c - r;
-            if (board_in_bounds(g, x, y) && board_get(g, x, y) == 0)
-                { *ox = x; *oy = y; return 0; }
-            y = c + r;
-            if (board_in_bounds(g, x, y) && board_get(g, x, y) == 0)
-                { *ox = x; *oy = y; return 0; }
-            x = c - r;
-            y = c + d;
-            if (board_in_bounds(g, x, y) && board_get(g, x, y) == 0)
-                { *ox = x; *oy = y; return 0; }
-            x = c + r;
-            if (board_in_bounds(g, x, y) && board_get(g, x, y) == 0)
-                { *ox = x; *oy = y; return 0; }
+            if (pick_if_free(g, c + d, c - r, ox, oy) == 0)
+                return 0;
+            if (pick_if_free(g, c + d, c + r, ox, oy) == 0)
+                return 0;
+            if (pick_if_free(g, c - r, c + d, ox, oy) == 0)
+                return 0;
+            if (pick_if_free(g, c + r, c + d, ox, oy) == 0)
+                return 0;
         }
     }
     return 1;
