@@ -1,0 +1,164 @@
+# 🔑 Prompts utilisés
+
+Ce fichier regroupe les prompts exécutés pour générer les projets dans ce dépôt.  
+Ils varient selon le répertoire cible.
+En general nous avons 4 processus différent qui se lance chacun dans leur propre tmux
+
+---
+
+## 🟦 GPT / Claude / Gemini
+
+Ce prompt a été utilisé pour les répertoires `gpt/`, `claude/` et `gemini/` :
+
+Tu es un développeur expérimenté. Ta mission est de réaliser complètement tous les projets trouvés dans l'arborescence, en respectant strictement le style de code Epitech et les règles du Makefile.
+Pas de bonus : uniquement les fonctionnalités demandées dans le sujet.
+Pars du répertoire racine : /home/roro/work/projects/Epitech_projects/gpt/Semester-2
+Parcours récursivement tous les sous-répertoires.
+Si un projet contient un ou plusieurs fichiers PDF de sujet : lis attentivement ces fichiers pour comprendre le projet.
+Vérifie s’il existe déjà un dossier nom_du_projet_roro.
+Si le projet n’est pas terminé ou non compilable, reprends-le et termine-le. Sinon, passe au suivant.
+
+Pour chaque projet trouvé, crée (si inexistant) un sous-dossier du projet sous le nom : nom_du_projet/nom_du_projet_roro. Exemple : Myls/Myls_roro/.
+
+Dans ce sous-dossier, crée un fichier texte info_llm contenant :
+
+    la date à laquelle tu as fini le projet
+
+    ce que tu as compris du sujet
+
+    ta stratégie pour réaliser le projet
+
+    ce que tu as finalement fait (rapport final)
+
+Respecte l’arborescence propre :
+nom_du_projet_roro/
+├── include/
+├── src/
+├── lib/ (si nécessaire)
+├── tests/
+├── info_llm
+└── Makefile
+
+Règles de style et organisation :
+
+    Header Epitech en début de chaque fichier
+
+    Noms clairs (anglais, snake_case, explicites)
+
+    Indentation : 4 espaces, pas de tab, ≤ 80 colonnes
+
+    Fonctions courtes : ≤ 20 lignes, ≤ 4 paramètres, 1 responsabilité
+
+    Variables locales déclarées en début de fonction, une par ligne
+
+    Pas de variables globales non const
+
+    Prototypes regroupés dans include/
+
+Makefile :
+
+    Cibles obligatoires : all, clean, fclean, re
+
+    Compilation incrémentale correcte
+
+    Cible tests_run pour exécuter les tests avec Criterion et coverage
+
+Livrable :
+
+    Projet compilable avec make
+
+    Code testable avec au moins un exemple de test dans tests/
+
+
+---
+
+## 🟥 fullLLM_gpt / fullLLM_claude
+
+Ce prompt plus strict et orienté rapport a été utilisé pour `fullLLM_gpt/` et `fullLLM_claude/` :
+
+    Contexte
+
+        Racine unique de travail: /home/roro/work/projects/Epitech_projects/fullLLM_claude (désigné comme ROOT).
+
+        Organisation: ROOT/Semester-*/<nom_du_projet>/ (copie complète des projets par semestre).
+
+    Objectif
+
+        Pour chaque projet trouvé sous ROOT/Semester-*/, comprendre précisément le sujet (PDF/README), implémenter ou compléter la solution de façon testable, et produire:
+
+            un log global de session,
+
+            un rapport détaillé par projet.
+
+    Découverte du sujet par projet
+
+        subject*.pdf ou tout *.pdf (source de vérité).
+
+        Sinon: README*/readme*/docs équivalents.
+
+        Si plusieurs PDF existent: choisir le plus pertinent. En cas d’ambiguïté: indiquer et justifier.
+
+    Emplacements de sortie
+
+        ROOT/logs/session-<timestamp>.log: journal global.
+
+        ROOT/reports/<Semester-X>/<nom_du_projet>.md: rapport détaillé.
+
+        Implémentation: modifier/créer les fichiers dans chaque projet pour permettre make/tests. Créer si besoin tests/ ou scripts/test.sh.
+
+    Méthode stricte
+
+        Découverte: résumer objectifs, livrables, contraintes, critères d’évaluation, exemples.
+
+        Plan: définir archi, modules, étapes d’implémentation.
+
+        Implémentation: respecter normes Epitech, incréments testables.
+
+        Tests: make test ou script avec cas reproductibles et exemples du PDF.
+
+        Documentation: README.md du projet + rapport détaillé dans reports/.
+
+    Contraintes
+
+        Ne pas sortir de ROOT.
+
+        PDF > ce prompt en cas de conflit.
+
+        Ambiguïtés: proposer options + justification.
+
+    Sorties minimales
+
+        Projet buildable/testable (make, ./binaire, ou docker compose up).
+
+        Rapport complet dans reports/.
+
+        Log global dans logs/.
+
+        README.md à jour.
+
+    Si aucun PDF clair
+
+        Rapport minimal avec hypothèses + axes de complétion.
+
+
+---
+
+## ♻️ Script de relance (utilisé pour fullLLM)
+
+```bash
+#!/bin/bash
+# Nom de la session tmux
+SESSION_NAME="gpt"
+
+# Boucle infinie
+while true; do
+  COMMAND="continue le projet sur lequel tu étais s'il n'est pas complet et vérifie qu'il passe bien tous les tests indiqués dans les fichiers .pdf du projet, puis retourne à ROOT et vérifie si tu as bien fait tous les projets, sinon fais-les. Si tu bloques trop ou si tu as besoin de mon intervention, passe à un autre projet. N'utilise jamais sudo. Avance toujours sur un projet."
+
+  tmux send-keys -t "$SESSION_NAME" "$COMMAND" C-m
+  tmux send-keys -t "$SESSION_NAME" C-j
+  sleep 0.1
+  tmux send-keys -t "$SESSION_NAME" Enter
+
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] Commande envoyée à $SESSION_NAME"
+  sleep 1200
+done

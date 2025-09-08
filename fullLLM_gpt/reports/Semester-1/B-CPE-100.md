@@ -27,7 +27,7 @@ Root: `Semester-1/B-CPE-100`
 
 - Exigences (préliminaire):
 
-  - MUST: À préciser d'après le sujet
+  - MUST: Binaire `firtree` imprimant un sapin de taille N, gestion d'erreurs
 
   - SHOULD: Tests automatisés + Makefile
 
@@ -135,4 +135,5 @@ Root: `Semester-1/B-CPE-100`
 
 - Implémentations:
   - Star: implémenté en C avec Makefile et tests (sizes 1,2,4,5 + erreur 0) — OK
+  - Firtree: implémenté en C avec Makefile + tests (comparaison à l'oracle `firtree.tgz` pour tailles 1..5 + erreur 0) — OK
   - Autres sous-projets: à faire

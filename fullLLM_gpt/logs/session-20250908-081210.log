@@ -47,3 +47,14 @@ make: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/
 [OK] n=0 error
 OK=5 KO=0
 make: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Star'
+[IMPL] Implemented Firtree (B-CPE-100/Firtree): Makefile, C sources, tests vs oracle
+[TEST] make test output (Firtree):
+make: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Firtree'
+[OK] n=1
+[OK] n=2
+[OK] n=3
+[OK] n=4
+[OK] n=5
+[OK] n=0 error
+OK=6 KO=0
+make: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Firtree'
