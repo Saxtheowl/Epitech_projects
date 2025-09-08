@@ -1,0 +1,56 @@
+Super Prompt — Exécution sur fullLLM_gpt
+
+- Contexte
+  - Racine unique de travail: `/home/roro/work/projects/Epitech_projects/fullLLM_gpt` (désigné comme `ROOT`).
+  - Organisation: `ROOT/Semester-*/<nom_du_projet>/` (copie complète des projets par semestre).
+  - Ne pas toucher aux autres dossiers (ne pas lire/écrire dans `best/`, `fullLLM_claude/`, etc.).
+
+- Objectif
+  - Pour chaque projet trouvé sous `ROOT/Semester-*/`, comprendre précisément le sujet (PDF/README), implémenter ou compléter la solution de façon testable, et produire:
+    - un log global de session,
+    - un rapport détaillé par projet.
+
+- Découverte du sujet par projet (ordre de recherche dans le dossier du projet)
+  1) `subject*.pdf` ou tout `*.pdf` (source de vérité).
+  2) Sinon: `README*`/`readme*`/docs équivalents.
+  3) Si plusieurs PDF existent: choisir le plus pertinent (nom sans suffixe numérique si possible, sinon le plus récent). En cas d’ambiguïté, l’indiquer dans le rapport et justifier le choix.
+
+- Emplacements de sortie (à créer sous `ROOT`)
+  - `ROOT/logs/session-<timestamp>.log`: journal global contenant le texte des actions/commandes/sorties/erreurs (si capture auto impossible, recopier manuellement les extraits pertinents).
+  - `ROOT/reports/<Semester-X>/<nom_du_projet>.md`: un rapport détaillé par projet.
+  - Implémentation: modifier/créer les fichiers directement dans chaque dossier de projet pour permettre `make`/tests sur place. Créer si besoin `tests/` et/ou `scripts/test.sh`.
+
+- Méthode stricte à appliquer pour chaque projet
+  1) Découverte
+     - Ouvrir le PDF/README détecté. Résumer objectifs, livrables, contraintes (fonctions autorisées/interdites, OS/outils), critères d’évaluation, exemples. Noter pages/sections.
+     - Lister les exigences en puces avec tags MUST/SHOULD/OPTIONAL.
+  2) Plan
+     - Définir l’architecture (langage, modules, algorithmes, gestion erreurs/IO) conforme aux contraintes.
+     - Planifier les étapes d’implémentation (parsing → core → IO → tests) et les livrables.
+  3) Implémentation
+     - Initialiser/mettre à jour `Makefile` (ou build system adapté). Respecter les contraintes Epitech (flags/normes si précisées).
+     - Implémenter par incréments testables. Ajouter des tests automatisés dans `tests/` ou `scripts/test.sh`.
+  4) Tests
+     - Ajouter `make test` (ou script) exécutant des cas reproductibles, couvrant exemples du PDF + cas limites, avec récapitulatif clair (OK/KO).
+  5) Documentation
+     - Mettre à jour le `README.md` du projet: objectif, build, run, test, dépendances, limites.
+     - Rédiger `ROOT/reports/<Semester-X>/<nom_du_projet>.md` incluant: but (avec références PDF/pages), exigences, approche, plan, tests (comment exécuter), checklist d’évaluation, risques/parties non couvertes.
+
+- Contraintes générales
+  - Interdiction: ne pas lire/écrire en dehors de `ROOT` (sauf pour ouvrir le PDF du projet si déjà dans le dossier projet).
+  - Si une exigence du PDF contredit ce prompt, le PDF prévaut (citer la page et le suivre).
+  - En cas d’ambiguïté, proposer 1–2 options, justifier le choix, noter l’alternative dans le rapport.
+
+- Sorties minimales attendues par projet
+  - Projet buildable/testable in situ (`make`, `./binaire`, ou `docker compose up` si requis par le sujet).
+  - `ROOT/reports/<Semester-X>/<nom_du_projet>.md` complet (analyse + procédure de test facile).
+  - `ROOT/logs/session-<timestamp>.log` contenant l’historique textuel.
+  - `README.md` du projet à jour (prise en main rapide).
+
+- Priorisation (si volumétrie élevée)
+  - Parcourir récursivement `ROOT/Semester-*/*`.
+  - Prioriser d’abord les projets `unix`, `algo`, `cpp`, `network`, puis `graphics`, puis `web/devops/security` si plusieurs coexistent dans un même semestre.
+  - Regrouper les projets aux workflows similaires (réutilisation de scripts/tests).
+
+- Si un projet n’a ni PDF ni README clair
+  - Créer un rapport minimal avec hypothèses, exploration du code existant et axes de complétion, puis passer au projet suivant.

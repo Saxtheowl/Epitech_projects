@@ -5,7 +5,7 @@ SESSION_NAME="claude"
 
 # Boucle infinie
 while true; do
-    COMMAND="continue le projet sur lequel tu étais s'il n'est pas complet et vérifie qu'il passe bien tous les tests indiqués dans les fichiers .pdf du projet, puis retourne à /home/roro/work/projects/Epitech_projects/claude/Semester-5 et vérifie si tu as bien fait tous les projets, sinon fais-les. Si tu bloques trop sur le sujet en cours ou si tu as besoins de mon intervention pour continuer passe à un autre projet, n'utilise jamais la commande sudo, dans tous les cas avance sur un projet ou continue un autre"
+    COMMAND="continue le projet sur lequel tu étais s'il n'est pas complet et vérifie qu'il passe bien tous les tests indiqués dans les fichiers .pdf du projet, puis retourne à ROOT et vérifie si tu as bien fait tous les projets, sinon fais-les. Si tu bloques trop sur le sujet en cours ou si tu as besoins de mon intervention pour continuer passe à un autre projet, n'utilise jamais la commande sudo, dans tous les cas avance sur un projet ou continue un autre"
 
     tmux send-keys -t "$SESSION_NAME" "$COMMAND" C-m
     tmux send-keys -t "$SESSION_NAME" C-j
