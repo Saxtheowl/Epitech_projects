@@ -58,3 +58,34 @@ make: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/
 [OK] n=0 error
 OK=6 KO=0
 make: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Firtree'
+[IMPL] Implemented Count_island (B-CPE-100/Count_island): algorithm + Makefile + tests
+[TEST] make test output (Count_island):
+make: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Count_island'
+[OK] program exit 0
+[OK] no X
+[OK] has digits
+OK=3 KO=0
+make: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Count_island'
+[IMPL] Implemented MatchNmatch (match/nmatch) with oracle-based tests
+[TEST] make test output (MatchNmatch):
+make: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/MatchNmatch'
+[OK] match 'abc' 'abc'
+[OK] nmatch 'abc' 'abc'
+[OK] match 'abc' 'a*c'
+[OK] nmatch 'abc' 'a*c'
+[OK] match 'abc' '*'
+[OK] nmatch 'abc' '*'
+[OK] match 'abcdef' 'a*f'
+[OK] nmatch 'abcdef' 'a*f'
+[OK] match 'abcdef' 'a*d*f'
+[OK] nmatch 'abcdef' 'a*d*f'
+[OK] match 'aaaa' 'a*'
+[OK] nmatch 'aaaa' 'a*'
+[OK] match 'aaaa' '*a'
+[OK] nmatch 'aaaa' '*a'
+[OK] match 'abacabaaa' 'a*a*a'
+[OK] nmatch 'abacabaaa' 'a*a*a'
+[OK] match 'abc' 'ab*d'
+[OK] nmatch 'abc' 'ab*d'
+OK=18 KO=0
+make: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/MatchNmatch'

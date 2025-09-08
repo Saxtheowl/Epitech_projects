@@ -12,7 +12,7 @@ Root: `Semester-1/B-CPE-100`
 
 - Exigences (préliminaire):
 
-  - MUST: À préciser d'après le sujet
+  - MUST: Implémenter `count_island` (remplacement des 'X' par des indices d'îlots), binaire liant `main.o`, gestion d'erreurs
 
   - SHOULD: Tests automatisés + Makefile
 
@@ -42,7 +42,7 @@ Root: `Semester-1/B-CPE-100`
 
 - Exigences (préliminaire):
 
-  - MUST: À préciser d'après le sujet
+  - MUST: Fonctions `match` et `nmatch` (`*` comme joker), sorties conformes aux binaires d'oracle
 
   - SHOULD: Tests automatisés + Makefile
 
@@ -136,4 +136,6 @@ Root: `Semester-1/B-CPE-100`
 - Implémentations:
   - Star: implémenté en C avec Makefile et tests (sizes 1,2,4,5 + erreur 0) — OK
   - Firtree: implémenté en C avec Makefile + tests (comparaison à l'oracle `firtree.tgz` pour tailles 1..5 + erreur 0) — OK
+  - Count_island: implémenté (flood-fill 4-connexité, numérotation 0..9), Makefile liant `main.o`, tests basiques sur `map.txt` — OK
+  - MatchNmatch: implémenté (`match`, `nmatch`) avec comparaisons contre binaires oracles fournis — OK
   - Autres sous-projets: à faire
