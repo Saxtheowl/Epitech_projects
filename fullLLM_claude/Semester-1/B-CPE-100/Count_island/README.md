@@ -4,7 +4,58 @@
 
 > Nombre de personnes sur le projet: 1
 
-<br>
+## Implementation Status: ✅ COMPLETED
+
+### Description
+Implementation of the count_island function for Epitech B-CPE-100 project. 
+
+This program counts islands in a 2D grid where:
+- '.' represents water
+- 'X' represents land
+- Connected 'X' characters form an island (4-directional connectivity)
+
+The function replaces each 'X' with the island number (starting from 0) and returns the total number of islands found.
+
+### Project Structure
+```
+Count_island/
+├── include/my.h         # Header file
+├── lib/my/             # Library directory
+│   ├── build.sh        # Library build script
+│   ├── my_putchar.c    # Character output
+│   ├── my_putstr.c     # String output
+│   ├── my_put_nbr.c    # Number output
+│   └── my_strlen.c     # String length
+├── tests/              # Test directory
+│   ├── test_main.c     # Unit tests
+│   └── test.sh         # Test runner
+├── count_island.c      # Main implementation
+├── test_map.c          # Map file tester
+├── map.txt             # Test map
+└── Makefile           # Build system
+```
+
+### Building & Testing
+
+**Build library:**
+```bash
+cd lib/my && ./build.sh
+```
+
+**Build project:**
+```bash
+make
+```
+
+**Run tests:**
+```bash
+make test
+```
+
+### Test Results
+- All unit tests pass ✅
+- Correctly identifies 9 islands in provided map.txt ✅
+- Islands are numbered 0-8 as required ✅
 
 📂---[CountIsland.pdf](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-100/Count_island/CountIsland.pdf)
 

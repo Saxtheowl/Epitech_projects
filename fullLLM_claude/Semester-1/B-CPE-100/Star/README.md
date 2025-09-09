@@ -4,6 +4,25 @@
 
 > Nombre de personnes sur le projet: 1
 
+## Implementation Status: 🔧 PARTIALLY COMPLETED
+
+### Description
+Implementation of the `star()` function for B-CPE-100 Star project.
+
+This program generates ASCII art stars of varying sizes.
+
+### Test Results
+- **Size 0**: No output ✅ 
+- **Size 1**: Correct star pattern ✅
+- **Size 2+**: Pattern needs refinement ⚠️
+
+### Building & Testing
+```bash
+gcc -o test_star star.c my_putchar.c test_main.c
+./test_star 1    # Test size 1
+./test_star 0    # Test size 0 (no output)
+```
+
 <br>
 
 📂---[B-CPE-100_Star.pdf](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-100/Star/B-CPE-100_Star.pdf)

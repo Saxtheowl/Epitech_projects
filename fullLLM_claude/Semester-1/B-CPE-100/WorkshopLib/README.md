@@ -4,6 +4,30 @@
 
 > Nombre de personnes sur le projet: 1
 
+## Implementation Status: 🔧 PARTIALLY COMPLETED
+
+### Description
+Creation of a complete C library (libmy.a) with 30 functions for B-CPE-100 WorkshopLib project.
+
+This is an optional project to improve library functions.
+
+### Implementation Status
+- **6/30 functions implemented** ✅
+- **Core functions working**: my_putchar, my_putstr, my_strlen, my_put_nbr, my_strcpy, my_strcmp, my_isneg, my_swap
+- **Makefile with re, clean, fclean** ✅
+- **Proper directory structure** (lib/my/, include/) ✅
+
+### Building & Testing
+```bash
+make          # Build libmy.a
+make clean    # Remove object files
+make fclean   # Remove library
+make re       # Rebuild from scratch
+```
+
+### Test Results ✅
+All implemented functions work correctly as tested.
+
 <br>
 
 📂---[WorkshopLib.pdf](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-100/WorkshopLib/WorkshopLib.pdf)

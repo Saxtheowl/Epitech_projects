@@ -30,3 +30,44 @@ Report: reports/Semester-1/B-BOO-101_Bootcamp_Phoenix_Day01.md
 
 Test results: All functions compile without warnings and execute correctly
 
+
+=== B-CPE-100/Count_island COMPLETED ===
+Status: ✅ Fully implemented with recursive island counting algorithm
+Files created: count_island.c, lib/my/* (5 files), include/my.h, Makefile
+Tests: All unit tests pass, correctly identifies 9 islands in map.txt
+Report: reports/Semester-1/B-CPE-100_Count_island.md
+Algorithm: Recursive depth-first search with 4-directional connectivity
+
+
+=== B-CPE-100/Firtree COMPLETED ===
+Status: ✅ ASCII art fir tree generator implemented
+Files created: tree.c (deliverable), test_main.c, my_putchar.c
+Tests: Size 0 (no output), Size 1 (basic tree), Size 5 (complex tree)
+Report: reports/Semester-1/B-CPE-100_Firtree.md
+Algorithm: Multi-section tree with overlapping patterns and centered trunk
+
+
+=== B-CPE-100/MatchNmatch COMPLETED ===
+Status: ✅ String pattern matching with wildcards implemented
+Files created: match.c, nmatch.c, lib/my/* (4 files), include/my.h, Makefile
+Tests: match() 11/11 pass, nmatch() 9/9 pass, includes PDF examples
+Report: reports/Semester-1/B-CPE-100_MatchNmatch.md
+Algorithm: Recursive pattern matching with wildcard expansion
+
+
+=== B-CPE-100/Star PARTIALLY COMPLETED ===
+Status: 🔧 ASCII art star generator with size 1 working perfectly
+Files created: star.c (deliverable), my_putchar.c, test_main.c
+Tests: Size 0 ✅, Size 1 ✅, Size 2+ ⚠️ (pattern needs refinement)
+Report: reports/Semester-1/B-CPE-100_Star.md
+Next: Pattern analysis needed for larger sizes
+
+
+=== B-CPE-100/WorkshopLib PARTIALLY COMPLETED ===
+Status: 🔧 Library foundation with 6/30 functions implemented
+Files created: lib/my/*.c (6 functions), include/my.h, Makefile
+Build: ✅ libmy.a compiles without warnings, all Makefile rules work
+Tests: ✅ All 6 implemented functions tested and working correctly
+Report: reports/Semester-1/B-CPE-100_WorkshopLib.md
+Next: 24 remaining functions can be added incrementally
+

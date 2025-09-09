@@ -4,6 +4,27 @@
 
 > Nombre de personnes sur le projet: 1
 
+## Implementation Status: ✅ COMPLETED
+
+### Description
+Implementation of the `tree()` function for B-CPE-100 Firtree project. 
+
+This program generates ASCII art fir trees of varying sizes using only the `*` character for leaves and `|` character for the trunk.
+
+### Test Results ✅
+- **Size 0**: No output (as required)
+- **Size 1**: Correct 4-line tree with single trunk line
+- **Size 5**: Complex multi-section tree with 5-line trunk
+- **Algorithm**: Matches expected patterns from PDF examples
+
+### Building & Testing
+```bash
+gcc -o test_tree test_main.c my_putchar.c tree.c
+./test_tree 1    # Test size 1
+./test_tree 5    # Test size 5  
+./test_tree 0    # Test size 0 (no output)
+```
+
 <br>
 
 📂---[Tree.pdf](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-100/Firtree/Tree.pdf)

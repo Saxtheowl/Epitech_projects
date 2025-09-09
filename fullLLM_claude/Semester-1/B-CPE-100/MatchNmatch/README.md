@@ -4,6 +4,25 @@
 
 > Nombre de personnes sur le projet: 1
 
+## Implementation Status: ✅ COMPLETED
+
+### Description
+Implementation of two string pattern matching functions for B-CPE-100 MatchNmatch project.
+
+- **match()**: Determines if two strings match with wildcard '*' support
+- **nmatch()**: Counts the number of ways two strings can match
+
+### Test Results ✅
+- **match()**: All 11 test cases pass including PDF examples
+- **nmatch()**: All 9 test cases pass including complex combinations
+- **Examples**: "abcbd" vs "*b*" = 2 matches, "abc" vs "a**" = 3 matches
+
+### Building & Testing
+```bash
+./lib/my/build.sh    # Build library
+./tests/test.sh      # Run all tests
+```
+
 <br>
 
 📂---[MatchNmatch.pdf](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-100/MatchNmatch/MatchNmatch.pdf)

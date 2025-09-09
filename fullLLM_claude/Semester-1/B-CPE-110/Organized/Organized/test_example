@@ -1,0 +1,9 @@
+add WIRE usb
+disp
+add ACTUATOR button, DEVICE recorder
+disp
+del 1
+disp
+sort NAME
+disp
+exit
