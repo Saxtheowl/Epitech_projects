@@ -1,0 +1,389 @@
+#!/bin/sh
+# BDSH - Simple JSON DB manager
+# POSIX sh only; authorized tools: [, test, expr, wc, head, tail, cat, sort, grep, sed, rm, cut, ps, tr, touch, mkdir, find
+
+set -eu
+
+usage() {
+  cat <<'EOF'
+Usage: ./bdsh [OPTION]... [COMMAND] [REQUEST]
+OPTION:
+  -h, --help          display help
+  -f, --file=FILE     json database file
+  -j                  json formatted output for select command
+
+COMMAND and REQUEST:
+  create              create database or table
+                      Examples:
+                        ./bdsh -f file.json create database
+                        ./bdsh -f file.json create table user id,firstname,lastname
+  insert              insert data in database
+                        ./bdsh -f file.json insert user id=1,firstname=John,lastname=SMITH
+  select              display data from database
+                        ./bdsh -f file.json select user firstname,lastname [where k=v] [orderby col]
+                        ./bdsh -f file.json select user,age age,firstname,lastname join id [where k=v]
+
+Notes:
+  - Errors go to stderr and exit code 1.
+  - update/delete are bonuses and not guaranteed.
+EOF
+}
+
+# Globals
+JSON_OUT=0
+DB_FILE=""
+
+# Resolve DB file: arg > env > rc
+resolve_db_file() {
+  if [ -n "$DB_FILE" ]; then
+    echo "$DB_FILE"
+    return 0
+  fi
+  if [ -n "${BDSH_File-}" ]; then
+    DB_FILE="$BDSH_File"
+    echo "$DB_FILE"
+    return 0
+  fi
+  if [ -f .bdshrc ]; then
+    # Expect a line: BDSH_File=path
+    DB_FILE="$(grep -E '^BDSH_File=' .bdshrc | head -n1 | sed 's/^BDSH_File=//')"
+    if [ -n "$DB_FILE" ]; then
+      echo "$DB_FILE"
+      return 0
+    fi
+  fi
+  echo "bdsh: database file not specified (-f, BDSH_File, or .bdshrc)" >&2
+  exit 1
+}
+
+json_escape() {
+  # Escape backslash and quotes; also convert tabs/newlines to spaces
+  echo "$1" | sed 's/\\/\\\\/g; s/"/\\"/g; s/[\t\r\n]/ /g'
+}
+
+# Helpers to parse/write DB (standardized layout)
+db_list_tables() {
+  file="$1"
+  grep -E '^  "[^"]+": \[$' "$file" | sed 's/^  "//; s/": \[$//'
+}
+
+db_get_rows() {
+  file="$1"; tbl="$2"
+  # Find start line number of the table
+  start=$(grep -n "^  \"$tbl\": \[$" "$file" | head -n1 | cut -d: -f1)
+  [ -n "$start" ] || { echo ""; return 0; }
+  # Print from start+1 up to (but not including) the first line '  ]'
+  sed -n "$((start+1)),\$p" "$file" \
+    | sed -n '1,/^  ]/ { /^  ]/q; p }' \
+    | sed 's/[[:space:]]*$//; s/,$$//'
+}
+
+write_db() {
+  file="$1"; names="$2"; shift 2
+  tmp="$file.tmp.$$"
+  echo "{" > "$tmp"
+  # count tables
+  tcount=0; for _n in $names; do tcount=$((tcount+1)); done
+  i=1
+  for name in $names; do
+    echo "  \"$name\": [" >> "$tmp"
+    rows="$1"; shift 1 || true
+    if [ -n "${rows:+x}" ]; then
+      printf "%s\n" "$rows" | sed '/^\s*$/d' | sed 's/^/    /' | sed '$!s/$/,/' >> "$tmp"
+    fi
+    echo "  ]" >> "$tmp"
+    if [ $i -lt $tcount ]; then echo "," >> "$tmp"; fi
+    i=$((i+1))
+  done
+  echo "}" >> "$tmp"
+  mv "$tmp" "$file"
+}
+
+# Same as write_db but reads rows for each table from a directory
+write_db_from_dir() {
+  file="$1"; names="$2"; rows_dir="$3"
+  tmp="$file.tmp.$$"
+  echo "{" > "$tmp"
+  tcount=0; for _n in $names; do tcount=$((tcount+1)); done
+  i=1
+  for name in $names; do
+    echo "  \"$name\": [" >> "$tmp"
+    if [ -s "$rows_dir/$name.rows" ]; then
+      sed '/^\s*$/d' "$rows_dir/$name.rows" | sed 's/^/    /' | sed '$!s/$/,/' >> "$tmp"
+    fi
+    echo "  ]" >> "$tmp"
+    if [ $i -lt $tcount ]; then echo "," >> "$tmp"; fi
+    i=$((i+1))
+  done
+  echo "}" >> "$tmp"
+  mv "$tmp" "$file"
+}
+
+# Initialize empty DB if needed
+create_database() {
+  file="$1"
+  if [ -f "$file" ]; then
+    echo "bdsh: database already exists: $file" >&2
+    return 1
+  fi
+  mkdir -p "$(dirname "$file")" 2>/dev/null || true
+  printf '{\n}\n' > "$file"
+}
+
+# Add table with schema columns
+create_table() {
+  file="$1"; table="$2"; cols_csv="$3"
+  if ! [ -f "$file" ]; then
+    echo "bdsh: database does not exist, use 'create database' first" >&2
+    exit 1
+  fi
+  if grep -q '"'"$table"'"[[:space:]]*:[[:space:]]*\[' "$file"; then
+    echo "bdsh: table '$table' already exists" >&2
+    return 1
+  fi
+  names="$(db_list_tables "$file")"
+  dir=".bdsh_rows.$$"; mkdir -p "$dir"
+  if [ -n "$names" ]; then
+    for n in $names; do
+      db_get_rows "$file" "$n" > "$dir/$n.rows"
+    done
+    names="$names $table"
+  else
+    names="$table"
+  fi
+  : > "$dir/$table.rows"
+  write_db_from_dir "$file" "$names" "$dir"
+  rm -rf "$dir" 2>/dev/null || true
+}
+
+# Append a JSON object to table array
+insert_row() {
+  file="$1"; table="$2"; kv_csv="$3"
+  if ! grep -q '"'"$table"'"' "$file"; then
+    echo "bdsh: unknown table '$table'" >&2
+    exit 1
+  fi
+  # Build new row object
+  row='{'
+  first=1
+  IFS=,
+  for pair in $kv_csv; do
+    key=$(echo "$pair" | cut -d'=' -f1)
+    val=$(echo "$pair" | cut -d'=' -f2-)
+    esc=$(json_escape "$val")
+    if [ $first -eq 1 ]; then first=0; else row="$row, "; fi
+    row="$row\"$key\": \"$esc\""
+  done
+  IFS=' \t\n'
+  row="$row}"
+  # Load all rows to temp dir
+  names="$(db_list_tables "$file")"
+  dir=".bdsh_rows.$$"; mkdir -p "$dir"
+  for n in $names; do
+    db_get_rows "$file" "$n" > "$dir/$n.rows"
+  done
+  # Append to target table
+  if [ -s "$dir/$table.rows" ]; then
+    printf "%s\n" "$row" >> "$dir/$table.rows"
+  else
+    printf "%s\n" "$row" > "$dir/$table.rows"
+  fi
+  write_db_from_dir "$file" "$names" "$dir"
+  rm -rf "$dir" 2>/dev/null || true
+}
+
+# Extract rows for a table as lines of key=value pairs (CSV with \t separator between kvs)
+extract_rows_kv() {
+  file="$1"; table="$2"
+  db_get_rows "$file" "$table" \
+  | sed 's/^\s*{//; s/}\s*,\?\s*$//' \
+  | sed 's/",[[:space:]]*"/\t/g; s/"[[:space:]]*:[[:space:]]*"/=/' \
+  | sed 's/"//g'
+}
+
+# Filter rows by key=value (exact)
+filter_where() {
+  kv_lines="$1"; cond_k="$2"; cond_v="$3"
+  echo "$kv_lines" | while IFS= read -r line; do
+    echo "$line" | tr '\t' '\n' | grep -q "^$cond_k=$cond_v$" && echo "$line" || true
+  done
+}
+
+# Project columns into TSV; compute widths
+project_columns() {
+  kv_lines="$1"; cols_csv="$2"
+  cols="$(echo "$cols_csv" | tr ',' ' ')"
+  # header
+  printf "%s\n" "$cols" | tr ' ' '\n' | sed '1!s/^/COL:/' >/dev/null
+  echo "$cols" | tr ' ' '\n' > .bdsh_cols.$$
+  # Print TSV rows
+  echo "$kv_lines" | while IFS= read -r line; do
+    out=""
+    for c in $cols; do
+      v="$(echo "$line" | tr '\t' '\n' | grep -E "^$c=" | sed "s/^$c=//")"
+      if [ -z "$out" ]; then out="$v"; else out="$out\t$v"; fi
+    done
+    echo "$out"
+  done
+}
+
+# Sort TSV by column name (ASCII)
+orderby_tsv() {
+  tsv="$1"; colname="$2"; cols_csv="$3"
+  idx=1; for c in $(echo "$cols_csv" | tr ',' ' '); do [ "$c" = "$colname" ] && break || idx=$((idx+1)); done
+  echo "$tsv" | sed '1!p;1d' | sort -t '\t' -k "$idx","$idx"
+}
+
+# Format TSV to table with headers
+format_table() {
+  tsv="$1"; cols_csv="$2"
+  # Simple header
+  header=$(echo "$cols_csv" | sed 's/,/ | /g')
+  echo "$header"
+  # separator
+  echo "$header" | sed 's/[^|]/-/g'
+  # rows
+  echo "$tsv" | sed 's/\t/ | /g'
+}
+
+select_command() {
+  file="$1"; req="$2"; json_flag="$3"
+  # Parse possible join
+  tables_part=$(echo "$req" | cut -d' ' -f1)
+  rest=$(echo "$req" | cut -d' ' -f2-)
+  if echo "$tables_part" | grep -q ','; then
+    t1=$(echo "$tables_part" | cut -d',' -f1)
+    t2=$(echo "$tables_part" | cut -d',' -f2)
+    cols=$(echo "$rest" | cut -d' ' -f1)
+    rest2=$(echo "$rest" | cut -d' ' -f2-)
+    if echo "$rest2" | grep -q '^join '; then
+      jkey=$(echo "$rest2" | cut -d' ' -f2)
+      rest3=$(echo "$rest2" | cut -d' ' -f3-)
+    else
+      echo "bdsh: missing 'join <key>' in two-table select" >&2; exit 1
+    fi
+    # Optional where
+    wkey=""; wval=""
+    if echo "$rest3" | grep -q '^where '; then
+      wexpr=$(echo "$rest3" | cut -d' ' -f2-)
+      wkey=$(echo "$wexpr" | cut -d'=' -f1)
+      wval=$(echo "$wexpr" | cut -d'=' -f2-)
+    fi
+    rows1=$(extract_rows_kv "$file" "$t1")
+    rows2=$(extract_rows_kv "$file" "$t2")
+    # Nested loop join on jkey
+    join_lines=""
+    echo "$rows1" | while IFS= read -r r1; do
+      v1=$(echo "$r1" | tr '\t' '\n' | grep -E "^$jkey=" | sed "s/^$jkey=//")
+      [ -z "$v1" ] && continue
+      echo "$rows2" | while IFS= read -r r2; do
+        v2=$(echo "$r2" | tr '\t' '\n' | grep -E "^$jkey=" | sed "s/^$jkey=//")
+        [ "$v1" = "$v2" ] || continue
+        echo "$r1\t$r2"
+      done
+    done > .bdsh_join.$$
+    kv_join=$(cat .bdsh_join.$$ || true)
+    rm -f .bdsh_join.$$ || true
+    # Optional where (on combined line)
+    if [ -n "$wkey" ]; then
+      kv_join=$(echo "$kv_join" | while IFS= read -r line; do echo "$line" | tr '\t' '\n' | grep -q "^$wkey=$wval$" && echo "$line" || true; done)
+    fi
+    # Project columns
+    tsv=$(echo "$kv_join" | while IFS= read -r line; do
+      out=""
+      IFS=','; for c in $cols; do IFS=' \t\n'; v=$(echo "$line" | tr '\t' '\n' | grep -E "^$c=" | sed "s/^$c=//"); if [ -z "$out" ]; then out="$v"; else out="$out\t$v"; fi; done
+      echo "$out"
+    done)
+  else
+    table="$tables_part"
+    cols=$(echo "$rest" | cut -d' ' -f1)
+    rest2=$(echo "$rest" | cut -d' ' -f2-)
+    wkey=""; wval=""; order=""
+    if echo "$rest2" | grep -q '^where '; then
+      wexpr=$(echo "$rest2" | cut -d' ' -f2-)
+      wkey=$(echo "$wexpr" | cut -d'=' -f1)
+      wval=$(echo "$wexpr" | cut -d'=' -f2-)
+    fi
+    if echo "$rest2" | grep -q ' orderby '; then
+      order=$(echo "$rest2" | sed -n 's/.* orderby \([^ ]*\).*/\1/p')
+    fi
+    rows=$(extract_rows_kv "$file" "$table")
+    if [ -n "$wkey" ]; then rows=$(filter_where "$rows" "$wkey" "$wval"); fi
+    tsv=$(project_columns "$rows" "$cols")
+    if [ -n "$order" ]; then
+      idx=1; for c in $(echo "$cols" | tr ',' ' '); do [ "$c" = "$order" ] && break || idx=$((idx+1)); done
+      delim=$(printf '\t')
+      tsv=$(echo "$tsv" | sort -t "$delim" -k ${idx},${idx})
+    fi
+  fi
+  if [ "$json_flag" -eq 1 ]; then
+    # TSV -> JSON array of objects (POSIX sh)
+    echo "["
+    first=1
+    echo "$tsv" | while IFS= read -r line; do
+      obj="{"
+      i=1
+      for c in $(echo "$cols" | tr ',' ' '); do
+        v=$(printf "%s" "$line" | cut -f "$i")
+        v=$(json_escape "$v")
+        if [ $i -gt 1 ]; then obj="$obj, "; fi
+        obj="$obj\"$c\":\"$v\""
+        i=$((i+1))
+      done
+      obj="$obj}"
+      if [ $first -eq 1 ]; then first=0; echo "  $obj"; else echo "  ,$obj"; fi
+    done
+    echo "]"
+  else
+    format_table "$tsv" "$cols"
+  fi
+}
+
+CMD=""
+REQ=""
+
+# Parse options
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -h|--help) usage; exit 0;;
+    -j) JSON_OUT=1; shift;;
+    -f) [ $# -ge 2 ] || { echo "bdsh: -f requires a file" >&2; exit 1; }; DB_FILE="$2"; shift 2;;
+    --file=*) DB_FILE="${1#--file=}"; shift;;
+    create|insert|select|update|delete) CMD="$1"; shift; REQ="$*"; break;;
+    *) echo "bdsh: unknown option or command: $1" >&2; usage >&2; exit 1;;
+  esac
+done
+
+[ -n "${CMD}" ] || { usage; exit 1; }
+
+DB="$(resolve_db_file)"
+
+case "$CMD" in
+  create)
+    # Expect: database OR table <name> <cols>
+    set -- $REQ
+    [ $# -ge 1 ] || { echo "bdsh: create requires arguments" >&2; exit 1; }
+    if [ "$1" = "database" ]; then
+      create_database "$DB" || exit 1
+    elif [ "$1" = "table" ]; then
+      [ $# -ge 3 ] || { echo "bdsh: create table <name> <col1,col2,...>" >&2; exit 1; }
+      create_table "$DB" "$2" "$3"
+    else
+      echo "bdsh: unknown create target: $1" >&2; exit 1
+    fi
+    ;;
+  insert)
+    # Expect: <table> k=v,k=v
+    set -- $REQ
+    [ $# -ge 2 ] || { echo "bdsh: insert <table> k=v,..." >&2; exit 1; }
+    insert_row "$DB" "$1" "$2"
+    ;;
+  select)
+    select_command "$DB" "$REQ" "$JSON_OUT"
+    ;;
+  update|delete)
+    echo "bdsh: $CMD not implemented (bonus)" >&2; exit 1;
+    ;;
+esac
+
+exit 0

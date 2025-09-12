@@ -129,4 +129,4 @@ Root: `Semester-1/B-CPE-101`
 - Scaffolding de tests: en cours de déploiement
 
 - Implémentations: à prioriser par simplicité
-
+  - EvalExpr: binaire `eval_expr` implémenté (parser récursif + `my_putchar`/`my_put_nbr`), Makefile et tests (`tests/test.sh`) — OK (8/8)

@@ -1,41 +1,27 @@
-# Semester-0 / DOCUMENTS - Analysis Report
+# Rapport de Projet : Semester-0 / DOCUMENTS
 
-## Summary
-Semester-0 contains documentation and reference materials rather than implementable projects.
+## Vue d'ensemble
+- **Semestre** : 0
+- **Projet** : DOCUMENTS
+- **Type** : Documentation de référence (coding styles et guides techniques)
 
-## Discovery
-- **Source**: README.md files in Semester-0/ and DOCUMENTS/
-- **Type**: Reference documentation (0 credits, no timeline, no moulinette)
+## Analyse du sujet
+Le répertoire DOCUMENTS contient des documents de référence Epitech non liés à un module spécifique :
 
-## Contents Analysis
-The DOCUMENTS directory contains essential Epitech reference materials:
+### Documentation disponible :
+- **Coding Styles** :
+  - `epitech_c_coding_style.pdf` : Guide du style de codage C Epitech
+  - `epitech_haskell_coding_style.pdf` : Guide du style de codage Haskell Epitech
 
-### Coding Standards
-- `epitech_c_coding_style.pdf` - C coding style guidelines
-- `epitech_haskell_coding_style.pdf` - Haskell coding style guidelines
+- **Documentation technique** :
+  - `epitech_makefile.pdf` : Guide pour créer des Makefile Epitech
+  - `doc_docker.pdf` : Documentation Docker
+  - `how_to_write_unit_tests.pdf` : Guide pour écrire des tests unitaires
 
-### Technical Documentation  
-- `doc_docker.pdf` - Docker documentation
-- `epitech_makefile.pdf` - Makefile guidelines
-- `how_to_write_unit_tests.pdf` - Unit testing guidelines
-
-## Project Assessment
-**STATUS**: DOCUMENTATION ONLY - NO IMPLEMENTATION REQUIRED
-
-This directory serves as a reference repository for:
-- Coding style enforcement across projects
-- Technical setup documentation
-- Development best practices
-
-## Recommendations
-- Keep this documentation accessible for reference during other project implementations
-- Use coding style PDFs to ensure compliance in actual projects
-- Reference unit testing and Makefile docs when setting up project build systems
-
-## Testing
-Not applicable - documentation only.
+## Statut
+- **Type** : Documentation de référence uniquement
+- **Implémentation** : Non applicable
+- **Tests** : Non applicable
 
 ## Notes
-- No code to implement or test
-- Serves as support material for other semester projects
-- PDFs contain official Epitech standards and should be referenced during development of other projects
+Ce répertoire ne contient pas de projets à implémenter, mais des documents de référence essentiels pour tous les projets Epitech. Ces documents définissent les standards et pratiques à suivre.

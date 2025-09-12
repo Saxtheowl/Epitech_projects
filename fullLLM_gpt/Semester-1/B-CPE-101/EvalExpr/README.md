@@ -1,75 +1,20 @@
-# EvalExpr
+# EvalExpr (B-CPE-101)
 
-> Timeline: 5 jours
+Évalue une expression arithmétique donnée en argument et affiche le résultat.
 
-> Nombre de personnes sur le projet: 2
+Référence: EvalExpr.pdf / EvalExprBootstrap.pdf.
 
-<br>
+Build
+- `make` construit le binaire `eval_expr`.
+- `make clean | fclean | re` pour nettoyer/reconstruire.
 
-📂---[EvalExpr.pdf](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-101/EvalExpr/EvalExpr.pdf)
+Run
+- `./eval_expr "(3+2)*5"` → `25`.
+- Si le nombre d’arguments est différent de 1, le programme retourne 84.
 
-|\_\_\_[EvalExprBootstrap.pdf](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-101/EvalExpr/EvalExprBootstrap.pdf)
+Tests
+- `make test` exécute `tests/test.sh` (8 cas basiques dont parenthèses, priorités, mod/div, unaires).
 
-<br>
-
-<details>
-<summary> Tests de la moulinette </summary>
-<table align="center">
-    <thead>
-        <tr>
-            <td colspan="3" align="center"><strong>MOULINETTE</strong></td>
-        </tr>
-        <tr>
-            <th>SOMMAIRE</th>
-            <th>NB DE TESTS</th>
-            <th>DETAILS</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td rowspan="8">01 - eval_expr</td>
-            <td rowspan="8" style="text-align: center;">8</td>
-            <td>Test 01</td>
-        </tr>
-        <tr>
-            <td>Test 02</td>
-        </tr>
-        <tr>
-            <td>Test 03</td>
-        </tr>
-        <tr>
-            <td>Test 04</td>
-        </tr>
-        <tr>
-            <td>Test 05</td>
-        </tr>
-        <tr>
-            <td>Test 06</td>
-        </tr>
-        <tr>
-            <td>Test 07</td>
-        </tr>
-        <tr>
-            <td>Test 08</td>
-        </tr>
-    </tbody>
-</table>
-</details>
-
-<br>
-
-[↩️ Revenir au module](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1/B-CPE-101)
-
-[↩️ Revenir au Semestre-1](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1)
-
-[↩️ Revenir à l'accueil](https://github.com/Studio-17/Epitech-Subjects)
-
-<br>
-
----
-
-<div align="center">
-
-<a href="https://github.com/Studio-17" target="_blank"><img src="../../../assets/voc17.gif" width="40"></a>
-
-</div>
+Notes
+- Respecte la contrainte: seules `write`, `malloc`, `free` sont utilisées (et fonctions internes).
+- Parser récursif: factor (nombre ou parenthèses avec prise en charge de +/− unaires) → term (*,/,% ) → expr (+,−).

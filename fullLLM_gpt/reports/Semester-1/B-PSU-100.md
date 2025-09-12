@@ -10,13 +10,9 @@ Root: `Semester-1/B-PSU-100`
 
 - Aperçu (PDF): extraction indisponible
 
-- Exigences (préliminaire):
-
-  - MUST: À préciser d'après le sujet
-
-  - SHOULD: Tests automatisés + Makefile
-
-  - OPTIONAL: Optimisations, bonus
+- Implémentation: binaire `my_ls` avec options `-a`, `-l`, `-R`, `-t`, tri par nom/mtime, format long (permissions, liens, user, group, taille, date), impression récursive avec en-têtes comme `ls -R`.
+- Build/Tests: Makefile présent; `make test` exécute `tests/test.sh` (5 cas basiques) — OK.
+- README: ajouté dans `Semester-1/B-PSU-100/My_ls/`.
 
 
 ### My_navy
@@ -104,4 +100,4 @@ Root: `Semester-1/B-PSU-100`
 - Scaffolding de tests: en cours de déploiement
 
 - Implémentations: à prioriser par simplicité
-
+  - My_ls: implémenté et testé (5 cas). Reste à étoffer selon PDF complet si besoin (compat. options supplémentaires, formats particuliers).

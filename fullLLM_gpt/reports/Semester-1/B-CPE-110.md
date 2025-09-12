@@ -119,4 +119,4 @@ Root: `Semester-1/B-CPE-110`
 - Scaffolding de tests: en cours de déploiement
 
 - Implémentations: à prioriser par simplicité
-
+  - BSQ: binaire `bsq` implémenté (DP O(R*C)), Makefile et tests (`tests/test.sh`) — OK (4 cas de base). README du projet ajouté.

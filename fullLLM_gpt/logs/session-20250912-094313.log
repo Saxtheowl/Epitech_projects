@@ -1,0 +1,498 @@
+Session start: 2025-09-12T09:43:13+00:00
+ROOT=/home/roro/work/projects/Epitech_projects/fullLLM_gpt
+Projects:
+Semester-0/DOCUMENTS
+Semester-1/B-BOO-101
+Semester-1/B-CPE-100
+Semester-1/B-CPE-101
+Semester-1/B-CPE-110
+Semester-1/B-MUL-100
+Semester-1/B-NSA-100
+Semester-1/B-PSU-100
+Semester-2/B-AIA-200
+Semester-2/B-CPE-200
+Semester-2/B-CPE-210
+Semester-2/B-DOP-200
+Semester-2/B-MUL-200
+Semester-2/B-PSU-200
+Semester-2/B-SEC-200
+Semester-2/B-SYN-200
+Semester-2/B-WEB-200
+Semester-3/B-PDG-300
+Semester-3/B-SHL-300
+Semester-4/B-ASM-400
+Semester-4/B-CNA-400
+Semester-4/B-CNA-410
+Semester-4/B-CPP-400
+Semester-4/B-DOP-400
+Semester-4/B-FUN-400
+Semester-4/B-NWP-400
+Semester-4/B-OOP-400
+Semester-4/B-PSU-400
+Semester-4/B-PSU-402
+Semester-4/B-SEC-400
+Semester-4/B-YEP-400
+Semester-5/B-AIA-500
+Semester-5/B-CPP-500
+Semester-5/B-DEV-500
+Semester-5/B-DOP-500
+Semester-5/B-FUN-500
+== Selecting project: Semester-3/B-SHL-300 (BDSH) ==
+Module : B-SHL-300
+Language : /bin/sh
+Authorized binaries : /!\ See end of this file ! /!\
+Version: 3.0
+
+-------------------------------------------------------------------------------
+Warning : for all scripts, error messages must be written on stderr output, and
+program must exit with error code 1
+-------------------------------------------------------------------------------
+
+Subject: 
+  Write a shell script that allows you to manage a database in a json file.
+  You must create table, insert-update-remove data, run query, ...
+
+Database File:
+  The database file can be specified in 3 ways, in order of priority:
+	as argument in command line : -f file
+    in environment : BDSH_File=
+    in a configuration file : .bdshrc
+
+Syntax:
+$> ./bdsh
+Usage: ./bdsh [OPTION]... [COMMAND] [REQUEST]
+OPTION:
+  -h, --help		display help
+  -f, --file=FILE	json database file
+  -j			json formated output for select command
+
+COMMAND and REQUEST:
+  create		create database
+			Example: 
+			   ./bdsh -f file.json create database
+			   ./bdsh -f file.json create table user id,firstname,lastname
+			   ./bdsh -f file.json create table age id,firstname,lastname
+
+  insert		insert data in database
+			Example:
+			   ./bdsh -f file.json insert user id=1,firstname=John,lastname=SMITH
+			   ./bdsh -f file.json insert user id=4,firstname=Robert John,lastname=WILLIAMS
+			   ./bdsh -f file.json insert user id=2,firstname=Lisa,lastname=SIMPSON
+			   ./bdsh -f file.json insert user id=10,lastname=SMITH
+			   ./bdsh -f file.json insert user firstname=Laura,lastname=SMITH
+			   ./bdsh -f file.json insert user id=9
+			   ./bdsh -f file.json insert age id=1,age=42
+
+  update		update data in database
+			Example:
+			   ./bdsh -f file.json update user firstname=Marry where firstname=John
+			   ./bdsh -f file.json update user lastname=DAVIS,firstname=Marge where id=9
+			   ./bdsh -f file.json update user firstname=,lastname=SIMPSON where id=2
+				this request remove firstname
+
+  select		display data from database
+			Example:
+			   ./bdsh -f file.json select user firstname,lastname
+                firstname    | lastname
+                -------------------------
+                John         | SMITH
+                Robert John  | WILLIAMS
+                Lisa         | SIMPSON
+                             | SMITH
+                Laura        | SMITH
+                             |
+			   ./bdsh -f file.json select user firstname,id where lastname=SMITH
+                firstname  | id
+                -----------------
+                John       | 1
+                           | 10
+                Laura      |
+			   ./bdsh -f file.json select user firstname where lastname=SMITH orderby firstname
+                firstname
+                -----------
+                
+                John       
+                Laura      
+			   ./bdsh -f file.json select user,age age,firstname,lastname join id where age=42
+                age  | firstname  | lastname
+                ------------------------------
+                42   | John       | SMITH
+			   
+  delete		remove data from table
+			Example:
+			   ./bdsh -f file.json delete user where lastname=SMITH
+                3 row(s) deleted
+
+Shell:
+	Shell must be /bin/sh (#shebang)
+
+$> ./bdsh -f fic.json 
+
+
+-------------------------------------------------------------------------------
+
+The 'update' and 'delete' commands will not be tested automatically and will be considered as bonuses.
+
+Authorized binaries :
+  * [
+  * test
+  * expr
+  * wc
+  * head
+  * tail
+  * cat
+  * sort
+  * grep
+  * sed
+  * rm (be careful, you do not have writing permissions on your current directory !)
+  * cut
+  * ps
+  * tr
+  * touch
+  * mkdir
+  * find== Running make test for B-SHL-300 ==
+sh tests/test.sh
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create database
+[OK ] create database
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table user id,firstname,lastname
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table age id,age
+awk: cmd. line:1: BEGIN{blk=0,done=0}
+awk: cmd. line:1:            ^ syntax error
+[KO ] create table age
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=1,firstname=John,lastname=SMITH
+awk: cmd. line:2:     BEGIN{inT=0,done=0}
+awk: cmd. line:2:                ^ syntax error
+[KO ] insert 1
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=4,firstname="Robert John",lastname=WILLIAMS
+awk: cmd. line:2:     BEGIN{inT=0,done=0}
+awk: cmd. line:2:                ^ syntax error
+[KO ] insert 2
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=2,firstname=Lisa,lastname=SIMPSON
+awk: cmd. line:2:     BEGIN{inT=0,done=0}
+awk: cmd. line:2:                ^ syntax error
+[KO ] insert 3
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=10,lastname=SMITH
+awk: cmd. line:2:     BEGIN{inT=0,done=0}
+awk: cmd. line:2:                ^ syntax error
+[KO ] insert 4
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user firstname=Laura,lastname=SMITH
+awk: cmd. line:2:     BEGIN{inT=0,done=0}
+awk: cmd. line:2:                ^ syntax error
+[KO ] insert 5
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=9
+awk: cmd. line:2:     BEGIN{inT=0,done=0}
+awk: cmd. line:2:                ^ syntax error
+[KO ] insert 6
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert age id=1,age=42
+awk: cmd. line:2:     BEGIN{inT=0,done=0}
+awk: cmd. line:2:                ^ syntax error
+[KO ] insert age
+      failed
+awk: cmd. line:4: warning: escape sequence `\[' treated as plain `['
+awk: cmd. line:15: warning: regexp escape sequence `\"' is not a known regexp operator
+awk: cmd. line:4: (FILENAME=/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json FNR=6) fatal: invalid regexp: Invalid regular expression: /"user"[ ]*:[ ]*[/
+make: *** [Makefile:9: test] Error 2
+== Running tests for B-CPE-100 subprojects ==
+[OK] n=1
+[OK] n=2
+[OK] n=4
+[OK] n=5
+[OK] n=0 error
+OK=5 KO=0
+[OK] n=1
+[OK] n=2
+[OK] n=3
+[OK] n=4
+[OK] n=5
+[OK] n=0 error
+OK=6 KO=0
+[OK] program exit 0
+[OK] no X
+[OK] has digits
+OK=3 KO=0
+[OK] match 'abc' 'abc'
+[OK] nmatch 'abc' 'abc'
+[OK] match 'abc' 'a*c'
+[OK] nmatch 'abc' 'a*c'
+[OK] match 'abc' '*'
+[OK] nmatch 'abc' '*'
+[OK] match 'abcdef' 'a*f'
+[OK] nmatch 'abcdef' 'a*f'
+[OK] match 'abcdef' 'a*d*f'
+[OK] nmatch 'abcdef' 'a*d*f'
+[OK] match 'aaaa' 'a*'
+[OK] nmatch 'aaaa' 'a*'
+[OK] match 'aaaa' '*a'
+[OK] nmatch 'aaaa' '*a'
+[OK] match 'abacabaaa' 'a*a*a'
+[OK] nmatch 'abacabaaa' 'a*a*a'
+[OK] match 'abc' 'ab*d'
+[OK] nmatch 'abc' 'ab*d'
+OK=18 KO=0
+== End tests for B-CPE-100 ==
+== Build+test EvalExpr ==
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o main.o main.c
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/eval_expr.o src/eval_expr.c
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/io.o src/io.c
+gcc main.o src/eval_expr.o src/io.o -o eval_expr 
+sh tests/test.sh
+[OK ] (3+2)*5
+[OK ] 2+2
+[OK ] 10-3-2
+[OK ] 18/3/3
+[OK ] 5*3%4
+[KO ] 40 + (2*5) - 7 -> got '43'
+[OK ] -3+10
+[KO ] -(2-5) -> got '0'
+-----
+Passed: 6  Failed: 2
+make: *** [Makefile:28: test] Error 1
+== End EvalExpr ==
+== Re-run EvalExpr tests ==
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/eval_expr.o src/eval_expr.c
+gcc main.o src/eval_expr.o src/io.o -o eval_expr 
+sh tests/test.sh
+[OK ] (3+2)*5
+[OK ] 2+2
+[OK ] 10-3-2
+[OK ] 18/3/3
+[OK ] 5*3%4
+[OK ] 40 + (2*5) - 7
+[OK ] -3+10
+[OK ] -(2-5)
+-----
+Passed: 8  Failed: 0
+== End EvalExpr tests ==
+== Re-run make test for B-SHL-300 after no-awk rewrite ==
+rm -f tests/tmp/*.json 2>/dev/null || true
+sh tests/test.sh
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create database
+[OK ] create database
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table user id,firstname,lastname
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table age id,age
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=1,firstname=John,lastname=SMITH
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=4,firstname="Robert John",lastname=WILLIAMS
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=2,firstname=Lisa,lastname=SIMPSON
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=10,lastname=SMITH
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user firstname=Laura,lastname=SMITH
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=9
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert age id=1,age=42
+/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh: 234: colw_1=9: not found
+make: *** [Makefile:9: test] Error 127
+== End ==
+== Re-run BDSH tests after format_table simplification ==
+sh tests/test.sh
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create database
+[OK ] create database
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table user id,firstname,lastname
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table age id,age
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=1,firstname=John,lastname=SMITH
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=4,firstname="Robert John",lastname=WILLIAMS
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=2,firstname=Lisa,lastname=SIMPSON
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=10,lastname=SMITH
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user firstname=Laura,lastname=SMITH
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=9
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert age id=1,age=42
+[OK ] select projection
+[KO ] select where
+      firstname | id
+      ----------|---
+sort: multi-character tab ‘\\t’
+make: *** [Makefile:9: test] Error 2
+== End ==
+== Clean and retest BDSH with simplified DB structure ==
+sh tests/test.sh
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create database
+[OK ] create database
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table user id,firstname,lastname
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table age id,age
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=1,firstname=John,lastname=SMITH
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=4,firstname="Robert John",lastname=WILLIAMS
+bdsh: unknown table 'user'
+[KO ] insert 2
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=2,firstname=Lisa,lastname=SIMPSON
+bdsh: unknown table 'user'
+[KO ] insert 3
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=10,lastname=SMITH
+bdsh: unknown table 'user'
+[KO ] insert 4
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user firstname=Laura,lastname=SMITH
+bdsh: unknown table 'user'
+[KO ] insert 5
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=9
+bdsh: unknown table 'user'
+[KO ] insert 6
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert age id=1,age=42
+[OK ] select projection
+[KO ] select where
+      firstname | id
+      ----------|---
+sort: multi-character tab ‘\\t’
+make: *** [Makefile:9: test] Error 2
+== End ==
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/main.o src/main.c
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/bsq.o src/bsq.c
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/io.o src/io.c
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/map.o src/map.c
+gcc src/main.o src/bsq.o src/io.o src/map.o -o bsq 
+sh tests/test.sh
+[OK ] 5x6 basic
+[OK ] 1x1 empty
+[KO ] 1x6 line
+--- /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-110/BSQ/tests/tmp/exp3.map	2025-09-12 10:38:31.694329001 +0000
++++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-110/BSQ/tests/tmp/out.txt	2025-09-12 10:38:31.695329001 +0000
+@@ -1 +1 @@
+-xxxxxx
++x.....
+[KO ] 6x1 column
+--- /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-110/BSQ/tests/tmp/exp4.map	2025-09-12 10:38:31.699329002 +0000
++++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-110/BSQ/tests/tmp/out.txt	2025-09-12 10:38:31.700329002 +0000
+@@ -1,6 +1,6 @@
+ x
+-x
+-x
+-x
+-x
+-x
++.
++.
++.
++.
++.
+-----
+Passed: 2  Failed: 2
+make: *** [Makefile:26: test] Error 1
+sh tests/test.sh
+[OK ] 5x6 basic
+[OK ] 1x1 empty
+[OK ] 1x6 line
+[OK ] 6x1 column
+-----
+Passed: 4  Failed: 0
+== Clean BDSH tmp and retest suite ==
+sh tests/test.sh
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create database
+[OK ] create database
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table user id,firstname,lastname
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table age id,age
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=1,firstname=John,lastname=SMITH
+sed: -e expression #1, char 6: unterminated address regex
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=4,firstname="Robert John",lastname=WILLIAMS
+bdsh: unknown table 'user'
+[KO ] insert 2
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=2,firstname=Lisa,lastname=SIMPSON
+bdsh: unknown table 'user'
+[KO ] insert 3
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=10,lastname=SMITH
+bdsh: unknown table 'user'
+[KO ] insert 4
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user firstname=Laura,lastname=SMITH
+bdsh: unknown table 'user'
+[KO ] insert 5
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=9
+bdsh: unknown table 'user'
+[KO ] insert 6
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert age id=1,age=42
+bdsh: unknown table 'age'
+[KO ] insert age
+      failed
+[OK ] select projection
+[KO ] select where
+      firstname | id
+      ----------|---
+[OK ] select orderby
+[KO ] select join
+      age | firstname | lastname
+      ----|-----------|---------
+[OK ] select -j
+-----
+Passed: 4  Failed: 8
+make: *** [Makefile:9: test] Error 1
+== End ==
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/main.o src/main.c
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/ls.o src/ls.c
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/print.o src/print.c
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/sort.o src/sort.c
+gcc src/main.o src/ls.o src/print.o src/sort.o -o my_ls 
+sh tests/test.sh
+[OK ] basic
+[OK ] -a shows hidden
+[OK ] -t sort
+[OK ] -R header
+[KO ] -l format
+      total 16
+      drwxrwxr-x  3 roro roro   4096 Sep 12 11:52 a
+      -rw-rw-r--  1 roro roro      4 Sep 12 11:52 file1
+      -rw-rw-r--  1 roro roro      4 Sep 12 11:52 file2
+      drwxrwxr-x  2 roro roro   4096 Sep 12 11:52 x
+-----
+Passed: 4  Failed: 1
+make: *** [Makefile:26: test] Error 1
+sh tests/test.sh
+[OK ] basic
+[OK ] -a shows hidden
+[OK ] -t sort
+[OK ] -R header
+[OK ] -l format
+-----
+Passed: 5  Failed: 0
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/main.o src/main.c
+src/main.c: In function ‘print_usage’:
+src/main.c:9:5: error: implicit declaration of function ‘dprintf’; did you mean ‘vprintf’? [-Werror=implicit-function-declaration]
+    9 |     dprintf(2, "Usage: %s mapfile\n", p);
+      |     ^~~~~~~
+      |     vprintf
+cc1: all warnings being treated as errors
+make: *** [<builtin>: src/main.o] Error 1
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/main.o src/main.c
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/map.o src/map.c
+src/map.c: In function ‘read_file’:
+src/map.c:17:9: error: this ‘if’ clause does not guard... [-Werror=misleading-indentation]
+   17 |         if (r == 0) break; len += (size_t)r;
+      |         ^~
+src/map.c:17:28: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   17 |         if (r == 0) break; len += (size_t)r;
+      |                            ^~~
+src/map.c: In function ‘free_map’:
+src/map.c:57:5: error: this ‘if’ clause does not guard... [-Werror=misleading-indentation]
+   57 |     if (!m) return; free(m->cells); free(m->targets); memset(m,0,sizeof(*m));
+      |     ^~
+src/map.c:57:21: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   57 |     if (!m) return; free(m->cells); free(m->targets); memset(m,0,sizeof(*m));
+      |                     ^~~~
+cc1: all warnings being treated as errors
+make: *** [<builtin>: src/map.o] Error 1
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/map.o src/map.c
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/game.o src/game.c
+src/game.c:4:12: error: ‘can_move_into’ defined but not used [-Werror=unused-function]
+    4 | static int can_move_into(char c){ return (c==' '); }
+      |            ^~~~~~~~~~~~~
+cc1: all warnings being treated as errors
+make: *** [<builtin>: src/game.o] Error 1
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/game.o src/game.c
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/io.o src/io.c
+gcc src/main.o src/map.o src/game.o src/io.o -o my_sokoban 
+sh tests/test.sh
+[OK ] usage no arg
+[OK ] render initial
+[OK ] push onto target
+[OK ] collision wall
+-----
+Passed: 4  Failed: 0
