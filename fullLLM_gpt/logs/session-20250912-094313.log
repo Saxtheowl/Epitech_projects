@@ -496,3 +496,242 @@ sh tests/test.sh
 [OK ] collision wall
 -----
 Passed: 4  Failed: 0
+sh tests/test.sh
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create database
+[OK ] create database
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table user id,firstname,lastname
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table age id,age
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=1,firstname=John,lastname=SMITH
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=4,firstname="Robert John",lastname=WILLIAMS
+bdsh: unknown table 'user'
+[KO ] insert 2
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=2,firstname=Lisa,lastname=SIMPSON
+bdsh: unknown table 'user'
+[KO ] insert 3
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=10,lastname=SMITH
+bdsh: unknown table 'user'
+[KO ] insert 4
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user firstname=Laura,lastname=SMITH
+bdsh: unknown table 'user'
+[KO ] insert 5
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=9
+bdsh: unknown table 'user'
+[KO ] insert 6
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert age id=1,age=42
+bdsh: unknown table 'age'
+[KO ] insert age
+      failed
+[OK ] select projection
+[KO ] select where
+      firstname | id
+      ----------|---
+[OK ] select orderby
+[KO ] select join
+      age | firstname | lastname
+      ----|-----------|---------
+[OK ] select -j
+-----
+Passed: 4  Failed: 8
+make: *** [Makefile:9: test] Error 1
+sh tests/test.sh
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create database
+[OK ] create database
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table user id,firstname,lastname
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table age id,age
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=1,firstname=John,lastname=SMITH
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=4,firstname="Robert John",lastname=WILLIAMS
+bdsh: unknown table 'user'
+[KO ] insert 2
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=2,firstname=Lisa,lastname=SIMPSON
+bdsh: unknown table 'user'
+[KO ] insert 3
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=10,lastname=SMITH
+bdsh: unknown table 'user'
+[KO ] insert 4
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user firstname=Laura,lastname=SMITH
+bdsh: unknown table 'user'
+[KO ] insert 5
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=9
+bdsh: unknown table 'user'
+[KO ] insert 6
+      failed
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert age id=1,age=42
+bdsh: unknown table 'age'
+[KO ] insert age
+      failed
+[OK ] select projection
+[KO ] select where
+      firstname | id
+      ----------|---
+[OK ] select orderby
+[KO ] select join
+      age | firstname | lastname
+      ----|-----------|---------
+[OK ] select -j
+-----
+Passed: 4  Failed: 8
+make: *** [Makefile:9: test] Error 1
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/main.o src/main.c
+src/main.c: In function ‘main’:
+src/main.c:19:9: error: variable ‘batch’ set but not used [-Werror=unused-but-set-variable]
+   19 |     int batch = 1;  // one-shot batch
+      |         ^~~~~
+cc1: all warnings being treated as errors
+make: *** [<builtin>: src/main.o] Error 1
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/main.o src/main.c
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/proc.o src/proc.c
+src/proc.c: In function ‘cpu_usage’:
+src/proc.c:85:5: error: this ‘if’ clause does not guard... [-Werror=misleading-indentation]
+   85 |     if (totald==0) return 0.0; return (double)(totald - idled) * 100.0 / (double)totald;
+      |     ^~
+src/proc.c:85:32: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   85 |     if (totald==0) return 0.0; return (double)(totald - idled) * 100.0 / (double)totald;
+      |                                ^~~~~~
+src/proc.c: In function ‘proc_cpu_percent’:
+src/proc.c:92:5: error: this ‘if’ clause does not guard... [-Werror=misleading-indentation]
+   92 |     if (total_jiffies <= 0.0) return 0.0; return (double)du * 100.0 / total_jiffies;
+      |     ^~
+src/proc.c:92:43: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   92 |     if (total_jiffies <= 0.0) return 0.0; return (double)du * 100.0 / total_jiffies;
+      |                                           ^~~~~~
+src/proc.c: In function ‘proc_mem_percent’:
+src/proc.c:99:5: error: this ‘if’ clause does not guard... [-Werror=misleading-indentation]
+   99 |     if (mem_total_kb==0) return 0.0; return (double)rss_kb * 100.0 / (double)mem_total_kb;
+      |     ^~
+src/proc.c:99:38: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   99 |     if (mem_total_kb==0) return 0.0; return (double)rss_kb * 100.0 / (double)mem_total_kb;
+      |                                      ^~~~~~
+cc1: all warnings being treated as errors
+make: *** [<builtin>: src/proc.o] Error 1
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/proc.o src/proc.c
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/format.o src/format.c
+gcc src/main.o src/proc.o src/format.o -o my_top 
+sh tests/test.sh
+[OK ] header
+[OK ] has rows
+-----
+Passed: 2  Failed: 0
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/main.o src/main.c
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/map.o src/map.c
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/io.o src/io.c
+gcc src/main.o src/map.o src/io.o -o my_navy 
+sh tests/test.sh
+[OK ] usage
+[OK ] invalid args
+[OK ] load map
+[OK ] invalid overlap
+-----
+Passed: 4  Failed: 0
+src/comm.c: In function ‘send_coord’:
+src/comm.c:76:5: error: this ‘if’ clause does not guard... [-Werror=misleading-indentation]
+   76 |     if (x1based < 1) x1based = 1; if (x1based > 10) x1based = 10;
+      |     ^~
+src/comm.c:76:35: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   76 |     if (x1based < 1) x1based = 1; if (x1based > 10) x1based = 10;
+      |                                   ^~
+src/comm.c:77:5: error: this ‘if’ clause does not guard... [-Werror=misleading-indentation]
+   77 |     if (y1based < 1) y1based = 1; if (y1based > 10) y1based = 10;
+      |     ^~
+src/comm.c:77:35: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   77 |     if (y1based < 1) y1based = 1; if (y1based > 10) y1based = 10;
+      |                                   ^~
+src/comm.c:78:55: error: implicit declaration of function ‘usleep’; did you mean ‘sleep’? [-Werror=implicit-function-declaration]
+   78 |     for (int i=0;i<x1based;i++) { kill(pid, SIGUSR1); usleep(2000); }
+      |                                                       ^~~~~~
+      |                                                       sleep
+cc1: all warnings being treated as errors
+make: *** [<builtin>: src/comm.o] Error 1
+cp: cannot stat 'tests/tmp/map1': No such file or directory
+src/comm.c: In function ‘send_shot_result’:
+src/comm.c:106:36: error: implicit declaration of function ‘usleep’; did you mean ‘sleep’? [-Werror=implicit-function-declaration]
+  106 |     if (hit) { kill(pid, SIGUSR1); usleep(2000); }
+      |                                    ^~~~~~
+      |                                    sleep
+cc1: all warnings being treated as errors
+make: *** [<builtin>: src/comm.o] Error 1
+cp: cannot stat 'tests/tmp/map1': No such file or directory
+Built.
+== Run My_navy integration test ==
+[KO ] P1 wins
+      my_pid: 40078
+      waiting for enemy connection...
+      
+      enemy connected
+      
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: miss
+      no move
+      my positions:
+      o.2......5
+      o.2......5
+      o........5
+      o..333...5
+      o........5
+      o.........
+      o.........
+      o.........
+      o.........
+      4444......
+      
+      enemy's positions:
+      ..x......x
+      ..x......x
+      .........x
+      ...xxx...x
+      .........o
+      ..........
+      ..........
+      ..........
+      ..........
+      xxxx......
+[KO ] P2 loses
+      my_pid: 40082
+      successfully connected
+      
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: hit
+      result: miss
+-----
+Passed: 0  Failed: 2
+== End My_navy IT ==
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/main.o src/main.c
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/solver.o src/solver.c
+gcc -std=c99 -Wall -Wextra -Werror -Iinclude  -c -o src/io.o src/io.c
+gcc src/main.o src/solver.o src/io.o -o my_sudo 
+sh tests/test.sh
+[OK ] solve known grid
+[OK ] invalid input
+-----
+Passed: 2  Failed: 0

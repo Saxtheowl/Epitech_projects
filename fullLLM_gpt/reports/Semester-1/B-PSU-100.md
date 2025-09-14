@@ -64,15 +64,9 @@ Root: `Semester-1/B-PSU-100`
 
 - Source: `My_Top/My_Top/B-PSU-100_my_top.pdf`
 
-- Aperçu (PDF): extraction indisponible
-
-- Exigences (préliminaire):
-
-  - MUST: À préciser d'après le sujet
-
-  - SHOULD: Tests automatisés + Makefile
-
-  - OPTIONAL: Optimisations, bonus
+- Implémentation: binaire `my_top` (mode batch one‑shot) affichant PID, USER, S, %CPU, %MEM, VSZ, RSS, UTIME, STIME, COMMAND. %CPU calculé entre deux snapshots /proc; %MEM basé sur RSS/ MemTotal. Options prises en charge: `-n N`, `-b`.
+- Build/Tests: Makefile présent; `make test` exécute `tests/test.sh` (vérifie l'en‑tête et la présence de lignes) — OK.
+- README: ajouté dans `Semester-1/B-PSU-100/My_Top/`.
 
 
 ## Plan (générique)
@@ -100,4 +94,6 @@ Root: `Semester-1/B-PSU-100`
 - Scaffolding de tests: en cours de déploiement
 
 - Implémentations: à prioriser par simplicité
+  - My_ls: implémenté et testé (5 cas). Reste à étoffer selon PDF complet.
+  - My_Top: implémenté (batch minimal) et testé (2 vérifications). Reste à étendre selon PDF complet (rafraîchissement, tris, colonnes additionnelles si demandées).
   - My_ls: implémenté et testé (5 cas). Reste à étoffer selon PDF complet si besoin (compat. options supplémentaires, formats particuliers).

@@ -1,0 +1,57 @@
+my_pid: 73989
+successfully connected
+
+send_coord: ACK timeout on X pulse
+result: miss
+result: miss
+recv_coord: timeout waiting Y-SEP
+result: miss
+send_coord: ACK timeout on X pulse
+result: miss
+send_coord: ACK timeout on X pulse
+result: miss
+send_coord: ACK timeout on X pulse
+result: miss
+result: miss
+recv_coord: timeout waiting Y-SEP
+result: miss
+recv_coord: timeout waiting Y-SEP
+result: miss
+send_coord: ACK timeout on X pulse
+result: miss
+send_coord: ACK timeout on X pulse
+result: miss
+result: miss
+result: miss
+send_coord: ACK timeout on Y pulse
+send_coord: ACK timeout on Y pulse
+send_coord: ACK timeout on Y pulse
+send_coord: ACK timeout on Y pulse
+send_coord: ACK timeout on Y pulse
+result: miss
+recv_coord: timeout waiting X-SEP
+recv_coord: timeout waiting Y-SEP
+no move
+my positions:
+oo2oo....x
+..x......x
+.........x
+o..3xx...5
+....o....5
+..........
+..........
+..........
+..........
+xx44......
+
+enemy's positions:
+o.........
+o.........
+o.........
+o.........
+o.........
+o.........
+o.........
+o.........
+o.........
+..........

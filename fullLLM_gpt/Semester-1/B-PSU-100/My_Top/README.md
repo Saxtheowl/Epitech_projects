@@ -1,34 +1,23 @@
 # My_Top
 
-> Timeline: ? semaines
+Outil de type “top” en mode batch: affiche une vue instantanée des processus avec pourcentages CPU/MEM et infos principales.
 
-> Nombre de personnes sur le projet: ?
+Fonctionnalités
+- Colonnes: PID, USER, S (state), %CPU, %MEM, VSZ (KB), RSS (pages), UTIME, STIME, COMMAND.
+- Options: `-n N` limite le nombre de lignes affichées; `-b` active le mode batch (one‑shot).
+- Calculs: %CPU basé sur deux snapshots rapprochés de `/proc/stat` et `/proc/[pid]/stat`; %MEM basé sur RSS vs MemTotal.
 
-<br>
+Build
+- `make` construit le binaire `my_top`.
+- `make clean | fclean | re` pour nettoyer/reconstruire.
 
-📂---[Bootstrap_My_Top](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1/B-PSU-100/My_Top/Bootstrap_My_Top)
+Run
+- `./my_top -b -n 10` affiche les 10 premières lignes en one‑shot.
 
-ㅤㅤ|\_\_\_[B-PSU-100_my_top_bootstrap.pdf](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-PSU-100/My_Top/Bootstrap_My_Top/B-PSU-100_my_top_bootstrap.pdf)
+Tests
+- `make test` exécute `tests/test.sh` et vérifie l’en‑tête et la présence de lignes de processus.
 
-|\_\_\_[My_Top](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1/B-PSU-100/My_Top/My_Top)
+Notes
+- Implémentation POSIX en C via `/proc` (Linux).
+- Ce batch minimal peut être étendu pour suivre fidèlement tous les critères du PDF si requis.
 
-ㅤㅤ|\_\_\_[B-PSU-100_my_top.pdf](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-PSU-100/My_Top/My_Top/B-PSU-100_my_top.pdf)
-
-
-<br>
-
-[↩️ Revenir au module](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1/B-PSU-100)
-
-[↩️ Revenir au Semester-1](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1)
-
-[↩️ Revenir à l'accueil](https://github.com/Studio-17/Epitech-Subjects)
-
-<br>
-
----
-
-<div align="center">
-
-<a href="https://github.com/Studio-17" target="_blank"><img src="../../../assets/voc17.gif" width="40"></a>
-
-</div>

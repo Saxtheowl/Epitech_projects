@@ -2,22 +2,23 @@
 ## EPITECH PROJECT, 2024
 ## EvalExpr
 ## File description:
-## Makefile
+## Makefile for eval_expr
 ##
 
-NAME	= libmy.a
+CC      = gcc
+CFLAGS  = -Wall -Wextra -Werror
+NAME    = eval_expr
 
-SRC	= eval_expr.c
+SRC     = main.c \
+          eval_expr.c \
+          my_utils.c
 
-OBJ	= $(SRC:.c=.o)
-
-CFLAGS	= -Wall -Wextra -Werror
+OBJ     = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	$(CC) -o $(NAME) $(OBJ)
 
 clean:
 	rm -f $(OBJ)

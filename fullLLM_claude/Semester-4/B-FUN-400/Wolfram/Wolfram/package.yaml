@@ -1,0 +1,36 @@
+name:                wolfram
+version:             0.1.0.0
+github:              "epitech/wolfram"
+license:             BSD3
+author:              "Epitech Student"
+maintainer:          "student@epitech.eu"
+copyright:           "2024 Epitech"
+
+extra-source-files:
+- README.md
+
+synopsis:            Elementary Cellular Automaton
+category:            Simulation
+
+description:         Please see the README on GitHub at <https://github.com/epitech/wolfram#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+  dependencies: []
+
+executables:
+  wolfram:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - wolfram
+
+default-extensions:
+- OverloadedStrings

@@ -1,0 +1,81 @@
+my_pid: 73985
+waiting for enemy connection...
+
+enemy connected
+
+result: miss
+recv_coord: timeout waiting Y-SEP
+result: miss
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+result: miss
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+result: miss
+recv_coord: timeout waiting Y-SEP
+result: miss
+recv_coord: timeout waiting Y-SEP
+result: miss
+recv_coord: timeout waiting Y-SEP
+result: miss
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+result: hit
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+result: miss
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+result: miss
+recv_coord: timeout waiting Y-SEP
+result: miss
+recv_coord: timeout waiting Y-SEP
+result: miss
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+result: miss
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+send_coord: ACK timeout on X pulse
+result: hit
+recv_coord: timeout waiting Y-SEP
+no move
+my positions:
+oo2ooo...5
+o.2......5
+o........5
+o..333...5
+.........5
+..........
+o.........
+o.........
+o.........
+4444......
+
+enemy's positions:
+..o......o
+..o......o
+.........o
+...ooo...o
+.........x
+..........
+..........
+..........
+..........
+ooxo......

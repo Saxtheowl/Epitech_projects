@@ -101,8 +101,10 @@ write_db() {
 
 # Same as write_db but reads rows for each table from a directory
 write_db_from_dir() {
-  file="$1"; names="$2"; rows_dir="$3"
+  file="$1"; rows_dir="$2"
   tmp="$file.tmp.$$"
+  # Build names list from rows_dir
+  names=$(ls -1 "$rows_dir"/*.rows 2>/dev/null | sed 's#.*/##; s/\.rows$//' | sort)
   echo "{" > "$tmp"
   tcount=0; for _n in $names; do tcount=$((tcount+1)); done
   i=1
@@ -147,12 +149,9 @@ create_table() {
     for n in $names; do
       db_get_rows "$file" "$n" > "$dir/$n.rows"
     done
-    names="$names $table"
-  else
-    names="$table"
   fi
   : > "$dir/$table.rows"
-  write_db_from_dir "$file" "$names" "$dir"
+  write_db_from_dir "$file" "$dir"
   rm -rf "$dir" 2>/dev/null || true
 }
 
@@ -188,7 +187,7 @@ insert_row() {
   else
     printf "%s\n" "$row" > "$dir/$table.rows"
   fi
-  write_db_from_dir "$file" "$names" "$dir"
+  write_db_from_dir "$file" "$dir"
   rm -rf "$dir" 2>/dev/null || true
 }
 

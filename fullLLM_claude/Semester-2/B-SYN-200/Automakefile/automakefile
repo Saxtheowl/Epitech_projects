@@ -1,0 +1,203 @@
+#!/bin/bash
+
+# automakefile - Generate Makefiles from configuration files
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <config_file>" >&2
+    exit 84
+fi
+
+config_file="$1"
+
+if [ ! -f "$config_file" ]; then
+    echo "Error: Config file '$config_file' not found" >&2
+    exit 84
+fi
+
+# Default values
+PROJECT_DIR=""
+SOURCES_DIR="."
+HEADERS_DIR="include"
+LIBS_DIR="lib"
+BCK_DIR="backup"
+EXEC="a.out"
+CC="gcc"
+CFLAGS="-Wall -Wextra -Werror"
+LDFLAGS=""
+ZIP="tar"
+ZIPFLAGS="-czf"
+UNZIP="tar"
+UNZIPFLAGS="-xzf"
+
+# Arrays for source files and their dependencies
+declare -A source_files
+declare -A dependencies
+
+# Parse configuration file
+while IFS=';' read -r key value; do
+    # Skip empty lines and comments
+    [[ -z "$key" || "$key" =~ ^#.*$ ]] && continue
+    
+    case "$key" in
+        PROJECT_DIR) PROJECT_DIR="$value" ;;
+        SOURCES_DIR) SOURCES_DIR="$value" ;;
+        HEADERS_DIR) HEADERS_DIR="$value" ;;
+        LIBS_DIR) LIBS_DIR="$value" ;;
+        BCK_DIR) BCK_DIR="$value" ;;
+        EXEC) EXEC="$value" ;;
+        CC) CC="$value" ;;
+        CFLAGS) CFLAGS="$value" ;;
+        LDFLAGS) LDFLAGS="$value" ;;
+        ZIP) ZIP="$value" ;;
+        ZIPFLAGS) ZIPFLAGS="$value" ;;
+        UNZIP) UNZIP="$value" ;;
+        UNZIPFLAGS) UNZIPFLAGS="$value" ;;
+        *.c) 
+            source_files["$key"]=1
+            dependencies["$key"]="$value"
+            ;;
+    esac
+done < "$config_file"
+
+# Check mandatory fields
+if [ -z "$PROJECT_DIR" ]; then
+    echo "Error: PROJECT_DIR is mandatory" >&2
+    exit 84
+fi
+
+if [ ${#source_files[@]} -eq 0 ]; then
+    echo "Error: At least one source file is required" >&2
+    exit 84
+fi
+
+# Create Makefile path
+makefile_path="$PROJECT_DIR/Makefile"
+
+# Generate object files list
+obj_files=""
+for src in "${!source_files[@]}"; do
+    obj_file="${src%.c}.o"
+    obj_files="$obj_files $obj_file"
+done
+
+# Generate Makefile
+cat > "$makefile_path" << EOF
+##
+## EPITECH PROJECT, $(date +%Y)
+## $PROJECT_DIR
+## File description:
+## Generated Makefile by automakefile
+##
+
+NAME = $EXEC
+
+SRC = $(echo "${!source_files[@]}" | tr ' ' '\n' | sort | tr '\n' ' ')
+
+OBJ = \$(SRC:.c=.o)
+
+CC = $CC
+
+CFLAGS = $CFLAGS
+
+LDFLAGS = $LDFLAGS
+
+SOURCES_DIR = $SOURCES_DIR
+
+HEADERS_DIR = $HEADERS_DIR
+
+LIBS_DIR = $LIBS_DIR
+
+BCK_DIR = $BCK_DIR
+
+ZIP = $ZIP
+
+ZIPFLAGS = $ZIPFLAGS
+
+UNZIP = $UNZIP
+
+UNZIPFLAGS = $UNZIPFLAGS
+
+VERSION_FILE = \$(BCK_DIR)/.version
+
+all: \$(NAME)
+
+\$(NAME): \$(OBJ)
+	\$(CC) -o \$(NAME) \$(OBJ) \$(LDFLAGS)
+
+clean:
+	rm -f \$(OBJ)
+
+fclean: clean
+	rm -f \$(NAME)
+
+re: fclean all
+
+# Version management rules
+archive:
+	@mkdir -p \$(BCK_DIR)
+	@if [ ! -f \$(VERSION_FILE) ]; then echo "0" > \$(VERSION_FILE); fi
+	@VERSION=\$\$((\$\$(cat \$(VERSION_FILE)) + 1)); \\
+	echo "\$\$VERSION" > \$(VERSION_FILE); \\
+	ARCHIVE_NAME="\$(NAME)_v\$\$VERSION.tgz"; \\
+	\$(ZIP) \$(ZIPFLAGS) \$(BCK_DIR)/\$\$ARCHIVE_NAME \$(SRC) \$(HEADERS_DIR) Makefile; \\
+	echo "\$\$ARCHIVE_NAME file generated."
+
+revert:
+	@if [ ! -f \$(VERSION_FILE) ]; then echo "No backup available"; exit 1; fi
+	@VERSION=\$\$(cat \$(VERSION_FILE)); \\
+	if [ "\$\$VERSION" = "0" ]; then echo "No backup available"; exit 1; fi; \\
+	ARCHIVE_NAME="\$(NAME)_v\$\$VERSION.tgz"; \\
+	if [ -f \$(BCK_DIR)/\$\$ARCHIVE_NAME ]; then \\
+		\$(UNZIP) \$(UNZIPFLAGS) \$(BCK_DIR)/\$\$ARCHIVE_NAME; \\
+	else \\
+		echo "Backup file \$\$ARCHIVE_NAME not found"; \\
+		exit 1; \\
+	fi
+
+num:
+	@if [ ! -f \$(VERSION_FILE) ]; then echo "0"; else cat \$(VERSION_FILE); fi
+
+delete:
+	@if [ ! -f \$(VERSION_FILE) ]; then echo "No backup to delete"; exit 1; fi
+	@VERSION=\$\$(cat \$(VERSION_FILE)); \\
+	if [ "\$\$VERSION" = "0" ]; then echo "No backup to delete"; exit 1; fi; \\
+	ARCHIVE_NAME="\$(NAME)_v\$\$VERSION.tgz"; \\
+	rm -f \$(BCK_DIR)/\$\$ARCHIVE_NAME; \\
+	VERSION=\$\$((\$\$VERSION - 1)); \\
+	echo "\$\$VERSION" > \$(VERSION_FILE)
+
+.PHONY: all clean fclean re archive revert num delete
+
+EOF
+
+# Generate dependency rules for object files
+for src in "${!source_files[@]}"; do
+    obj_file="${src%.c}.o"
+    deps="${dependencies[$src]}"
+    
+    # Convert header dependencies to full paths if they exist
+    full_deps=""
+    if [ -n "$deps" ]; then
+        for dep in $deps; do
+            if [[ "$dep" == *.h ]]; then
+                if [[ "$dep" == */* ]]; then
+                    # Already has path
+                    full_deps="$full_deps \$(HEADERS_DIR)/$dep"
+                else
+                    # Add headers directory
+                    full_deps="$full_deps \$(HEADERS_DIR)/$dep"
+                fi
+            else
+                full_deps="$full_deps $dep"
+            fi
+        done
+    fi
+    
+    cat >> "$makefile_path" << EOF
+
+$obj_file: \$(SOURCES_DIR)/$src$full_deps
+	\$(CC) \$(CFLAGS) -I\$(HEADERS_DIR) -c \$(SOURCES_DIR)/$src -o $obj_file
+EOF
+done
+
+echo "Makefile generated successfully in $PROJECT_DIR/"

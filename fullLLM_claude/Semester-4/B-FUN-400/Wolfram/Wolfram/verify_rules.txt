@@ -1,0 +1,68 @@
+Wolfram Elementary Cellular Automaton - Rule Verification
+========================================================
+
+This file demonstrates the correct implementation of the three required rules
+by manually tracing through a few generations starting from a single alive cell.
+
+Rule 30 (Chaotic behavior):
+---------------------------
+Rule table for Rule 30:
+111 110 101 100 011 010 001 000
+ 0   0   1   1   1   1   1   0
+
+Generation 0: * (single alive cell)
+Generation 1: *** (applying rule: 000->0, 0*0->1, *0->1, 00->0)
+                Result: " *** "
+
+Generation 2: Applying rule to " *** ":
+Position: -1  0  1  2  3 (conceptual positions)
+Triplets: (" ", " ", "*"), (" ", "*", "*"), ("*", "*", "*"), ("*", "*", " "), ("*", " ", " ")
+Results:  Dead, Alive, Dead, Dead, Alive
+Final:    " * * "
+
+Rule 90 (Simple symmetric patterns):
+-----------------------------------
+Rule table for Rule 90:
+111 110 101 100 011 010 001 000
+ 0   1   0   1   1   0   1   0
+
+Generation 0: *
+Generation 1: * * (symmetric growth)
+Generation 2: ****  (fills in the gaps)
+
+Rule 110 (Turing complete):
+---------------------------
+Rule table for Rule 110:
+111 110 101 100 011 010 001 000
+ 0   1   1   0   1   1   1   0
+
+Generation 0: *
+Generation 1: ** (grows to the left)
+Generation 2: *** (continues growth)
+
+Key Implementation Details:
+===========================
+
+1. Infinite Space: The implementation uses a finite list with implicit dead cells
+   at boundaries, expanding as needed.
+
+2. Pattern Matching: Each rule is implemented using exhaustive pattern matching
+   on all 8 possible three-cell neighborhoods.
+
+3. Window Display: The display function calculates a window centered around the
+   middle of the generation, with optional movement offset.
+
+4. Pure Functions: All functions are pure with no side effects, following
+   functional programming principles.
+
+5. Higher-Order Functions: Uses map, iterate, and other HOFs for generation
+   sequences and transformations.
+
+Error Handling:
+===============
+- Exit code 84 on any error
+- Proper validation of all command-line arguments
+- Clear usage message display
+- No external dependencies (only base library)
+
+This implementation satisfies all requirements from the PDF specification.

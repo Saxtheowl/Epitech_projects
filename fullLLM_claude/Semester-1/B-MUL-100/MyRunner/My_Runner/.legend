@@ -1,0 +1,14 @@
+MyRunner Map Legend
+
+0 - Empty space (sky)
+1 - Solid ground (green blocks)
+2 - Spikes/hazards (red blocks, deadly to player)
+3 - Special decorative blocks (blue blocks)
+
+Map format:
+- First line can contain metadata or be part of the map
+- Each character represents a tile
+- Spaces represent empty tiles (type 0)
+- Numbers 1-3 represent different tile types
+- Player spawns at position (100, ground_level - player_height)
+- Map scrolls from right to left automatically
