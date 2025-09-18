@@ -1,0 +1,25 @@
+/*
+** EPITECH PROJECT, 2024
+** Day09 PDG - Exercise 4
+** File description:
+** Paladin class header (multiple inheritance)
+*/
+
+#ifndef PALADIN_HPP_
+#define PALADIN_HPP_
+
+#include "Knight.hpp"
+#include "Priest.hpp"
+
+class Paladin : public Knight, public Priest
+{
+public:
+    Paladin(const std::string &name, int power);
+    ~Paladin();
+
+    int attack() override;
+    int special() override;
+    void rest() override;
+};
+
+#endif /* !PALADIN_HPP_ */

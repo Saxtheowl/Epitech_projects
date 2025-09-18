@@ -9,6 +9,7 @@
 static volatile sig_atomic_t g_peer_pid = 0;
 // For legacy async mode (kept minimal); we move to synchronous waits below
 static volatile sig_atomic_t g_ack_ready = 0;
+static volatile sig_atomic_t g_stage = 0;
 
 static int debug_enabled(void)
 {
@@ -35,16 +36,7 @@ static int wait_ack_timeout_ms(int ms)
     return -1;
 }
 
-static int wait_flag_timeout(volatile sig_atomic_t *flag, int ms)
-{
-    struct timespec ts = {0, 1*1000*1000}; // 1ms
-    int steps = ms;
-    while (steps-- > 0) {
-        if (*flag) return 0;
-        nanosleep(&ts, NULL);
-    }
-    return -1;
-}
+// removed unused wait_flag_timeout to satisfy -Werror
 
 static void handler(int sig, siginfo_t *si, void *ucontext) { (void)sig; (void)si; (void)ucontext; }
 
@@ -131,7 +123,10 @@ int recv_coord_blocking(int *x1based, int *y1based)
     int cx=0, cy=0;
     if (recv_pulses_until_sep(&cx, 1500) != 0) { debugf("recv_coord: timeout X"); cx = 1; }
     if (recv_pulses_until_sep(&cy, 1500) != 0) { debugf("recv_coord: timeout Y"); cy = 1; }
-    if (cx < 1) cx = 1; if (cx > 10) cx = 10; if (cy < 1) cy = 1; if (cy > 10) cy = 10;
+    if (cx < 1) cx = 1;
+    if (cx > 10) cx = 10;
+    if (cy < 1) cy = 1;
+    if (cy > 10) cy = 10;
     *x1based = cx; *y1based = cy;
     return 0;
 }

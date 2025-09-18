@@ -1,0 +1,4 @@
+Hello world!
+Char: A, Num: 42, Lit: %
+Neg: -123; Null:(null)
+Unknown:%q stays literal

@@ -1,0 +1,3 @@
+Hello world!
+Char:Z Num:-42 Int:1337 Uns:4294967295 Oct:777 Hex:deadbeef HEX:BEEF Ptr:0x1234 End:%
+Null:(null) Zero:0

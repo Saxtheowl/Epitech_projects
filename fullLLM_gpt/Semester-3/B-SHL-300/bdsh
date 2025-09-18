@@ -103,22 +103,27 @@ write_db() {
 write_db_from_dir() {
   file="$1"; rows_dir="$2"
   tmp="$file.tmp.$$"
-  # Build names list from rows_dir
-  names=$(ls -1 "$rows_dir"/*.rows 2>/dev/null | sed 's#.*/##; s/\.rows$//' | sort)
+  # Build names list from rows_dir, robust to IFS/newlines
+  names_file="$rows_dir/.names.$$"
+  ls -1 "$rows_dir"/*.rows 2>/dev/null | sed 's#.*/##; s/\.rows$//' | sort > "$names_file" || :
   echo "{" > "$tmp"
-  tcount=0; for _n in $names; do tcount=$((tcount+1)); done
+  tcount=$(wc -l < "$names_file" 2>/dev/null || echo 0)
   i=1
-  for name in $names; do
-    echo "  \"$name\": [" >> "$tmp"
-    if [ -s "$rows_dir/$name.rows" ]; then
-      sed '/^\s*$/d' "$rows_dir/$name.rows" | sed 's/^/    /' | sed '$!s/$/,/' >> "$tmp"
-    fi
-    echo "  ]" >> "$tmp"
-    if [ $i -lt $tcount ]; then echo "," >> "$tmp"; fi
-    i=$((i+1))
-  done
+  if [ "$tcount" -gt 0 ]; then
+    while IFS= read -r name; do
+      [ -n "$name" ] || continue
+      echo "  \"$name\": [" >> "$tmp"
+      if [ -s "$rows_dir/$name.rows" ]; then
+        sed '/^\s*$/d' "$rows_dir/$name.rows" | sed 's/^/    /' | sed '$!s/$/,/' >> "$tmp"
+      fi
+      echo "  ]" >> "$tmp"
+      if [ $i -lt $tcount ]; then echo "," >> "$tmp"; fi
+      i=$((i+1))
+    done < "$names_file"
+  fi
   echo "}" >> "$tmp"
   mv "$tmp" "$file"
+  rm -f "$names_file" 2>/dev/null || true
 }
 
 # Initialize empty DB if needed
@@ -173,7 +178,8 @@ insert_row() {
     if [ $first -eq 1 ]; then first=0; else row="$row, "; fi
     row="$row\"$key\": \"$esc\""
   done
-  IFS=' \t\n'
+  # Restore default IFS (space, tab, newline)
+  IFS="$(printf ' \t\n')"
   row="$row}"
   # Load all rows to temp dir
   names="$(db_list_tables "$file")"
@@ -290,7 +296,7 @@ select_command() {
     # Project columns
     tsv=$(echo "$kv_join" | while IFS= read -r line; do
       out=""
-      IFS=','; for c in $cols; do IFS=' \t\n'; v=$(echo "$line" | tr '\t' '\n' | grep -E "^$c=" | sed "s/^$c=//"); if [ -z "$out" ]; then out="$v"; else out="$out\t$v"; fi; done
+      IFS=','; for c in $cols; do IFS="$(printf ' \t\n')"; v=$(echo "$line" | tr '\t' '\n' | grep -E "^$c=" | sed "s/^$c=//"); if [ -z "$out" ]; then out="$v"; else out="$out\t$v"; fi; done
       echo "$out"
     done)
   else
