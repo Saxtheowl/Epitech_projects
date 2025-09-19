@@ -1,0 +1,39 @@
+# ARCADE PROJECT
+
+**Group Leader Email:** arcade.project@epitech.eu
+
+## Interface Collaboration
+
+This project implements a complete arcade gaming platform with modular graphics and game libraries.
+
+**Interface Sharing:** Ready for integration with other Arcade implementations.
+
+## Project Structure
+
+### Built Libraries
+- **Graphics:** arcade_ncurses.so, arcade_sdl2.so
+- **Games:** arcade_nibbler.so, arcade_pacman.so
+
+### Usage
+```bash
+./arcade ./lib/arcade_ncurses.so
+```
+
+### Controls
+- **Left/Right:** Switch graphics libraries
+- **Up/Down:** Switch games
+- **Space/Enter:** Start game
+- **ESC/Q:** Quit
+- **R:** Restart game (in-game)
+
+### Games Implemented
+1. **Nibbler (Snake):** Classic snake game with growing mechanics
+2. **Pacman:** Maze-based collect game with ghosts
+
+### Graphics Libraries
+1. **NCurses:** Terminal-based graphics with colors
+2. **SDL2:** Window-based graphics (stub implementation)
+
+## Architecture
+
+The project follows a plugin-based architecture using dynamic libraries (.so files) loaded at runtime via dlopen/dlsym, respecting the complete separation between graphics rendering and game logic as specified in the project requirements.

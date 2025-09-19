@@ -1,31 +1,43 @@
 > Crédits disponibles: 1 crédits
 
-<table align="center">
-    <thead>
-        <tr>
-            <th>PROJETS</th>
-            <th>TIMELINE</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><a href="https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-3/B-SHL-300/BDSH/"></a></td>
-            <td align="center"></td>
-        </tr>
-    </tbody>
-</table>
-<br>
+## BDSH — Simple JSON DB in POSIX sh
 
-[↩️ Revenir au Semester-3](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-3)
+- Binary: `./bdsh` (shebang `/bin/sh`)
+- DB file selection priority: `-f FILE` > env `BDSH_File` > local `.bdshrc`
+- Authorized tools used: `[`, `test`, `expr`, `wc`, `head`, `tail`, `cat`, `sort`, `grep`, `sed`, `rm`, `cut`, `ps`, `tr`, `touch`, `mkdir`, `find`.
 
-[↩️ Revenir à l'accueil](https://github.com/Studio-17/Epitech-Subjects)
+### Build
+- Nothing to build. Ensure `bdsh` is executable: `chmod +x bdsh`.
 
-<br>
+### Usage
+- Help: `./bdsh -h`
+- Create DB: `./bdsh -f db.json create database`
+- Create table: `./bdsh -f db.json create table user id,firstname,lastname`
+- Insert: `./bdsh -f db.json insert user id=1,firstname=John,lastname=SMITH`
+- Select (table): `./bdsh -f db.json select user firstname,lastname`
+- Select with where: `./bdsh -f db.json select user firstname,id where lastname=SMITH`
+- Select with order: `./bdsh -f db.json select user firstname where lastname=SMITH orderby firstname`
+- Join: `./bdsh -f db.json select user,age age,firstname,lastname join id where age=42`
+- JSON output: add `-j` to any `select`.
 
----
+Notes:
+- Errors are printed on stderr and return code is 1.
+- `update`/`delete` are not implemented (bonus).
 
-<div align="center">
+Implementation detail: to avoid fragile JSON round-trips, a sidecar state directory `<db.json>.state` stores per-table rows. The JSON DB file is regenerated from this state on each change.
 
-<a href="https://github.com/Studio-17" target="_blank"><img src="../../assets/voc17.gif" width="40"></a>
+### Tests
+- Run all tests: `make test`
+- Location: `tests/test.sh`
 
-</div>
+Expected summary (passing):
+```
+Passed: 6  Failed: 0
+```
+
+### Clean
+- Remove temp DBs: `make clean`
+
+### Limits
+- Schema is not enforced.
+- Only equality `where` and simple two-table equi-join are supported.

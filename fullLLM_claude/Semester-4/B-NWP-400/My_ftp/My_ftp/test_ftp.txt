@@ -1,0 +1,6 @@
+open localhost 2121
+anonymous
+
+pwd
+ls
+quit

@@ -1,0 +1,76 @@
+Session start: 2025-09-18T19:55:12Z
+ROOT=/home/roro/work/projects/Epitech_projects/fullLLM_gpt
+== Project: Semester-3/B-SHL-300 ==
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create database
+[OK ] create database
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table user id,firstname,lastname
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table age id,age
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=1,firstname=John,lastname=SMITH
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=4,firstname="Robert John",lastname=WILLIAMS
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=2,firstname=Lisa,lastname=SIMPSON
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=10,lastname=SMITH
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user firstname=Laura,lastname=SMITH
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=9
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert age id=1,age=42
+[OK ] select projection
+[OK ] select where
+[OK ] select orderby
+[OK ] select join
+[OK ] select -j
+-----
+Passed: 6  Failed: 0
+
+== Project: Semester-1/B-CPE-100/Star ==
+[OK] n=1
+[OK] n=2
+[OK] n=4
+[OK] n=5
+[OK] n=0 error
+OK=5 KO=0
+
+== Project: Semester-1/B-CPE-100/Count_island ==
+[OK] program exit 0
+[OK] no X
+[OK] has digits
+OK=3 KO=0
+
+== Project: Semester-1/B-CPE-100/MatchNmatch ==
+[OK] match 'abc' 'abc'
+[OK] nmatch 'abc' 'abc'
+[OK] match 'abc' 'a*c'
+[OK] nmatch 'abc' 'a*c'
+[OK] match 'abc' '*'
+[OK] nmatch 'abc' '*'
+[OK] match 'abcdef' 'a*f'
+[OK] nmatch 'abcdef' 'a*f'
+[OK] match 'abcdef' 'a*d*f'
+[OK] nmatch 'abcdef' 'a*d*f'
+[OK] match 'aaaa' 'a*'
+[OK] nmatch 'aaaa' 'a*'
+[OK] match 'aaaa' '*a'
+[OK] nmatch 'aaaa' '*a'
+[OK] match 'abacabaaa' 'a*a*a'
+[OK] nmatch 'abacabaaa' 'a*a*a'
+[OK] match 'abc' 'ab*d'
+[OK] nmatch 'abc' 'ab*d'
+OK=18 KO=0
+
+== Project: Semester-1/B-CPE-100/Firtree ==
+[OK] n=1
+[OK] n=2
+[OK] n=3
+[OK] n=4
+[OK] n=5
+[OK] n=0 error
+OK=6 KO=0
+
+== Project: Semester-1/B-PSU-100/My_ls ==
+[OK ] basic
+[OK ] -a shows hidden
+[OK ] -t sort
+[OK ] -R header
+[OK ] -l format
+-----
+Passed: 5  Failed: 0
+
+Session end: 2025-09-18T19:55:15Z

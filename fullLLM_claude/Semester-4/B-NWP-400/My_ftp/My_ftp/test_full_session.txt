@@ -1,0 +1,7 @@
+open localhost 2121
+user anonymous
+pass
+pwd
+pasv
+list
+quit

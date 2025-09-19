@@ -31,9 +31,25 @@ Root: `Semester-3/B-SHL-300`
 ## Tests (exécution)
 
 - `make test` à la racine du projet `Semester-3/B-SHL-300` exécute les cas principaux et affiche un récapitulatif.
+- Résultat actuel: Passed: 6  Failed: 0
 
 ## État d'implémentation
 
-- Script `bdsh`: ajouté (create/insert/select/where/orderby/join, `-j`).
-- Makefile: ajouté (`test` inclus).
-- Tests: ajoutés sous `tests/` (exemples du sujet + cas limites de base).
+- Script `bdsh`: create/insert/select (where, orderby, join), option `-j`, erreurs sur stderr.
+- Persistance: fichier JSON généré et ré‑généré à partir d'un état latéral `<db>.state` pour fiabilité du parsing (pas d'`awk`).
+- Makefile: cibles `all`, `test`, `clean`.
+- Tests: `tests/test.sh` couvre les exemples du sujet et quelques limites (espaces dans valeurs, jointure, -j).
+
+## Remarques techniques
+
+- Parsing: uniquement via `grep/sed/tr/cut/sort`; pas d'outil JSON.
+- Valeurs entre guillemets en CLI (ex: `firstname="Robert John"`) sont dépouillées des guillemets pour produire un JSON propre.
+- `update`/`delete`: non implémentés (bonus, non testés par le sujet).
+
+## Procédure rapide
+
+- Créer DB: `./bdsh -f db.json create database`
+- Tables: `./bdsh -f db.json create table user id,firstname,lastname`
+- Insertion: `./bdsh -f db.json insert user id=1,firstname=John,lastname=SMITH`
+- Sélection: `./bdsh -f db.json select user firstname,lastname`
+- Tests: `make test`

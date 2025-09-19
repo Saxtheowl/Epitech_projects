@@ -1,0 +1,296 @@
+[2025-09-19 08:47:33] Session started at 20250919-084733
+[2025-09-19 08:47:33] Found semesters: ['Semester-0', 'Semester-1', 'Semester-2', 'Semester-3', 'Semester-4', 'Semester-5']
+[2025-09-19 08:47:33] Semester-0: 2 project(s)
+[2025-09-19 08:47:33] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-0/DOCUMENTS/Coding_styles
+[2025-09-19 08:47:34] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:34] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-0/Coding_styles.md
+[2025-09-19 08:47:34] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-0/DOCUMENTS/Coding_styles/scripts/test.sh
+[2025-09-19 08:47:34] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-0/DOCUMENTS/Technical_Documentation
+[2025-09-19 08:47:34] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:34] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-0/Technical_Documentation.md
+[2025-09-19 08:47:34] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-0/DOCUMENTS/Technical_Documentation/scripts/test.sh
+[2025-09-19 08:47:34] Semester-1: 29 project(s)
+[2025-09-19 08:47:34] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix
+[2025-09-19 08:47:34] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/Bootcamp_Phoenix.md
+[2025-09-19 08:47:34] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/scripts/test.sh
+[2025-09-19 08:47:34] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Count_island
+[2025-09-19 08:47:35] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:35] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/Count_island.md
+[2025-09-19 08:47:35] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Count_island/scripts/test.sh
+[2025-09-19 08:47:35] Appended test target to /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Count_island/Makefile
+[2025-09-19 08:47:35] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Firtree
+[2025-09-19 08:47:35] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:35] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/Firtree.md
+[2025-09-19 08:47:35] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Firtree/scripts/test.sh
+[2025-09-19 08:47:35] Appended test target to /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Firtree/Makefile
+[2025-09-19 08:47:35] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/MatchNmatch
+[2025-09-19 08:47:36] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:36] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/MatchNmatch.md
+[2025-09-19 08:47:36] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/MatchNmatch/scripts/test.sh
+[2025-09-19 08:47:36] Appended test target to /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/MatchNmatch/Makefile
+[2025-09-19 08:47:36] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Pool
+[2025-09-19 08:47:36] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/Pool.md
+[2025-09-19 08:47:36] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Pool/scripts/test.sh
+[2025-09-19 08:47:36] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Rushs
+[2025-09-19 08:47:36] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/Rushs.md
+[2025-09-19 08:47:36] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Rushs/scripts/test.sh
+[2025-09-19 08:47:36] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Star
+[2025-09-19 08:47:36] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:36] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/Star.md
+[2025-09-19 08:47:36] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Star/scripts/test.sh
+[2025-09-19 08:47:36] Appended test target to /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/Star/Makefile
+[2025-09-19 08:47:36] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/WorkshopLib
+[2025-09-19 08:47:37] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:37] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/WorkshopLib.md
+[2025-09-19 08:47:37] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-100/WorkshopLib/scripts/test.sh
+[2025-09-19 08:47:37] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-101/Bistro-matic
+[2025-09-19 08:47:37] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:37] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/Bistro-matic.md
+[2025-09-19 08:47:37] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-101/Bistro-matic/scripts/test.sh
+[2025-09-19 08:47:37] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-101/EvalExpr
+[2025-09-19 08:47:38] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/EvalExpr.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-101/EvalExpr/scripts/test.sh
+[2025-09-19 08:47:38] Appended test target to /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-101/EvalExpr/Makefile
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-101/FinalStumper
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/FinalStumper.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-101/FinalStumper/scripts/test.sh
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-101/InfinAdd
+[2025-09-19 08:47:38] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/InfinAdd.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-101/InfinAdd/scripts/test.sh
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-101/My_Printf
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/My_Printf.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-101/My_Printf/scripts/test.sh
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-110/Antman
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/Antman.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-110/Antman/scripts/test.sh
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-110/BSQ
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/BSQ.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-110/BSQ/scripts/test.sh
+[2025-09-19 08:47:38] Appended test target to /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-110/BSQ/Makefile
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-110/Organized
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/Organized.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-110/Organized/scripts/test.sh
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-110/Pushswap
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/Pushswap.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-110/Pushswap/scripts/test.sh
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-110/Secured
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/Secured.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-110/Secured/scripts/test.sh
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-110/Setting_up
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/Setting_up.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-CPE-110/Setting_up/scripts/test.sh
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-MUL-100/MyHunter
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/MyHunter.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-MUL-100/MyHunter/scripts/test.sh
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-MUL-100/MyRadar
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/MyRadar.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-MUL-100/MyRadar/scripts/test.sh
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-MUL-100/MyRunner
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/MyRunner.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-MUL-100/MyRunner/scripts/test.sh
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-MUL-100/MyScreensaver
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/MyScreensaver.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-MUL-100/MyScreensaver/scripts/test.sh
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-NSA-100/My_web
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/My_web.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-NSA-100/My_web/scripts/test.sh
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-PSU-100/My_Top
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/My_Top.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-PSU-100/My_Top/scripts/test.sh
+[2025-09-19 08:47:38] Appended test target to /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-PSU-100/My_Top/Makefile
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-PSU-100/My_ls
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/My_ls.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-PSU-100/My_ls/scripts/test.sh
+[2025-09-19 08:47:38] Appended test target to /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-PSU-100/My_ls/Makefile
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-PSU-100/My_navy
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/My_navy.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-PSU-100/My_navy/scripts/test.sh
+[2025-09-19 08:47:38] Appended test target to /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-PSU-100/My_navy/Makefile
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-PSU-100/My_sokoban
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/My_sokoban.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-PSU-100/My_sokoban/scripts/test.sh
+[2025-09-19 08:47:38] Appended test target to /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-PSU-100/My_sokoban/Makefile
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-PSU-100/My_sudo
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-1/My_sudo.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-PSU-100/My_sudo/scripts/test.sh
+[2025-09-19 08:47:38] Appended test target to /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-PSU-100/My_sudo/Makefile
+[2025-09-19 08:47:38] Semester-2: 24 project(s)
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-AIA-200/Need4Stek
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/Need4Stek.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-AIA-200/Need4Stek/scripts/test.sh
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-CPE-200/Amazed
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/Amazed.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-CPE-200/Amazed/scripts/test.sh
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-CPE-200/Corewar
+[2025-09-19 08:47:38] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/Corewar.md
+[2025-09-19 08:47:38] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-CPE-200/Corewar/scripts/test.sh
+[2025-09-19 08:47:38] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-CPE-200/Dante
+[2025-09-19 08:47:39] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:39] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/Dante.md
+[2025-09-19 08:47:39] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-CPE-200/Dante/scripts/test.sh
+[2025-09-19 08:47:39] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-CPE-200/Matchstick
+[2025-09-19 08:47:39] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/Matchstick.md
+[2025-09-19 08:47:39] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-CPE-200/Matchstick/scripts/test.sh
+[2025-09-19 08:47:39] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-CPE-200/RobotFactory
+[2025-09-19 08:47:39] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/RobotFactory.md
+[2025-09-19 08:47:39] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-CPE-200/RobotFactory/scripts/test.sh
+[2025-09-19 08:47:39] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-CPE-210/Duo_Stumpers
+[2025-09-19 08:47:39] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/Duo_Stumpers.md
+[2025-09-19 08:47:39] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-CPE-210/Duo_Stumpers/scripts/test.sh
+[2025-09-19 08:47:39] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-CPE-210/Redemption
+[2025-09-19 08:47:40] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:40] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/Redemption.md
+[2025-09-19 08:47:40] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-CPE-210/Redemption/scripts/test.sh
+[2025-09-19 08:47:40] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-CPE-210/Solo_Stumpers
+[2025-09-19 08:47:40] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/Solo_Stumpers.md
+[2025-09-19 08:47:40] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-CPE-210/Solo_Stumpers/scripts/test.sh
+[2025-09-19 08:47:40] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-DOP-200/Chocolatine
+[2025-09-19 08:47:40] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/Chocolatine.md
+[2025-09-19 08:47:40] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-DOP-200/Chocolatine/scripts/test.sh
+[2025-09-19 08:47:40] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-DOP-200/Popeye
+[2025-09-19 08:47:40] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/Popeye.md
+[2025-09-19 08:47:40] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-DOP-200/Popeye/scripts/test.sh
+[2025-09-19 08:47:40] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-MUL-200/MyDefender
+[2025-09-19 08:47:40] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/MyDefender.md
+[2025-09-19 08:47:40] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-MUL-200/MyDefender/scripts/test.sh
+[2025-09-19 08:47:40] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-MUL-200/MyPaint
+[2025-09-19 08:47:40] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/MyPaint.md
+[2025-09-19 08:47:40] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-MUL-200/MyPaint/scripts/test.sh
+[2025-09-19 08:47:40] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-MUL-200/MyRPG
+[2025-09-19 08:47:40] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:40] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/MyRPG.md
+[2025-09-19 08:47:40] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-MUL-200/MyRPG/scripts/test.sh
+[2025-09-19 08:47:40] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-MUL-200/MyWorld
+[2025-09-19 08:47:40] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/MyWorld.md
+[2025-09-19 08:47:40] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-MUL-200/MyWorld/scripts/test.sh
+[2025-09-19 08:47:40] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-PSU-200/42sh
+[2025-09-19 08:47:41] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:41] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/42sh.md
+[2025-09-19 08:47:41] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-PSU-200/42sh/scripts/test.sh
+[2025-09-19 08:47:41] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-PSU-200/Minishell1
+[2025-09-19 08:47:41] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/Minishell1.md
+[2025-09-19 08:47:41] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-PSU-200/Minishell1/scripts/test.sh
+[2025-09-19 08:47:41] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-PSU-200/Minishell2
+[2025-09-19 08:47:41] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/Minishell2.md
+[2025-09-19 08:47:41] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-PSU-200/Minishell2/scripts/test.sh
+[2025-09-19 08:47:41] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-PSU-200/Tetris
+[2025-09-19 08:47:41] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:41] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/Tetris.md
+[2025-09-19 08:47:41] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-PSU-200/Tetris/scripts/test.sh
+[2025-09-19 08:47:41] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-SEC-200/Noob
+[2025-09-19 08:47:42] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:42] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/Noob.md
+[2025-09-19 08:47:42] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-SEC-200/Noob/scripts/test.sh
+[2025-09-19 08:47:42] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-SYN-200/Automakefile
+[2025-09-19 08:47:42] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:42] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/Automakefile.md
+[2025-09-19 08:47:42] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-SYN-200/Automakefile/scripts/test.sh
+[2025-09-19 08:47:42] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-SYN-200/FASTAtools
+[2025-09-19 08:47:43] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:43] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/FASTAtools.md
+[2025-09-19 08:47:43] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-SYN-200/FASTAtools/scripts/test.sh
+[2025-09-19 08:47:43] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-SYN-200/Palindrome
+[2025-09-19 08:47:43] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:43] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/Palindrome.md
+[2025-09-19 08:47:43] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-SYN-200/Palindrome/scripts/test.sh
+[2025-09-19 08:47:43] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-WEB-200/Epytodo
+[2025-09-19 08:47:43] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-2/Epytodo.md
+[2025-09-19 08:47:43] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-2/B-WEB-200/Epytodo/scripts/test.sh
+[2025-09-19 08:47:43] Semester-3: 3 project(s)
+[2025-09-19 08:47:43] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-PDG-300/Pool
+[2025-09-19 08:47:43] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-3/Pool.md
+[2025-09-19 08:47:43] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-PDG-300/Pool/scripts/test.sh
+[2025-09-19 08:47:43] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-PDG-300/Rushs
+[2025-09-19 08:47:43] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-3/Rushs.md
+[2025-09-19 08:47:43] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-PDG-300/Rushs/scripts/test.sh
+[2025-09-19 08:47:43] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/BDSH
+[2025-09-19 08:47:43] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-3/BDSH.md
+[2025-09-19 08:47:43] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/BDSH/scripts/test.sh
+[2025-09-19 08:47:43] Semester-4: 20 project(s)
+[2025-09-19 08:47:43] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-ASM-400/MiniLibC
+[2025-09-19 08:47:43] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/MiniLibC.md
+[2025-09-19 08:47:43] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-ASM-400/MiniLibC/scripts/test.sh
+[2025-09-19 08:47:43] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-CNA-400/Game_of_Stones
+[2025-09-19 08:47:44] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:44] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/Game_of_Stones.md
+[2025-09-19 08:47:44] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-CNA-400/Game_of_Stones/scripts/test.sh
+[2025-09-19 08:47:44] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-CNA-410/Trade
+[2025-09-19 08:47:44] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:44] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/Trade.md
+[2025-09-19 08:47:44] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-CNA-410/Trade/scripts/test.sh
+[2025-09-19 08:47:44] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-CPP-400/Panoramix
+[2025-09-19 08:47:44] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/Panoramix.md
+[2025-09-19 08:47:44] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-CPP-400/Panoramix/scripts/test.sh
+[2025-09-19 08:47:44] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-CPP-400/Plazza
+[2025-09-19 08:47:44] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/Plazza.md
+[2025-09-19 08:47:44] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-CPP-400/Plazza/scripts/test.sh
+[2025-09-19 08:47:44] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-DOP-400/My_marvin
+[2025-09-19 08:47:44] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/My_marvin.md
+[2025-09-19 08:47:44] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-DOP-400/My_marvin/scripts/test.sh
+[2025-09-19 08:47:44] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-DOP-400/My_octopus
+[2025-09-19 08:47:44] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/My_octopus.md
+[2025-09-19 08:47:44] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-DOP-400/My_octopus/scripts/test.sh
+[2025-09-19 08:47:44] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-FUN-400/Wolfram
+[2025-09-19 08:47:44] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/Wolfram.md
+[2025-09-19 08:47:44] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-FUN-400/Wolfram/scripts/test.sh
+[2025-09-19 08:47:44] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-NWP-400/My_ftp
+[2025-09-19 08:47:44] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/My_ftp.md
+[2025-09-19 08:47:44] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-NWP-400/My_ftp/scripts/test.sh
+[2025-09-19 08:47:44] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-NWP-400/My_teams
+[2025-09-19 08:47:44] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/My_teams.md
+[2025-09-19 08:47:44] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-NWP-400/My_teams/scripts/test.sh
+[2025-09-19 08:47:44] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-OOP-400/Arcade
+[2025-09-19 08:47:44] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/Arcade.md
+[2025-09-19 08:47:44] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-OOP-400/Arcade/scripts/test.sh
+[2025-09-19 08:47:44] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-OOP-400/NanoTekSpice
+[2025-09-19 08:47:44] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/NanoTekSpice.md
+[2025-09-19 08:47:44] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-OOP-400/NanoTekSpice/scripts/test.sh
+[2025-09-19 08:47:44] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-PSU-400/Malloc
+[2025-09-19 08:47:44] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/Malloc.md
+[2025-09-19 08:47:44] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-PSU-400/Malloc/scripts/test.sh
+[2025-09-19 08:47:44] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-PSU-400/NmObjdump
+[2025-09-19 08:47:44] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/NmObjdump.md
+[2025-09-19 08:47:44] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-PSU-400/NmObjdump/scripts/test.sh
+[2025-09-19 08:47:44] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-PSU-402/Ftrace
+[2025-09-19 08:47:44] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/Ftrace.md
+[2025-09-19 08:47:44] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-PSU-402/Ftrace/scripts/test.sh
+[2025-09-19 08:47:44] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-PSU-402/Strace
+[2025-09-19 08:47:44] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/Strace.md
+[2025-09-19 08:47:44] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-PSU-402/Strace/scripts/test.sh
+[2025-09-19 08:47:44] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-SEC-400/Hydra
+[2025-09-19 08:47:44] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/Hydra.md
+[2025-09-19 08:47:44] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-SEC-400/Hydra/scripts/test.sh
+[2025-09-19 08:47:44] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-SEC-400/Shodan
+[2025-09-19 08:47:45] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:45] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/Shodan.md
+[2025-09-19 08:47:45] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-SEC-400/Shodan/scripts/test.sh
+[2025-09-19 08:47:45] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-YEP-400/Indie-Studio
+[2025-09-19 08:47:46] PyPDF2 install failed: Command '['/usr/bin/python3', '-m', 'pip', 'install', '--quiet', 'PyPDF2']' returned non-zero exit status 1.
+[2025-09-19 08:47:46] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/Indie-Studio.md
+[2025-09-19 08:47:46] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-YEP-400/Indie-Studio/scripts/test.sh
+[2025-09-19 08:47:46] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-YEP-400/Zappy
+[2025-09-19 08:47:46] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-4/Zappy.md
+[2025-09-19 08:47:46] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-4/B-YEP-400/Zappy/scripts/test.sh
+[2025-09-19 08:47:46] Semester-5: 6 project(s)
+[2025-09-19 08:47:46] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-5/B-AIA-500/Gomoku
+[2025-09-19 08:47:46] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-5/Gomoku.md
+[2025-09-19 08:47:46] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-5/B-AIA-500/Gomoku/scripts/test.sh
+[2025-09-19 08:47:46] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-5/B-CPP-500/Rtype
+[2025-09-19 08:47:46] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-5/Rtype.md
+[2025-09-19 08:47:46] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-5/B-CPP-500/Rtype/scripts/test.sh
+[2025-09-19 08:47:46] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-5/B-DEV-500/Area
+[2025-09-19 08:47:46] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-5/Area.md
+[2025-09-19 08:47:46] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-5/B-DEV-500/Area/scripts/test.sh
+[2025-09-19 08:47:46] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-5/B-DOP-500/Bernstein
+[2025-09-19 08:47:46] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-5/Bernstein.md
+[2025-09-19 08:47:46] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-5/B-DOP-500/Bernstein/scripts/test.sh
+[2025-09-19 08:47:46] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-5/B-DOP-500/Whanos
+[2025-09-19 08:47:46] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-5/Whanos.md
+[2025-09-19 08:47:46] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-5/B-DOP-500/Whanos/scripts/test.sh
+[2025-09-19 08:47:46] Processing /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-5/B-FUN-500/GlaDOS
+[2025-09-19 08:47:46] Wrote report /home/roro/work/projects/Epitech_projects/fullLLM_gpt/reports/Semester-5/GlaDOS.md
+[2025-09-19 08:47:46] Created /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-5/B-FUN-500/GlaDOS/scripts/test.sh
+[2025-09-19 08:47:46] Processed 84 project(s).
+[2025-09-19 08:47:46] Session completed.

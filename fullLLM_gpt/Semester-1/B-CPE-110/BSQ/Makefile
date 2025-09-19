@@ -25,3 +25,15 @@ re: fclean all
 test: all
 	sh tests/test.sh
 
+
+
+# Added by auto_report.py
+.PHONY: test
+TEST_SCRIPT=./scripts/test.sh
+
+test:
+	@if [ -x $$(echo $(TEST_SCRIPT)) ]; then \
+		$$(echo $(TEST_SCRIPT)); \
+	else \
+		echo 'No tests script found'; \
+	fi

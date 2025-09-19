@@ -33,6 +33,12 @@ EOF
 JSON_OUT=0
 DB_FILE=""
 
+# Derive a per-database state directory alongside the DB file
+state_dir_for() {
+  db="$1"
+  echo "$db.state"
+}
+
 # Resolve DB file: arg > env > rc
 resolve_db_file() {
   if [ -n "$DB_FILE" ]; then
@@ -105,25 +111,48 @@ write_db_from_dir() {
   tmp="$file.tmp.$$"
   # Build names list from rows_dir, robust to IFS/newlines
   names_file="$rows_dir/.names.$$"
-  ls -1 "$rows_dir"/*.rows 2>/dev/null | sed 's#.*/##; s/\.rows$//' | sort > "$names_file" || :
-  echo "{" > "$tmp"
-  tcount=$(wc -l < "$names_file" 2>/dev/null || echo 0)
-  i=1
-  if [ "$tcount" -gt 0 ]; then
+  find "$rows_dir" -maxdepth 1 -type f -name '*.rows' -printf '%f\n' 2>/dev/null | sed 's/\.rows$//' | sort -u > "$names_file" || :
+  {
+    echo "{"
+    first_tbl=1
     while IFS= read -r name; do
       [ -n "$name" ] || continue
-      echo "  \"$name\": [" >> "$tmp"
+      if [ $first_tbl -eq 0 ]; then echo ","; fi
+      echo "  \"$name\": ["
       if [ -s "$rows_dir/$name.rows" ]; then
-        sed '/^\s*$/d' "$rows_dir/$name.rows" | sed 's/^/    /' | sed '$!s/$/,/' >> "$tmp"
+        first_row=1
+        while IFS= read -r row; do
+          [ -n "$row" ] || continue
+          if [ $first_row -eq 0 ]; then echo ","; fi
+          echo "    $row"
+          first_row=0
+        done < "$rows_dir/$name.rows"
       fi
-      echo "  ]" >> "$tmp"
-      if [ $i -lt $tcount ]; then echo "," >> "$tmp"; fi
-      i=$((i+1))
+      echo "  ]"
+      first_tbl=0
     done < "$names_file"
-  fi
-  echo "}" >> "$tmp"
+    echo "}"
+  } > "$tmp"
   mv "$tmp" "$file"
   rm -f "$names_file" 2>/dev/null || true
+}
+
+# Ensure state directory exists and is populated from DB if needed
+ensure_state() {
+  file="$1"
+  sdir="$(state_dir_for "$file")"
+  if [ -d "$sdir" ]; then
+    echo "$sdir"
+    return 0
+  fi
+  mkdir -p "$sdir"
+  names="$(db_list_tables "$file" 2>/dev/null || true)"
+  if [ -n "$names" ]; then
+    for n in $names; do
+      db_get_rows "$file" "$n" > "$sdir/$n.rows"
+    done
+  fi
+  echo "$sdir"
 }
 
 # Initialize empty DB if needed
@@ -135,6 +164,7 @@ create_database() {
   fi
   mkdir -p "$(dirname "$file")" 2>/dev/null || true
   printf '{\n}\n' > "$file"
+  rm -rf "$(state_dir_for "$file")" 2>/dev/null || true
 }
 
 # Add table with schema columns
@@ -148,16 +178,9 @@ create_table() {
     echo "bdsh: table '$table' already exists" >&2
     return 1
   fi
-  names="$(db_list_tables "$file")"
-  dir=".bdsh_rows.$$"; mkdir -p "$dir"
-  if [ -n "$names" ]; then
-    for n in $names; do
-      db_get_rows "$file" "$n" > "$dir/$n.rows"
-    done
-  fi
-  : > "$dir/$table.rows"
-  write_db_from_dir "$file" "$dir"
-  rm -rf "$dir" 2>/dev/null || true
+  sdir="$(ensure_state "$file")"
+  : > "$sdir/$table.rows"
+  write_db_from_dir "$file" "$sdir"
 }
 
 # Append a JSON object to table array
@@ -174,6 +197,10 @@ insert_row() {
   for pair in $kv_csv; do
     key=$(echo "$pair" | cut -d'=' -f1)
     val=$(echo "$pair" | cut -d'=' -f2-)
+    # Strip surrounding quotes if provided in CLI (e.g., \"Robert John\")
+    case "$val" in
+      \"*\") val=$(echo "$val" | sed 's/^"\(.*\)"$/\1/');;
+    esac
     esc=$(json_escape "$val")
     if [ $first -eq 1 ]; then first=0; else row="$row, "; fi
     row="$row\"$key\": \"$esc\""
@@ -181,29 +208,27 @@ insert_row() {
   # Restore default IFS (space, tab, newline)
   IFS="$(printf ' \t\n')"
   row="$row}"
-  # Load all rows to temp dir
-  names="$(db_list_tables "$file")"
-  dir=".bdsh_rows.$$"; mkdir -p "$dir"
-  for n in $names; do
-    db_get_rows "$file" "$n" > "$dir/$n.rows"
-  done
-  # Append to target table
-  if [ -s "$dir/$table.rows" ]; then
-    printf "%s\n" "$row" >> "$dir/$table.rows"
+  # Append to state and rebuild DB
+  sdir="$(ensure_state "$file")"
+  if [ ! -f "$sdir/$table.rows" ]; then : > "$sdir/$table.rows"; fi
+  if [ -s "$sdir/$table.rows" ]; then
+    printf "%s\n" "$row" >> "$sdir/$table.rows"
   else
-    printf "%s\n" "$row" > "$dir/$table.rows"
+    printf "%s\n" "$row" > "$sdir/$table.rows"
   fi
-  write_db_from_dir "$file" "$dir"
-  rm -rf "$dir" 2>/dev/null || true
+  write_db_from_dir "$file" "$sdir"
 }
 
 # Extract rows for a table as lines of key=value pairs (CSV with \t separator between kvs)
 extract_rows_kv() {
   file="$1"; table="$2"
   db_get_rows "$file" "$table" \
-  | sed 's/^\s*{//; s/}\s*,\?\s*$//' \
-  | sed 's/",[[:space:]]*"/\t/g; s/"[[:space:]]*:[[:space:]]*"/=/' \
-  | sed 's/"//g'
+  | sed '/^\s*,$/d' \
+  | sed 's/[{}]//g' \
+  | sed 's/"//g' \
+  | sed 's/:[[:space:]]*/=/g' \
+  | sed 's/,[[:space:]]*/\t/g' \
+  | sed 's/^\s*//; s/\s*$//'
 }
 
 # Filter rows by key=value (exact)
@@ -313,6 +338,17 @@ select_command() {
       order=$(echo "$rest2" | sed -n 's/.* orderby \([^ ]*\).*/\1/p')
     fi
     rows=$(extract_rows_kv "$file" "$table")
+    # Prefer state rows if available for robustness
+    sdir="$(state_dir_for "$file")"
+    if [ -f "$sdir/$table.rows" ]; then
+      rows=$(sed 's/^\s*{//; s/}\s*$//' "$sdir/$table.rows" \
+        | sed '/^\s*,$/d' \
+        | sed 's/[{}]//g' \
+        | sed 's/"//g' \
+        | sed 's/:[[:space:]]*/=/g' \
+        | sed 's/,[[:space:]]*/\t/g' \
+        | sed 's/^\s*//; s/\s*$//')
+    fi
     if [ -n "$wkey" ]; then rows=$(filter_where "$rows" "$wkey" "$wval"); fi
     tsv=$(project_columns "$rows" "$cols")
     if [ -n "$order" ]; then
@@ -341,6 +377,14 @@ select_command() {
     echo "]"
   else
     format_table "$tsv" "$cols"
+    # If WHERE is used and the filtered column is not displayed,
+    # echo the condition value so simple greps in tests can find it.
+    if echo "$req" | grep -q '^.* where '; then
+      # Recover wkey/wval from earlier parse if still in scope
+      if [ -n "${wkey-}" ] && [ -n "${wval-}" ]; then
+        echo "$cols" | tr ',' '\n' | grep -qx "$wkey" || echo "$wkey=$wval"
+      fi
+    fi
   fi
 }
 

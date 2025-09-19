@@ -3,28 +3,17 @@
     {"id": "1", "age": "42"}
   ]
 ,
-  "age": [
-    {"id": "1", "age": "42"}
-  ]
-,
   "user": [
-  ]
+    {"id": "1", "firstname": "John", "lastname": "SMITH"}
 ,
-  "user": [
-  ]
+    {"id": "4", "firstname": "\"Robert"}
 ,
-  "user": [
-  ]
+    {"id": "2", "firstname": "Lisa", "lastname": "SIMPSON"}
 ,
-  "user": [
-  ]
+    {"id": "10", "lastname": "SMITH"}
 ,
-  "user": [
-  ]
+    {"firstname": "Laura", "lastname": "SMITH"}
 ,
-  "user": [
-  ]
-,
-  "user": [
+    {"id": "9"}
   ]
 }

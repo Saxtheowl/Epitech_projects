@@ -1,0 +1,23 @@
+Session start: 2025-09-18T19:44:28Z
+Project: Semester-3/B-SHL-300
+Actions: fix bdsh IFS + JSON write, add state dir, robust parsing, pass tests
+Run: make test
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create database
+[OK ] create database
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table user id,firstname,lastname
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json create table age id,age
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=1,firstname=John,lastname=SMITH
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=4,firstname="Robert John",lastname=WILLIAMS
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=2,firstname=Lisa,lastname=SIMPSON
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=10,lastname=SMITH
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user firstname=Laura,lastname=SMITH
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert user id=9
++ /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/bdsh -f /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-3/B-SHL-300/tests/tmp/file.json insert age id=1,age=42
+[OK ] select projection
+[OK ] select where
+[OK ] select orderby
+[OK ] select join
+[OK ] select -j
+-----
+Passed: 6  Failed: 0
+Status: PASS

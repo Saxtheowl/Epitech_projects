@@ -1,0 +1,6 @@
+USER anonymous
+PASS
+PWD
+PASV
+LIST
+QUIT
