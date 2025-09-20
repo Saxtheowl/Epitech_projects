@@ -1,0 +1,9 @@
+\n[COMMAND] find . -maxdepth 3 -iname '*.pdf'
+./Bootcamp_Phoenix/Day04/day04.pdf
+./Bootcamp_Phoenix/Day05/day05.pdf
+./Bootcamp_Phoenix/Day03/day03.pdf
+./Bootcamp_Phoenix/Day01/day01.pdf
+./Bootcamp_Phoenix/Day02/day02.pdf
+\n[COMMAND] find . -maxdepth 2 -type f ! -name '*.pdf'
+./Bootcamp_Phoenix/README.md
+./README.md

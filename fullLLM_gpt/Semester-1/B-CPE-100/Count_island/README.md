@@ -1,71 +1,36 @@
-# Count_island
+# Count_island (B-CPE-100)
 
-> Timeline: 1 semaines
+Implementation of the Epitech "Count Island" exercise: walk a rectangular map of `.` and
+`X`, label each contiguous block of `X` with its discovery index (starting at `0`) and
+return the number of islands found.
 
-> Nombre de personnes sur le projet: 1
+## Build
 
-<br>
+```sh
+make
+```
 
-📂---[CountIsland.pdf](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-100/Count_island/CountIsland.pdf)
+The provided `Makefile` links the delivered `count_island.c` with the subject `main.o`
+for convenient local runs. Drop `main.o` before submitting, as the graders will supply
+their own entry point.
 
-|\_\_\_[Epitech_README.txt](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-100/Count_island/Epitech_README.txt)
+## Usage
 
-|\_\_\_[map.txt](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-100/Count_island/map.txt)
+```sh
+./count_island <map_file>
+```
 
-|\_\_\_[main.o](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-100/Count_island/main.o)
+The example `map.txt` follows the subject convention: the first line gives the map
+height, followed by that many rows composed of `.` and `X`.
 
+## Tests
 
-<br>
+```sh
+make test
+```
 
-
-<details>
-<summary> Tests de la moulinette </summary>
-<table align="center">
-    <thead>
-        <tr>
-            <td colspan="3" align="center"><strong>MOULINETTE</strong></td>
-        </tr>
-        <tr>
-            <th>SOMMAIRE</th>
-            <th>NB DE TESTS</th>
-            <th>DETAILS</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td rowspan="1">01 - Count Island</td>
-            <td rowspan="1" style="text-align: center;">1</td>
-            <td>01 - Count island</td>
-        </tr>
-        <tr>
-            <td rowspan="1">02 - Return Value</td>
-            <td rowspan="1" style="text-align: center;">1</td>
-            <td>01 - Return value</td>
-        </tr>
-        <tr>
-            <td rowspan="1">03 - Error handling</td>
-            <td rowspan="1" style="text-align: center;">1</td>
-            <td>01 - Error handling</td>
-        </tr>
-	</tbody>
-</table>
-</details>
-
-
-<br>
-
-[↩️ Revenir au module](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-100)
-
-[↩️ Revenir au Semester-1](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1)
-
-[↩️ Revenir à l'accueil](https://github.com/Studio-17/Epitech-Subjects)
-
-<br>
-
----
-
-<div align="center">
-
-<a href="https://github.com/Studio-17" target="_blank"><img src="../../../assets/voc17.gif" width="40"></a>
-
-</div>
+The test suite:
+- rebuilds the reference transformation for `map.txt` and diffs it against the program
+  output;
+- compiles a dedicated unit binary that exercises small edge cases and asserts the
+  return value / labelling contract of `count_island`.

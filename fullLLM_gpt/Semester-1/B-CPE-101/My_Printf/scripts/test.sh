@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
-echo "[INFO] No tests defined yet for $(basename $(pwd))."
-exit 0
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$ROOT_DIR"
+
+make test

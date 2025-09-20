@@ -1,84 +1,41 @@
-# InfinAdd
+# InfinAdd (B-CPE-101)
 
-> Timeline: 48h
+Addition et soustraction de grands entiers représentés sous forme de chaînes.
 
-> Nombre de personnes sur le projet: 1
+## Build
 
-<br>
+```sh
+make
+```
 
-📂---[InfinAdd.pdf](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-101/FinalStumper/Final_Stumper)
+Binaire produit : `infin_add`. Les cibles `clean`, `fclean`, `re`, `test` sont disponibles.
 
-<br>
+## Usage
 
-<details>
-<summary> Tests de la moulinette </summary>
-<table align="center">
-    <thead>
-        <tr>
-            <td colspan="3" align="center"><strong>MOULINETTE</strong></td>
-        </tr>
-        <tr>
-            <th>SOMMAIRE</th>
-            <th>NB DE TESTS</th>
-            <th>DETAILS</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td rowspan="5">01 - add</td>
-            <td rowspan="5" style="text-align: center;">5</td>
-            <td>Test 1</td>
-        </tr>
-        <tr>
-            <td>Test 2</td>
-        </tr>
-        <tr>
-            <td>Test 3</td>
-        </tr>
-        <tr>
-            <td>Test 4</td>
-        </tr>
-        <tr>
-            <td>Test 5</td>
-        </tr>
-        <tr>
-            <td rowspan="6">02 - sub</td>
-            <td rowspan="6" style="text-align: center;">6</td>
-            <td>Test 1</td>
-        </tr>
-        <tr>
-            <td>Test 2</td>
-        </tr>
-        <tr>
-            <td>Test 3</td>
-        </tr>
-        <tr>
-            <td>Test 4</td>
-        </tr>
-        <tr>
-            <td>Test 5</td>
-        </tr>
-        <tr>
-            <td>Test 6</td>
-        </tr>
-    </tbody>
-</table>
-</details>
+```sh
+./infin_add "-876435" "987143265"
+# -> 986266830
+```
 
-<br>
+- Les deux paramètres sont des entiers signés (avec éventuels espaces/`+`/`-` multiples).
+- Résultat affiché sans zéros superflus, précédé d’un unique `-` si négatif.
+- Retourne `84` si le nombre d’arguments est incorrect ou en cas d’allocation échouée.
 
-[↩️ Revenir au module](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1/B-CPE-101)
+## Implémentation
 
-[↩️ Revenir au Semestre-1](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1)
+- Analyse des signes puis addition/soustraction des valeurs absolues selon les règles des entiers relatifs.
+- Les valeurs sont stockées sous forme de chaînes décimales (little-endian pour les calculs).
+- Opérations élémentaires : `add_abs`, `sub_abs`, `compare_abs`, normalisation des zéros.
+- Aucune fonction de la libC n’est utilisée en dehors de `write`, `malloc`, `free`.
 
-[↩️ Revenir à l'accueil](https://github.com/Studio-17/Epitech-Subjects)
+## Tests
 
-<br>
+```sh
+make test          # compile + exécute tests/tests.sh
+./scripts/test.sh  # wrapper pratique
+```
 
----
-
-<div align="center">
-
-<a href="https://github.com/Studio-17" target="_blank"><img src="../../../assets/voc17.gif" width="40"></a>
-
-</div>
+Le jeu de tests couvre :
+- Sommes positives avec retenues.
+- Nombres négatifs et combinaisons signe/opposé.
+- Cas limite `0` et grands entiers (plusieurs dizaines de chiffres).

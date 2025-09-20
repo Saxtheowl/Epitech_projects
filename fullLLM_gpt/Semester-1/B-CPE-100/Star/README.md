@@ -1,18 +1,30 @@
 # Star (B-CPE-100)
 
-ASCII star renderer that prints a star of given size to stdout.
+Implementation of the Epitech "Star" exercise: render a symmetrical ASCII star of the
+requested size to stdout using only the `write(2)` system call.
 
 ## Build
 
-- `make` builds the `star` binary.
-- `make clean | fclean | re` for cleanup.
+```sh
+make
+```
 
-## Run
+## Usage
 
-- `./star <size>` where `<size>` is a positive integer.
-- Error cases (invalid args or size <= 0) return exit code 84 and no output.
+```sh
+./star <size>
+```
 
-## Test
+- `<size>` is a non-negative integer. `0` produces no output, as required by the
+  subject.
+- On invalid input the program returns `84` without printing anything.
 
-- `make test` runs functional tests against the examples from `star_example.txt` (sizes 1, 2, 4, 5) and checks error handling for 0.
+## Tests
 
+```sh
+make test
+```
+
+The test suite regenerates the official examples from `star_example.txt`, checks the
+rendered star for sizes 1, 2, 4 and 5, validates the `size = 0` edge case and the
+expected failures (missing argument, non numeric input, negative value).

@@ -1,46 +1,46 @@
 CC      = gcc
-CFLAGS  = -Wall -Wextra -Werror -std=c11 -Iinclude
+CFLAGS  = -Wall -Wextra -Werror -std=c99 -Iinclude
 AR      = ar rcs
 RM      = rm -f
 
 NAME    = libmy_printf.a
 SRC_DIR = src
-INC_DIR = include
 TST_DIR = tests
 
-SRC     = $(SRC_DIR)/my_printf.c \
-          $(SRC_DIR)/print_num.c \
-          $(SRC_DIR)/print_hex.c \
-          $(SRC_DIR)/print_oct.c \
-          $(SRC_DIR)/print_ptr.c
+SRC     = $(SRC_DIR)/my_printf.c
 OBJ     = $(SRC:.c=.o)
 
 TEST_BIN = test_my_printf
+REF_BIN  = printf_reference
 TEST_SRC = $(TST_DIR)/main.c
+REF_SRC  = $(TST_DIR)/reference.c
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(AR) $@ $^
 
-%.o: %.c $(INC_DIR)/my_printf.h
+%.o: %.c include/my_printf.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJ) $(TEST_BIN) $(REF_BIN) $(TST_DIR)/out_my.txt $(TST_DIR)/out_ref.txt
 
 fclean: clean
-	$(RM) $(NAME) $(TEST_BIN)
+	$(RM) $(NAME)
 
 re: fclean all
 
 $(TEST_BIN): $(NAME) $(TEST_SRC)
 	$(CC) $(CFLAGS) $(TEST_SRC) -L. -lmy_printf -o $@
 
-test: $(TEST_BIN)
-	./$(TEST_BIN) > $(TST_DIR)/out.txt
-	diff -u $(TST_DIR)/expected.txt $(TST_DIR)/out.txt
+$(REF_BIN): $(REF_SRC)
+	$(CC) $(CFLAGS) $(REF_SRC) -o $@
+
+test: $(TEST_BIN) $(REF_BIN)
+	./$(TEST_BIN) > $(TST_DIR)/out_my.txt
+	./$(REF_BIN) > $(TST_DIR)/out_ref.txt
+	diff -u $(TST_DIR)/out_ref.txt $(TST_DIR)/out_my.txt
 	@echo "my_printf: tests OK"
 
 .PHONY: all clean fclean re test
-

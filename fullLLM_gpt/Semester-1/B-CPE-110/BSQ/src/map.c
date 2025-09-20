@@ -1,52 +1,90 @@
 #include <stdlib.h>
-#include <string.h>
 #include "../include/bsq.h"
 
-static int read_int_line(const char *data, size_t len, size_t *pos)
+static int parse_int(const char *data, size_t len, size_t *pos)
 {
-    int v = 0; int any = 0;
+    int value = 0;
+    int seen = 0;
+
     while (*pos < len && data[*pos] >= '0' && data[*pos] <= '9') {
-        any = 1;
-        v = v * 10 + (data[*pos] - '0');
+        seen = 1;
+        value = value * 10 + (data[*pos] - '0');
         (*pos)++;
     }
-    if (*pos < len && data[*pos] == '\n') (*pos)++;
-    return any ? v : -1;
+    if (!seen)
+        return -1;
+    if (*pos >= len || data[*pos] != '\n')
+        return -1;
+    (*pos)++;
+    return value;
+}
+
+static int parse_first_line(const char *data, size_t len, size_t *pos, int *cols_out)
+{
+    size_t start = *pos;
+    int cols = 0;
+
+    while (*pos < len && data[*pos] != '\n') {
+        char ch = data[*pos];
+        if (ch != '.' && ch != 'o')
+            return -1;
+        ++cols;
+        ++(*pos);
+    }
+    if (cols <= 0)
+        return -1;
+    if (*pos >= len || data[*pos] != '\n')
+        return -1;
+    ++(*pos);
+    *cols_out = cols;
+    return (int)start;
+}
+
+static int copy_rows(const char *data, size_t len, size_t pos,
+                     int rows, int cols, char *grid, size_t start_first_row)
+{
+    for (int j = 0; j < cols; ++j) {
+        char ch = data[start_first_row + j];
+        if (ch != '.' && ch != 'o')
+            return -1;
+        grid[j] = ch;
+    }
+    for (int row = 1; row < rows; ++row) {
+        for (int col = 0; col < cols; ++col) {
+            if (pos >= len)
+                return -1;
+            char ch = data[pos++];
+            if (ch != '.' && ch != 'o')
+                return -1;
+            grid[row * cols + col] = ch;
+        }
+        if (pos >= len || data[pos] != '\n')
+            return -1;
+        ++pos;
+    }
+    return (pos == len) ? 0 : -1;
 }
 
 int parse_map(const char *data, size_t len, int *rows, int *cols, char **grid)
 {
     size_t pos = 0;
-    int r = read_int_line(data, len, &pos);
-    if (r <= 0) return -1;
-    if (pos >= len) return -1;
-    // determine cols by first line
-    size_t start = pos;
+    int r = parse_int(data, len, &pos);
+    if (r <= 0)
+        return -1;
     int c = 0;
-    while (pos < len && data[pos] != '\n') { c++; pos++; }
-    if (pos < len && data[pos] == '\n') pos++;
-    if (c <= 0) return -1;
-    // allocate
-    char *g = malloc((size_t)r * (size_t)c);
-    if (!g) return -1;
-    // copy first row
-    if ((int)strlen(data + start) < c) { free(g); return -1; }
-    for (int j = 0; j < c; ++j) {
-        char ch = data[start + j];
-        if (ch != '.' && ch != 'o') { free(g); return -1; }
-        g[j] = ch;
+    int first_row_start = parse_first_line(data, len, &pos, &c);
+    if (first_row_start < 0)
+        return -1;
+    char *map = malloc((size_t)r * (size_t)c);
+    if (!map)
+        return -1;
+    if (copy_rows(data, len, pos, r, c, map, (size_t)first_row_start) != 0) {
+        free(map);
+        return -1;
     }
-    // subsequent rows
-    for (int i = 1; i < r; ++i) {
-        for (int j = 0; j < c; ++j) {
-            if (pos >= len) { free(g); return -1; }
-            char ch = data[pos++];
-            if (ch != '.' && ch != 'o') { free(g); return -1; }
-            g[i * c + j] = ch;
-        }
-        if (pos < len && data[pos] == '\n') pos++;
-    }
-    *rows = r; *cols = c; *grid = g;
+    *rows = r;
+    *cols = c;
+    *grid = map;
     return 0;
 }
 
@@ -86,4 +124,3 @@ void mark_square(int rows, int cols, char *grid, square_t best)
         }
     }
 }
-

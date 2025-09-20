@@ -1,0 +1,2634 @@
+Session started at 2025-09-19T11:51:22+00:00
+Working directory: /home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1
+\n[COMMAND] ls
+B-BOO-101
+B-CPE-100
+B-CPE-101
+B-CPE-110
+B-MUL-100
+B-NSA-100
+B-PSU-100
+logs
+README.md
+\n[COMMAND] ls
+Bootcamp_Phoenix
+README.md
+\n[COMMAND] cat README.md
+# B-BOO-101
+
+> Crédits disponibles: 0
+
+## Description du module
+
+Prenez du recul et prenez le temps de réfléchir au travail inachevé que vous avez laissé derrière vous.
+Allez ......... affronte le!
+
+Espérons que rien n'est irréversible, mais il est maintenant temps de passer à autre chose et de reconstruire des fondations solides et stables.
+Au cours de cette semaine, vous aurez l'occasion de combler certaines lacunes accumulées au début de votre première année scolaire.
+
+Soyez engagé dans votre travail en faisant preuve de sérieux, et respectez les règles pour vous améliorer et passer au niveau supérieur pour la fin de l'année.
+Vous êtes amené à travailler des « pool days » comme des tâches, tous les jours de 9h à 18h.
+Soyez proactif, cherchez des réponses, posez des questions au groupe et n'abandonnez pas !
+Travaillez pas à pas chaque jour. Assurez-vous de maîtriser chaque sujet avant de passer au suivant.
+Votre objectif ne doit pas être de franchir toutes les étapes mais d'aller le plus loin possible, en acquérant des compétences de manière progressive.
+Ne soyez pas trop gourmand !
+
+## Compétences à acquerir
+
+- Jouer selon les règles
+- Soyez engagé dans votre travail
+- Respecter l'horaire
+- Ensuite, l'amélioration devrait se produire :)
+
+<br>
+
+<table align="center">
+    <thead>
+        <tr>
+            <th>PROJETS</th>
+            <th>TIMELINE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan="1"><a href="https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1/B-BOO-101/Bootcamp_Phoenix">Bootcamp Phoenix</a></td>
+            <td align="center">1 semaine</td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+
+[↩️ Revenir au Semestre 1](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1)
+
+[↩️ Revenir à l'accueil](https://github.com/Studio-17/Epitech-Subjects)
+
+<br>
+
+---
+
+<div align="center">
+
+<a href="https://github.com/Studio-17" target="_blank"><img src="../../assets/voc17.gif" width="40"></a>
+
+</div>
+\n[COMMAND] find Bootcamp_Phoenix -maxdepth 2 -type d
+Bootcamp_Phoenix
+Bootcamp_Phoenix/scripts
+Bootcamp_Phoenix/Day04
+Bootcamp_Phoenix/Day05
+Bootcamp_Phoenix/Day03
+Bootcamp_Phoenix/Day01
+Bootcamp_Phoenix/Day02
+\n[COMMAND] ls Day01
+day01.pdf
+README.md
+\n[COMMAND] cat README.md
+# Day01
+
+> Timeline: 48h
+
+> Nombre de personnes sur le projet: 1
+
+<br>
+
+📂---[day01.pdf](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day01/day01.pdf)
+
+<br>
+
+<details>
+<summary> Tests de la moulinette </summary>
+<table align="center">
+    <thead>
+    <tr>
+            <td colspan="3" align="center"><strong>MOULINETTE</strong></td>
+    </tr>
+        <tr>
+            <th>SOMMAIRE</th>
+            <th>NB DE TESTS</th>
+            <th>DETAILS</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan="1">01 - task01</td>
+            <td rowspan="1" style="text-align: center;">1</td>
+            <td>task01</td>
+        </tr>
+        <tr>
+            <td rowspan="1">02 - task02</td>
+            <td rowspan="1" style="text-align: center;">1</td>
+            <td>task02</td>
+        </tr>
+        <tr>
+            <td rowspan="1">03 - task03</td>
+            <td rowspan="1" style="text-align: center;">1</td>
+            <td>task03</td>
+        </tr>
+        <tr>
+            <td rowspan="1">04 - task04</td>
+            <td rowspan="1" style="text-align: center;">1</td>
+            <td>task04</td>
+        </tr>
+        <tr>
+            <td rowspan="1">05 - task05</td>
+            <td rowspan="1" style="text-align: center;">1</td>
+            <td>task05</td>
+        </tr>
+        <tr>
+            <td rowspan="1">06 - task06</td>
+            <td rowspan="1" style="text-align: center;">1</td>
+            <td>task06</td>
+        </tr>
+    </tbody>
+</table>
+</details>
+
+<br>
+
+[↩️ Revenir au projet](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1/B-BOO-101/Bootcamp_Phoenix)
+
+[↩️ Revenir au module](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1/B-BOO-101)
+
+[↩️ Revenir au Semestre-1](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1)
+
+[↩️ Revenir à l'accueil](https://github.com/Studio-17/Epitech-Subjects)
+
+<br>
+
+---
+
+<div align="center">
+
+<a href="https://github.com/Studio-17" target="_blank"><img src="../../../../assets/voc17.gif" width="40"></a>
+
+</div>
+\n[COMMAND] pdftotext day01.pdf -
+\n[COMMAND] python3 -m pip install --user PyPDF2
+\n[COMMAND] python3 -m venv ../../.venv
+\n[COMMAND] ../../.venv/bin/pip install PyPDF2
+Collecting PyPDF2
+  Using cached pypdf2-3.0.1-py3-none-any.whl.metadata (6.8 kB)
+Using cached pypdf2-3.0.1-py3-none-any.whl (232 kB)
+Installing collected packages: PyPDF2
+Successfully installed PyPDF2-3.0.1
+\n[COMMAND] ../../.venv/bin/python - <<'PY'
+--- Page 1 ---
+B1 - Phoenix Bootcamp
+B-BOO-101
+Day01
+Welc²meback
+1
+--- Page 2 ---
+Day01
+re³²sit²ryname: BOO_³h²enix_d01_ $ACADEMICYEAR
+re³²sit²ryrights: ramassage-tek
+language: C
+c²m³ilati²n: gcc*.c(+²ur²wnﬁlesc²ntainingthe mainfuncti²n)
+The totality of your source files, except all useless files (binary, temp files, obj
+files,...), must be included in your delivery.
+All the bonus files (including a potential specific Makefile) should be in a directory
+named bonus .
+Error messages have to be written on the error output, and the program should
+then exit with the 84 error code (0 if there is no error).
+Don’t push your main and my_putchar functions into your delivery directory. Your files will
+be compiled adding our own main and my_putchar .
+You are only allowed to use the my_putchar function to complete the following tasks, but
+don’t push it into your delivery directory, and don’t copy it in anyof your delivered files.
+1
+--- Page 3 ---
+T/A.sc/S.sc/K.sc 01 - /S.sc/H.sc/O.sc/W.sc_/A.sc/L.sc/P.sc/H.sc/A.sc/B.sc/E.sc/T.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: show_alphabet.c
+Write a function that, beginning with a, displays the lowercase alphabet in ascending order, on a single line.
+It must be prototyped as follows:
+int show_alphabet ( void );
+T/A.sc/S.sc/K.sc 02 - /S.sc/H.sc/O.sc/W.sc_/C.sc/O.sc/M.sc/B.sc/I.sc/N.sc/A.sc/T.sc/I.sc/O.sc/N.sc/S.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: show_combinations.c
+Write a function that displays, in ascending order, all the numbers composed by three different digits num-
+bers (012, 013, 014, 015, 016, 017, 018, 019, 023, ..., 789). Given three digits (all different), only the smallest
+number composed by those digits must be displayed. It must be prototyped as follows:
+int show_combinations ( void );
+r Terminal - + x
+/B-BOO-101> ./a.out
+012, 013, 014, 015, 016, 017, 018, 019, 023, ..., 789
+Neither 987nor 999is to be displayed (as an example).
+2
+--- Page 4 ---
+T/A.sc/S.sc/K.sc 03 - /S.sc/H.sc/O.sc/W.sc_/N.sc/U.sc/M.sc/B.sc/E.sc/R.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: show_number.c
+Write a function that displays the number given as a parameter. It must be able to display all the possible
+values of an int, and must be prototyped as follows:
+int show_number (int nb);
+For instance, show_number(42) displays 42, show_number(0) displays 0,
+show_number(-2147483647) displays -2147483647.
+T/A.sc/S.sc/K.sc 04 - /S.sc/H.sc/O.sc/W.sc_/S.sc/T.sc/R.sc/I.sc/N.sc/G.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: show_string.c
+Write a function that displays, one-by-one, the characters of a string.
+The address of the string’s first character will be found in the pointer passed as a parameter to the function,
+which must be prototyped as follows:
+int show_string ( char const *str);
+3
+--- Page 5 ---
+T/A.sc/S.sc/K.sc 05 - /R.sc/E.sc/V.sc/E.sc/R.sc/S.sc/E.sc_/S.sc/T.sc/R.sc/I.sc/N.sc/G.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: reverse_string.c
+The goal of this task is to swap each of the string’s characters, two by two.
+In other words, you will swap the first letter with the last one, the second with the second-to-last and so
+on.
+The function should return a pointer to the first character of the reversed string:
+char * reverse_string ( char *str );
+For instance:‘
+a => a
+ab => ba
+abc => cba
+abcd => dcba
+abcde => edcba
+abcdef => fedcba
+When testing your function you may encounter “Segmentation fault” errors. Either
+you’re messing with the pointers in your function or the string given in parameter is read-
+only!
+Easy way to have read/write string for testing purpose: man 3 strdup .
+4
+--- Page 6 ---
+T/A.sc/S.sc/K.sc 06 - /T.sc/O.sc_/N.sc/U.sc/M.sc/B.sc/E.sc/R.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: to_number.c
+Write a function that returns a number, sent to the function as a string. It must be prototyped as follows:
+int to_number ( char const *str);
+Here are some tricky examples to be handled:
+"+---+--++---+---+---+-42" => -42
+"42 a43" => 42
+"11000000000000000000000042" => 0 (the number doesn /quotesingle.ts1t fit in an integer )
+" -1000000000000000000000042" => 0 (for the same reason }
+5
+\n[COMMAND] ../../.venv/bin/python - <<'PY'
+--- Page 1 ---
+B1 - Phoenix Bootcamp
+B-BOO-101
+Day02
+Recursi¹eandstrings
+1
+--- Page 2 ---
+Day02
+re³²sit²ryname: BOO_³h²enix_d02_ $ACADEMICYEAR
+re³²sit²ryrights: ramassage-tek
+language: C
+c²m³ilati²n: gcc*.c(+²ur²wnﬁlesc²ntainingthe mainfuncti²n)
+The totality of your source files, except all useless files (binary, temp files, obj
+files,...), must be included in your delivery.
+All the bonus files (including a potential specific Makefile) should be in a directory
+named bonus .
+Error messages have to be written on the error output, and the program should
+then exit with the 84 error code (0 if there is no error).
+Don’t push your main and my_putchar functions into your delivery directory. Your files will
+be compiled adding our own main and my_putchar .
+You are only allowed to use the my_putchar function to complete the following tasks, but
+don’t push it into your delivery directory, and don’t copy it in anyof your delivered files.
+1
+--- Page 3 ---
+T/A.sc/S.sc/K.sc 01 - /I.sc/T.sc/E.sc/R.sc/A.sc/T.sc/I.sc/V.sc/E.sc_/F.sc/A.sc/C.sc/T.sc/O.sc/R.sc/I.sc/A.sc/L.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: iterative_factorial.c
+Write an iterative function that returns the factorial of the number given as a parameter.
+It must be prototyped the following way:
+int iterative_factorial (int nb);
+In case of error, the function should return 0.
+0! = 1
+if n < 0, n! = 0
+T/A.sc/S.sc/K.sc 02 - /R.sc/E.sc/C.sc/U.sc/R.sc/S.sc/I.sc/V.sc/E.sc_/P.sc/O.sc/W.sc/E.sc/R.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: recursive_power.c
+Write a recursive function that returns the first argument raised to the power p, where pis the second argu-
+ment.
+It must be prototyped the following way:
+int recursive_power (int nb , int p);
+In case of error, the function should return 0.
+nˆ0 = 1
+if p < 0, nˆp = 0
+2
+--- Page 4 ---
+T/A.sc/S.sc/K.sc 03 - /I.sc/S.sc_/P.sc/R.sc/I.sc/M.sc/E.sc_/N.sc/U.sc/M.sc/B.sc/E.sc/R.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: is_prime_number.c
+Write a function that returns 1if the number is prime and 0if not.
+int is_prime_number (int nb);
+As you know, 0and 1are not prime numbers.
+3
+--- Page 5 ---
+From here on, most of the tasks functions exist in the string library. Use manto obtain a
+full explanation of how a function works. Beware that none of your deliveries contains a
+function frmo this string library!
+T/A.sc/S.sc/K.sc 04 - /M.sc/Y.sc_/S.sc/T.sc/R.sc/C.sc/P.sc/Y.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: my_strcpy.c
+Write a function that copies a string into another. The destination string will already have enough memory
+to copy the source string.
+It must be prototyped the following way:
+char * my_strcpy ( char *dest , char const *src )
+The function returns dest.
+T/A.sc/S.sc/K.sc 05 - /M.sc/Y.sc_/S.sc/T.sc/R.sc/N.sc/C.sc/M.sc/P.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: my_strncmp.c
+Reproduce the behavior of the strncmp function. Your function must be prototyped the following way:
+int my_strncmp ( char const *s1 , char const *s2 , int n);
+4
+--- Page 6 ---
+T/A.sc/S.sc/K.sc 06 - /M.sc/Y.sc_/S.sc/T.sc/R.sc/S.sc/T.sc/R.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: my_strstr.c
+Reproduce the behavior of the strstr function. Your function must be prototyped the following way:
+char * my_strstr ( char *str , char const * to_find );
+T/A.sc/S.sc/K.sc 07 - /M.sc/Y.sc_/S.sc/T.sc/R.sc/U.sc/P.sc/C.sc/A.sc/S.sc/E.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: my_strupcase.c
+Write a function that puts every letter of every word in it in uppercase.
+It must be prototyped the following way:
+char * my_strupcase ( char *str );
+The function returns str.
+T/A.sc/S.sc/K.sc 08 - /M.sc/Y.sc_/S.sc/T.sc/R.sc/C.sc/A.sc/P.sc/I.sc/T.sc/A.sc/L.sc/I.sc/Z.sc/E.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: my_strcapitalize.c
+Write a function that capitalizes the first letter of each word.
+It must be prototyped the following way:
+char * my_strcapitalize ( char *str );
+The function returns str.
+The sentence, hey, how are you? 42WORds forty-two; fifty+one
+will become Hey, How Are You? 42words Forty-Two; Fifty+One
+5
+--- Page 7 ---
+T/A.sc/S.sc/K.sc 09 - U/N.sc/I.sc/T.sc /T.sc/E.sc/S.sc/T.sc/S.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: tests/test_my_strcpy.c ,tests/test_my_strncmp.c
+You have to write unit tests (using Criterion) for some tasks: my_strcpy and my_strncmp .
+YouMUST have at least a line coverage of 60% and a branch coverage of 40% for both of these functions.
+Here’s an example of unit test for the function my_strcpy :
+# include <criterion / criterion .h>
+char * my_strcpy ( char *dest , char const *src );
+Test ( my_strcpy , copy_in_empty_array )
+{
+char dest [6] = {0};
+my_strcpy (dest , " Hello ");
+cr_assert_str_eq (dest , " Hello ");
+}
+You can even compare the result with the libC functions like so:
+Test ( my_strcpy , copy_string_in_empty_array )
+{
+char my_dest [6] = {0};
+char dest [6] = {0};
+my_strcpy ( my_dest , " Hello ");
+strcpy (dest , " Hello ");
+cr_assert_str_eq ( my_dest , dest );
+}
+Take a look at the unit tests documentation.
+Your test will be built manually (without Makefile) using the command shown in the
+documentation.
+6
+\n[COMMAND] ../../.venv/bin/python - <<'PY'
+--- Page 1 ---
+B1 - Phoenix Bootcamp
+B-BOO-101
+Day03
+Ph²enixlibraryandarguments
+1.1
+--- Page 2 ---
+Day03
+re³²sit²ryname: BOO_³h²enix_d03_ $ACADEMICYEAR
+re³²sit²ryrights: ramassage-tek
+language: C
+The totality of your source files, except all useless files (binary, temp files, obj
+files,...), must be included in your delivery.
+All the bonus files (including a potential specific Makefile) should be in a directory
+named bonus .
+Error messages have to be written on the error output, and the program should
+then exit with the 84 error code (0 if there is no error).
+Unless stated otherwise, don’t push your main functions into your delivery directory. Your
+files will be compiled adding our own main.
+All.cfiles from your delivery folder will be collected and compiled with your libphoenix ,
+which is to be found in /lib/phoenix . Header files ( .h) must be located in includes/ .
+Allowed system function(s): write .
+1
+--- Page 3 ---
+T/A.sc/S.sc/K.sc 01 - /L.sc/I.sc/B.sc/P.sc/H.sc/O.sc/E.sc/N.sc/I.sc/X.sc./A.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: lib/phoenix/Makefile ,lib/phoenix/ALL_THE_NEEDED_SOURCE_FILES.c
+Create a Makefile that, when called, build a static library called libphoenix.a in your lib/phoenix directory.
+This library must contains, at least, the following functions:
+void my_putchar ( char c);
+int show_number (int nb);
+int show_string ( char const *str);
+char * reverse_string ( char *str );
+int to_number ( char const *str);
+int is_prime_number (int nb);
+char * my_strcpy ( char *dest , char const *src );
+int my_strncmp ( char const *s1 , char const *s2 , int n);
+char * my_strstr ( char *str , char const * to_find );
+Beware to build your library in the correct folder because it will be used to build all of the
+following tasks.
+T/A.sc/S.sc/K.sc 02 - /P.sc/H.sc/O.sc/E.sc/N.sc/I.sc/X.sc./H.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: includes/phoenix.h
+Write your phoenix.h header file that contains the prototypes of all the functions exposed by your libphoenix
+.a.
+To check exposed functions, see the man of nm.
+Beware to place your header in the correct folder because it will be used to build all of
+the following tasks.
+2
+--- Page 4 ---
+T/A.sc/S.sc/K.sc 03 - /C.sc/O.sc/N.sc/C.sc/A.sc/T.sc_/S.sc/T.sc/R.sc/I.sc/N.sc/G.sc/S.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: concat_strings.c
+Write a function that concatenates two strings. It must be prototyped the following way:
+char * concat_strings ( char *dest , char const *src );
+man strcat
+Your function will be built using your own library.
+r Terminal - + x
+/B-BOO-101> make -C lib/phoenix
+/B-BOO-101> gcc *.c -Iincludes -Llib/phoenix -lphoenix
+T/A.sc/S.sc/K.sc 04 - /S.sc/H.sc/O.sc/W.sc_/P.sc/A.sc/R.sc/A.sc/M.sc/S.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: task04/show_params.c ,task04/Makefile
+Write a program called show_params that displays its arguments (received on the command line). Since it is
+aprogram , you need to put the main function in your delivered file.
+You are to display all arguments (including argv[0] , on different lines.)
+Your program will be built by calling your Makefile .
+Your main function must return 0.
+3
+--- Page 5 ---
+r Terminal - + x
+/B-BOO-101> cd task04
+/B-BOO-101> make clean && make fclean && make && make re
+/B-BOO-101> ./show_params test “This is a test” retest | cat -e
+./show_params$
+test$
+This is a test $
+retest$
+/B-BOO-101> echo $?
+0
+T/A.sc/S.sc/K.sc 05 - /S.sc/O.sc/R.sc/T.sc/E.sc/D.sc_/P.sc/A.sc/R.sc/A.sc/M.sc/S.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: task05/sorted_params.c ,task05/Makefile
+Write a program called sorted_params that displays all its arguments, in ASCII order.
+You are to display all arguments (including argv[0] , on different lines.)
+Your program will be built by calling your Makefile .
+Your main function must return 0.
+r Terminal - + x
+/B-BOO-101> cd task05
+/B-BOO-101> make clean && make fclean && make && make re
+./sorted_params test “This is a test” retest | cat -e
+./sorted_params$
+This is a test $
+retest$
+test$
+4
+\n[COMMAND] ../../.venv/bin/python - <<'PY'
+--- Page 5 ---
+r Terminal - + x
+/B-BOO-101> cd task04
+/B-BOO-101> make clean && make fclean && make && make re
+/B-BOO-101> ./show_params test “This is a test” retest | cat -e
+./show_params$
+test$
+This is a test $
+retest$
+/B-BOO-101> echo $?
+0
+T/A.sc/S.sc/K.sc 05 - /S.sc/O.sc/R.sc/T.sc/E.sc/D.sc_/P.sc/A.sc/R.sc/A.sc/M.sc/S.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: task05/sorted_params.c ,task05/Makefile
+Write a program called sorted_params that displays all its arguments, in ASCII order.
+You are to display all arguments (including argv[0] , on different lines.)
+Your program will be built by calling your Makefile .
+Your main function must return 0.
+r Terminal - + x
+/B-BOO-101> cd task05
+/B-BOO-101> make clean && make fclean && make && make re
+./sorted_params test “This is a test” retest | cat -e
+./sorted_params$
+This is a test $
+retest$
+test$
+4
+\n[COMMAND] ../../.venv/bin/python - <<'PY'
+--- Page 1 ---
+B1 - Phoenix Bootcamp
+B-BOO-101
+Day 04
+Memory, re-parameters and structures
+1.1
+--- Page 2 ---
+Day 04
+repository name : BOO_phoenix_d04_ $ACADEMICYEAR
+repository rights : ramassage-tek
+language : C
+compilation : make -C lib/phoenix && gcc *.c -Iincludes -Llib/phoenix -
+lphoenix (+ our own ﬁles containing the mainfunction)
+The totality of your source files, except all useless files (binary, temp files, obj
+files,...), must be included in your delivery.
+All the bonus files (including a potential specific Makefile) should be in a directory
+named bonus .
+Error messages have to be written on the error output, and the program should
+then exit with the 84 error code (0 if there is no error).
+Unless stated otherwise, don’t push your main functions into your delivery directory. Your
+files will be compiled adding our own main.
+All.cfiles from your delivery folder will be collected and compiled with your libphoenix ,
+which is to be found in /lib/phoenix . Header files ( .h) must be located in includes/ .
+Allowed system function(s): write ,malloc ,free.
+1
+--- Page 3 ---
+T/A.sc/S.sc/K.sc 01 - /D.sc/U.sc/P.sc/L.sc/I.sc/C.sc/A.sc/T.sc/E.sc_/S.sc/T.sc/R.sc/I.sc/N.sc/G.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: duplicate_string.c
+Write a function that allocates memory and copies the string given as argument in it.
+It must be prototyped as follows:
+char * duplicate_string ( char const *src );
+The function must return a pointer to the newly allocated string.
+T/A.sc/S.sc/K.sc 02 - /C.sc/O.sc/N.sc/C.sc/A.sc/T.sc_/P.sc/A.sc/R.sc/A.sc/M.sc/E.sc/T.sc/E.sc/R.sc/S.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: task02/concat_parameters.c ,task02/Makefile
+Write a program called concat_parameters that turns the command-line given arguments into a single string.
+Arguments are to be separated by \n. Do not submit a main function in your delivery, we will be adding our
+own main in the file task02/main.c before calling your Makefile .
+Our main.c file is as follows:
+# include <stdlib .h>
+# include " phoenix .h"
+int main (int ac , char ** av)
+{
+char * str = concat_parameters (ac , av);
+show_string ( str);
+free ( str);
+return ( EXIT_SUCCESS );
+}
+r Terminal - + x
+/B-BOO-101> cp /path/to/somewhere/main.c task02/main.c && cd task02
+/B-BOO-101> make clean && make fclean && make && make re
+/B-BOO-101> ./concat_parameters toto titi | cat -e
+./concat_parameters$
+toto$
+titi
+2
+--- Page 4 ---
+T/A.sc/S.sc/K.sc 03 - /S.sc/P.sc/L.sc/I.sc/T.sc_/S.sc/T.sc/R.sc/I.sc/N.sc/G.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: split_string.c
+Write a function that splits a string into words. Separators will all be non-alphanumeric characters.
+The function returns an array in which each cell contains the address of a string (representing a word).
+The last cell must be NULL to terminate the array.
+The function must be prototyped as follows:
+char ** split_string ( char const *str );
+T/A.sc/S.sc/K.sc 04 - /S.sc/H.sc/O.sc/W.sc_/S.sc/T.sc/R.sc/I.sc/N.sc/G.sc_/A.sc/R.sc/R.sc/A.sc/Y.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: show_string_array.c
+Write a function that displays the content of an array of words.
+There must be one word per line, and each word must end with \n, including the last one.
+The function must be prototyped as follows:
+int show_string_array ( char * const * array );
+Here is an example of main function:
+int main ()
+{
+char * test_word_array [] = {"The ", " Answer ", "to", "the ", " Great ", " Question ...", "
+Of", "Life ,", "the ", " Universe ", "and ", " Everything ... ", "Is ... ", "Forty -two ,",
+0};
+show_string_array ( test_word_array );
+}
+3
+--- Page 5 ---
+T/A.sc/S.sc/K.sc 05 - /P.sc/A.sc/R.sc/A.sc/M.sc/E.sc/T.sc/E.sc/R.sc/S.sc_/T.sc/O.sc_/A.sc/R.sc/R.sc/A.sc/Y.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: parameters_to_array.c
+Write a function that stores the program’s parameters into an array of structures and returns the address of
+the array’s first cell. All array elements are to be addressed, including av[0] .
+The function must be prototyped as follows:
+struct info_param * parameters_to_array (int ac , char ** av);
+The structures contained is the array are to be allocated.
+To indicate the end of the array, the strfield of its last cell must be set to 0orNULL.
+The structure is defined as follows:
+struct info_param
+{
+int length ; // parameter /quotesingle.ts1s length
+char *str ; // parameter /quotesingle.ts1s address
+char * copy ; // parameter /quotesingle.ts1s copy
+char ** word_array ; // the result of split_string (str )
+};
+Do not submit the struct info_param structure; the tests set will use its own.
+Your function will be tested with your own split_string .
+4
+--- Page 6 ---
+T/A.sc/S.sc/K.sc 06 - /S.sc/H.sc/O.sc/W.sc_/P.sc/A.sc/R.sc/A.sc/M.sc/E.sc/T.sc/E.sc/R.sc/S.sc_/A.sc/R.sc/R.sc/A.sc/Y.sc_ _ _ _ _ _ _ _ _ _ _
+Delivery: show_parameters_array.c
+Write a function that displays the content of an array created with the previous function, and prototyped
+as follows:
+int show_parameters_array ( struct info_param const *par);
+For each cell, display the following elements (one per line): parameter, size and words (one per line).
+Do not submit the struct info_param structure; the tests set will use its own.
+5
+\n[COMMAND] ../../.venv/bin/python - <<'PY'
+--- Page 1 ---
+B1 - Phoenix Bootcamp
+B-BOO-101
+Day05
+TheStarryDay
+1
+--- Page 2 ---
+Day05
+binaryname: star
+re³²sit²ryname: BOO_³h²enix_d05_ $ACADEMICYEAR
+re³²sit²ryrights: ramassage-tek
+language: C
+c²m³ilati²n: ¹iaMakeﬁle,includingre,cleanandfcleanrules
+The totality of your source files, except all useless files (binary, temp files, obj
+files,...), must be included in your delivery.
+All the bonus files (including a potential specific Makefile) should be in a directory
+named bonus .
+Error messages have to be written on the error output, and the program should
+then exit with the 84 error code (0 if there is no error).
+Allowed system function: write .
+For this last day of the bootcamp, you’ll have only one bigtask (or a mini-project depending on how you
+look at it).
+Create a program called star that displays a star, based on its given size.
+If the size is 0, don’t display anything (but it is not an error).
+Don’t forget that you need a coherent test policy to ensure your program outputs are correct. To do so:
+split your functions in as many small functions as possible , so that each function is responsible for
+one single thing (according to the Coding Style),
+Test each of your functions individually using automated unit tests.
+Here’s some output with different sizes, it is up to you to deduce the rules regarding the star formation.
+These examples (and maybe more) can also be found in a simple text files given with
+this subject.
+r Terminal - + x
+/B-BOO-101> ./star toto 1>/dev/null
+Usage: ./star
+/B-BOO-101> ./star -1 1>/dev/null
+Usage: ./star
+/B-BOO-101> ./star 0 1>/dev/null
+/B-BOO-101>
+1
+--- Page 3 ---
+r Terminal - + x
+/B-BOO-101> ./star 1 | cat -e
+*$
+*** *** $
+* *$
+*** *** $
+*$
+/B-BOO-101> ./star 2 | cat -e
+*$
+* *$
+***** ***** $
+* *$
+* *$
+***** ***** $
+* *$
+*$
+/B-BOO-101> ./star 5
+*
+* *
+* *
+* *
+* *
+*********** ***********
+* *
+* *
+* *
+* *
+* *
+* *
+* *
+* *
+* *
+*********** ***********
+* *
+* *
+* *
+* *
+*
+2
+\n[COMMAND] pkg-config --modversion criterion
+\n[COMMAND] find .. -maxdepth 3 -type f -name '*.txt'
+../Day05/star_examples.txt
+\n[COMMAND] cat ../Day05/star_examples.txt
+$> ./star toto 1>/dev/null
+Usage: ./star <number>
+$> ./star -1 1>/dev/null
+Usage: ./star <number>
+$> ./star 0
+$> ./star 1 | cat -e
+   *$
+*** ***$
+ *   *$
+*** ***$
+   *$
+$> ./star 2 | cat -e
+     *$
+    * *$
+***** *****$
+ *       *$
+  *     *$
+ *       *$
+***** *****$
+    * *$
+     *$
+$> ./star 4
+           *
+          * *
+         *   *
+        *     *
+*********     *********
+ *                   *
+  *                 *
+   *               *
+    *             *
+   *               *
+  *                 *
+ *                   *
+*********     *********
+        *     *
+         *   *
+          * *
+           *
+$> ./star 5
+              *
+             * *
+            *   *
+           *     *
+          *       *
+***********       ***********
+ *                         *
+  *                       *
+   *                     *
+    *                   *
+     *                 *
+    *                   *
+   *                     *
+  *                       *
+ *                         *
+***********       ***********
+          *       *
+           *     *
+            *   *
+             * *
+              *
+\n[COMMAND] ls
+Day01
+Day02
+Day03
+Day04
+Day05
+README.md
+scripts
+\n[COMMAND] ls scripts
+test.sh
+\n[COMMAND] cat scripts/test.sh
+#!/usr/bin/env bash
+set -euo pipefail
+echo "[INFO] No tests defined yet for $(basename $(pwd))."
+exit 0
+\n[COMMAND] cat README.md
+# Bootcamp Phoenix
+
+> Crédits disponibles: 0
+
+> Timeline totale des projets: 1 semaine
+
+<br>
+
+<table align="center">
+    <thead>
+        <tr>
+            <th>PROJETS</th>
+            <th>TIMELINE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan="1"><a href="https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day01">Day01</a></td>
+            <td align="center">48h</td>
+        </tr>
+        <tr>
+            <td rowspan="1"><a href="https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day02">Day02</a></td>
+            <td align="center">48h</td>
+        </tr>
+        <tr>
+            <td rowspan="1"><a href="https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day03">Day03</a></td>
+            <td align="center">48h</td>
+        </tr>
+        <tr>
+            <td rowspan="1"><a href="https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day04">Day04</a></td>
+            <td align="center">48h</td>
+        </tr>
+        <tr>
+            <td rowspan="1"><a href="https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day05">Day05</a></td>
+            <td align="center">48h</td>
+        </tr>
+    </tbody>
+</table>
+
+</table>
+
+<br>
+
+[↩️ Revenir au module](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1/B-BOO-101)
+
+[↩️ Revenir au Semestre 1](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1)
+
+[↩️ Revenir à l'accueil](https://github.com/Studio-17/Epitech-Subjects)
+
+<br>
+
+---
+
+<div align="center">
+
+<a href="https://github.com/Studio-17" target="_blank"><img src="../../../assets/voc17.gif" width="40"></a>
+
+</div>
+\n[COMMAND] mkdir -p includes lib/phoenix Day01/src Day02/src Day03/src Day03/task04 Day03/task05 Day04/task02 Day05/src tests
+\n[COMMAND] cat <<'EOF' > includes/phoenix.h
+\n[COMMAND] cat <<'EOF' > Day01/show_alphabet.c
+\n[COMMAND] cat <<'EOF' > Day01/show_combinations.c
+\n[COMMAND] cat <<'EOF' > Day01/show_number.c
+\n[COMMAND] cat <<'EOF' > Day01/show_string.c
+\n[COMMAND] cat <<'EOF' > Day01/reverse_string.c
+\n[COMMAND] cat <<'EOF' > Day01/to_number.c
+\n[COMMAND] cat <<'EOF' > Day01/to_number.c
+\n[COMMAND] cat <<'EOF' > Day02/iterative_factorial.c
+\n[COMMAND] cat <<'EOF' > Day02/recursive_power.c
+\n[COMMAND] cat <<'EOF' > Day02/is_prime_number.c
+\n[COMMAND] cat <<'EOF' > Day02/my_strcpy.c
+\n[COMMAND] cat <<'EOF' > Day02/my_strncmp.c
+\n[COMMAND] cat <<'EOF' > Day02/my_strncmp.c
+\n[COMMAND] cat <<'EOF' > Day02/my_strstr.c
+\n[COMMAND] cat <<'EOF' > Day02/my_strupcase.c
+\n[COMMAND] cat <<'EOF' > Day02/my_strcapitalize.c
+\n[COMMAND] cat <<'EOF' > lib/phoenix/my_putchar.c
+\n[COMMAND] cat <<'EOF' > lib/phoenix/Makefile
+\n[COMMAND] cat <<'EOF' > Day03/concat_strings.c
+\n[COMMAND] cat <<'EOF' > Day03/task04/show_params.c
+\n[COMMAND] cat <<'EOF' > task04/show_params.c
+\n[COMMAND] cat <<'EOF' > task04/Makefile
+\n[COMMAND] cat <<'EOF' > task05/sorted_params.c
+\n[COMMAND] cat <<'EOF' > task05/Makefile
+\n[COMMAND] cat <<'EOF' > Day04/duplicate_string.c
+\n[COMMAND] cat <<'EOF' > task02/concat_parameters.c
+\n[COMMAND] cat <<'EOF' > task02/Makefile
+\n[COMMAND] cat <<'EOF' > Day04/split_string.c
+\n[COMMAND] cat <<'EOF' > Day04/show_string_array.c
+\n[COMMAND] cat <<'EOF' > Day04/parameters_to_array.c
+\n[COMMAND] cat <<'EOF' > Day04/parameters_to_array.c
+\n[COMMAND] cat <<'EOF' > Day04/show_parameters_array.c
+\n[COMMAND] python3 - <<'PY'
+size 0
+
+size 4
+1 12 '           *'
+2 13 '          * *'
+3 14 '         *   *'
+4 15 '        *     *'
+5 23 '*********     *********'
+6 22 ' *                   *'
+7 21 '  *                 *'
+8 20 '   *               *'
+9 19 '    *             *'
+10 20 '   *               *'
+11 21 '  *                 *'
+12 22 ' *                   *'
+13 23 '*********     *********'
+14 15 '        *     *'
+15 14 '         *   *'
+16 13 '          * *'
+17 12 '           *'
+
+size 5
+1 15 '              *'
+2 16 '             * *'
+3 17 '            *   *'
+4 18 '           *     *'
+5 19 '          *       *'
+6 29 '***********       ***********'
+7 28 ' *                         *'
+8 27 '  *                       *'
+9 26 '   *                     *'
+10 25 '    *                   *'
+11 24 '     *                 *'
+12 25 '    *                   *'
+13 26 '   *                     *'
+14 27 '  *                       *'
+15 28 ' *                         *'
+16 29 '***********       ***********'
+17 19 '          *       *'
+18 18 '           *     *'
+19 17 '            *   *'
+20 16 '             * *'
+21 15 '              *'
+
+\n[COMMAND] python3 - <<'PY'
+size 0
+
+size 1
+1 4 '   *'
+2 7 '*** ***'
+3 6 ' *   *'
+4 7 '*** ***'
+5 4 '   *'
+
+size 2
+1 6 '     *'
+2 7 '    * *'
+3 11 '***** *****'
+4 10 ' *       *'
+5 9 '  *     *'
+6 10 ' *       *'
+7 11 '***** *****'
+8 7 '    * *'
+9 6 '     *'
+
+size 4
+1 12 '           *'
+2 13 '          * *'
+3 14 '         *   *'
+4 15 '        *     *'
+5 23 '*********     *********'
+6 22 ' *                   *'
+7 21 '  *                 *'
+8 20 '   *               *'
+9 19 '    *             *'
+10 20 '   *               *'
+11 21 '  *                 *'
+12 22 ' *                   *'
+13 23 '*********     *********'
+14 15 '        *     *'
+15 14 '         *   *'
+16 13 '          * *'
+17 12 '           *'
+
+size 5
+1 15 '              *'
+2 16 '             * *'
+3 17 '            *   *'
+4 18 '           *     *'
+5 19 '          *       *'
+6 29 '***********       ***********'
+7 28 ' *                         *'
+8 27 '  *                       *'
+9 26 '   *                     *'
+10 25 '    *                   *'
+11 24 '     *                 *'
+12 25 '    *                   *'
+13 26 '   *                     *'
+14 27 '  *                       *'
+15 28 ' *                         *'
+16 29 '***********       ***********'
+17 19 '          *       *'
+18 18 '           *     *'
+19 17 '            *   *'
+20 16 '             * *'
+21 15 '              *'
+
+\n[COMMAND] python3 - <<'PY'
+size -1
+1 len 22 leading 0 inner -1 'Usage: ./star <number>'
+
+size 0
+
+size 1
+1 len 4 leading 3 inner None '   *'
+2 len 7 leading 0 inner 5 '*** ***'
+3 len 6 leading 1 inner 3 ' *   *'
+4 len 7 leading 0 inner 5 '*** ***'
+5 len 4 leading 3 inner None '   *'
+
+size 2
+1 len 6 leading 5 inner None '     *'
+2 len 7 leading 4 inner 1 '    * *'
+3 len 11 leading 0 inner 9 '***** *****'
+4 len 10 leading 1 inner 7 ' *       *'
+5 len 9 leading 2 inner 5 '  *     *'
+6 len 10 leading 1 inner 7 ' *       *'
+7 len 11 leading 0 inner 9 '***** *****'
+8 len 7 leading 4 inner 1 '    * *'
+9 len 6 leading 5 inner None '     *'
+
+size 4
+1 len 12 leading 11 inner None '           *'
+2 len 13 leading 10 inner 1 '          * *'
+3 len 14 leading 9 inner 3 '         *   *'
+4 len 15 leading 8 inner 5 '        *     *'
+5 len 23 leading 0 inner 21 '*********     *********'
+6 len 22 leading 1 inner 19 ' *                   *'
+7 len 21 leading 2 inner 17 '  *                 *'
+8 len 20 leading 3 inner 15 '   *               *'
+9 len 19 leading 4 inner 13 '    *             *'
+10 len 20 leading 3 inner 15 '   *               *'
+11 len 21 leading 2 inner 17 '  *                 *'
+12 len 22 leading 1 inner 19 ' *                   *'
+13 len 23 leading 0 inner 21 '*********     *********'
+14 len 15 leading 8 inner 5 '        *     *'
+15 len 14 leading 9 inner 3 '         *   *'
+16 len 13 leading 10 inner 1 '          * *'
+17 len 12 leading 11 inner None '           *'
+
+size 5
+1 len 15 leading 14 inner None '              *'
+2 len 16 leading 13 inner 1 '             * *'
+3 len 17 leading 12 inner 3 '            *   *'
+4 len 18 leading 11 inner 5 '           *     *'
+5 len 19 leading 10 inner 7 '          *       *'
+6 len 29 leading 0 inner 27 '***********       ***********'
+7 len 28 leading 1 inner 25 ' *                         *'
+8 len 27 leading 2 inner 23 '  *                       *'
+9 len 26 leading 3 inner 21 '   *                     *'
+10 len 25 leading 4 inner 19 '    *                   *'
+11 len 24 leading 5 inner 17 '     *                 *'
+12 len 25 leading 4 inner 19 '    *                   *'
+13 len 26 leading 3 inner 21 '   *                     *'
+14 len 27 leading 2 inner 23 '  *                       *'
+15 len 28 leading 1 inner 25 ' *                         *'
+16 len 29 leading 0 inner 27 '***********       ***********'
+17 len 19 leading 10 inner 7 '          *       *'
+18 len 18 leading 11 inner 5 '           *     *'
+19 len 17 leading 12 inner 3 '            *   *'
+20 len 16 leading 13 inner 1 '             * *'
+21 len 15 leading 14 inner None '              *'
+
+\n[COMMAND] cat <<'EOF' > Day05/star.c
+\n[COMMAND] cat <<'EOF' > Day05/Makefile
+\n[COMMAND] cat <<'EOF' > Makefile
+\n[COMMAND] cat <<'EOF' > test_day01.c
+\n[COMMAND] cat <<'EOF' > test_day02.c
+\n[COMMAND] cat <<'EOF' > test_day03.c
+\n[COMMAND] cat <<'EOF' > test_day04.c
+\n[COMMAND] cat <<'EOF' > test_day04.c
+\n[COMMAND] cat <<'EOF' > Makefile
+\n[COMMAND] cat <<'EOF' > test_star.py
+\n[COMMAND] chmod +x test_star.py
+\n[COMMAND] cat <<'EOF' > scripts/test.sh
+\n[COMMAND] chmod +x scripts/test.sh
+\n[COMMAND] cat <<'EOF' > Makefile
+\n[COMMAND] make test
+make -C lib/phoenix
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+mkdir -p build
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes -c my_putchar.c -o build/my_putchar.o
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes -c ../../Day01/show_number.c -o build/show_number.o
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes -c ../../Day01/show_string.c -o build/show_string.o
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes -c ../../Day01/reverse_string.c -o build/reverse_string.o
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes -c ../../Day01/to_number.c -o build/to_number.o
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes -c ../../Day02/is_prime_number.c -o build/is_prime_number.o
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes -c ../../Day02/my_strcpy.c -o build/my_strcpy.o
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes -c ../../Day02/my_strncmp.c -o build/my_strncmp.o
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes -c ../../Day02/my_strstr.c -o build/my_strstr.o
+ar rcs libphoenix.a build/my_putchar.o build/show_number.o build/show_string.o build/reverse_string.o build/to_number.o build/is_prime_number.o build/my_strcpy.o build/my_strncmp.o build/my_strstr.o
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+make -C Day03/task04
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day03/task04'
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes   -c -o show_params.o show_params.c
+make -C ../../lib/phoenix
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes show_params.o -o show_params -L../../lib/phoenix -lphoenix
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day03/task04'
+make -C Day03/task05
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day03/task05'
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes   -c -o sorted_params.o sorted_params.c
+make -C ../../lib/phoenix
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes sorted_params.o -o sorted_params -L../../lib/phoenix -lphoenix
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day03/task05'
+make -C Day04/task02
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day04/task02'
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes   -c -o concat_parameters.o concat_parameters.c
+make -C ../../lib/phoenix
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes concat_parameters.o -o concat_parameters -L../../lib/phoenix -lphoenix
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day04/task02'
+\n[COMMAND] cat <<'EOF' > Day04/task02/main.c
+\n[COMMAND] cat <<'EOF' > Day04/task02/main.c
+\n[COMMAND] make test
+make -C Day04/task02
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day04/task02'
+make -C ../../lib/phoenix
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes concat_parameters.o -o concat_parameters -L../../lib/phoenix -lphoenix
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day04/task02'
+\n[COMMAND] cat <<'EOF' > Day04/task02/Makefile
+\n[COMMAND] make test
+make -C Day04/task02
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day04/task02'
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes   -c -o main.o main.c
+make -C ../../lib/phoenix
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+gcc -Wall -Wextra -Werror -std=c99 -I../../includes concat_parameters.o main.o -o concat_parameters -L../../lib/phoenix -lphoenix
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day04/task02'
+make -C Day05
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day05'
+gcc -Wall -Wextra -Werror -std=c99 -I../includes   -c -o star.o star.c
+make -C ../lib/phoenix
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+gcc -Wall -Wextra -Werror -std=c99 -I../includes star.o -o star -L../lib/phoenix -lphoenix
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day05'
+make -C tests test
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/tests'
+gcc -Wall -Wextra -Werror -std=c99 --coverage -I../includes test_day01.c test_day02.c test_day03.c test_day04.c ../lib/phoenix/my_putchar.c ../Day01/show_alphabet.c ../Day01/show_combinations.c ../Day01/show_number.c ../Day01/show_string.c ../Day01/reverse_string.c ../Day01/to_number.c ../Day02/iterative_factorial.c ../Day02/recursive_power.c ../Day02/is_prime_number.c ../Day02/my_strcpy.c ../Day02/my_strncmp.c ../Day02/my_strstr.c ../Day02/my_strupcase.c ../Day02/my_strcapitalize.c ../Day03/concat_strings.c ../Day04/duplicate_string.c ../Day04/split_string.c ../Day04/show_string_array.c ../Day04/parameters_to_array.c ../Day04/show_parameters_array.c ../Day04/task02/concat_parameters.c -o unit_tests --coverage -lcriterion
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/tests'
+\n[COMMAND] cat <<'EOF' > tests/framework.h
+\n[COMMAND] cat <<'EOF' > tests/framework.c
+\n[COMMAND] cat <<'EOF' > tests/framework.c
+\n[COMMAND] cat <<'EOF' > tests/test_day01.c
+\n[COMMAND] cat <<'EOF' > tests/test_day02.c
+\n[COMMAND] cat <<'EOF' > tests/test_day03.c
+\n[COMMAND] cat <<'EOF' > tests/test_day04.c
+\n[COMMAND] cat <<'EOF' > tests/Makefile
+\n[COMMAND] make test
+make -C tests test
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/tests'
+gcc -Wall -Wextra -Werror -std=c99 --coverage -I../includes framework.c test_day01.c test_day02.c test_day03.c test_day04.c ../lib/phoenix/my_putchar.c ../Day01/show_alphabet.c ../Day01/show_combinations.c ../Day01/show_number.c ../Day01/show_string.c ../Day01/reverse_string.c ../Day01/to_number.c ../Day02/iterative_factorial.c ../Day02/recursive_power.c ../Day02/is_prime_number.c ../Day02/my_strcpy.c ../Day02/my_strncmp.c ../Day02/my_strstr.c ../Day02/my_strupcase.c ../Day02/my_strcapitalize.c ../Day03/concat_strings.c ../Day04/duplicate_string.c ../Day04/split_string.c ../Day04/show_string_array.c ../Day04/parameters_to_array.c ../Day04/show_parameters_array.c ../Day04/task02/concat_parameters.c -o unit_tests --coverage 
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/tests'
+\n[COMMAND] cat <<'EOF' > tests/framework.c
+\n[COMMAND] make test
+make -C tests test
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/tests'
+gcc -Wall -Wextra -Werror -std=c99 --coverage -I../includes framework.c test_day01.c test_day02.c test_day03.c test_day04.c ../lib/phoenix/my_putchar.c ../Day01/show_alphabet.c ../Day01/show_combinations.c ../Day01/show_number.c ../Day01/show_string.c ../Day01/reverse_string.c ../Day01/to_number.c ../Day02/iterative_factorial.c ../Day02/recursive_power.c ../Day02/is_prime_number.c ../Day02/my_strcpy.c ../Day02/my_strncmp.c ../Day02/my_strstr.c ../Day02/my_strupcase.c ../Day02/my_strcapitalize.c ../Day03/concat_strings.c ../Day04/duplicate_string.c ../Day04/split_string.c ../Day04/show_string_array.c ../Day04/parameters_to_array.c ../Day04/show_parameters_array.c ../Day04/task02/concat_parameters.c -o unit_tests --coverage 
+./unit_tests
+[RESULT] 33/33 tests passed
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/tests'
+./tests/test_star.py
+\n[COMMAND] cat <<'EOF' > README.md
+\n[COMMAND] mkdir -p reports/Semester-1
+\n[COMMAND] cat <<'EOF' > reports/Semester-1/B-BOO-101.md
+\n[COMMAND] git status -sb
+## main...origin/main
+ m ../../best/best
+ m ../../claude/other/best
+ M B-BOO-101/Bootcamp_Phoenix/README.md
+ M B-BOO-101/Bootcamp_Phoenix/scripts/test.sh
+ M B-CPE-100/Count_island/Makefile
+ M B-CPE-100/Count_island/README.md
+ M B-CPE-100/Count_island/count_island
+ M B-CPE-100/Count_island/include/count_island.h
+ M B-CPE-100/Count_island/src/count_island.c
+ M B-CPE-100/Count_island/src/count_island.o
+ M B-CPE-100/Count_island/tests/test.sh
+ M B-CPE-100/Firtree/Makefile
+ M B-CPE-100/Firtree/README.md
+ M B-CPE-100/Firtree/firtree
+ M B-CPE-100/Firtree/include/tree.h
+ M B-CPE-100/Firtree/src/main.c
+ M B-CPE-100/Firtree/src/main.o
+ M B-CPE-100/Firtree/src/tree.c
+ M B-CPE-100/Firtree/src/tree.o
+ M B-CPE-100/Firtree/tests/test.sh
+ M B-CPE-100/MatchNmatch/Makefile
+ M B-CPE-100/MatchNmatch/README.md
+ D B-CPE-100/MatchNmatch/match
+ D B-CPE-100/MatchNmatch/nmatch
+ M B-CPE-100/MatchNmatch/src/match.c
+ D B-CPE-100/MatchNmatch/src/match.o
+ M B-CPE-100/MatchNmatch/src/nmatch.c
+ D B-CPE-100/MatchNmatch/src/nmatch.o
+ M B-CPE-100/MatchNmatch/tests/test.sh
+ M B-CPE-100/Rushs/Rush1/README.md
+ M B-CPE-100/Star/Makefile
+ M B-CPE-100/Star/README.md
+ M B-CPE-100/Star/include/star.h
+ M B-CPE-100/Star/src/main.c
+ M B-CPE-100/Star/src/main.o
+ M B-CPE-100/Star/src/star.c
+ M B-CPE-100/Star/src/star.o
+ M B-CPE-100/Star/star
+ M B-CPE-100/Star/tests/test.sh
+ M B-CPE-100/WorkshopLib/README.md
+ M B-CPE-110/BSQ/Makefile
+ M B-PSU-100/My_Top/Makefile
+ M B-PSU-100/My_ls/Makefile
+ M B-PSU-100/My_navy/Makefile
+ M B-PSU-100/My_sokoban/Makefile
+ M ../reports/Semester-1/Count_island.md
+ M ../reports/Semester-1/Firtree.md
+ M ../reports/Semester-1/MatchNmatch.md
+ M ../reports/Semester-1/Star.md
+ M ../reports/Semester-1/WorkshopLib.md
+?? B-BOO-101/.venv/
+?? B-BOO-101/Bootcamp_Phoenix/Day01/reverse_string.c
+?? B-BOO-101/Bootcamp_Phoenix/Day01/show_alphabet.c
+?? B-BOO-101/Bootcamp_Phoenix/Day01/show_combinations.c
+?? B-BOO-101/Bootcamp_Phoenix/Day01/show_number.c
+?? B-BOO-101/Bootcamp_Phoenix/Day01/show_string.c
+?? B-BOO-101/Bootcamp_Phoenix/Day01/to_number.c
+?? B-BOO-101/Bootcamp_Phoenix/Day02/is_prime_number.c
+?? B-BOO-101/Bootcamp_Phoenix/Day02/iterative_factorial.c
+?? B-BOO-101/Bootcamp_Phoenix/Day02/my_strcapitalize.c
+?? B-BOO-101/Bootcamp_Phoenix/Day02/my_strcpy.c
+?? B-BOO-101/Bootcamp_Phoenix/Day02/my_strncmp.c
+?? B-BOO-101/Bootcamp_Phoenix/Day02/my_strstr.c
+?? B-BOO-101/Bootcamp_Phoenix/Day02/my_strupcase.c
+?? B-BOO-101/Bootcamp_Phoenix/Day02/recursive_power.c
+?? B-BOO-101/Bootcamp_Phoenix/Day03/concat_strings.c
+?? B-BOO-101/Bootcamp_Phoenix/Day03/task04/
+?? B-BOO-101/Bootcamp_Phoenix/Day03/task05/
+?? B-BOO-101/Bootcamp_Phoenix/Day04/duplicate_string.c
+?? B-BOO-101/Bootcamp_Phoenix/Day04/parameters_to_array.c
+?? B-BOO-101/Bootcamp_Phoenix/Day04/show_parameters_array.c
+?? B-BOO-101/Bootcamp_Phoenix/Day04/show_string_array.c
+?? B-BOO-101/Bootcamp_Phoenix/Day04/split_string.c
+?? B-BOO-101/Bootcamp_Phoenix/Day04/task02/
+?? B-BOO-101/Bootcamp_Phoenix/Day05/Makefile
+?? B-BOO-101/Bootcamp_Phoenix/Day05/star
+?? B-BOO-101/Bootcamp_Phoenix/Day05/star.c
+?? B-BOO-101/Bootcamp_Phoenix/Day05/star.o
+?? B-BOO-101/Bootcamp_Phoenix/Makefile
+?? B-BOO-101/Bootcamp_Phoenix/includes/
+?? B-BOO-101/Bootcamp_Phoenix/lib/
+?? B-BOO-101/Bootcamp_Phoenix/my_strcpy.c.gcov
+?? B-BOO-101/Bootcamp_Phoenix/my_strncmp.c.gcov
+?? B-BOO-101/Bootcamp_Phoenix/tests/
+?? B-CPE-100/Rushs/Rush1/.oracle/
+?? B-CPE-100/Rushs/Rush1/rush-1-1/
+?? B-CPE-100/Rushs/Rush1/rush-1-2/
+?? B-CPE-100/Rushs/Rush1/rush-1-3/
+?? B-CPE-100/Rushs/Rush1/rush-1-4/
+?? B-CPE-100/Rushs/Rush1/rush-1-5/
+?? B-CPE-100/WorkshopLib/Makefile
+?? B-CPE-100/WorkshopLib/include/
+?? B-CPE-100/WorkshopLib/lib/
+?? B-CPE-100/WorkshopLib/tests/
+?? logs/
+?? reports/
+?? ../logs/session-20250919-101337.log
+?? ../logs/session-20250919-115122.log
+?? ../python_packages/
+?? ../reports/Semester-1/Rush1.md
+\n[COMMAND] make fclean
+\n[COMMAND] make fclean
+make -C lib/phoenix clean
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -rf build
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+make -C Day03/task04 clean
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day03/task04'
+rm -f show_params.o
+make -C ../../lib/phoenix clean
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -rf build
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day03/task04'
+make -C Day03/task05 clean
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day03/task05'
+rm -f sorted_params.o
+make -C ../../lib/phoenix clean
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -rf build
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day03/task05'
+make -C Day04/task02 clean
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day04/task02'
+rm -f concat_parameters.o main.o
+make -C ../../lib/phoenix clean
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -rf build
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day04/task02'
+make -C Day05 clean
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day05'
+rm -f star.o
+make -C ../lib/phoenix clean
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -rf build
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day05'
+rm -f -f tests/*.gcno tests/*.gcda tests/unit_tests
+make -C lib/phoenix fclean
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -rf build
+rm -f libphoenix.a
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+make -C Day03/task04 fclean
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day03/task04'
+rm -f show_params.o
+make -C ../../lib/phoenix clean
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -rf build
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -f show_params
+make -C ../../lib/phoenix fclean
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -rf build
+rm -f libphoenix.a
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day03/task04'
+make -C Day03/task05 fclean
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day03/task05'
+rm -f sorted_params.o
+make -C ../../lib/phoenix clean
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -rf build
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -f sorted_params
+make -C ../../lib/phoenix fclean
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -rf build
+rm -f libphoenix.a
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day03/task05'
+make -C Day04/task02 fclean
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day04/task02'
+rm -f concat_parameters.o main.o
+make -C ../../lib/phoenix clean
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -rf build
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -f concat_parameters
+make -C ../../lib/phoenix fclean
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -rf build
+rm -f libphoenix.a
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day04/task02'
+make -C Day05 fclean
+make[1]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day05'
+rm -f star.o
+make -C ../lib/phoenix clean
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -rf build
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -f star
+make -C ../lib/phoenix fclean
+make[2]: Entering directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+rm -rf build
+rm -f libphoenix.a
+make[2]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/lib/phoenix'
+make[1]: Leaving directory '/home/roro/work/projects/Epitech_projects/fullLLM_gpt/Semester-1/B-BOO-101/Bootcamp_Phoenix/Day05'
+rm -f -f Day03/task04/show_params Day03/task05/sorted_params Day04/task02/concat_parameters Day05/star
+\n[COMMAND] rm -f my_strcpy.c.gcov my_strncmp.c.gcov
+\n[COMMAND] ls
+Count_island
+Firtree
+MatchNmatch
+Pool
+README.md
+Rushs
+Star
+WorkshopLib
+\n[COMMAND] find . -maxdepth 3 -iname '*.pdf'
+./Pool/Day12/Day12.pdf
+./Pool/Day06/Day06.pdf
+./Pool/Day10/Day10.pdf
+./Pool/Day07/Day07.pdf
+./Pool/Day04/Day04.pdf
+./Pool/Day05/Day05.pdf
+./Pool/Day09/Day09.pdf
+./Pool/Day03/Day03.pdf
+./Pool/Day01/Day01.pdf
+./Pool/Day01/manifesto.pdf
+./Pool/Day11/Day11.pdf
+./Pool/Day02/Day02.pdf
+./Pool/Day08/Day08.pdf
+./Firtree/Tree.pdf
+./Rushs/Rush1/Rush1.pdf
+./Rushs/Rush2/Rush2.pdf
+./Count_island/CountIsland.pdf
+./WorkshopLib/WorkshopLib.pdf
+./MatchNmatch/MatchNmatch.pdf
+./Star/B-CPE-100_Star.pdf
+\n[COMMAND] ../B-BOO-101/.venv/bin/python - <<'PY'
+--- Page 1 ---
+COUNT_ISLAND
+BACK TO RECURSION
+
+--- Page 2 ---
+COUNT_ISLAND
+Preliminaries
+Language: C
+The totality of your source files, except all useless files (binary, temp files, obj files,...),
+must be included in your delivery.
+✓Don’t push your mainfunction into your delivery directory, we will be adding our own.
+Your files will be compiled adding our main.c .
+✓If one of your files prevents you from compiling with *.c, the Autograder will not be
+able to correct your work and you will receive a 0.
+All .c files from your delivery folder will be collected and compiled with your libmy , which
+must be found in lib/my/ . For those of you using .h files, they must be located in include/ (like
+the my.hfile).
+The only allowed system call for this project is write .
+1
+--- Page 3 ---
+Compilation
+∇ Terminal - + x
+~/B-CPE-100> cd lib/my && ./build.sh && cd ../..
+~/B-CPE-100> cc -o count_island *.c test_files/our_main.c -I./include -L./lib/my -lmy
+Your library will be built using the lib/my/build.sh script you previously made (see Day07).
+Don’t forget that you need a coherent test policy to ensure your program outputs are correct. To
+do so:
+✓split your functions in as many small functions as possible , so that each function is re-
+sponsible for one single thing (according to the Coding Style),
+✓write unit tests to test exhaustively all of these functions.
+2
+--- Page 4 ---
+count_island
+Write a function called count_island with the following prototype:
+i n t c o u n t _ i s l a n d ( c h a r * * w o r l d ) ;
+The world 2-dimensional array represent a file containing a series of equal-length lines that con-
+tains either the dot character ( .) or the Xcharacter.
+These lines form a rectangle of ‘ .’, which contains islands of ‘ X’s.
+A line is a series of’ .’ and ‘ X’ characters that are terminated by a ‘ \0’.
+Two characters are considered touching each other if they are:
+✓contiguous and on the same line
+OR
+✓in the same column and on contiguous lines
+An island of ‘ X’ is formed by either a single, isolated, ‘ X’ or the set of characters touching each
+other.
+The function must scan the whole array, line by line, and replace all of the ’X’s from the islands
+by their number in order of appearance in the array.
+The last line of the array will always be set to NULL.
+We start the count at 0. Meaning the first island must be constitued of 0.
+The function must do this computation starting at the beginning of the array and processing
+line by line.
+There cannot be two different results from the same file.
+The function return value of the function must be the number of islands found.
+The array contains, at most, 10 islands.
+3
+--- Page 5 ---
+v 2.2
+
+\n[COMMAND] ls
+count_island
+CountIsland.pdf
+Epitech_README.txt
+include
+main.o
+Makefile
+map.txt
+README.md
+scripts
+src
+tests
+\n[COMMAND] find src -maxdepth 2 -type f
+src/count_island.o
+src/count_island.c
+\n[COMMAND] sed -n '1,160p' src/count_island.c
+#include <stddef.h>
+
+#include "count_island.h"
+
+static int my_strlen(const char *s)
+{
+    int len = 0;
+
+    if (s == NULL)
+        return 0;
+    while (s[len] != '\0')
+        ++len;
+    return len;
+}
+
+static void flood_fill(char **world, int row_count, int row, int col, char mark)
+{
+    if (row < 0 || row >= row_count)
+        return;
+
+    int col_count = my_strlen(world[row]);
+
+    if (col < 0 || col >= col_count)
+        return;
+    if (world[row][col] != 'X')
+        return;
+
+    world[row][col] = mark;
+
+    flood_fill(world, row_count, row - 1, col, mark);
+    flood_fill(world, row_count, row + 1, col, mark);
+    flood_fill(world, row_count, row, col - 1, mark);
+    flood_fill(world, row_count, row, col + 1, mark);
+}
+
+int count_island(char **world)
+{
+    if (world == NULL)
+        return 0;
+
+    int rows = 0;
+
+    while (world[rows] != NULL)
+        ++rows;
+    if (rows == 0)
+        return 0;
+
+    int islands = 0;
+
+    for (int r = 0; r < rows; ++r) {
+        int cols = my_strlen(world[r]);
+        for (int c = 0; c < cols; ++c) {
+            if (world[r][c] == 'X') {
+                char mark = (islands < 10) ? (char)('0' + islands) : '9';
+                flood_fill(world, rows, r, c, mark);
+                ++islands;
+            }
+        }
+    }
+    return islands;
+}
+\n[COMMAND] cat include/count_island.h
+#ifndef COUNT_ISLAND_H
+#define COUNT_ISLAND_H
+
+int count_island(char **world);
+
+#endif
+\n[COMMAND] ls tests
+test.sh
+\n[COMMAND] cat tests/test.sh
+#!/usr/bin/env bash
+set -euo pipefail
+
+DIR="$(cd "$(dirname "$0")/.." && pwd)"
+BIN="$DIR/count_island"
+MAP_FILE="$DIR/map.txt"
+EXPECTED_OUT="$(mktemp)"
+EXPECTED_COUNT_FILE="$(mktemp)"
+UNIT_BIN="$DIR/tests/unit_cases"
+
+cleanup() {
+  rm -f "$EXPECTED_OUT" "$EXPECTED_COUNT_FILE" "$UNIT_BIN"
+}
+trap cleanup EXIT
+
+if [ ! -x "$BIN" ]; then
+  echo "[KO] missing binary $BIN" >&2
+  exit 1
+fi
+
+python3 - <<'PY' "$MAP_FILE" "$EXPECTED_OUT" "$EXPECTED_COUNT_FILE"
+import sys
+from pathlib import Path
+
+map_path = Path(sys.argv[1])
+out_path = Path(sys.argv[2])
+count_path = Path(sys.argv[3])
+lines = map_path.read_text().splitlines()
+if not lines:
+    out_path.write_text("")
+    count_path.write_text("0")
+    raise SystemExit
+height = int(lines[0]) if lines[0].strip() else 0
+grid_lines = lines[1:height + 1]
+grid = [list(line) for line in grid_lines]
+rows = len(grid)
+
+sys.setrecursionlimit(10000)
+
+def flood(r, c, mark):
+    if r < 0 or r >= rows:
+        return
+    row = grid[r]
+    if c < 0 or c >= len(row):
+        return
+    if row[c] != 'X':
+        return
+    row[c] = mark
+    flood(r - 1, c, mark)
+    flood(r + 1, c, mark)
+    flood(r, c - 1, mark)
+    flood(r, c + 1, mark)
+
+islands = 0
+for r in range(rows):
+    for c in range(len(grid[r])):
+        if grid[r][c] == 'X':
+            if islands >= 10:
+                raise SystemExit('Map contains more than 10 islands')
+            flood(r, c, chr(ord('0') + islands))
+            islands += 1
+
+out_path.write_text("\n".join("".join(row) for row in grid) + "\n")
+count_path.write_text(str(islands))
+PY
+
+ok=0
+ko=0
+
+compare_output() {
+  local result
+  result="$(mktemp)"
+  "$BIN" "$MAP_FILE" >"$result"
+  if diff -u "$EXPECTED_OUT" "$result" >/dev/null; then
+    echo "[OK] map transformation"
+    ok=$((ok+1))
+  else
+    echo "[KO] map transformation" >&2
+    diff -u "$EXPECTED_OUT" "$result" >&2 || true
+    ko=$((ko+1))
+  fi
+  rm -f "$result"
+}
+
+compile_unit_tests() {
+  cat >"$DIR/tests/unit_cases.c" <<'CEOF'
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "count_island.h"
+
+static int test_single_island(void)
+{
+    char row0[] = "XX";
+    char row1[] = "XX";
+    char *world[] = {row0, row1, NULL};
+    int count = count_island(world);
+    if (count != 1) {
+        fprintf(stderr, "Expected 1 island, got %d\n", count);
+        return 1;
+    }
+    if (row0[0] != '0' || row0[1] != '0' || row1[0] != '0' || row1[1] != '0') {
+        fprintf(stderr, "Island not filled with 0s\n");
+        return 1;
+    }
+    return 0;
+}
+
+static int test_diagonal_islands(void)
+{
+    char row0[] = "X..";
+    char row1[] = ".X.";
+    char row2[] = "..X";
+    char *world[] = {row0, row1, row2, NULL};
+    int count = count_island(world);
+    if (count != 3) {
+        fprintf(stderr, "Expected 3 islands, got %d\n", count);
+        return 1;
+    }
+    if (row0[0] != '0' || row1[1] != '1' || row2[2] != '2') {
+        fprintf(stderr, "Diagonal islands not numbered correctly\n");
+        return 1;
+    }
+    return 0;
+}
+
+static int test_no_island(void)
+{
+    char row0[] = "....";
+    char row1[] = "....";
+    char *world[] = {row0, row1, NULL};
+    int count = count_island(world);
+    if (count != 0) {
+        fprintf(stderr, "Expected 0 island, got %d\n", count);
+        return 1;
+    }
+    if (row0[0] != '.' || row1[3] != '.') {
+        fprintf(stderr, "Dots should remain untouched\n");
+        return 1;
+    }
+    return 0;
+}
+
+static char **load_map(const char *path, int *height)
+{
+    FILE *fp = fopen(path, "r");
+    if (fp == NULL)
+        return NULL;
+
+    char buffer[1024];
+    if (fgets(buffer, sizeof(buffer), fp) == NULL) {
+        fclose(fp);
+        return NULL;
+    }
+
+    int rows = atoi(buffer);
+    if (rows <= 0) {
+        fclose(fp);
+        return NULL;
+    }
+
+    char **grid = malloc(sizeof(char *) * (rows + 1));
+    if (grid == NULL) {
+        fclose(fp);
+        return NULL;
+    }
+
+    for (int i = 0; i < rows; ++i) {
+        if (fgets(buffer, sizeof(buffer), fp) == NULL) {
+            rows = i;
+            break;
+        }
+        size_t len = strcspn(buffer, "\n");
+        buffer[len] = '\0';
+        grid[i] = malloc(len + 1);
+        if (grid[i] == NULL) {
+            rows = i;
+            break;
+        }
+        memcpy(grid[i], buffer, len + 1);
+    }
+    grid[rows] = NULL;
+    fclose(fp);
+    if (height != NULL)
+        *height = rows;
+    return grid;
+}
+
+static void free_map(char **grid)
+{
+    if (grid == NULL)
+        return;
+    for (int i = 0; grid[i] != NULL; ++i)
+        free(grid[i]);
+    free(grid);
+}
+
+static int test_large_map(void)
+{
+    int rows = 0;
+    char **grid = load_map("MAP_PLACEHOLDER", &rows);
+    if (grid == NULL) {
+        fprintf(stderr, "Failed to load map file\n");
+        return 1;
+    }
+    int count = count_island(grid);
+    if (count != EXPECTED_COUNT) {
+        fprintf(stderr, "Expected %d islands, got %d\n", EXPECTED_COUNT, count);
+        free_map(grid);
+        return 1;
+    }
+    int seen[10] = {0};
+    for (int r = 0; r < rows; ++r) {
+        for (int c = 0; grid[r][c] != '\0'; ++c) {
+            char ch = grid[r][c];
+            if (ch == 'X') {
+                fprintf(stderr, "Unconverted X at (%d,%d)\n", r, c);
+                free_map(grid);
+                return 1;
+            }
+            if (ch >= '0' && ch <= '9')
+                seen[ch - '0'] = 1;
+        }
+    }
+    for (int i = 0; i < EXPECTED_COUNT && i < 10; ++i) {
+        if (!seen[i]) {
+            fprintf(stderr, "Island %d not present in output\n", i);
+            free_map(grid);
+            return 1;
+        }
+    }
+    free_map(grid);
+    return 0;
+}
+
+int main(void)
+{
+    int failures = 0;
+
+    failures += test_single_island();
+    failures += test_diagonal_islands();
+    failures += test_no_island();
+    failures += test_large_map();
+
+    if (failures != 0)
+        return 84;
+    return 0;
+}
+CEOF
+
+  sed -i "s|MAP_PLACEHOLDER|$MAP_FILE|" "$DIR/tests/unit_cases.c"
+  expected_count="$(cat "$EXPECTED_COUNT_FILE")"
+  sed -i "s/EXPECTED_COUNT/$expected_count/" "$DIR/tests/unit_cases.c"
+
+  gcc -Wall -Wextra -Werror -I"$DIR/include" "$DIR/src/count_island.c" "$DIR/tests/unit_cases.c" -o "$UNIT_BIN"
+}
+
+run_unit_tests() {
+  if "$UNIT_BIN"; then
+    echo "[OK] unit cases"
+    ok=$((ok+1))
+  else
+    echo "[KO] unit cases" >&2
+    ko=$((ko+1))
+  fi
+  rm -f "$DIR/tests/unit_cases.c"
+}
+
+compare_output
+compile_unit_tests
+run_unit_tests
+
+echo "OK=$ok KO=$ko"
+[ "$ko" -eq 0 ]
+\n[COMMAND] cat Makefile
+CC		?=	gcc
+CFLAGS		+=	-Wall -Wextra -Werror
+CPPFLAGS	+=	-Iinclude
+NAME		=	count_island
+SRC		=	src/count_island.c
+OBJ		=	$(SRC:.c=.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJ) main.o
+	$(CC) $(OBJ) main.o -o $@
+
+clean:
+	$(RM) $(OBJ)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
+
+test: $(NAME)
+	@tests/test.sh
+
+.PHONY: all clean fclean re test
+\n[COMMAND] make fclean
+rm -f src/count_island.o
+rm -f count_island
+\n[COMMAND] make test
+cc -Wall -Wextra -Werror -Iinclude  -c -o src/count_island.o src/count_island.c
+cc src/count_island.o main.o -o count_island
+[OK] map transformation
+[OK] unit cases
+OK=2 KO=0
+\n[COMMAND] cat README.md
+# Count_island (B-CPE-100)
+
+Implementation of the Epitech "Count Island" exercise: walk a rectangular map of `.` and
+`X`, label each contiguous block of `X` with its discovery index (starting at `0`) and
+return the number of islands found.
+
+## Build
+
+```sh
+make
+```
+
+The provided `Makefile` links the delivered `count_island.c` with the subject `main.o`
+for convenient local runs. Drop `main.o` before submitting, as the graders will supply
+their own entry point.
+
+## Usage
+
+```sh
+./count_island <map_file>
+```
+
+The example `map.txt` follows the subject convention: the first line gives the map
+height, followed by that many rows composed of `.` and `X`.
+
+## Tests
+
+```sh
+make test
+```
+
+The test suite:
+- rebuilds the reference transformation for `map.txt` and diffs it against the program
+  output;
+- compiles a dedicated unit binary that exercises small edge cases and asserts the
+  return value / labelling contract of `count_island`.
+\n[COMMAND] cat ../../reports/Semester-1/Count_island.md
+\n[COMMAND] ls scripts
+test.sh
+\n[COMMAND] cat scripts/test.sh
+#!/usr/bin/env bash
+set -euo pipefail
+echo "[INFO] No tests defined yet for $(basename $(pwd))."
+exit 0
+\n[COMMAND] cat <<'EOF' > scripts/test.sh
+\n[COMMAND] chmod +x scripts/test.sh
+\n[COMMAND] scripts/test.sh
+[OK] map transformation
+[OK] unit cases
+OK=2 KO=0
+\n[COMMAND] make fclean
+rm -f src/count_island.o
+rm -f count_island
+\n[COMMAND] cat <<'EOF' > ../../reports/Semester-1/Count_island.md
+\n[COMMAND] ls
+firtree
+firtree.tgz
+include
+Makefile
+README.md
+scripts
+src
+tests
+Tree.pdf
+\n[COMMAND] ../../B-BOO-101/.venv/bin/python - <<'PY'
+--- Page 1 ---
+B1 - Unix & C Lab Seminar
+B-CPE-100
+Fir Tree
+An ascii art resizable Fir tree
+1.0
+--- Page 2 ---
+Fir Tree
+language : C
+The totality of your source files, except all useless files (binary, temp files, obj
+files,...), must be included in your delivery.
+- Don’t push your main function into your delivery directory, we will be adding our own.
+Your files will be compiled adding our main.c and our my_putchar.c files.
+- You are only allowed to use the my_putchar function to complete the following tasks,
+butdon’t push it into your delivery directory, and don’t copy it in anyof your delivered
+files.
+The only allowed system call for this project is write .
+Write a function that displays a fir tree, based on its given size.
+If the size is 0, don’t display anything.
+The function must be prototyped as follows:
+void tree (int size );
+Delivery: tree.c
+This is the only source file that will be checked-out.
+It will be compiled with the command cc our_main.c our_my_putchar.c tree.c .
+You can find a binary called, tree on the intranet along with the project description.
+Don’t forget that you need a coherent test policy to ensure your program outputs are correct. To do so:
+split your functions in as many small functions as possible , so that each function is responsible for
+one single thing (according to the Coding Style),
+Test each of your functions individually AND try to automate your testing process with some (shell?)
+scripts.
+1
+--- Page 3 ---
+E/X.sc/A.sc/M.sc/P.sc/L.sc/E.sc/S.sc
+r Terminal - + x
+/B-CPE-100> ./a.out 1
+*
+***
+*****
+*******
+|
+r Terminal - + x
+/B-CPE-100> ./a.out 5
+*
+***
+*****
+*******
+*****
+*******
+*********
+***********
+*************
+***********
+*************
+***************
+*****************
+*******************
+*********************
+*****************
+*******************
+*********************
+***********************
+*************************
+***************************
+*****************************
+*************************
+***************************
+*****************************
+*******************************
+*********************************
+***********************************
+*************************************
+***************************************
+|||||
+|||||
+|||||
+|||||
+|||||
+2
+\n[COMMAND] sed -n '1,200p' src/tree.c
+#include <unistd.h>
+
+#include "tree.h"
+
+static void put_char(char c)
+{
+    (void)!write(1, &c, 1);
+}
+
+static void put_nchar(char c, int count)
+{
+    for (int i = 0; i < count; ++i) {
+        put_char(c);
+    }
+}
+
+static int compute_base_width(int size)
+{
+    int width = 1;
+    int dec = 2;
+    int dec_increase = 0;
+
+    for (int block = 1; block <= size; ++block) {
+        int lines = block + 3;
+        for (int line = 0; line < lines; ++line) {
+            if (block != size || line != lines - 1) {
+                width += 2;
+            }
+        }
+        if (block != size) {
+            width -= 2 * dec;
+            if (++dec_increase == 2) {
+                ++dec;
+                dec_increase = 0;
+            }
+        }
+    }
+    return width;
+}
+
+void tree(int size)
+{
+    if (size <= 0) {
+        return;
+    }
+
+    int width = compute_base_width(size);
+    int stars = 1;
+    int dec = 2;
+    int dec_increase = 0;
+
+    for (int block = 1; block <= size; ++block) {
+        int lines = block + 3;
+        for (int line = 0; line < lines; ++line) {
+            int spaces = (width - stars) / 2;
+            put_nchar(' ', spaces);
+            put_nchar('*', stars);
+            put_char('\n');
+            stars += 2;
+        }
+        if (block != size) {
+            stars -= 2 * dec;
+            if (++dec_increase == 2) {
+                ++dec;
+                dec_increase = 0;
+            }
+        }
+    }
+
+    int trunk_width = (size % 2 == 0) ? size + 1 : size;
+    int trunk_height = size;
+    int trunk_spaces = (width - trunk_width) / 2;
+
+    for (int h = 0; h < trunk_height; ++h) {
+        put_nchar(' ', trunk_spaces);
+        put_nchar('|', trunk_width);
+        put_char('\n');
+    }
+}
+\n[COMMAND] ls tests
+test.sh
+\n[COMMAND] cat tests/test.sh
+#!/usr/bin/env bash
+set -euo pipefail
+
+DIR="$(cd "$(dirname "$0")/.." && pwd)"
+BIN="$DIR/firtree"
+TMP_DIR="$DIR/.firtree_tmp"
+ARCHIVE="$DIR/firtree.tgz"
+ORACLE_BIN="$TMP_DIR/firtree"
+
+setup_oracle() {
+  if [ -x "$ORACLE_BIN" ]; then
+    return 0
+  fi
+  if [ ! -f "$ARCHIVE" ]; then
+    echo "[WARN] Missing oracle archive; running smoke tests only." >&2
+    return 1
+  fi
+  mkdir -p "$TMP_DIR"
+  tar -xzf "$ARCHIVE" -C "$TMP_DIR"
+  chmod +x "$ORACLE_BIN" || true
+  return 0
+}
+
+ok=0
+ko=0
+
+compare_case() {
+  local n="$1"
+  local out my_out status oracle_status
+  local my_tmp oracle_tmp
+  my_tmp="$(mktemp)"
+  oracle_tmp="$(mktemp)"
+
+  set +e
+  "$BIN" "$n" >"$my_tmp"
+  status=$?
+  if [ -x "$ORACLE_BIN" ]; then
+    "$ORACLE_BIN" "$n" >"$oracle_tmp"
+    oracle_status=$?
+  else
+    oracle_status=0
+    : >"$oracle_tmp"
+  fi
+  set -e
+
+  if [ "$status" -ne 0 ]; then
+    echo "[KO] n=$n exit $status" >&2
+    ko=$((ko+1))
+  elif [ -x "$ORACLE_BIN" ] && [ "$status" -ne "$oracle_status" ]; then
+    echo "[KO] n=$n exit mismatch (expected $oracle_status)" >&2
+    ko=$((ko+1))
+  elif [ -x "$ORACLE_BIN" ] && ! diff -u "$oracle_tmp" "$my_tmp" >/dev/null; then
+    echo "[KO] n=$n diff" >&2
+    diff -u "$oracle_tmp" "$my_tmp" >&2 || true
+    ko=$((ko+1))
+  else
+    echo "[OK] n=$n"
+    ok=$((ok+1))
+  fi
+
+  rm -f "$my_tmp" "$oracle_tmp"
+}
+
+error_case() {
+  local label="$1"
+  shift || true
+  local tmp
+  tmp="$(mktemp)"
+  set +e
+  "$BIN" "$@" >"$tmp" 2>&1
+  local status=$?
+  set -e
+  if [ "$status" -eq 84 ] && [ ! -s "$tmp" ]; then
+    echo "[OK] error $label"
+    ok=$((ok+1))
+  else
+    echo "[KO] error $label (exit=$status, output=$(cat "$tmp"))" >&2
+    ko=$((ko+1))
+  fi
+  rm -f "$tmp"
+}
+
+if [ ! -x "$BIN" ]; then
+  echo "[KO] missing binary $BIN" >&2
+  exit 1
+fi
+
+setup_oracle || true
+
+for n in 0 1 2 3 4 5; do
+  compare_case "$n"
+done
+
+error_case "missing arg"
+error_case "non digit" foo
+error_case "negative" -2
+
+printf 'OK=%d KO=%d\n' "$ok" "$ko"
+[ "$ko" -eq 0 ]
+\n[COMMAND] make fclean
+rm -f src/main.o src/tree.o
+rm -f firtree
+\n[COMMAND] make test
+cc -Wall -Wextra -Werror -Iinclude  -c -o src/main.o src/main.c
+cc -Wall -Wextra -Werror -Iinclude  -c -o src/tree.o src/tree.c
+cc src/main.o src/tree.o -o firtree
+[OK] n=0
+[OK] n=1
+[OK] n=2
+[OK] n=3
+[OK] n=4
+[OK] n=5
+[OK] error missing arg
+[OK] error non digit
+[OK] error negative
+OK=9 KO=0
+\n[COMMAND] cat <<'EOF' > scripts/test.sh
+\n[COMMAND] chmod +x scripts/test.sh
+\n[COMMAND] scripts/test.sh
+[OK] n=0
+[OK] n=1
+[OK] n=2
+[OK] n=3
+[OK] n=4
+[OK] n=5
+[OK] error missing arg
+[OK] error non digit
+[OK] error negative
+OK=9 KO=0
+\n[COMMAND] make fclean
+rm -f src/main.o src/tree.o
+rm -f firtree
+\n[COMMAND] cat <<'EOF' > ../../reports/Semester-1/Firtree.md
+\n[COMMAND] ls
+include
+Makefile
+MatchNmatch.pdf
+match.tgz
+nmatch.tgz
+README.md
+scripts
+src
+tests
+\n[COMMAND] ../../B-BOO-101/.venv/bin/python - <<'PY'
+--- Page 1 ---
+B1 - Unix & C Lab Seminar
+B-CPE-100
+match - nmatch
+Characters matching
+1.1
+--- Page 2 ---
+match - nmatch
+language : C
+The totality of your source files, except all useless files (binary, temp files, obj
+files,...), must be included in your delivery.
+- Don’t push your main function into your delivery directory, we will be adding our own.
+Your files will be compiled adding our main.c .
+- If one of your files prevents you from compiling with *.c, the Autograder will not be
+able to correct your work and you will receive a 0.
+All .c files from your delivery folder will be collected and compiled with your libmy , which
+must be found in lib/my/ . For those of you using .h files, they must be located in include/
+(like the my.h file).
+The only allowed system call for this project is write .
+Both exercises will be built individually from each other with our own main and linked
+with your lib.
+r Terminal - + x
+/B-CPE-100> ./lib/my/build.sh
+/B-CPE-100> gcc -o match *.c test_files/match_main.c -I./include -L./lib/my -lmy
+/B-CPE-100> gcc -o nmatch *.c test_files/nmatch_main.c -I./include -L./lib/my
+-lmy
+Your library will be built using the lib/my/build.sh script you previously made (see Day07).
+Don’t forget that you need a coherent test policy to ensure your program outputs are correct. To do so:
+split your functions in as many small functions as possible , so that each function is responsible for
+one single thing (according to the Coding Style),
+write unit tests to test exhaustively all of these functions.
+1
+--- Page 3 ---
+M/A.sc/T.sc/C.sc/H.sc
+Delivery: match.c
+The purpose of this function is to find out if two strings match , that is to say when they are identical.
+If the second string contains an asterisk (’*’), this asterisk can be replaced with any character string (even an
+empty one) so that the two strings become identical.
+For instance, main.c and *.cmatch because it is possible to replace the asterisk with the main string, making
+them identical.
+This second string can contain an unlimited number of asterisks.
+The function must be prototyped as follows:
+int match ( char const *s1 , char const *s2);
+The function returns 1if the strings match, and 0otherwise.
+N/M.sc/A.sc/T.sc/C.sc/H.sc
+Delivery: nmatch.c
+The purpose of this function is to count the number of times two strings match .
+When there are two or more asterisks, several string combinations are possible. Your function must calculate
+the total number of such combinations.
+For instance, abcbd and *b*match two times: ( a,cbd) and ( abc,d)
+abcand a**match three times: ( nothing ,bc) ; (b,c) and ( bc,nothing ).
+The function must be prototyped as follows:
+int nmatch ( char const *s1 , char const *s2);
+The function returns the number of combinations that match.
+2
+\n[COMMAND] ls tests
+test.sh
+\n[COMMAND] cat tests/test.sh
+#!/usr/bin/env bash
+set -euo pipefail
+
+DIR="$(cd "$(dirname "$0")/.." && pwd)"
+HARNESS_C="$DIR/tests/harness.c"
+HARNESS_BIN="$DIR/tests/harness"
+SRC_MATCH="$DIR/src/match.c"
+SRC_NMATCH="$DIR/src/nmatch.c"
+INCLUDE="$DIR/include"
+CASES_FILE="$(mktemp)"
+ORACLE_DIR="$(mktemp -d)"
+
+cleanup() {
+  rm -f "$HARNESS_BIN" "$HARNESS_C" "$CASES_FILE"
+  rm -rf "$ORACLE_DIR"
+}
+trap cleanup EXIT
+
+cat >"$HARNESS_C" <<'CEOF'
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "matchnmatch.h"
+
+int main(int argc, char **argv)
+{
+    if (argc != 3) {
+        return 84;
+    }
+    const char *s = argv[1];
+    const char *p = argv[2];
+    int m = match(s, p);
+    int n = nmatch(s, p);
+    printf("match(\"%s\", \"%s\") returned %d\n", s, p, m);
+    printf("nmatch(\"%s\", \"%s\") returned %d\n", s, p, n);
+    return 0;
+}
+CEOF
+
+gcc -Wall -Wextra -Werror -I"$INCLUDE" "$HARNESS_C" "$SRC_MATCH" "$SRC_NMATCH" -o "$HARNESS_BIN"
+
+# Prepare reference executables from subject archives
+if [ -f "$DIR/match.tgz" ]; then
+  tar -xzf "$DIR/match.tgz" -C "$ORACLE_DIR"
+fi
+if [ -f "$DIR/nmatch.tgz" ]; then
+  tar -xzf "$DIR/nmatch.tgz" -C "$ORACLE_DIR"
+fi
+ORACLE_MATCH="$ORACLE_DIR/match"
+ORACLE_NMATCH="$ORACLE_DIR/nmatch"
+if [ ! -x "$ORACLE_MATCH" ] || [ ! -x "$ORACLE_NMATCH" ]; then
+  echo "[WARN] Oracle binaries missing; skipping comparison." >&2
+fi
+
+cat >"$CASES_FILE" <<'EOFCASES'
+"" "" # match empty strings
+"" "*" # star matches empty
+"abc" "abc" # identical strings
+"abc" "a*c" # simple star
+"abc" "*" # single star all
+"abcbd" "*b*" # subject example (2 combos)
+"abc" "a**" # subject example (3 combos)
+"abcd" "a*d" # star middle
+"aaaa" "a*" # repeated characters
+"abacabaaa" "a*a*a" # multiple stars
+"abc" "ab*d" # negative match
+EOFCASES
+
+ok=0
+ko=0
+
+while read -r raw_s raw_p _; do
+  [ -z "$raw_s" ] && continue
+  s="${raw_s#\"}"
+  s="${s%\"}"
+  p="${raw_p#\"}"
+  p="${p%\"}"
+
+  harness_out="$($HARNESS_BIN "$s" "$p")"
+  match_line="$(printf '%s\n' "$harness_out" | sed -n '1p')"
+  nmatch_line="$(printf '%s\n' "$harness_out" | sed -n '2p')"
+
+  if [ -x "$ORACLE_MATCH" ]; then
+    expect_match="$($ORACLE_MATCH "$s" "$p")"
+  else
+    expect_match="$match_line"
+  fi
+  if [ -x "$ORACLE_NMATCH" ]; then
+    expect_nmatch="$($ORACLE_NMATCH "$s" "$p")"
+  else
+    expect_nmatch="$nmatch_line"
+  fi
+
+  if [ "$match_line" = "$expect_match" ]; then
+    echo "[OK] match '$s' '$p'"
+    ok=$((ok+1))
+  else
+    echo "[KO] match '$s' '$p'" >&2
+    echo "expected: $expect_match" >&2
+    echo "got:      $match_line" >&2
+    ko=$((ko+1))
+  fi
+
+  if [ "$nmatch_line" = "$expect_nmatch" ]; then
+    echo "[OK] nmatch '$s' '$p'"
+    ok=$((ok+1))
+  else
+    echo "[KO] nmatch '$s' '$p'" >&2
+    echo "expected: $expect_nmatch" >&2
+    echo "got:      $nmatch_line" >&2
+    ko=$((ko+1))
+  fi
+
+done <"$CASES_FILE"
+
+echo "OK=$ok KO=$ko"
+[ "$ko" -eq 0 ]
+\n[COMMAND] make fclean
+rm -f src/match.o src/nmatch.o tests/harness tests/harness.c
+rm -f match nmatch
+\n[COMMAND] make test
+cc -Wall -Wextra -Werror -Iinclude  -c -o src/match.o src/match.c
+cc -Wall -Wextra -Werror -Iinclude  -c -o src/nmatch.o src/nmatch.c
+[OK] match '' ''
+[OK] nmatch '' ''
+[OK] match '' '*'
+[OK] nmatch '' '*'
+[OK] match 'abc' 'abc'
+[OK] nmatch 'abc' 'abc'
+[OK] match 'abc' 'a*c'
+[OK] nmatch 'abc' 'a*c'
+[OK] match 'abc' '*'
+[OK] nmatch 'abc' '*'
+[OK] match 'abcbd' '*b*'
+[OK] nmatch 'abcbd' '*b*'
+[OK] match 'abc' 'a**'
+[OK] nmatch 'abc' 'a**'
+[OK] match 'abcd' 'a*d'
+[OK] nmatch 'abcd' 'a*d'
+[OK] match 'aaaa' 'a*'
+[OK] nmatch 'aaaa' 'a*'
+[OK] match 'abacabaaa' 'a*a*a'
+[OK] nmatch 'abacabaaa' 'a*a*a'
+[OK] match 'abc' 'ab*d'
+[OK] nmatch 'abc' 'ab*d'
+OK=22 KO=0
+\n[COMMAND] cat <<'EOF' > scripts/test.sh
+\n[COMMAND] chmod +x scripts/test.sh
+\n[COMMAND] scripts/test.sh
+[OK] match '' ''
+[OK] nmatch '' ''
+[OK] match '' '*'
+[OK] nmatch '' '*'
+[OK] match 'abc' 'abc'
+[OK] nmatch 'abc' 'abc'
+[OK] match 'abc' 'a*c'
+[OK] nmatch 'abc' 'a*c'
+[OK] match 'abc' '*'
+[OK] nmatch 'abc' '*'
+[OK] match 'abcbd' '*b*'
+[OK] nmatch 'abcbd' '*b*'
+[OK] match 'abc' 'a**'
+[OK] nmatch 'abc' 'a**'
+[OK] match 'abcd' 'a*d'
+[OK] nmatch 'abcd' 'a*d'
+[OK] match 'aaaa' 'a*'
+[OK] nmatch 'aaaa' 'a*'
+[OK] match 'abacabaaa' 'a*a*a'
+[OK] nmatch 'abacabaaa' 'a*a*a'
+[OK] match 'abc' 'ab*d'
+[OK] nmatch 'abc' 'ab*d'
+OK=22 KO=0
+\n[COMMAND] cat <<'EOF' > ../../reports/Semester-1/MatchNmatch.md
+\n[COMMAND] ls
+B-CPE-100_Star.pdf
+include
+Makefile
+README.md
+scripts
+src
+star
+star_example.txt
+tests
+\n[COMMAND] cat tests/test.sh
+#!/usr/bin/env bash
+set -euo pipefail
+
+DIR="$(cd "$(dirname "$0")/.." && pwd)"
+BIN="$DIR/star"
+
+ok=0
+ko=0
+
+gen_expected() {
+  local example="$DIR/star_example.txt"
+  : >"$DIR/tests/expected_0.txt"
+  if [ ! -f "$example" ]; then
+    return
+  fi
+  for n in 1 2 4 5; do
+    awk -v n="$n" '
+      $0 ~ ("^\\$> \\./star " n "(\\s*\\|.*)?$") {inblk=1; next}
+      $0 ~ "^\\$> " { if (inblk) exit; else next }
+      inblk { sub(/\s*\$$/, ""); print }
+    ' "$example" >"$DIR/tests/expected_${n}.txt"
+  done
+}
+
+run_valid_case() {
+  local n="$1"
+  local expect_file="$DIR/tests/expected_${n}.txt"
+  local tmp
+  tmp="$(mktemp)"
+  set +e
+  "$BIN" "$n" >"$tmp"
+  local status=$?
+  set -e
+  if [ "$status" -ne 0 ]; then
+    echo "[KO] n=$n exit $status" >&2
+    ko=$((ko+1))
+    rm -f "$tmp"
+    return
+  fi
+  if [ -f "$expect_file" ]; then
+    if diff -u "$expect_file" "$tmp" >/dev/null; then
+      echo "[OK] n=$n"
+      ok=$((ok+1))
+    else
+      echo "[KO] n=$n diff" >&2
+      ko=$((ko+1))
+      diff -u "$expect_file" "$tmp" >&2 || true
+    fi
+  else
+    if [ -s "$tmp" ]; then
+      echo "[KO] n=$n unexpected output" >&2
+      ko=$((ko+1))
+    else
+      echo "[OK] n=$n"
+      ok=$((ok+1))
+    fi
+  fi
+  rm -f "$tmp"
+}
+
+run_error_case() {
+  local label="$1"
+  shift || true
+  local tmp
+  tmp="$(mktemp)"
+  set +e
+  "$BIN" "$@" >"$tmp" 2>&1
+  local status=$?
+  set -e
+  if [ "$status" -eq 84 ] && [ ! -s "$tmp" ]; then
+    echo "[OK] error $label"
+    ok=$((ok+1))
+  else
+    echo "[KO] error $label (exit=$status, output=$(cat "$tmp"))" >&2
+    ko=$((ko+1))
+  fi
+  rm -f "$tmp"
+}
+
+if [ ! -x "$BIN" ]; then
+  echo "[KO] missing binary $BIN" >&2
+  exit 1
+fi
+
+mkdir -p "$DIR/tests"
+gen_expected
+
+run_valid_case 0
+run_valid_case 1
+run_valid_case 2
+run_valid_case 4
+run_valid_case 5
+
+run_error_case "missing arg"
+run_error_case "non digit" foo
+run_error_case "negative" -2
+
+printf 'OK=%d KO=%d\n' "$ok" "$ko"
+[ "$ko" -eq 0 ]
+\n[COMMAND] ls
+include
+lib
+Makefile
+README.md
+scripts
+tests
+WorkshopLib.pdf
+\n[COMMAND] ls
+README.md
+rush-1-1
+rush-1-2
+rush-1-3
+rush-1-4
+rush-1-5
+rush1_bins.tgz
+Rush1.pdf
+\n[COMMAND] find rush-1-1 -maxdepth 2 -type f
+rush-1-1/tests/test.sh
+rush-1-1/Makefile
+rush-1-1/README.md
+rush-1-1/src/rush.c
+rush-1-1/include/rush.h
+\n[COMMAND] ls
+bistromatic.h
+Bistro-matic.pdf
+main.c
+README.md
+scripts
+\n[COMMAND] make test
+cc -Wall -Wextra -Werror -std=c99 -Iinclude  -c -o main.o main.c
+cc -Wall -Wextra -Werror -std=c99 -Iinclude  -c -o src/utils.o src/utils.c
+cc -Wall -Wextra -Werror -std=c99 -Iinclude  -c -o src/bigint.o src/bigint.c
+cc -Wall -Wextra -Werror -std=c99 -Iinclude  -c -o src/parser.o src/parser.c
+cc -Wall -Wextra -Werror -std=c99 -Iinclude  -c -o src/eval_expr.o src/eval_expr.c
+cc main.o src/utils.o src/bigint.o src/parser.o src/eval_expr.o -o calc
+[OK] 3+6
+[OK] custom plus
+[OK] multiple unary
+[OK] nested
+[OK] custom base
+[OK] big expression
+[OK] syntax error
+[OK] division by zero
+\n[COMMAND] make fclean
+rm -f main.o src/utils.o src/bigint.o src/parser.o src/eval_expr.o
+rm -f calc
+\n[COMMAND] ./scripts/test.sh
+sh tests/test.sh
+[OK ] (3+2)*5
+[OK ] 2+2
+[OK ] 10-3-2
+[OK ] 18/3/3
+[OK ] 5*3%4
+[OK ] 40 + (2*5) - 7
+[OK ] -3+10
+[OK ] -(2-5)
+[OK ] --++10
+[OK ] (1+(2*(3+(4*(5-6)))))
+[OK ]   12 * ( -3 + 5 )
+-----
+Passed: 11  Failed: 0
+\n[COMMAND] make fclean
+rm -f main.o src/eval_expr.o src/io.o
+rm -f eval_expr
+\n[COMMAND] ./scripts/test.sh
+[INFO] No tests defined yet for InfinAdd.
+\n[COMMAND] ./scripts/test.sh
+sh tests/test.sh
+[OK ] -876435 + 987143265 = 986266830
+[OK ] -807965 + -34532 = -842497
+[OK ] 435439435845843984358439 + 45359766785665822182412343254343435433339459569 = 45359766785665822182412778693779281277323818008
+[OK ] 000123 + 000001 = 124
+[OK ] 999 + 1 = 1000
+[OK ] -1000 + 1 = -999
+[OK ] 500 + -500 = 0
+[OK ] 123456789123456789 + -987654321987654321 = -864197532864197532
+-----
+Passed: 8  Failed: 0
+\n[COMMAND] ./scripts/test.sh
+sh tests/test.sh
+[OK ] rush1-1 4 4
+[OK ] rush1-2 3 4
+[OK ] rush1-3 5 1
+[OK ] rush1-4 1 1
+[OK ] rush1-5 2 2
+[OK ] none
+-----
+Passed: 6  Failed: 0

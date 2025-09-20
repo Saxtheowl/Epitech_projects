@@ -1,43 +1,24 @@
+CC		?=	gcc
+CFLAGS		+=	-Wall -Wextra -Werror
+CPPFLAGS	+=	-Iinclude
+SRC		=	src/match.c \
+			src/nmatch.c
+OBJ		=	$(SRC:.c=.o)
 NAME_MATCH	=	match
 NAME_NMATCH	=	nmatch
+TEST_BIN	=	tests/harness
 
-SRC_MATCH	=	src/match.c
-SRC_NMATCH	=	src/nmatch.c
-
-OBJ_MATCH	=	$(SRC_MATCH:.c=.o)
-OBJ_NMATCH	=	$(SRC_NMATCH:.c=.o)
-
-CFLAGS	=	-Wall -Wextra -Werror -Iinclude
-
-all: $(NAME_MATCH) $(NAME_NMATCH)
-
-$(NAME_MATCH): $(OBJ_MATCH)
-	$(CC) $(OBJ_MATCH) -o $(NAME_MATCH)
-
-$(NAME_NMATCH): $(OBJ_NMATCH)
-	$(CC) $(OBJ_NMATCH) -o $(NAME_NMATCH)
+all: $(OBJ)
 
 clean:
-	$(RM) $(OBJ_MATCH) $(OBJ_NMATCH)
+	$(RM) $(OBJ) $(TEST_BIN) tests/harness.c
 
 fclean: clean
 	$(RM) $(NAME_MATCH) $(NAME_NMATCH)
 
 re: fclean all
 
-.PHONY: all clean fclean re test
-
-test: all
+test: $(OBJ)
 	@tests/test.sh
 
-
-# Added by auto_report.py
-.PHONY: test
-TEST_SCRIPT=./scripts/test.sh
-
-test:
-	@if [ -x $$(echo $(TEST_SCRIPT)) ]; then \
-		$$(echo $(TEST_SCRIPT)); \
-	else \
-		echo 'No tests script found'; \
-	fi
+.PHONY: all clean fclean re test

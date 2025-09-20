@@ -1,42 +1,61 @@
 #include <stddef.h>
+
 #include "count_island.h"
 
-static int strlen_c(const char *s)
+static int my_strlen(const char *s)
 {
-    int n = 0; if (!s) return 0; while (s[n]) n++; return n;
+    int len = 0;
+
+    if (s == NULL)
+        return 0;
+    while (s[len] != '\0')
+        ++len;
+    return len;
 }
 
-static void flood(char **map, int rows, int cols, int r, int c, char mark)
+static void flood_fill(char **world, int row_count, int row, int col, char mark)
 {
-    if (r < 0 || r >= rows || c < 0 || c >= cols)
+    if (row < 0 || row >= row_count)
         return;
-    if (map[r][c] != 'X')
+
+    int col_count = my_strlen(world[row]);
+
+    if (col < 0 || col >= col_count)
         return;
-    map[r][c] = mark;
-    flood(map, rows, cols, r-1, c, mark);
-    flood(map, rows, cols, r+1, c, mark);
-    flood(map, rows, cols, r, c-1, mark);
-    flood(map, rows, cols, r, c+1, mark);
+    if (world[row][col] != 'X')
+        return;
+
+    world[row][col] = mark;
+
+    flood_fill(world, row_count, row - 1, col, mark);
+    flood_fill(world, row_count, row + 1, col, mark);
+    flood_fill(world, row_count, row, col - 1, mark);
+    flood_fill(world, row_count, row, col + 1, mark);
 }
 
-char **count_island(char **map)
+int count_island(char **world)
 {
-    if (!map)
-        return map;
+    if (world == NULL)
+        return 0;
+
     int rows = 0;
-    int cols = 0;
-    while (map[rows]) rows++;
-    if (rows > 0) cols = strlen_c(map[0]);
 
-    int idx = 0;
+    while (world[rows] != NULL)
+        ++rows;
+    if (rows == 0)
+        return 0;
+
+    int islands = 0;
+
     for (int r = 0; r < rows; ++r) {
+        int cols = my_strlen(world[r]);
         for (int c = 0; c < cols; ++c) {
-            if (map[r][c] == 'X') {
-                char mark = (char)('0' + (idx % 10));
-                flood(map, rows, cols, r, c, mark);
-                idx++;
+            if (world[r][c] == 'X') {
+                char mark = (islands < 10) ? (char)('0' + islands) : '9';
+                flood_fill(world, rows, r, c, mark);
+                ++islands;
             }
         }
     }
-    return map;
+    return islands;
 }

@@ -1,310 +1,61 @@
-# Bistro-matic
+# Bistro-matic (B-CPE-101)
 
-> Timeline: 14 jours
+Arbitrary-precision calculator handling custom bases and operator symbols. Supports
+`+`, `-`, unary `+/-`, `*`, `/`, `%`, and parentheses, all evaluated with the Pool
+rules (no libC besides `read`, `write`, `malloc`, `free`, `exit`).
 
-> Nombre de personnes sur le projet: 3-4
+## Build
 
-<br>
+```sh
+make
+```
 
-📂---[Bistro-matic.pdf](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-101/Bistro-matic/Bistro-matic.pdf)
+Produces the `calc` binary.
 
-|\_\_\_[bistro-matic.h](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-101/Bistro-matic/bistromatic.h)
+## Usage
 
-|\_\_\_[main.c](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-101/Bistro-matic/main.c)
+```sh
+echo "3+6" | ./calc 0123456789 '()+-*/%' 3
+```
 
-<br>
+Parameters:
+- `base`: characters representing digits of the numeral system (≥ 2 symbols, unique).
+- `operators`: seven characters defining `(`, `)`, `+`, `-`, `*`, `/`, `%` in that order.
+- `size_read`: number of characters to read from stdin.
 
-<details>
-<summary> Tests de la moulinette </summary>
-<table align="center">
-    <thead>
-        <tr>
-            <td colspan="3" align="center"><strong>MOULINETTE</strong></td>
-        </tr>
-        <tr>
-            <th>SOMMAIRE</th>
-            <th>NB DE TESTS</th>
-            <th>DETAILS</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td rowspan="12">01 - syntax errors</td>
-            <td rowspan="12" style="text-align: center;">12</td>
-            <td>A - missing operator</td>
-        </tr>
-        <tr>
-            <td>B - too many operator</td>
-        </tr>
-        <tr>
-            <td>C - operator in the base</td>
-        </tr>
-        <tr>
-            <td>D - two identical digits</td>
-        </tr>
-        <tr>
-            <td>E - two identical operators</td>
-        </tr>
-        <tr>
-            <td>F - unmatched parenthesis #1</td>
-        </tr>
-        <tr>
-            <td>G - unmatched parenthesis #2</td>
-        </tr>
-        <tr>
-            <td>H - invalid expression #1</td>
-        </tr>
-        <tr>
-            <td>I - invalid expression #2</td>
-        </tr>
-        <tr>
-            <td>J - empty expression</td>
-        </tr>
-        <tr>
-            <td>K - unknown digit</td>
-        </tr>
-        <tr>
-            <td>L - missing argument</td>
-        </tr>
-        <tr>
-            <td rowspan="7">02 - addition</td>
-            <td rowspan="7" style="text-align: center;">7</td>
-            <td>A - simple #1</td>
-        </tr>
-        <tr>
-            <td>B - simple #2</td>
-        </tr>
-        <tr>
-            <td>C - size handling #1</td>
-        </tr>
-        <tr>
-            <td>D - size handling #2</td>
-        </tr>
-        <tr>
-            <td>E - with remainder</td>
-        </tr>
-        <tr>
-            <td>F - big #1</td>
-        </tr>
-        <tr>
-            <td>G - big #2</td>
-        </tr>
-        <tr>
-            <td rowspan="13">03 - subtraction</td>
-            <td rowspan="13" style="text-align: center;">13</td>
-            <td>A - simple positive</td>
-        </tr>
-        <tr>
-            <td>B - simple negative #1</td>
-        </tr>
-        <tr>
-            <td>C - simple negative #2</td>
-        </tr>
-        <tr>
-            <td>D - size handling #1</td>
-        </tr>
-        <tr>
-            <td>E - size handling #2</td>
-        </tr>
-        <tr>
-            <td>F - size handling #3</td>
-        </tr>
-        <tr>
-            <td>G - with remainder #1</td>
-        </tr>
-        <tr>
-            <td>H - with remainder #2</td>
-        </tr>
-        <tr>
-            <td>I - two operators</td>
-        </tr>
-        <tr>
-            <td>J - big #1</td>
-        </tr>
-        <tr>
-            <td>K - big #2</td>
-        </tr>
-        <tr>
-            <td>L - big #3</td>
-        </tr>
-        <tr>
-            <td>M - big #4</td>
-        </tr>
-        <tr>
-            <td rowspan="9">04 - multiplication</td>
-            <td rowspan="9" style="text-align: center;">9</td>
-            <td>A - simple</td>
-        </tr>
-        <tr>
-            <td>B - size handling #1</td>
-        </tr>
-        <tr>
-            <td>C - size handling #2</td>
-        </tr>
-        <tr>
-            <td>D - size handling #3</td>
-        </tr>
-        <tr>
-            <td>E - with negative number #1</td>
-        </tr>
-        <tr>
-            <td>F - with negative number #2</td>
-        </tr>
-        <tr>
-            <td>G - big#1</td>
-        </tr>
-        <tr>
-            <td>H - big #2</td>
-        </tr>
-        <tr>
-            <td>I - big #3</td>
-        </tr>
-        <tr>
-            <td rowspan="11">05 - division</td>
-            <td rowspan="11" style="text-align: center;">11</td>
-            <td>A - simple #1</td>
-        </tr>
-        <tr>
-            <td>B - simple #2</td>
-        </tr>
-        <tr>
-            <td>C - size handling #1</td>
-        </tr>
-        <tr>
-            <td>D - size handling #2</td>
-        </tr>
-        <tr>
-            <td>E - size handling #3</td>
-        </tr>
-        <tr>
-            <td>F - with negative number #1</td>
-        </tr>
-        <tr>
-            <td>G - with negative number #2</td>
-        </tr>
-        <tr>
-            <td>H - big #1</td>
-        </tr>
-        <tr>
-            <td>I - big #2</td>
-        </tr>
-        <tr>
-            <td>J - big #3</td>
-        </tr>
-        <tr>
-            <td>K - by 0 exception</td>
-        </tr>
-        <tr>
-            <td rowspan="11">06 - modulo</td>
-            <td rowspan="11" style="text-align: center;">11</td>
-            <td>A - simple #1</td>
-        </tr>
-        <tr>
-            <td>B - simple #2</td>
-        </tr>
-        <tr>
-            <td>C - size handling #1</td>
-        </tr>
-        <tr>
-            <td>D - size handling #2</td>
-        </tr>
-        <tr>
-            <td>E - size handling #3</td>
-        </tr>
-        <tr>
-            <td>F - with negative number #1</td>
-        </tr>
-        <tr>
-            <td>G - with negative number #2</td>
-        </tr>
-        <tr>
-            <td>H - big #1</td>
-        </tr>
-        <tr>
-            <td>I - big #2</td>
-        </tr>
-        <tr>
-            <td>J - big #3</td>
-        </tr>
-        <tr>
-            <td>K - by 0 exception</td>
-        </tr>
-        <tr>
-            <td rowspan="6">07 - base and operators</td>
-            <td rowspan="6" style="text-align: center;">6</td>
-            <td>A - binary base</td>
-        </tr>
-        <tr>
-            <td>B - hexa base</td>
-        </tr>
-        <tr>
-            <td>C - custom base #1</td>
-        </tr>
-        <tr>
-            <td>D - custom base #2</td>
-        </tr>
-        <tr>
-            <td>E - custom operators</td>
-        </tr>
-        <tr>
-            <td>F - mixed custom</td>
-        </tr>
-        <tr>
-            <td rowspan="12">08 - eval expr</td>
-            <td rowspan="12" style="text-align: center;">12</td>
-            <td>A - operator priority #1</td>
-        </tr>
-        <tr>
-            <td>B - operator priority #2</td>
-        </tr>
-        <tr>
-            <td>C - operator priority #3</td>
-        </tr>
-        <tr>
-            <td>D - unary operator #1</td>
-        </tr>
-        <tr>
-            <td>E - unary operator #2</td>
-        </tr>
-        <tr>
-            <td>F - unary operator #3</td>
-        </tr>
-        <tr>
-            <td>G - with parenthesis #1</td>
-        </tr>
-        <tr>
-            <td>H - with parenthesis #2</td>
-        </tr>
-        <tr>
-            <td>I - with parenthesis #3</td>
-        </tr>
-        <tr>
-            <td>J - with parenthesis #4</td>
-        </tr>
-        <tr>
-            <td>K - big #1</td>
-        </tr>
-        <tr>
-            <td>L - big #2</td>
-        </tr>
-    </tbody>
-</table>
-</details>
+On syntax errors the program prints `syntax error` to `stderr` and exits with 84; on
+other runtime errors (e.g., division by zero) it prints `error` to `stderr` and exits 84.
 
-<br>
+## Tests
 
-[↩️ Revenir au module](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1/B-CPE-101)
+```sh
+make test         # run non-regression suite
+./scripts/test.sh # convenience wrapper
+```
 
-[↩️ Revenir au Semestre-1](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1)
+The test suite exercises:
+- Reference examples from the subject (default and custom bases/operators).
+- Nested parentheses and multiple unary operators.
+- Syntax error propagation.
+- Division by zero handling.
 
-[↩️ Revenir à l'accueil](https://github.com/Studio-17/Epitech-Subjects)
+## Code layout
 
-<br>
+- `main.c`: argument parsing and I/O plumbing provided by the subject (rewired to use
+  the local helpers).
+- `include/`: headers for the big integer engine, parser, and utilities.
+- `src/utils.c`: minimal replacements for forbidden libC helpers (`my_strlen`,
+  `my_putstr`, `my_atoi`, etc.).
+- `src/bigint.c`: big integer implementation working in base 10 internally with
+  conversion to arbitrary bases.
+- `src/parser.c`: recursive-descent parser with operator precedence and unary support.
+- `src/eval_expr.c`: glue between parser and evaluator, formatting the final result.
 
----
+## Notes
 
-<div align="center">
-
-<a href="https://github.com/Studio-17" target="_blank"><img src="../../../assets/voc17.gif" width="40"></a>
-
-</div>
+- The evaluator uses a shunting-like recursive grammar, applying operations as soon as
+  precedence allows, which keeps memory usage bounded.
+- Big integer division/modulo implement long division; intermediate buffers dynamically
+  resize via custom helpers (no `realloc`).
+- Error helpers ensure every fatal condition prints the correct message to `stderr`
+  before exiting with code 84.

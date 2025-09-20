@@ -1,34 +1,23 @@
-#include <stdio.h>
 #include "matchnmatch.h"
 
-static int nmatch_rec(const char *s, const char *p)
+static int nmatch_rec(const char *s1, const char *s2)
 {
-    if (*p == '\0')
-        return *s == '\0' ? 1 : 0;
-    if (*p == '*') {
-        int count = 0;
-        count += nmatch_rec(s, p + 1);
-        if (*s)
-            count += nmatch_rec(s + 1, p);
+    if (*s2 == '\0')
+        return (*s1 == '\0') ? 1 : 0;
+    if (*s2 == '*') {
+        int count = nmatch_rec(s1, s2 + 1);
+        if (*s1 != '\0')
+            count += nmatch_rec(s1 + 1, s2);
         return count;
     }
-    if (*s == '\0' || *p != *s)
+    if (*s1 == '\0' || *s1 != *s2)
         return 0;
-    return nmatch_rec(s + 1, p + 1);
+    return nmatch_rec(s1 + 1, s2 + 1);
 }
 
-int nmatch(const char *s, const char *p)
+int nmatch(const char *s1, const char *s2)
 {
-    return nmatch_rec(s, p);
-}
-
-int main(int argc, char **argv)
-{
-    if (argc != 3) {
-        printf("Usage: %s src pattern\n", argv[0]);
-        return 84;
-    }
-    int r = nmatch(argv[1], argv[2]);
-    printf("nmatch(\"%s\", \"%s\") returned %d\n", argv[1], argv[2], r);
-    return 0;
+    if (s1 == 0 || s2 == 0)
+        return 0;
+    return nmatch_rec(s1, s2);
 }

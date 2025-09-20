@@ -1,75 +1,103 @@
-#include <stdlib.h>
 #include "../include/eval_expr.h"
 
-static const char *g_p;
-
-static void skip_spaces(void)
+static int is_space_char(char c)
 {
-    while (*g_p == ' ' || *g_p == '\t')
-        g_p++;
+    return c == ' ' || c == '\t' || c == '\n' ||
+           c == '\r' || c == '\v' || c == '\f';
 }
 
-static int parse_number(void)
+static void skip_spaces(char const **str)
 {
-    skip_spaces();
-    int val = 0;
-    while (*g_p >= '0' && *g_p <= '9') {
-        val = val * 10 + (*g_p - '0');
-        g_p++;
-    }
-    return val;
+    while (is_space_char(**str))
+        (*str)++;
 }
 
-static int parse_factor(void)
+static long long parse_expression(char const **str);
+static long long parse_term(char const **str);
+static long long parse_factor(char const **str);
+static long long parse_number(char const **str);
+
+static long long parse_number(char const **str)
 {
-    skip_spaces();
-    if (*g_p == '+' || *g_p == '-') {
-        int s = (*g_p == '-') ? -1 : 1;
-        g_p++;
-        int v = parse_factor();
-        return s * v;
+    long long value = 0;
+
+    skip_spaces(str);
+    while (**str >= '0' && **str <= '9') {
+        value = value * 10 + (**str - '0');
+        (*str)++;
     }
-    if (*g_p == '(') {
-        g_p++;
-        int v = 0;
-        // forward decl
-        int parse_expr(void);
-        v = parse_expr();
-        skip_spaces();
-        if (*g_p == ')') g_p++;
-        return v;
-    }
-    return parse_number();
+    return value;
 }
 
-static int parse_term(void)
+static long long parse_factor(char const **str)
 {
-    int v = parse_factor();
-    for (;;) {
-        skip_spaces();
-        if (*g_p == '*') { g_p++; v *= parse_factor(); }
-        else if (*g_p == '/') { g_p++; int d = parse_factor(); v /= d; }
-        else if (*g_p == '%') { g_p++; int d = parse_factor(); v %= d; }
-        else break;
+    long long sign = 1;
+    long long value;
+
+    skip_spaces(str);
+    while (**str == '+' || **str == '-') {
+        if (**str == '-')
+            sign = -sign;
+        (*str)++;
+        skip_spaces(str);
     }
-    return v;
+    if (**str == '(') {
+        (*str)++;
+        value = parse_expression(str);
+        skip_spaces(str);
+        if (**str == ')')
+            (*str)++;
+    } else {
+        value = parse_number(str);
+    }
+    return sign * value;
 }
 
-int parse_expr(void)
+static long long parse_term(char const **str)
 {
-    int v = parse_term();
-    for (;;) {
-        skip_spaces();
-        if (*g_p == '+') { g_p++; v += parse_term(); }
-        else if (*g_p == '-') { g_p++; v -= parse_term(); }
-        else break;
+    long long value = parse_factor(str);
+
+    while (1) {
+        skip_spaces(str);
+        if (**str == '*') {
+            (*str)++;
+            value *= parse_factor(str);
+        } else if (**str == '/') {
+            (*str)++;
+            value /= parse_factor(str);
+        } else if (**str == '%') {
+            (*str)++;
+            value %= parse_factor(str);
+        } else {
+            break;
+        }
     }
-    return v;
+    return value;
 }
 
-int eval_expr(const char *str)
+static long long parse_expression(char const **str)
 {
-    g_p = str;
-    int v = parse_expr();
-    return v;
+    long long value = parse_term(str);
+
+    while (1) {
+        skip_spaces(str);
+        if (**str == '+') {
+            (*str)++;
+            value += parse_term(str);
+        } else if (**str == '-') {
+            (*str)++;
+            value -= parse_term(str);
+        } else {
+            break;
+        }
+    }
+    return value;
+}
+
+int eval_expr(char const *str)
+{
+    char const *cursor = str;
+    long long result = parse_expression(&cursor);
+
+    return (int)result;
 }

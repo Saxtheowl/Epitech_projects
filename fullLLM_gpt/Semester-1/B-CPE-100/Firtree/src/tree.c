@@ -1,67 +1,79 @@
-#include <stdio.h>
+#include <unistd.h>
+
 #include "tree.h"
 
-static void putnchar(char c, int n)
+static void put_char(char c)
 {
-    for (int i = 0; i < n; ++i)
-        putchar(c);
+    (void)!write(1, &c, 1);
 }
 
-static int last_line_stars(int size)
+static void put_nchar(char c, int count)
 {
-    int stars = 1;
-    int dec = 2; // initial decrement after each block
-    int dec_increase_counter = 0;
+    for (int i = 0; i < count; ++i) {
+        put_char(c);
+    }
+}
+
+static int compute_base_width(int size)
+{
+    int width = 1;
+    int dec = 2;
+    int dec_increase = 0;
+
     for (int block = 1; block <= size; ++block) {
         int lines = block + 3;
-        for (int l = 0; l < lines; ++l) {
-            if (!(block == size && l == lines - 1))
-                stars += 2;
+        for (int line = 0; line < lines; ++line) {
+            if (block != size || line != lines - 1) {
+                width += 2;
+            }
         }
         if (block != size) {
-            stars -= 2 * dec;
-            dec_increase_counter++;
-            if (dec_increase_counter == 2) {
-                dec++;
-                dec_increase_counter = 0;
+            width -= 2 * dec;
+            if (++dec_increase == 2) {
+                ++dec;
+                dec_increase = 0;
             }
         }
     }
-    return stars;
+    return width;
 }
 
-void print_tree(int size)
+void tree(int size)
 {
+    if (size <= 0) {
+        return;
+    }
+
+    int width = compute_base_width(size);
     int stars = 1;
     int dec = 2;
-    int dec_inc_cnt = 0;
-    int width = last_line_stars(size);
-    int trunk_w = (size % 2 == 0) ? size + 1 : size;
-    int trunk_h = size;
+    int dec_increase = 0;
 
     for (int block = 1; block <= size; ++block) {
         int lines = block + 3;
-        for (int l = 0; l < lines; ++l) {
+        for (int line = 0; line < lines; ++line) {
             int spaces = (width - stars) / 2;
-            putnchar(' ', spaces);
-            putnchar('*', stars);
-            putchar('\n');
+            put_nchar(' ', spaces);
+            put_nchar('*', stars);
+            put_char('\n');
             stars += 2;
         }
         if (block != size) {
             stars -= 2 * dec;
-            dec_inc_cnt++;
-            if (dec_inc_cnt == 2) {
-                dec++;
-                dec_inc_cnt = 0;
+            if (++dec_increase == 2) {
+                ++dec;
+                dec_increase = 0;
             }
         }
     }
 
-    int spaces = (width - trunk_w) / 2;
-    for (int i = 0; i < trunk_h; ++i) {
-        putnchar(' ', spaces);
-        putnchar('|', trunk_w);
-        putchar('\n');
+    int trunk_width = (size % 2 == 0) ? size + 1 : size;
+    int trunk_height = size;
+    int trunk_spaces = (width - trunk_width) / 2;
+
+    for (int h = 0; h < trunk_height; ++h) {
+        put_nchar(' ', trunk_spaces);
+        put_nchar('|', trunk_width);
+        put_char('\n');
     }
 }

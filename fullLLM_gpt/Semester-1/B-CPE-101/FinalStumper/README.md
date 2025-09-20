@@ -1,94 +1,48 @@
-# FinalStumper
+# Final Stumper (B-CPE-101)
 
-> Timeline: 24h
+Analyse la sortie d’un "rush1-x" (ASCII rectangle) et indique quelle(s) variante(s)
+correspond, ainsi que les dimensions.
 
-> Nombre de personnes sur le projet: 2
+## Build
 
-<br>
+```sh
+make
+```
 
-📂---[Final_Stumper](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-101/FinalStumper/Final_Stumper)
+Génère `rush3`. Cibles habituelles : `clean`, `fclean`, `re`, `test`.
 
-|\_\_\_[rush1_bins.tgz](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-101/FinalStumper/rush1_bins.tgz)
+## Usage
 
-|\_\_\_[rush3.tgz](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-101/FinalStumper/rush3.tgz)
+```sh
+./rush1-1 4 4 | ./rush3
+# [rush1-1] 4 4
+```
 
-<br>
+- L’entrée standard doit contenir l’intégralité du motif (chaque ligne terminée par
+  `\n`).
+- En cas d’aucune correspondance, le programme affiche `none` suivi d’un retour
+  chariot.
+- Plusieurs variantes peuvent produire le même motif (ex. dimensions 1×1 ou 5×1) :
+  elles sont listées et séparées par ` || `.
 
-<details>
-<summary> Tests de la moulinette </summary>
-<table align="center">
-    <thead>
-        <tr>
-            <td colspan="3" align="center"><strong>MOULINETTE</strong></td>
-        </tr>
-        <tr>
-            <th>SOMMAIRE</th>
-            <th>NB DE TESTS</th>
-            <th>DETAILS</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td rowspan="8">01 - Fonctionality</td>
-            <td rowspan="8" style="text-align: center;">8</td>
-            <td>Test 01</td>
-        </tr>
-        <tr>
-            <td>Test 02</td>
-        </tr>
-        <tr>
-            <td>Test 03</td>
-        </tr>
-        <tr>
-            <td>Test 04</td>
-        </tr>
-        <tr>
-            <td>Test 05</td>
-        </tr>
-        <tr>
-            <td>Test 06</td>
-        </tr>
-        <tr>
-            <td>Test 07</td>
-        </tr>
-        <tr>
-            <td>Test 08</td>
-        </tr>
-        <tr>
-            <td rowspan="5">02 - Error handling</td>
-            <td rowspan="5" style="text-align: center;">5</td>
-            <td>Test 01</td>
-        </tr>
-        <tr>
-            <td>Test 02</td>
-        </tr>
-        <tr>
-            <td>Test 03</td>
-        </tr>
-        <tr>
-            <td>Test 04</td>
-        </tr>
-        <tr>
-            <td>Test 05</td>
-        </tr>
-    </tbody>
-</table>
-</details>
+## Implémentation
 
-<br>
+- Lecture via buffer statique (voir `main.c` fourni) puis calcul de la largeur/hauteur
+  en validant l’uniformité des lignes.
+- Comparaison avec les cinq générateurs `rush1-1` à `rush1-5` implémentés sous forme
+  de fonctions retournant le caractère attendu à chaque position.
+- Résultats imprimés à la volée (`write` uniquement), sans allocations inutiles.
 
-[↩️ Revenir au module](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1/B-CPE-101)
+## Tests
 
-[↩️ Revenir au Semestre-1](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1)
+```sh
+make test          # exécute tests/test.sh
+./scripts/test.sh  # wrapper pratique
+```
 
-[↩️ Revenir à l'accueil](https://github.com/Studio-17/Epitech-Subjects)
+Le script extrait les binaires officiels `rush1-x` fournis (`rush1_bins.tgz`) et vérifie :
+- Cas basique pour chaque rush.
+- Cas ambigus (`1x1`, `5x1`).
+- Cas sans correspondance.
 
-<br>
-
----
-
-<div align="center">
-
-<a href="https://github.com/Studio-17" target="_blank"><img src="../../../assets/voc17.gif" width="40"></a>
-
-</div>
+Tous les tests renvoient actuellement `Passed: 6  Failed: 0`.

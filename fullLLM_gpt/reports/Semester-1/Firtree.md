@@ -4,27 +4,46 @@
 - UE: B-CPE-100
 - Subject source: `Tree.pdf`
 
-## Summary
-No extractable subject text. See README or code.
+## Subject Summary
+- Page 2: Project in C compiled with `cc our_main.c our_my_putchar.c tree.c`; graders
+  provide `main`/`my_putchar`, and only `write(2)` is authorised. Delivery must only
+  contain the necessary sources (no binaries or helper mains).
+- Page 2: Implement `void tree(int size);` that draws an ASCII fir tree; `size = 0`
+  must simply print nothing. Required delivery file: `tree.c`.
+- Page 2: Encourage small, single-responsibility functions and automated tests.
+- Page 3: Official renderings are provided for sizes `1` and `5` (also available via the
+  `firtree` oracle shipped alongside the subject).
 
-## Requirements (heuristic)
-- [MUST] Implement per subject. (Details not auto-extracted)
+## Requirements
+- [MUST] Expose `void tree(int size);` producing the exact ASCII layout defined in the
+  subject/oracle.
+- [MUST] Use only the subject-provided output primitive (`my_putchar` → `write(2)`).
+- [MUST] Treat `size = 0` as a valid no-op (no characters printed, exit success).
+- [SHOULD] Keep delivery clean of binaries/objects, splitting the logic into focused
+  helpers that respect the coding style.
+- [OPTIONAL] Automate verification against the provided oracle to ensure regression-free
+  output.
 
-## Plan (initial)
-- Parsing/IO setup
-- Core logic
-- Error handling
-- Tests from examples + edge cases
+## Implementation Notes
+- `src/tree.c` computes the canopy width per block to stay aligned with the official
+  oracle while only relying on `write(2)` helpers.
+- `src/main.c` is a local runner kept for development; drop it before delivery to comply
+  with the subject expectations.
+- Makefile rebuilt with the standard targets and forwards `make test` to the functional
+  suite.
 
-## Implementation Status
-- Language: C
-- Makefile: yes
-- Tests present: yes
+## Test Strategy
+- `make test` extracts the official `firtree` oracle, compares outputs for sizes `0` to
+  `5`, and covers the representative error scenarios (missing argument, non-digit,
+  negative input).
 
-## How To Test
-- Build: `make` (if available)
-- Run tests: `make test` (stub added when missing)
+## Evaluation Checklist
+- [x] Builds with `make` and strict warning flags.
+- [x] Output of `tree(size)` matches the oracle for tested sizes.
+- [x] `size = 0` produces no output and succeeds.
+- [x] Automated tests documented and passing.
 
-## Risks / Gaps
-- Auto-extracted summary may miss constraints.
-- Manual review recommended before final submission.
+## Risks / Follow-up
+- Remove helper binaries/mains and the extracted oracle directory before official
+  submission, keeping only `tree.c` and required sources.
+- Additional large-size visual checks can complement automated coverage.

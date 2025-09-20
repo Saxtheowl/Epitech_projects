@@ -1,15 +1,14 @@
-NAME	=	count_island
-
-SRC	=	src/count_island.c
-
-OBJ	=	$(SRC:.c=.o)
-
-CFLAGS	=	-Wall -Wextra -Werror -Iinclude
+CC		?=	gcc
+CFLAGS		+=	-Wall -Wextra -Werror
+CPPFLAGS	+=	-Iinclude
+NAME		=	count_island
+SRC		=	src/count_island.c
+OBJ		=	$(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ) main.o
-	$(CC) $(OBJ) main.o -o $(NAME)
+	$(CC) $(OBJ) main.o -o $@
 
 clean:
 	$(RM) $(OBJ)
@@ -19,19 +18,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re test
-
-test: all
+test: $(NAME)
 	@tests/test.sh
 
-
-# Added by auto_report.py
-.PHONY: test
-TEST_SCRIPT=./scripts/test.sh
-
-test:
-	@if [ -x $$(echo $(TEST_SCRIPT)) ]; then \
-		$$(echo $(TEST_SCRIPT)); \
-	else \
-		echo 'No tests script found'; \
-	fi
+.PHONY: all clean fclean re test

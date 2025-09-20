@@ -1,23 +1,27 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <ctype.h>
+#include <stdlib.h>
+
 #include "star.h"
 
-static int parse_positive_int(const char *s, int *out)
+static int parse_size(const char *s, unsigned int *out)
 {
-    if (!s || !*s)
+    if (s == NULL || *s == '\0') {
         return -1;
-    long val = 0;
-    for (const char *p = s; *p; ++p) {
-        if (!isdigit((unsigned char)*p))
-            return -1;
-        val = val * 10 + (*p - '0');
-        if (val > 1000000)
-            return -1;
     }
-    if (val <= 0)
-        return -1;
-    *out = (int)val;
+
+    unsigned long value = 0;
+
+    for (const unsigned char *p = (const unsigned char *)s; *p; ++p) {
+        if (!isdigit(*p)) {
+            return -1;
+        }
+        value = (value * 10UL) + (unsigned long)(*p - '0');
+        if (value > 1000000UL) {
+            return -1;
+        }
+    }
+
+    *out = (unsigned int)value;
     return 0;
 }
 
@@ -26,10 +30,13 @@ int main(int argc, char **argv)
     if (argc != 2) {
         return 84;
     }
-    int n = 0;
-    if (parse_positive_int(argv[1], &n) != 0) {
+
+    unsigned int size = 0;
+
+    if (parse_size(argv[1], &size) != 0) {
         return 84;
     }
-    print_star(n);
+
+    star(size);
     return 0;
 }

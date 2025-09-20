@@ -1,61 +1,50 @@
-# MatchNmatch
+# Match & Nmatch (B-CPE-100)
 
-> Timeline: 6 jours
+Re-implementation of the pool pattern-matching exercises:
 
-> Nombre de personnes sur le projet: 1
+- `match` tells whether two strings can match when the pattern may contain `*`
+  wildcards.
+- `nmatch` counts all distinct matches produced by the same `*` semantics.
 
-<br>
+Both functions follow the official prototypes:
 
-📂---[MatchNmatch.pdf](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-100/MatchNmatch/MatchNmatch.pdf)
+```c
+int match(char const *s1, char const *s2);
+int nmatch(char const *s1, char const *s2);
+```
 
-|\_\_\_[match.tgz](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-100/MatchNmatch/match.tgz)
+The wildcard `*` substitutes any string (including the empty string). Other
+characters compare literally.
 
-|\_\_\_[nmatch.tgz](https://github.com/Studio-17/Epitech-Subjects/blob/main/Semester-1/B-CPE-100/MatchNmatch/nmatch.tgz)
+## Build
 
-<br>
+```sh
+make
+```
 
-<details>
-<summary> Tests de la moulinette </summary>
-<table align="center">
-    <thead>
-        <tr>
-            <td colspan="3" align="center"><strong>MOULINETTE</strong></td>
-        </tr>
-        <tr>
-            <th>SOMMAIRE</th>
-            <th>NB DE TESTS</th>
-            <th>DETAILS</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td rowspan="1">match</td>
-            <td rowspan="1" style="text-align: center;">1</td>
-            <td>match</td>
-        </tr>
-        <tr>
-            <td rowspan="1">nmatch</td>
-            <td rowspan="1" style="text-align: center;">1</td>
-            <td>nmatch</td>
-        </tr>
-    </tbody>
-</table>
-</details>
+`make` only compiles the object files (`src/match.c`, `src/nmatch.c`). They are
+ready to be linked with the subject’s graders.
 
-<br>
+## Tests
 
-[↩️ Revenir au module](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1/B-CPE-100)
+```sh
+make test
+```
 
-[↩️ Revenir au Semestre-1](https://github.com/Studio-17/Epitech-Subjects/tree/main/Semester-1)
+`make test` compiles a lightweight harness that exercises both functions against
+canonical cases and compares the answers to the official subject oracles
+(`match.tgz`, `nmatch.tgz`). The harness is transient and removed automatically.
 
-[↩️ Revenir à l'accueil](https://github.com/Studio-17/Epitech-Subjects)
+## Cleaning
 
-<br>
+```sh
+make clean   # object files + test harness
+make fclean  # clean + remove stray binaries (if any)
+make re      # rebuild from scratch
+```
 
----
+## Notes
 
-<div align="center">
-
-<a href="https://github.com/Studio-17" target="_blank"><img src="../../../assets/voc17.gif" width="40"></a>
-
-</div>
+- The sources don’t embed a `main`; the graders will supply theirs.
+- `match`/`nmatch` accept `NULL` inputs defensively by returning 0.
+- Only recursion is used (no additional allocations or forbidden system calls).

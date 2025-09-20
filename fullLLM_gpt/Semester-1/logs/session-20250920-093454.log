@@ -1,0 +1,7 @@
+[2025-09-20 09:34:54] Session start: cible B-CPE-101/EvalExpr.
+[2025-09-20 09:35:01] Inventaire dépôt (ls -R) pour vérifier l’arborescence projet.
+[2025-09-20 09:35:05] Lecture du sujet via EvalExpr.txt (fallback après absence de pdftotext) et EvalExprBootstrap.txt pour récupérer exigences.
+[2025-09-20 09:35:18] Exécution `make test` (toutes les dépendances recompilées) -> 11 tests OK, aucun échec.
+[2025-09-20 09:35:40] Mise à jour `README.md` pour documenter contraintes, dépendances et campagne de tests.
+[2025-09-20 09:36:12] Réécriture du rapport `reports/Semester-1/EvalExpr.md` avec résumé du sujet, exigences taggées, plan suivi et checklist.
+[2025-09-20 09:36:40] Session close.

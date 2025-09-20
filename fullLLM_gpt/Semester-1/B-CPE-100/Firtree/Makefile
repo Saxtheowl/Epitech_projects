@@ -1,16 +1,15 @@
-NAME	=	firtree
-
-SRC	=	src/main.c \
-		src/tree.c
-
-OBJ	=	$(SRC:.c=.o)
-
-CFLAGS	=	-Wall -Wextra -Werror -Iinclude
+CC		?=	gcc
+CFLAGS		+=	-Wall -Wextra -Werror
+CPPFLAGS	+=	-Iinclude
+NAME		=	firtree
+SRC		=	src/main.c \
+			src/tree.c
+OBJ		=	$(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME)
+	$(CC) $(OBJ) -o $@
 
 clean:
 	$(RM) $(OBJ)
@@ -20,19 +19,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re test
-
-test: all
+test: $(NAME)
 	@tests/test.sh
 
-
-# Added by auto_report.py
-.PHONY: test
-TEST_SCRIPT=./scripts/test.sh
-
-test:
-	@if [ -x $$(echo $(TEST_SCRIPT)) ]; then \
-		$$(echo $(TEST_SCRIPT)); \
-	else \
-		echo 'No tests script found'; \
-	fi
+.PHONY: all clean fclean re test

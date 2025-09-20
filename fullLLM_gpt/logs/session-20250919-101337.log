@@ -1,0 +1,357 @@
+[2025-09-19 10:08:21] $ ls
+logs
+reports
+scripts
+Semester-0
+Semester-1
+Semester-2
+Semester-3
+Semester-4
+Semester-5
+tmp
+
+[2025-09-19 10:08:29] $ ls Semester-0
+DOCUMENTS
+README.md
+
+[2025-09-19 10:08:32] $ ls Semester-0/DOCUMENTS
+Coding_styles
+README.md
+Technical_Documentation
+
+[2025-09-19 10:08:40] $ ls Semester-1
+B-BOO-101
+B-CPE-100
+B-CPE-101
+B-CPE-110
+B-MUL-100
+B-NSA-100
+B-PSU-100
+README.md
+
+[2025-09-19 10:08:55] $ find . -maxdepth 3 -mindepth 2 -type d | sort
+... (semester project directories listed)
+
+[2025-09-19 10:09:12] $ find Semester-1 -maxdepth 3 -iname '*.pdf'
+Semester-1/B-CPE-101/Bistro-matic/Bistro-matic.pdf
+Semester-1/B-CPE-101/EvalExpr/EvalExpr.pdf
+Semester-1/B-CPE-101/EvalExpr/EvalExprBootstrap.pdf
+Semester-1/B-CPE-101/InfinAdd/InfinAdd.pdf
+Semester-1/B-CPE-100/Firtree/Tree.pdf
+Semester-1/B-CPE-100/Count_island/CountIsland.pdf
+Semester-1/B-CPE-100/WorkshopLib/WorkshopLib.pdf
+Semester-1/B-CPE-100/MatchNmatch/MatchNmatch.pdf
+Semester-1/B-CPE-100/Star/B-CPE-100_Star.pdf
+
+[2025-09-19 10:09:41] $ pdftotext -layout Semester-1/B-CPE-100/Star/B-CPE-100_Star.pdf -
+bash: line 1: pdftotext: command not found
+
+[2025-09-19 10:09:47] $ mutool draw -F txt Semester-1/B-CPE-100/Star/B-CPE-100_Star.pdf -
+bash: line 1: mutool: command not found
+
+[2025-09-19 10:10:02] $ python3 - <<'PY'
+... (PyPDF2 missing message)
+Module PyPDF2 not found
+
+[2025-09-19 10:10:22] $ python3 -m pip install PyPDF2 --target tmp/pypdf
+NotADirectoryError: '/home/roro/.../tmp/pypdf'
+
+[2025-09-19 10:10:33] $ ls -l tmp
+-rw-rw-r-- 1 roro roro 4101 Sep  8 08:05 tmp
+
+[2025-09-19 10:10:45] $ mkdir -p python_packages
+
+[2025-09-19 10:10:50] $ python3 -m pip install PyPDF2 --target python_packages/pypdf
+Successfully installed PyPDF2-3.0.1
+
+[2025-09-19 10:11:07] $ PYTHONPATH=python_packages/pypdf python3 - <<'PY'
+... (PDF text extraction)
+--- Page 1 ---
+STAR
+YOU ARE A STAR
+...
+
+[2025-09-19 10:11:36] $ ls Semester-1/B-CPE-100/Star
+B-CPE-100_Star.pdf
+include
+Makefile
+README.md
+scripts
+src
+star
+star_example.txt
+tests
+
+[2025-09-19 10:11:45] $ ls Semester-1/B-CPE-100/Star/src
+main.c
+main.o
+star.c
+star.o
+
+[2025-09-19 10:11:55] $ sed -n '1,120p' Semester-1/B-CPE-100/Star/src/star.c
+#include <stdio.h>
+#include "star.h"
+...
+
+[2025-09-19 10:12:11] $ ./Semester-1/B-CPE-100/Star/star 1
+   *
+*** ***
+ *   *
+*** ***
+   *
+
+[2025-09-19 10:12:20] $ ./Semester-1/B-CPE-100/Star/star 2
+     *
+    * *
+***** *****
+ *       *
+  *     *
+ *       *
+***** *****
+    * *
+     *
+
+[2025-09-19 10:12:28] $ ./Semester-1/B-CPE-100/Star/star 5
+              *
+             * *
+            *   *
+           *     *
+          *       *
+***********       ***********
+...
+
+[2025-09-19 10:17:04] $ make clean && make  (in Semester-1/B-CPE-100/Star)
+rm -f src/main.o src/star.o
+cc -Wall -Wextra -Werror -Iinclude  -c -o src/main.o src/main.c
+cc -Wall -Wextra -Werror -Iinclude  -c -o src/star.o src/star.c
+cc src/main.o src/star.o -o star
+
+[2025-09-19 10:17:19] $ make test  (in Semester-1/B-CPE-100/Star)
+[OK] n=0
+[OK] n=1
+[OK] n=2
+[OK] n=4
+[OK] n=5
+[OK] error missing arg
+[OK] error non digit
+[OK] error negative
+OK=8 KO=0
+
+[2025-09-19 10:17:35] $ make fclean  (in Semester-1/B-CPE-100/Star)
+rm -f src/main.o src/star.o
+rm -f star
+
+[2025-09-19 10:23:05] $ ls Semester-1/B-CPE-100/Firtree
+firtree
+firtree.tgz
+include
+Makefile
+README.md
+scripts
+src
+tests
+Tree.pdf
+[2025-09-19 10:23:22] $ PYTHONPATH=python_packages/pypdf python3 - <<'PY'
+from pathlib import Path
+import PyPDF2
+path = Path('Semester-1/B-CPE-100/Firtree/Tree.pdf')
+reader = PyPDF2.PdfReader(path.open('rb'))
+for i, page in enumerate(reader.pages, 1):
+    print(f'--- Page {i} ---')
+    text = page.extract_text() or ''
+    print(text)
+PY
+--- Page 1 ---
+B1 - Unix & C Lab Seminar
+B-CPE-100
+Fir Tree
+An ascii art resizable Fir tree
+1.0
+--- Page 2 ---
+Fir Tree
+language : C
+... (truncated)
+[2025-09-19 10:23:47] $ ls Semester-1/B-CPE-100/Firtree/src
+main.c
+main.o
+tree.c
+tree.o
+[2025-09-19 10:23:55] $ sed -n '1,200p' Semester-1/B-CPE-100/Firtree/src/tree.c
+#include <stdio.h>
+#include "tree.h"
+...
+[2025-09-19 10:24:10] (in Semester-1/B-CPE-100/Firtree) $ make test
+Makefile:34: warning: overriding recipe for target 'test'
+Makefile:26: warning: ignoring old recipe for target 'test'
+[INFO] No tests defined yet for Firtree.
+[2025-09-19 10:24:25] $ tar -tzf Semester-1/B-CPE-100/Firtree/firtree.tgz | head
+firtree
+[2025-09-19 10:24:32] $ mkdir -p Semester-1/B-CPE-100/Firtree/.firtree_tmp && tar -xzf Semester-1/B-CPE-100/Firtree/firtree.tgz -C Semester-1/B-CPE-100/Firtree/.firtree_tmp
+[2025-09-19 10:25:05] $ cat <<'EOF' > Semester-1/B-CPE-100/Firtree/include/tree.h
+#ifndef TREE_H
+#define TREE_H
+
+void tree(int size);
+
+#endif
+[2025-09-19 10:25:05] $ update tree.h to expose void tree(int size);
+[2025-09-19 10:25:18] $ rewrote tree.c to implement tree(int) using write(2) helpers and official layout.
+[2025-09-19 10:25:28] $ updated main.c to accept non-negative sizes and call tree().
+[2025-09-19 10:25:34] $ normalized Makefile with standard targets and make test hook.
+[2025-09-19 10:25:45] $ rewrote tests/test.sh to compare outputs with the official oracle and cover invalid inputs.
+[2025-09-19 10:25:49] $ chmod +x Semester-1/B-CPE-100/Firtree/tests/test.sh
+[2025-09-19 10:25:58] $ refreshed README.md with build/run/test instructions and subject notes.
+[2025-09-19 10:26:10] $ rewrote reports/Semester-1/Firtree.md with subject summary, requirements, and test strategy.
+[2025-09-19 10:26:20] (in Semester-1/B-CPE-100/Firtree) $ make clean && make
+rm -f src/main.o src/tree.o
+cc -Wall -Wextra -Werror -Iinclude  -c -o src/main.o src/main.c
+cc -Wall -Wextra -Werror -Iinclude  -c -o src/tree.o src/tree.c
+cc src/main.o src/tree.o -o firtree
+[2025-09-19 10:26:28] (in Semester-1/B-CPE-100/Firtree) $ make test
+[OK] n=0
+[OK] n=1
+[OK] n=2
+[OK] n=3
+[OK] n=4
+[OK] n=5
+[OK] error missing arg
+[OK] error non digit
+[OK] error negative
+OK=9 KO=0
+[2025-09-19 10:26:35] (in Semester-1/B-CPE-100/Firtree) $ make fclean
+rm -f src/main.o src/tree.o
+rm -f firtree
+[2025-09-19 10:26:40] $ rm -rf Semester-1/B-CPE-100/Firtree/.firtree_tmp
+[2025-09-19 10:26:48] $ restored .firtree_tmp from archive
+[2025-09-19 10:27:00] (in Semester-1/B-CPE-100/Firtree) $ make
+cc -Wall -Wextra -Werror -Iinclude  -c -o src/main.o src/main.c
+cc -Wall -Wextra -Werror -Iinclude  -c -o src/tree.o src/tree.c
+cc src/main.o src/tree.o -o firtree
+[2025-09-19 10:27:07] (in Semester-1/B-CPE-100/Star) $ make
+cc -Wall -Wextra -Werror -Iinclude  -c -o src/main.o src/main.c
+cc -Wall -Wextra -Werror -Iinclude  -c -o src/star.o src/star.c
+cc src/main.o src/star.o -o star
+[2025-09-19 10:27:12] $ diff -u <(Semester-1/B-CPE-100/Firtree/.firtree_tmp/firtree 5) <(Semester-1/B-CPE-100/Firtree/firtree 5) | head
+[2025-09-19 10:27:30] $ ls Semester-1/B-CPE-100/Count_island
+[2025-09-19 10:27:38] $ PYTHONPATH=python_packages/pypdf python3 - <<'PY' ...
+--- Page 1 ---\nCOUNT_ISLAND\nBACK TO RECURSION\n...
+[2025-09-19 10:27:55] $ updated include/count_island.h to expose int count_island(char **world);
+[2025-09-19 10:28:05] $ rewrote src/count_island.c to return island count and number islands using flood fill.
+[2025-09-19 10:28:10] $ normalized Count_island Makefile with standard targets.
+[2025-09-19 10:28:25] $ rewrote tests/test.sh to validate output against oracle and run unit cases.
+[2025-09-19 10:28:35] $ refreshed README.md with build/run/test documentation.
+[2025-09-19 10:28:45] $ updated reports/Semester-1/Count_island.md with subject-derived analysis.
+[2025-09-19 10:28:50] $ chmod +x tests/test.sh
+[2025-09-19 10:28:58] (in Semester-1/B-CPE-100/Count_island) $ make clean && make
+rm -f src/count_island.o
+cc -Wall -Wextra -Werror -Iinclude  -c -o src/count_island.o src/count_island.c
+cc src/count_island.o main.o -o count_island[2025-09-19 10:29:10] $ ensured expected oracle output ends with newline in tests/test.sh.
+[2025-09-19 10:29:18] (in Semester-1/B-CPE-100/Count_island) $ make test
+[OK] map transformation
+[OK] unit cases
+OK=2 KO=0[2025-09-19 10:29:25] (in Semester-1/B-CPE-100/Count_island) $ make fclean
+rm -f src/count_island.o
+rm -f count_island
+[2025-09-19 10:29:32] (in Semester-1/B-CPE-100/Count_island) $ make
+cc -Wall -Wextra -Werror -Iinclude  -c -o src/count_island.o src/count_island.c
+cc src/count_island.o main.o -o count_island[2025-09-19 10:29:40] $ ls Semester-1/B-CPE-100/WorkshopLib
+[2025-09-19 10:29:48] $ PYTHONPATH=python_packages/pypdf python3 - <<'PY' ...
+--- Page 1 ---\nB1 - Unix & C Lab Seminar\nB-CPE-100\nWorkshopLib\nAutonomous work on your library\n1.0\n--- Page 2 ---\nWorkshopLib\nbinary name : lib/libmy.a\n...
+[2025-09-19 10:29:55] $ mkdir -p include lib/my tests (WorkshopLib)
+[2025-09-19 10:30:05] $ wrote include/my.h with 30 prototypes.
+[2025-09-19 10:30:20] $ make (WorkshopLib)
+cc ...
+(build output omitted above)[2025-09-19 10:30:28] $ make test
+[2025-09-19 10:30:30] make test output
+Test
+-12345
+Hi\0a
+00000000: 4865 6c6c 6f2c 2057 6f72 6c64 21        Hello, World!
+[2025-09-19 10:30:32] $ make fclean
+[2025-09-19 10:30:33] make fclean output
+rm -f ...
+rm -f lib/libmy.a
+[2025-09-19 10:30:40] $ ls Semester-1/B-CPE-100/MatchNmatch
+[2025-09-19 10:30:49] $ PYTHONPATH=python_packages/pypdf python3 - <<'PY' ...
+--- Page 1 ---\nB1 - Unix & C Lab Seminar\nB-CPE-100\nmatch - nmatch\nCharacters matching\n1.1\n--- Page 2 ---\nmatch - nmatch\n...
+[2025-09-19 10:30:58] $ extracted match.tgz to .oracle
+[2025-09-19 10:31:05] $ extracted nmatch.tgz to .oracle
+[2025-09-19 10:31:12] $ rm -rf .oracle directory
+[2025-09-19 10:31:20] $ rewrote match.c and nmatch.c to deliver pure functions without mains.
+[2025-09-19 10:31:25] $ updated Makefile, tests, README, and report for MatchNmatch.
+[2025-09-19 10:31:32] (MatchNmatch) $ make fclean
+rm -f src/match.o src/nmatch.o tests/harness tests/harness.c
+rm -f match nmatch[2025-09-19 10:31:38] (MatchNmatch) $ make
+cc -Wall -Wextra -Werror -Iinclude  -c -o src/match.o src/match.c
+cc -Wall -Wextra -Werror -Iinclude  -c -o src/nmatch.o src/nmatch.c[2025-09-19 10:31:45] (MatchNmatch) $ make test
+[OK] match '' ''
+[OK] nmatch '' ''
+[OK] match '' '*'
+[OK] nmatch '' '*'
+[OK] match 'abc' 'abc'
+[OK] nmatch 'abc' 'abc'
+[OK] match 'abc' 'a*c'
+[OK] nmatch 'abc' 'a*c'
+[OK] match 'abc' '*'
+[OK] nmatch 'abc' '*'
+[OK] match 'abcbd' '*b*'
+[OK] nmatch 'abcbd' '*b*'
+[OK] match 'abc' 'a**'
+[OK] nmatch 'abc' 'a**'
+[OK] match 'abcd' 'a*d'
+[OK] nmatch 'abcd' 'a*d'
+[OK] match 'aaaa' 'a*'
+[OK] nmatch 'aaaa' 'a*'
+[OK] match 'abacabaaa' 'a*a*a'
+[OK] nmatch 'abacabaaa' 'a*a*a'
+[OK] match 'abc' 'ab*d'
+[OK] nmatch 'abc' 'ab*d'
+OK=22 KO=0[2025-09-19 10:31:50] (MatchNmatch) $ make fclean
+rm -f src/match.o src/nmatch.o tests/harness tests/harness.c
+rm -f match nmatch[2025-09-19 10:31:58] $ created directories rush-1-{1..5}/include,src,tests
+[2025-09-19 10:32:15] (rush-1-1) $ make test
+cc -Iinclude -Wall -Wextra -Werror -c -o src/rush.o src/rush.c
+[OK] rush1-1 5 3
+[OK] rush1-1 5 1
+[OK] rush1-1 1 1
+[OK] rush1-1 1 5
+[OK] rush1-1 4 4
+[OK] rush1-1 0 3
+OK=6 KO=0[2025-09-19 10:32:20] (rush-1-1) $ make fclean
+rm -f src/rush.o tests/harness tests/harness.c[2025-09-19 10:32:40] (rush-1-2) $ make test
+cc -Iinclude -Wall -Wextra -Werror -c -o src/rush.o src/rush.c
+[OK] rush1-2 5 3
+[OK] rush1-2 5 1
+[OK] rush1-2 1 1
+[OK] rush1-2 1 5
+[OK] rush1-2 4 4
+[OK] rush1-2 0 3
+OK=6 KO=0[2025-09-19 10:32:44] (rush-1-2) $ make fclean
+rm -f src/rush.o tests/harness tests/harness.c[2025-09-19 10:33:05] (rush-1-3) $ make test
+cc -Iinclude -Wall -Wextra -Werror -c -o src/rush.o src/rush.c
+[OK] rush1-3 5 3
+[OK] rush1-3 5 1
+[OK] rush1-3 1 1
+[OK] rush1-3 1 5
+[OK] rush1-3 4 4
+[OK] rush1-3 0 3
+OK=6 KO=0[2025-09-19 10:33:09] (rush-1-3) $ make fclean
+rm -f src/rush.o tests/harness tests/harness.c[2025-09-19 10:33:23] (rush-1-4) $ make test
+cc -Iinclude -Wall -Wextra -Werror -c -o src/rush.o src/rush.c
+[OK] rush1-4 5 3
+[OK] rush1-4 5 1
+[OK] rush1-4 1 1
+[OK] rush1-4 1 5
+[OK] rush1-4 4 4
+[OK] rush1-4 0 3
+OK=6 KO=0[2025-09-19 10:33:27] (rush-1-4) $ make fclean
+rm -f src/rush.o tests/harness tests/harness.c[2025-09-19 10:33:42] (rush-1-5) $ make test
+cc -Iinclude -Wall -Wextra -Werror -c -o src/rush.o src/rush.c
+[OK] rush1-5 5 3
+[OK] rush1-5 5 1
+[OK] rush1-5 1 1
+[OK] rush1-5 1 5
+[OK] rush1-5 4 4
+[OK] rush1-5 0 3
+OK=6 KO=0[2025-09-19 10:33:46] (rush-1-5) $ make fclean
+rm -f src/rush.o tests/harness tests/harness.c

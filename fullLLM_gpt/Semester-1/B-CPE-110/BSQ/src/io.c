@@ -1,7 +1,13 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
-#include <string.h>
+#include "../include/bsq.h"
+
+static void copy_bytes(char *dst, const char *src, size_t len)
+{
+    for (size_t i = 0; i < len; ++i)
+        dst[i] = src[i];
+}
 
 int write_all(int fd, const char *buf, size_t len)
 {
@@ -17,23 +23,42 @@ int write_all(int fd, const char *buf, size_t len)
 char *read_entire_file(const char *path, size_t *out_len)
 {
     int fd = open(path, O_RDONLY);
-    if (fd < 0) return NULL;
-    size_t cap = 8192, len = 0;
-    char *buf = malloc(cap);
-    if (!buf) { close(fd); return NULL; }
-    for (;;) {
+    if (fd < 0)
+        return NULL;
+    size_t cap = 4096;
+    size_t len = 0;
+    char *buffer = malloc(cap + 1);
+    if (!buffer) {
+        close(fd);
+        return NULL;
+    }
+    while (1) {
         if (len == cap) {
-            cap *= 2; char *nb = realloc(buf, cap);
-            if (!nb) { free(buf); close(fd); return NULL; }
-            buf = nb;
+            size_t new_cap = cap * 2;
+            char *nb = malloc(new_cap + 1);
+            if (!nb) {
+                free(buffer);
+                close(fd);
+                return NULL;
+            }
+            copy_bytes(nb, buffer, len);
+            free(buffer);
+            buffer = nb;
+            cap = new_cap;
         }
-        ssize_t r = read(fd, buf + len, cap - len);
-        if (r < 0) { free(buf); close(fd); return NULL; }
-        if (r == 0) break;
+        ssize_t r = read(fd, buffer + len, cap - len);
+        if (r < 0) {
+            free(buffer);
+            close(fd);
+            return NULL;
+        }
+        if (r == 0)
+            break;
         len += (size_t)r;
     }
     close(fd);
-    if (out_len) *out_len = len;
-    return buf;
+    buffer[len] = '\0';
+    if (out_len)
+        *out_len = len;
+    return buffer;
 }
-

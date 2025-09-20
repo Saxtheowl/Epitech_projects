@@ -1,20 +1,19 @@
-CC	= gcc
-CFLAGS	= -std=c99 -Wall -Wextra -Werror
+CC      = gcc
+CFLAGS  = -std=c99 -Wall -Wextra -Werror
 CPPFLAGS= -Iinclude
-LDFLAGS =
 
-NAME	= eval_expr
-SRC	= main.c \
-		src/eval_expr.c \
-		src/io.c
-OBJ	= $(SRC:.c=.o)
+NAME    = eval_expr
+SRC     = main.c \
+          src/eval_expr.c \
+          src/io.c
+OBJ     = $(SRC:.c=.o)
 
 .PHONY: all clean fclean re test
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME) $(LDFLAGS)
+	$(CC) $(OBJ) -o $(NAME)
 
 clean:
 	rm -f $(OBJ)
@@ -24,18 +23,5 @@ fclean: clean
 
 re: fclean all
 
-test: all
+test: $(NAME)
 	sh tests/test.sh
-
-
-
-# Added by auto_report.py
-.PHONY: test
-TEST_SCRIPT=./scripts/test.sh
-
-test:
-	@if [ -x $$(echo $(TEST_SCRIPT)) ]; then \
-		$$(echo $(TEST_SCRIPT)); \
-	else \
-		echo 'No tests script found'; \
-	fi

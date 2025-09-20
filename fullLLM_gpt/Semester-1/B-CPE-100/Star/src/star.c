@@ -1,66 +1,79 @@
-#include <stdio.h>
+#include <unistd.h>
+
 #include "star.h"
 
-static void putnchar(char c, int n)
+static void put_char(char c)
 {
-    for (int i = 0; i < n; ++i)
-        putchar(c);
+    (void)!write(1, &c, 1);
 }
 
-static void line_one_star(int indent)
+static void put_nchar(char c, unsigned int count)
 {
-    putnchar(' ', indent);
-    putchar('*');
-    putchar('\n');
+    for (unsigned int i = 0; i < count; ++i) {
+        put_char(c);
+    }
 }
 
-static void line_two_stars(int left_spaces, int inner_spaces)
+static void line_one_star(unsigned int indent)
 {
-    putnchar(' ', left_spaces);
-    putchar('*');
-    putnchar(' ', inner_spaces);
-    putchar('*');
-    putchar('\n');
+    put_nchar(' ', indent);
+    put_char('*');
+    put_char('\n');
 }
 
-void print_star(int s)
+static void line_two_stars(unsigned int left_spaces, unsigned int inner_spaces)
 {
-    int w = 2 * s + 1;
-    int g = (2 * s - 3);
-    if (g < 1) g = 1;
-    int T = 2 * w + g;
+    put_nchar(' ', left_spaces);
+    put_char('*');
+    put_nchar(' ', inner_spaces);
+    put_char('*');
+    put_char('\n');
+}
 
-    int apex_indent = w + (g / 2);
+void star(unsigned int size)
+{
+    if (size == 0) {
+        return;
+    }
+
+    unsigned int w = 2 * size + 1;
+    unsigned int g = (size > 1) ? (2 * size - 3) : 1;
+    unsigned int span = (2 * w) + g;
+    unsigned int apex_indent = w + (g / 2);
+
     line_one_star(apex_indent);
-    for (int i = 1; i <= s - 1; ++i) {
-        int left_spaces = apex_indent - i;
-        int inner_spaces = 2 * i - 1;
+
+    for (unsigned int i = 1; i < size; ++i) {
+        unsigned int left_spaces = apex_indent - i;
+        unsigned int inner_spaces = (2 * i) - 1;
         line_two_stars(left_spaces, inner_spaces);
     }
 
-    putnchar('*', w);
-    putnchar(' ', g);
-    putnchar('*', w);
-    putchar('\n');
+    put_nchar('*', w);
+    put_nchar(' ', g);
+    put_nchar('*', w);
+    put_char('\n');
 
-    for (int L = 1; L <= s; ++L) {
-        int inner = T - 2 * L - 2;
-        line_two_stars(L, inner);
-    }
-    for (int L = s - 1; L >= 1; --L) {
-        int inner = T - 2 * L - 2;
-        line_two_stars(L, inner);
+    for (unsigned int arm = 1; arm <= size; ++arm) {
+        unsigned int inner = span - (2 * arm) - 2;
+        line_two_stars(arm, inner);
     }
 
-    putnchar('*', w);
-    putnchar(' ', g);
-    putnchar('*', w);
-    putchar('\n');
+    for (unsigned int arm = size; arm-- > 1;) {
+        unsigned int inner = span - (2 * arm) - 2;
+        line_two_stars(arm, inner);
+    }
 
-    for (int i = s - 1; i >= 1; --i) {
-        int left_spaces = apex_indent - i;
-        int inner_spaces = 2 * i - 1;
+    put_nchar('*', w);
+    put_nchar(' ', g);
+    put_nchar('*', w);
+    put_char('\n');
+
+    for (unsigned int i = size; i-- > 1;) {
+        unsigned int left_spaces = apex_indent - i;
+        unsigned int inner_spaces = (2 * i) - 1;
         line_two_stars(left_spaces, inner_spaces);
     }
+
     line_one_star(apex_indent);
 }
