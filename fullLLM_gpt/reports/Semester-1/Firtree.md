@@ -25,17 +25,19 @@
   output.
 
 ## Implementation Notes
-- `src/tree.c` computes the canopy width per block to stay aligned with the official
-  oracle while only relying on `write(2)` helpers.
-- `src/main.c` is a local runner kept for development; drop it before delivery to comply
-  with the subject expectations.
-- Makefile rebuilt with the standard targets and forwards `make test` to the functional
-  suite.
+- `src/tree.c` now forwards every character emission to `my_putchar`, keeping the
+  implementation compliant with the "only write" requirement.
+- `src/my_putchar.c` provides a local fallback (simple `write`) so the binary remains
+  runnable outside the grading environment; remove if the delivery must only contain
+  `tree.c`.
+- `src/main.c` offers a lightweight argument parser (digits only, no `ctype.h`) for
+  manual testing; graders will link their own main.
+- Makefile compiles `src/main.c`, `src/tree.c`, and `src/my_putchar.c`; `make test`
+  exercises the functional suite.
 
 ## Test Strategy
-- `make test` extracts the official `firtree` oracle, compares outputs for sizes `0` to
-  `5`, and covers the representative error scenarios (missing argument, non-digit,
-  negative input).
+- `make test` extrait l’oracle officiel, compare les sorties pour les tailles `0` à `5`,
+  et vérifie les erreurs (argument manquant, chaîne non numérique, entier négatif).
 
 ## Evaluation Checklist
 - [x] Builds with `make` and strict warning flags.

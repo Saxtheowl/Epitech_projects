@@ -3,7 +3,8 @@ CFLAGS		+=	-Wall -Wextra -Werror
 CPPFLAGS	+=	-Iinclude
 NAME		=	firtree
 SRC		=	src/main.c \
-			src/tree.c
+			src/tree.c \
+			src/my_putchar.c
 OBJ		=	$(SRC:.c=.o)
 
 all: $(NAME)

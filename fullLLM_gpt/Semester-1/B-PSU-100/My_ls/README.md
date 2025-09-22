@@ -20,4 +20,5 @@ Tests
 
 Notes
 - Implémenté en C POSIX. Les sorties sont compatibles avec `ls` pour les cas couverts par les tests.
-
+- Les erreurs (`lstat`, `opendir`, mauvais fichier`) sont signalées sur `stderr` au format `my_ls: path: strerror`.
+- Toutes les allocations dynamiques sont vérifiées; en cas d’échec, le programme retourne `84` après nettoyage.

@@ -1,33 +1,28 @@
-#include <unistd.h>
-
 #include "star.h"
 
-static void put_char(char c)
-{
-    (void)!write(1, &c, 1);
-}
+extern void my_putchar(char c);
 
 static void put_nchar(char c, unsigned int count)
 {
     for (unsigned int i = 0; i < count; ++i) {
-        put_char(c);
+        my_putchar(c);
     }
 }
 
 static void line_one_star(unsigned int indent)
 {
     put_nchar(' ', indent);
-    put_char('*');
-    put_char('\n');
+    my_putchar('*');
+    my_putchar('\n');
 }
 
 static void line_two_stars(unsigned int left_spaces, unsigned int inner_spaces)
 {
     put_nchar(' ', left_spaces);
-    put_char('*');
+    my_putchar('*');
     put_nchar(' ', inner_spaces);
-    put_char('*');
-    put_char('\n');
+    my_putchar('*');
+    my_putchar('\n');
 }
 
 void star(unsigned int size)
@@ -52,7 +47,7 @@ void star(unsigned int size)
     put_nchar('*', w);
     put_nchar(' ', g);
     put_nchar('*', w);
-    put_char('\n');
+    my_putchar('\n');
 
     for (unsigned int arm = 1; arm <= size; ++arm) {
         unsigned int inner = span - (2 * arm) - 2;
@@ -67,7 +62,7 @@ void star(unsigned int size)
     put_nchar('*', w);
     put_nchar(' ', g);
     put_nchar('*', w);
-    put_char('\n');
+    my_putchar('\n');
 
     for (unsigned int i = size; i-- > 1;) {
         unsigned int left_spaces = apex_indent - i;

@@ -6,9 +6,8 @@
   for empty cells and `o` for obstacles.
 - Find the largest square of `.` and replace it with `x`. If multiple solutions
   exist, choose the highest; if still tied, choose the leftmost.
-- Allowed syscalls: `open`, `read`, `close`, `write`, `malloc`, `free`, `stat`.
-- On error, write an error message to stderr and exit 84 (this implementation
-  returns 84 without additional output for invalid input).
+- Allowed syscalls: `open`, `read`, `close`, `write`, `malloc`, `free`.
+- On error, print `map error` on stderr and exit 84.
 
 ## Implementation summary
 - `read_entire_file` allocates a buffer dynamically (doubling strategy) using only
@@ -21,11 +20,13 @@
 - `write_all` prints each row atomically, preserving the original structure.
 
 ## Testing
-- `make test` (or `./scripts/test.sh`) generates several deterministic maps and
-  compares the program output to the expected annotated maps:
-  - 5×6 mixed map with obstacles.
-  - 1×1, 1×N, and N×1 edge cases.
-- All scenarios currently report `Passed: 4  Failed: 0`.
+- `make test` / `./scripts/test.sh`:
+  - Utilise `tests/solve_ref.py` (solveur Python) pour comparer la sortie sur des
+    cartes validées (`basic`, ligne unique, colonne unique, carte pleine d’obstacles).
+  - Vérifie que des cartes invalides (caractère interdit, lignes de longueur
+    différente, nombre de lignes erroné) retournent 84, n’écrivent rien sur stdout et
+    affichent `map error` sur stderr.
+- Dernière exécution: `Passed: 7  Failed: 0`.
 
 ## Risks / follow-up
 - Current tests cover representative scenarios; adding more heterogeneous grids

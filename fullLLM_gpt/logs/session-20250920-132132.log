@@ -1,0 +1,4 @@
+[2025-09-20 13:21:32] Session start: Rushs (Rush1 variants).
+[2025-09-20 13:21:40] Exécution `scripts/test.sh` → lance `make test` pour rush-1-1 à rush-1-5 ; tous OK.
+[2025-09-20 13:21:55] Mise à jour `scripts/test.sh` pour automatiser ces sous-tests.
+[2025-09-20 13:22:00] Session close.

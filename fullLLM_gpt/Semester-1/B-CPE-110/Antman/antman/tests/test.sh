@@ -1,12 +1,14 @@
 #!/bin/sh
 set -eu
+
 ROOT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 BIN="$ROOT_DIR/antman"
 GIANT_DIR="$ROOT_DIR/../giantman"
 GIANT="$GIANT_DIR/giantman"
-TMP_DIR="$ROOT_DIR/tests/tmp"
 
-mkdir -p "$TMP_DIR"
+TMP_DIR="$(mktemp -d)"
+cleanup(){ rm -rf "$TMP_DIR"; }
+trap cleanup EXIT
 
 make -C "$ROOT_DIR" >/dev/null
 make -C "$GIANT_DIR" >/dev/null
@@ -14,42 +16,57 @@ make -C "$GIANT_DIR" >/dev/null
 pass=0
 fail=0
 
-compress_and_check() {
-  local name="$1"
-  local input="$2"
-  local type="$3"
-  local comp="$TMP_DIR/${name}.ant"
-  local out="$TMP_DIR/${name}.out"
+ok(){ pass=$((pass + 1)); printf '[OK ] %s\n' "$1"; }
+ko(){ fail=$((fail + 1)); printf '[KO ] %s\n' "$1" >&2; }
 
-  printf '%b' "$input" > "$TMP_DIR/${name}.txt"
-  if ! "$BIN" "$TMP_DIR/${name}.txt" "$type" > "$comp"; then
-    echo "[KO] $name (compression failed)"
-    fail=$((fail + 1))
+roundtrip(){
+  name=$1; content=$2; type=$3
+  src="$TMP_DIR/${name}.src"
+  comp="$TMP_DIR/${name}.ant"
+  out="$TMP_DIR/${name}.out"
+  printf '%b' "$content" >"$src"
+  if ! "$BIN" "$src" "$type" >"$comp"; then
+    ko "$name (compression failed)"
     return
   fi
-  if ! "$GIANT" "$comp" "$type" > "$out"; then
-    echo "[KO] $name (decompression failed)"
-    fail=$((fail + 1))
+  # header validation
+  if ! python3 - "$comp" "$type" <<'PY'
+import sys, pathlib
+path = pathlib.Path(sys.argv[1])
+data = path.read_bytes()
+expected = int(sys.argv[2]) & 0xFF
+if len(data) < 5 or data[:4] != b'AR01' or data[4] != expected:
+    sys.exit(1)
+PY
+  then
+    ko "$name (invalid header)"
     return
   fi
-  if diff -q "$TMP_DIR/${name}.txt" "$out" >/dev/null; then
-    echo "[OK] $name"
-    pass=$((pass + 1))
+  if ! "$GIANT" "$comp" "$type" >"$out"; then
+    ko "$name (decompression failed)"
+    return
+  fi
+  if diff -q "$src" "$out" >/dev/null; then
+    ok "$name"
   else
-    echo "[KO] $name (mismatch)"
-    fail=$((fail + 1))
+    ko "$name (mismatch)"
   fi
 }
 
-compress_and_check "lyrics" "Maiha hi Maiha hou Maiha ha Maiha ha ha" 1
-compress_and_check "html" "<html><body><p>Hello</p></body></html>" 2
-compress_and_check "binary" "\x00\x00\x00\x01\x02\x02\x02\x02\xff\xff" 3
+expect_fail(){
+  label=$1; shift
+  if "$@" >/dev/null 2>&1; then
+    ko "$label"
+  else
+    ok "$label"
+  fi
+}
 
-rm -rf "$TMP_DIR"
+roundtrip "lyrics" "Maiha hi Maiha hou Maiha ha Maiha ha ha" 1
+roundtrip "html" "<html><body><p>Hello</p></body></html>" 2
+roundtrip "binary" "\x00\x00\x00\x01\x02\x02\x02\x02\xff\xff" 3
 
-if [ "$fail" -eq 0 ]; then
-  echo "Passed: $pass Failed: $fail"
-else
-  echo "Passed: $pass Failed: $fail"
-  exit 1
-fi
+expect_fail "invalid type" "$BIN" "$TMP_DIR/lyrics.src" 4
+
+printf -- '-----\nPassed: %d  Failed: %d\n' "$pass" "$fail"
+[ "$fail" -eq 0 ]

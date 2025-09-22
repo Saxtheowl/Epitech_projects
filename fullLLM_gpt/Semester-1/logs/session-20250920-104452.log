@@ -1,0 +1,7 @@
+[2025-09-20 10:44:52] Session start: projet B-CPE-110/BSQ.
+[2025-09-20 10:45:05] Revue code existant (run_bsq, parse_map, solve_bsq) + lecture README/tests.
+[2025-09-20 10:45:20] Ajout solveur Python de référence + fixtures de cartes pour rendre les tests déterministes.
+[2025-09-20 10:45:45] Ajustement bsq.c: émission de "map error" sur stderr, propagation des erreurs et retour status de solve_bsq (malloc).
+[2025-09-20 10:46:10] Renforcement parse/tests: nouveaux cas invalides, vérification stderr, exécution `make test` → 7 cas OK.
+[2025-09-20 10:46:25] Mise à jour README + rapport BSQ, `make clean`.
+[2025-09-20 10:46:30] Session close.

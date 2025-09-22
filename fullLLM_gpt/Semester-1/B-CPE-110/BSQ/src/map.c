@@ -88,11 +88,14 @@ int parse_map(const char *data, size_t len, int *rows, int *cols, char **grid)
     return 0;
 }
 
-void solve_bsq(int rows, int cols, char *grid, square_t *best)
+int solve_bsq(int rows, int cols, char *grid, square_t *best)
 {
     // DP: dp[i][j] size of square ending at i,j
     int *dp = malloc((size_t)rows * (size_t)cols * sizeof(int));
-    if (!dp) { best->x = best->y = best->size = 0; return; }
+    if (!dp) {
+        best->x = best->y = best->size = 0;
+        return -1;
+    }
     int bsz = 0, bx = 0, by = 0;
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
@@ -111,6 +114,7 @@ void solve_bsq(int rows, int cols, char *grid, square_t *best)
     }
     free(dp);
     best->size = bsz; best->x = bx - bsz + 1; best->y = by - bsz + 1;
+    return 0;
 }
 
 void mark_square(int rows, int cols, char *grid, square_t best)

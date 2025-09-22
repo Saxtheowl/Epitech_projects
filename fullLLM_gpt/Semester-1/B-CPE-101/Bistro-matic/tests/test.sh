@@ -72,3 +72,18 @@ else
   exit 1
 fi
 rm -f "$out_file" "$err_file"
+
+# Zero/negative size argument
+out_file="$(mktemp)"
+err_file="$(mktemp)"
+printf '%s' "3+6" | "$BIN" "0123456789" "()+-*/%" 0 >"$out_file" 2>"$err_file" || true
+if [ ! -s "$out_file" ] && [ "$(cat "$err_file")" = "$SYNTAX_MSG" ]; then
+  echo "[OK] invalid size"
+else
+  echo "[KO] invalid size" >&2
+  echo "stdout: $(cat "$out_file")" >&2
+  echo "stderr: $(cat "$err_file")" >&2
+  rm -f "$out_file" "$err_file"
+  exit 1
+fi
+rm -f "$out_file" "$err_file"

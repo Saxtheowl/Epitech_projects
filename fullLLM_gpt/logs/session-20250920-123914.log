@@ -1,0 +1,6 @@
+[2025-09-20 12:39:14] Session start: projet B-CPE-100/Star.
+[2025-09-20 12:39:25] Analyse de l’état (star.c, main.c, tests) + contraintes sujet.
+[2025-09-20 12:39:45] Adaptation star.c pour utiliser my_putchar, ajout src/my_putchar.c, simplification du parseur dans main.c, Makefile mis à jour.
+[2025-09-20 12:40:05] Exécution `make test`: comparaisons oracle + erreurs → OK (8 validations).
+[2025-09-20 12:40:20] README et rapport enrichis; `make fclean` effectué.
+[2025-09-20 12:40:25] Session close.

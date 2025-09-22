@@ -1,5 +1,4 @@
-#include <ctype.h>
-#include <stdlib.h>
+#include <stddef.h>
 
 #include "star.h"
 
@@ -11,8 +10,8 @@ static int parse_size(const char *s, unsigned int *out)
 
     unsigned long value = 0;
 
-    for (const unsigned char *p = (const unsigned char *)s; *p; ++p) {
-        if (!isdigit(*p)) {
+    for (const char *p = s; *p; ++p) {
+        if (*p < '0' || *p > '9') {
             return -1;
         }
         value = (value * 10UL) + (unsigned long)(*p - '0');

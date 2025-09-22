@@ -3,7 +3,8 @@ CFLAGS		+=	-Wall -Wextra -Werror
 CPPFLAGS	+=	-Iinclude
 NAME		=	star
 SRC		=	src/main.c \
-			src/star.c
+			src/star.c \
+			src/my_putchar.c
 OBJ		=	$(SRC:.c=.o)
 
 all: $(NAME)

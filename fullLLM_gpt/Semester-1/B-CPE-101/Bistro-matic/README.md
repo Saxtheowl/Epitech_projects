@@ -4,6 +4,17 @@ Arbitrary-precision calculator handling custom bases and operator symbols. Suppo
 `+`, `-`, unary `+/-`, `*`, `/`, `%`, and parentheses, all evaluated with the Pool
 rules (no libC besides `read`, `write`, `malloc`, `free`, `exit`).
 
+## Contraintes du sujet
+- `MUST` n’utiliser que `read`, `write`, `malloc`, `free`, `exit` (Bistro-matic.pdf p.3).
+- `MUST` accepter une base personnalisée (≥ 2 symboles, tous distincts) et une table
+  d’opérateurs de 7 caractères ordonnés `() +-*/%`.
+- `MUST` lire exactement `size_read` caractères sur stdin et retourner `syntax error`
+  ou `error` sur stderr (code 84) selon la nature de l’échec.
+- `SHOULD` refuser toute duplication de symbole base/opérateur et trim les espaces
+  selon les règles du sujet.
+- `KNOWN LIMIT` calculs sur entiers uniquement (pas de décimales) mais précision
+  arbitraire via big integers.
+
 ## Build
 
 ```sh

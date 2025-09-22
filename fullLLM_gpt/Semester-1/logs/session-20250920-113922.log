@@ -1,0 +1,5 @@
+[2025-09-20 11:39:22] Session start: vérification B-CPE-100/Count_island.
+[2025-09-20 11:39:30] Lecture README, inspecté src/count_island.c et scripts/tests/test.sh pour comprendre la couverture actuelle.
+[2025-09-20 11:39:45] Exécution `make test`: build + comparaison map de référence + batterie de tests unitaires → OK (0 KO).
+[2025-09-20 11:39:55] Aucune modification nécessaire; `make fclean` effectué pour nettoyer les artefacts.
+[2025-09-20 11:40:00] Session close.

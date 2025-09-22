@@ -1,12 +1,11 @@
 # My_Printf (B-CPE-101)
 
-Implementation of both training steps:
+Implementation of both training steps defined in the subject PDFs:
 
-- **mini_printf** – limited `%s`, `%c`, `%d`, `%i`, `%%` handling, focused on `va_list` usage.
-- **my_printf** – full-featured replacement for `printf` (C99): flags (`- + 0 # space`),
-  field width, precision (including `*`), length modifiers (`hh`, `h`, `l`, `ll`, `L`),
-  and conversions `%c`, `%s`, `%d`, `%i`, `%u`, `%o`, `%x`, `%X`, `%p`, `%f`, `%F`, `%e`, `%E`,
-  `%g`, `%G`, `%%`, `%n`.
+- **mini_printf** – bootstrap exercise supporting `%s`, `%c`, `%d`, `%i`, `%%` to practise
+  variadic arguments (`mini_printf.pdf`).
+- **my_printf** – extended `printf` reimplementation with flags, width/precision and a
+  broad conversion set (`my_printf.pdf`).
 
 ## Layout
 
@@ -19,32 +18,35 @@ scripts/      # project-level test runner
 ## Build
 
 ```sh
-make          # builds both libraries via sub-Makefiles
-make clean    # removes objects/binaries
-make fclean   # clean + removes libraries/binaries
+make          # builds libmini_printf.a and libmy_printf.a
+make clean    # removes objects/test binaries for both subprojects
+make fclean   # clean + remove libraries
 make re       # full rebuild
 ```
 
-Each subdirectory exposes the same targets.
+Each subdirectory exposes the same targets (`all`, `clean`, `fclean`, `re`, `test`).
 
 ## Tests
 
 ```sh
-./scripts/test.sh  # runs mini_printf + my_printf test suites
+./scripts/test.sh  # rebuilds + runs the mini_printf and my_printf suites
 ```
 
-- `mini_printf/tests/test.sh` compares the output against an expected file covering
-  `%s`, `%c`, `%d`, `%%`.
-- `my_printf/tests/test.sh` builds a reference program using the system `printf`,
-  runs both implementations on a broad sample (flags, width/precision, dynamic
-  `*`, integer bases, pointers, floating-point formats), and diffs the outputs.
+- `mini_printf` regression: compares stdout against the expected transcript (strings,
+  chars, signed ints, literal `%%`, NULL string).
+- `my_printf` regression: builds a reference binary using system `printf`, executes the
+  same scenarios (flags, width, precision, dynamic `*`, integer bases, `%p`, floating
+  formats, `%n`) and diffs the outputs.
 
 The my_printf tests also ensure compatible behaviour for special cases such as
 NULL strings (`(null)`) and `%p` on `NULL` (`(nil)`).
 
 ## Notes
 
-- No buffer handling is implemented (as allowed by the subject). All writes use
-  `write(2)` directly.
-- Only the permitted libC functions are used: `write`, `malloc`, `free`,
-  `va_start`, `va_arg`, `va_end`, `va_copy`.
+- Only the permitted C/POSIX calls are used across both projects: `write`, `malloc`,
+  `free`, `exit`, and the variadic macros (`va_*`).
+- `my_printf` supports flags (`- + 0 # space`), width (fixed & dynamic), precision
+  (fixed & dynamic), length modifiers (`hh`, `h`, `l`, `ll`, `L`) and conversions
+  `%c`, `%s`, `%d`, `%i`, `%u`, `%o`, `%x`, `%X`, `%p`, `%f`, `%F`, `%e`, `%E`, `%g`, `%G`,
+  `%%`, `%n`. Unsupported specifiers are printed verbatim (subject behaviour when
+  outside scope).

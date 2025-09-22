@@ -1,16 +1,11 @@
-#include <unistd.h>
-
 #include "tree.h"
 
-static void put_char(char c)
-{
-    (void)!write(1, &c, 1);
-}
+extern void my_putchar(char c);
 
 static void put_nchar(char c, int count)
 {
     for (int i = 0; i < count; ++i) {
-        put_char(c);
+        my_putchar(c);
     }
 }
 
@@ -55,7 +50,7 @@ void tree(int size)
             int spaces = (width - stars) / 2;
             put_nchar(' ', spaces);
             put_nchar('*', stars);
-            put_char('\n');
+            my_putchar('\n');
             stars += 2;
         }
         if (block != size) {
@@ -74,6 +69,6 @@ void tree(int size)
     for (int h = 0; h < trunk_height; ++h) {
         put_nchar(' ', trunk_spaces);
         put_nchar('|', trunk_width);
-        put_char('\n');
+        my_putchar('\n');
     }
 }

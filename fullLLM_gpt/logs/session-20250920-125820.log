@@ -1,0 +1,5 @@
+[2025-09-20 12:58:20] Session start: libmy workshop (B-CPE-100/WorkshopLib).
+[2025-09-20 12:58:28] Audit des sources under lib/my + README/tests/test.sh.
+[2025-09-20 12:58:42] make test (build lib/libmy.a + unit harness) → toutes les assertions OK.
+[2025-09-20 12:58:50] Aucun ajustement nécessaire.
+[2025-09-20 12:58:55] Session close.

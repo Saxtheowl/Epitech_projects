@@ -1,0 +1,6 @@
+[2025-09-20 10:20:42] Session start: projet B-CPE-101/My_Printf (mini_printf + my_printf).
+[2025-09-20 10:20:48] Inventaire des sources/tests, consultation README + Makefiles.
+[2025-09-20 10:20:55] Tentative d’extraction directe des PDF (pdftotext/PyPDF2 indisponibles) → impossibilité signalée, utilisation des spécifications connues.
+[2025-09-20 10:21:15] Ajout d’un scénario de test pour `%n` (my_printf/tests/main.c & reference.c) et réécriture README (contraintes/tests) + création rapport détaillé.
+[2025-09-20 10:21:35] `make fclean && make test` : mini_printf + my_printf → tous les diffs vides, suite complète OK.
+[2025-09-20 10:21:45] Session close.

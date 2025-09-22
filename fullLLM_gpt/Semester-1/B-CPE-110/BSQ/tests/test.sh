@@ -1,58 +1,72 @@
 #!/bin/sh
 set -eu
+
 DIR="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 BIN="$DIR/bsq"
+REF="$DIR/tests/solve_ref.py"
+DATA_DIR="$DIR/tests/data"
 
-pass=0; fail=0
-ok(){ pass=$((pass+1)); echo "[OK ] $1"; }
-ko(){ fail=$((fail+1)); echo "[KO ] $1"; diff -u "$2" "$3" || true; }
+TMP_DIR="$(mktemp -d)"
+cleanup(){ rm -rf "$TMP_DIR"; }
+trap cleanup EXIT
 
-tmp="$DIR/tests/tmp"; mkdir -p "$tmp"
+pass=0
+fail=0
 
-gen_map(){ # rows cols fill_percent outfile
-  r=$1; c=$2; p=$3; out=$4
-  { printf "%d\n" "$r"; for i in $(seq 1 "$r"); do
-      line=""
-      for j in $(seq 1 "$c"); do
-        # deterministic pattern for tests
-        mod=$(( (i*j) % 100 ))
-        if [ $mod -lt $p ]; then ch='o'; else ch='.'; fi
-        line="$line$ch"
-      done
-      printf "%s\n" "$line"
-    done; } > "$out"
+ok(){ pass=$((pass + 1)); printf '[OK ] %s\n' "$1"; }
+ko(){ fail=$((fail + 1)); printf '[KO ] %s\n' "$1" >&2; shift; "$@"; }
+
+build(){ make -C "$DIR" >/dev/null; }
+
+run_valid(){
+  name=$1
+  map_file=$2
+  exp="$TMP_DIR/${name}.expected"
+  out="$TMP_DIR/${name}.out"
+  python3 "$REF" "$map_file" >"$exp"
+  if "$BIN" "$map_file" >"$out"; then
+    if diff -u "$exp" "$out" >/dev/null; then
+      ok "$name"
+    else
+      ko "$name" diff -u "$exp" "$out"
+    fi
+  else
+    ko "$name" printf '%s\n' "program exited with failure"
+  fi
 }
 
-run_case(){ name=$1; in=$2; exp=$3;
-  out="$tmp/out.txt"
-  "$BIN" "$in" > "$out" || { echo "program failed"; exit 1; }
-  if diff -q "$exp" "$out" >/dev/null; then ok "$name"; else ko "$name" "$exp" "$out"; fi
+run_invalid(){
+  name=$1
+  map_file=$2
+  out="$TMP_DIR/${name}.out"
+  err="$TMP_DIR/${name}.err"
+  if "$BIN" "$map_file" >"$out" 2>"$err"; then
+    ko "$name" printf '%s\n' "expected non-zero exit"
+  else
+    status=$?
+    if [ -s "$out" ]; then
+      ko "$name" printf '%s\n' "expected no stdout"
+    else
+      err_content="$(tr -d '\n' < "$err")"
+      if [ "$err_content" = "map error" ] && [ "$status" -eq 84 ]; then
+        ok "$name"
+      else
+        ko "$name" printf '%s\n' "expected rc=84 and stderr 'map error'"
+      fi
+    fi
+  fi
 }
 
-make -C "$DIR" >/dev/null
+build
 
-# Case 1: 5x6 with obstacles
-in1="$tmp/in1.map"; gen_map 5 6 20 "$in1"
-exp1="$tmp/exp1.map"
-# Precompute expected by running then verifying idempotency (marking twice is same)
-"$BIN" "$in1" > "$exp1"
-run_case "5x6 basic" "$in1" "$exp1"
+run_valid "basic" "$DATA_DIR/valid_basic.map"
+run_valid "single_row" "$DATA_DIR/valid_single_row.map"
+run_valid "single_col" "$DATA_DIR/valid_single_col.map"
+run_valid "all_obstacles" "$DATA_DIR/valid_all_obstacles.map"
 
-# Case 2: 1x1 empty
-printf "1\n.\n" > "$tmp/in2.map"
-printf "x\n" > "$tmp/exp2.map"
-run_case "1x1 empty" "$tmp/in2.map" "$tmp/exp2.map"
+run_invalid "invalid_char" "$DATA_DIR/invalid_char.map"
+run_invalid "invalid_rowlen" "$DATA_DIR/invalid_rowlen.map"
+run_invalid "invalid_count" "$DATA_DIR/invalid_count.map"
 
-# Case 3: line 1x6 (largest square size 1)
-printf "1\n......\n" > "$tmp/in3.map"
-printf "x.....\n" > "$tmp/exp3.map"
-run_case "1x6 line" "$tmp/in3.map" "$tmp/exp3.map"
-
-# Case 4: column 6x1 (largest square size 1)
-printf "6\n.\n.\n.\n.\n.\n.\n" > "$tmp/in4.map"
-printf "x\n.\n.\n.\n.\n.\n" > "$tmp/exp4.map"
-run_case "6x1 column" "$tmp/in4.map" "$tmp/exp4.map"
-
-echo "-----"
-echo "Passed: $pass  Failed: $fail"
-exit $([ "$fail" -eq 0 ] && echo 0 || echo 1)
+printf -- '-----\nPassed: %d  Failed: %d\n' "$pass" "$fail"
+[ "$fail" -eq 0 ]

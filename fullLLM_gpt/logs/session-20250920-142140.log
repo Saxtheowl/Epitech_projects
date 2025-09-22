@@ -1,0 +1,6 @@
+[2025-09-20 14:21:40] Session start: projet B-PSU-100/My_ls.
+[2025-09-20 14:21:50] Revue du code (ls.c, print.c, sort.c) + tests existants.
+[2025-09-20 14:22:10] Corrections mémoire/erreurs: sécurisation `stat_entry`, gestion realloc failures, duplication protégée dans list_paths/directories.
+[2025-09-20 14:22:35] `make fclean && make test` → 5 cas OK.
+[2025-09-20 14:22:45] Rapport à mettre à jour (TODO).
+[2025-09-20 14:22:50] Session close.

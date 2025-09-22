@@ -1,0 +1,7 @@
+[2025-09-20 12:00:36] Session start: projet B-CPE-100/Firtree.
+[2025-09-20 12:00:45] Lecture du code existant (tree.c, main.c), README, tests.
+[2025-09-20 12:01:05] Mise à jour tree.c pour déléguer l’affichage à my_putchar (plus de write direct) + ajout src/my_putchar.c.
+[2025-09-20 12:01:20] Simplification parse_size (plus de ctype/stdlib), Makefile ajusté pour compiler les nouvelles sources.
+[2025-09-20 12:01:40] Exécution `make test`: comparaison avec l’oracle + erreurs → OK (9 cas).
+[2025-09-20 12:01:55] README et rapport actualisés, `make fclean` exécuté.
+[2025-09-20 12:02:00] Session close.

@@ -1,27 +1,26 @@
-#include <ctype.h>
-#include <stdlib.h>
+#include <stddef.h>
 
 #include "tree.h"
 
-static int parse_size(const char *s, unsigned int *out)
+static int parse_size(const char *s, int *out)
 {
     if (s == NULL || *s == '\0') {
         return -1;
     }
 
-    unsigned long value = 0;
+    long value = 0;
 
-    for (const unsigned char *p = (const unsigned char *)s; *p; ++p) {
-        if (!isdigit(*p)) {
+    for (const char *p = s; *p; ++p) {
+        if (*p < '0' || *p > '9') {
             return -1;
         }
-        value = (value * 10UL) + (unsigned long)(*p - '0');
-        if (value > 1000000UL) {
+        value = value * 10 + (*p - '0');
+        if (value > 1000000L) {
             return -1;
         }
     }
 
-    *out = (unsigned int)value;
+    *out = (int)value;
     return 0;
 }
 
@@ -31,12 +30,12 @@ int main(int argc, char **argv)
         return 84;
     }
 
-    unsigned int size = 0;
+    int size = 0;
 
     if (parse_size(argv[1], &size) != 0) {
         return 84;
     }
 
-    tree((int)size);
+    tree(size);
     return 0;
 }

@@ -1,26 +1,58 @@
 #define _XOPEN_SOURCE 700
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <errno.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
 #include "../include/my_ls.h"
+
+static void free_entry(entry_t *e)
+{
+    if (!e)
+        return;
+    free(e->name);
+    free(e->path);
+    e->name = NULL;
+    e->path = NULL;
+}
 
 int stat_entry(const char *dir, const char *name, entry_t *out)
 {
-    size_t dlen = strlen(dir), nlen = strlen(name);
-    size_t plen = dlen + 1 + nlen + 1;
+    size_t dlen = strlen(dir);
+    size_t need_slash = (dlen > 0 && dir[dlen - 1] != '/') ? 1u : 0u;
+    size_t nlen = strlen(name);
+    size_t plen = dlen + need_slash + nlen + 1;
+
     char *path = malloc(plen);
-    if (!path) return -1;
-    strcpy(path, dir);
-    if (dlen > 0 && dir[dlen-1] != '/') strcat(path, "/");
-    strcat(path, name);
-    memset(out, 0, sizeof(*out));
-    out->name = strdup(name);
+    if (!path)
+        return -1;
+    char *dst = path;
+    if (dlen > 0) {
+        memcpy(dst, dir, dlen);
+        dst += dlen;
+        if (need_slash)
+            *dst++ = '/';
+    }
+    memcpy(dst, name, nlen + 1);
+
+    char *name_copy = strdup(name);
+    if (!name_copy) {
+        free(path);
+        return -1;
+    }
+
+    struct stat st;
+    if (lstat(path, &st) < 0) {
+        free(name_copy);
+        free(path);
+        return -1;
+    }
+
+    out->name = name_copy;
     out->path = path;
-    if (!out->name || !out->path) return -1;
-    if (lstat(path, &out->st) < 0) return -1;
+    out->st = st;
     return 0;
 }
 
@@ -36,9 +68,9 @@ int list_directory(const char *path, const ls_opts_t *opts, int print_header)
     if (print_header)
         printf("%s:\n", path);
 
-    size_t cap = 64, n = 0;
-    entry_t *arr = malloc(cap * sizeof(*arr));
-    if (!arr) { closedir(d); return 84; }
+    size_t cap = 0;
+    size_t n = 0;
+    entry_t *arr = NULL;
     struct dirent *de;
     while ((de = readdir(d))) {
         if (!opts->opt_a && is_hidden(de->d_name)) continue;
@@ -46,10 +78,21 @@ int list_directory(const char *path, const ls_opts_t *opts, int print_header)
             if (!(opts->opt_a)) continue;
         }
         entry_t e;
-        if (stat_entry(path, de->d_name, &e) == 0) {
-            if (n == cap) { cap *= 2; entry_t *na = realloc(arr, cap*sizeof(*na)); if (!na){free(arr); closedir(d); return 84;} arr = na; }
-            arr[n++] = e;
+        if (stat_entry(path, de->d_name, &e) != 0)
+            continue;
+        if (n == cap) {
+            size_t new_cap = cap ? cap * 2 : 32;
+            entry_t *tmp = realloc(arr, new_cap * sizeof(*tmp));
+            if (!tmp) {
+                free_entry(&e);
+                free_entries(arr, (int)n);
+                closedir(d);
+                return 84;
+            }
+            arr = tmp;
+            cap = new_cap;
         }
+        arr[n++] = e;
     }
     closedir(d);
     sort_entries(arr, (int)n, opts);
@@ -72,7 +115,6 @@ int list_directory(const char *path, const ls_opts_t *opts, int print_header)
 int list_paths(char **paths, int npaths, const ls_opts_t *opts)
 {
     int ret = 0;
-    // first, stat paths and separate files/dirs
     entry_t *files = NULL; int nf = 0; int cf = 0;
     entry_t *dirs = NULL; int nd = 0; int cd = 0;
     for (int i = 0; i < npaths; ++i) {
@@ -82,22 +124,42 @@ int list_paths(char **paths, int npaths, const ls_opts_t *opts)
             ret = 84; continue;
         }
         if (S_ISDIR(st.st_mode)) {
-            if (nd == cd) { cd = cd? cd*2: 8; dirs = realloc(dirs, cd*sizeof(*dirs)); }
+            if (nd == cd) {
+                cd = cd ? cd * 2 : 8;
+                entry_t *tmp = realloc(dirs, cd * sizeof(*dirs));
+                if (!tmp) { ret = 84; continue; }
+                dirs = tmp;
+            }
             entry_t e = { strdup(paths[i]), strdup(paths[i]), st };
+            if (!e.name || !e.path) {
+                free(e.name);
+                free(e.path);
+                ret = 84;
+                continue;
+            }
             dirs[nd++] = e;
         } else {
-            if (nf == cf) { cf = cf? cf*2: 8; files = realloc(files, cf*sizeof(*files)); }
+            if (nf == cf) {
+                cf = cf ? cf * 2 : 8;
+                entry_t *tmp = realloc(files, cf * sizeof(*files));
+                if (!tmp) { ret = 84; continue; }
+                files = tmp;
+            }
             entry_t e = { strdup(paths[i]), strdup(paths[i]), st };
+            if (!e.name || !e.path) {
+                free(e.name);
+                free(e.path);
+                ret = 84;
+                continue;
+            }
             files[nf++] = e;
         }
     }
-    // print files first
     if (nf > 0) {
         sort_entries(files, nf, opts);
         print_entries(NULL, files, nf, opts);
         if (nd > 0) printf("\n");
     }
-    // print dirs
     for (int i = 0; i < nd; ++i) {
         list_directory(dirs[i].path, opts, (npaths > 1));
         if (i+1 < nd) printf("\n");
@@ -112,4 +174,3 @@ void free_entries(entry_t *arr, int n)
     for (int i = 0; i < n; ++i) { free(arr[i].name); free(arr[i].path); }
     free(arr);
 }
-

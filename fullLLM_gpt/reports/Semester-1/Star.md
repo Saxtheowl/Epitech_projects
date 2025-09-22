@@ -21,11 +21,12 @@
 - [OPTIONAL] Offer local tooling (Makefile/tests) for validation.
 
 ## Implementation Notes
-- `src/star.c` reconstructs the geometric sections (top cone, horizontal bars, arms)
-  using simple loops and the `write(2)` helper; no other libc calls are required.
-- `src/main.c` is kept only as a local runner to exercise the function.
-- Makefile now follows the usual `make`, `clean`, `fclean`, `re`, `test` contract and
-  compiles with `-Wall -Wextra -Werror`.
+- `src/star.c` route désormais chaque caractère vers `my_putchar` (aucun `write`
+  direct), tout en conservant la géométrie de l'étoile.
+- `src/my_putchar.c` fournit une implémentation locale minimaliste (simple `write`) pour
+  pouvoir lancer le binaire sans les fichiers du correcteur.
+- `src/main.c` reste un exécutable de confort, avec un parseur maison (digits uniquement).
+- Makefile compile `main.c`, `star.c`, `my_putchar.c` et expose les cibles habituelles.
 
 ## Test Strategy
 - `make test` (wrapper in `tests/test.sh`) regenerates expectations from the official

@@ -9,8 +9,9 @@
 - **Constraints**:
   - Only `read`, `write`, `malloc`, `free`, `exit` allowed (p.3).
   - Errors must print `syntax error` or `error` on stderr and exit with code 84.
-  - Support custom bases/operators (7-symbol operator string ordered as
-    `() +-*/%`).
+  - Support custom bases/operators (7-symbol operator string ordered `() +-*/%`).
+  - Refuse invalid base/operator definitions (duplicate symbols) and zero/negative
+    `size_read`.
 
 ## Implementation overview
 - Recursive-descent parser with precedence levels (expr → term → factor) manages unary
@@ -27,7 +28,7 @@
 ## Tests
 - `make test` (or `./scripts/test.sh`) runs `tests/test.sh`, covering:
   - Subject sample cases (default base, custom operators/base, nested parentheses).
-  - Unary operator chains and large expressions.
+  - Unary operator chains, large expressions, invalid `size_read` (0) rejection.
   - Syntax error scenario (`----++-6(12)`).
   - Division-by-zero pathway (ensuring `error` on stderr).
 - All cases currently report `OK`.
@@ -36,7 +37,8 @@
 - [x] Build system (`Makefile`) with `all`, `clean`, `fclean`, `re`, `test`.
 - [x] Parser enforces syntax and operator precedence.
 - [x] Arbitrary-precision engine handles big integers and base conversion.
-- [x] Error handling per specification (stderr + exit 84).
+- [x] Error handling per specification (stderr + exit 84) including invalid
+      `size_read`.
 - [x] Automated regression suite documented and reproducible.
 
 ## Risks & follow-up

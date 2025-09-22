@@ -32,7 +32,11 @@ int decompress_file(const char *path, int type)
         free(input);
         return 84;
     }
-    (void)type;
+    unsigned char header_type = input[4];
+    if (type < 1 || type > 3 || header_type != (unsigned char)type) {
+        free(input);
+        return 84;
+    }
     unsigned char *ptr = input + 5;
     size_t remaining = len - 5;
     while (remaining > 0) {

@@ -20,5 +20,9 @@ int main(void)
            2147483648L, -9223372036854775807LL - 1, 18446744073709551615ULL);
 
     printf("Mixed:%-#10x %+10d % 10i\n", 0x2a, 42, -42);
+
+    int stored = 0;
+    printf("Counted:%nDone\n", &stored);
+    printf("Stored count:%d\n", stored);
     return 0;
 }

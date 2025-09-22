@@ -1,32 +1,34 @@
-# Antman (B-CPE-110)
+# Antman & Giantman (B-CPE-110)
 
-## Subject recap
-- Two binaries: `antman` (compress) and `giantman` (decompress).
-- Supported file hints (1=lyrics, 2=HTML, 3=P3 PPM) but programs must cope with any
-  content; compression must be lossless (giantman must reproduce the original file).
-- Allowed syscalls: `open`, `read`, `write`, `close`, `malloc`, `free`, `stat`.
+## Subject overview
+- **Sources**: `Antman/Antman.pdf` (compression) & `Antman/Giantman.pdf` (decompression). PDF extraction unavailable in this environment; requirements recalled from prior project notes.
+- **Goal**: implement a pair of CLI tools — `antman` compresses a file, `giantman` restores it losslessly. The header format is `AR01` followed by a single byte type identifier (`1` text, `2` HTML, `3` P3 PPM).
+- **Constraints**:
+  - Use only low-level I/O (`open`, `read`, `write`, `close`) and dynamic allocation (`malloc`, `free`).
+  - Programs must fail (return 84) when arguments are invalid, when the header/type mismatch, or when the stream is malformed.
+  - Compression must be lossless for the supported file types.
 
-## Implementation
-- Compression uses a PackBits-inspired RLE:
-  * Output header `"AR01"` + one byte storing the file type.
-  * Literal blocks: control byte `0xxxxxxx` followed by `(ctrl+1)` raw bytes.
-  * Run blocks: control byte `1xxxxxxx` followed by the repeated byte, repeated
-    `(ctrl&0x7F)+1` times.
-  Runs start at sequences of ≥2 identical bytes, giving modest but reliable
-  compression while being 100% reversible.
-- Decompression validates the header and emits literal/run segments back to stdout.
-- File loading is done with custom helpers that reallocate dynamically yet rely only
-  on allowed syscalls. Output uses `write_all` to avoid partial writes.
+## Implementation notes
+- Compression uses a PackBits-like RLE: literals are emitted with control bytes `0xxxxxxx`, runs with `1xxxxxxx`. The encoder enforces block limits (≤128 bytes) and builds the output in a dynamically resized buffer.
+- Decompression mirrors the scheme, validating the header and ensuring the embedded type matches the CLI argument before streaming data through `write_all`.
+- Both binaries now validate the type argument (`1..3`) up-front to respect the subject contract.
+- Shared utilities (`read_entire_file`, `write_all`) reside in each project’s `src/io.c`, using only permitted syscalls.
 
-## Tests
-- `make test` runs `antman/tests/test.sh` and `giantman/tests/test.sh`:
-  * Antman tests create sample inputs (text, HTML-like, binary), compress them,
-    decompress via `giantman`, and diff the output.
-  * Giantman tests similarly round-trip using both binaries to guarantee symmetry.
+## Tests & validation
+- `make test` runs `antman/tests/test.sh` then `giantman/tests/test.sh`.
+  - Round-trip tests on textual, HTML, et binary payloads confirm lossless compression.
+  - Header integrity checks (Python helper) ensure the `AR01` magic and type byte are produced correctly.
+  - Error-path tests assert `antman` rejects invalid types and `giantman` fails on header corruption or type mismatch, returning 84.
+- Latest execution: `make test` → antman (4 OK) + giantman (5 OK) without residual artefacts.
 
-## Notes & risks
-- Compression ratio varies; RLE shines on repeated bytes and remains near 2× in the
-  worst case (header + block tags). The spec only requires that it “compresses
-  sometimes”, which this approach satisfies.
-- The type byte is currently informational; the pipeline can be extended with
-  type-specific heuristics in the future.
+## Checklist
+- [x] CLI usage enforces correct arity and type range.
+- [x] Header conforms to expected `AR01` + type format.
+- [x] Decompression validates header/type and handles malformed streams safely.
+- [x] Regression suite exercises success and failure flows.
+- [x] Only allowed syscalls/utilities are used.
+
+## Risks / next steps
+- PackBits encoding is generic; dedicated optimisations for HTML or P3 (e.g. dictionary compression) could improve ratios if required by advanced grading.
+- No explicit size limit: extremely large inputs may require additional chunked streaming rather than whole-file buffering for memory footprint; acceptable for current scope.
+- Additional fuzz tests on random binary streams would strengthen robustness.

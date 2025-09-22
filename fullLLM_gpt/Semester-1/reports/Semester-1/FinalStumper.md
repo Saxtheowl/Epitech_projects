@@ -1,34 +1,23 @@
 # Final Stumper (B-CPE-101)
 
 ## Subject recap
-- **Binary**: `rush3` (see `Final_Stumper` brief).
-- **Goal**: read the output of any `rush1-x` generator and print which rush pattern(s)
-  match, along with detected width and height.
-- **Output**: `[rush1-n] w h` for each match, ordered by pattern, separated by ` || `.
-  Print `none` if no variant matches. Always end with `\n`.
-- **Constraints**: only `read`, `write`, `malloc`, `free`; handle invalid inputs by
-  returning `none`. Recommended to reuse existing `rush1` logic.
+- **Binary**: `rush3` (`Final_Stumper`, p.1).
+- **Goal**: lire la sortie d’un `rush1-x` et afficher la ou les variantes compatibles + dimensions (`Final_Stumper`, p.1).
+- **Output**: `[rush1-n] w h` pour chaque correspondance, séparées par ` || `; sinon `none`. Toujours terminer par `\n` (`Final_Stumper`, p.1).
+- **Constraints**: seules les syscalls `read`, `write`, `malloc`, `free` sont autorisées (p.1). Les erreurs doivent passer par `stderr` avec code `84`; succès → `0` (p.1).
 
 ## Implementation
-- `main` reads up to BUFF_SIZE (4096) bytes from stdin, null-terminates and delegates
-  to `rush3`.
-- `rush3` computes width/height, ensuring uniform line lengths and rejecting empty or
-  malformed input.
-- Pattern comparison uses generator functions mirroring the official rush outputs.
-  Special cases (`width == 1` or `height == 1`) produce ambiguous results (patterns
-  3/4/5) per reference behaviour.
-- Matching is done character-by-character; each row may end with an optional trailing
-  newline.
-- Output is streamed using small helper functions (`my_putchar`, `my_putstr`,
-  `my_putnbr_unsigned`).
+- `main` lit jusqu’à `BUFF_SIZE` (4096) octets depuis stdin, termine la chaîne et renvoie `84` en cas d’erreur `read` (conformément au sujet).
+- `rush3` calcule largeur/hauteur, vérifie l’uniformité des lignes et rejette les entrées vides/malfaites → affiche `none`.
+- Comparaison via générateurs internes `rush_1_x_char` reproduisant fidèlement les bords/cas ambigus (`width == 1` ou `height == 1`).
+- Affichage en flux (`write` exclusivement) au format attendu, accumulation des variantes multiples avec séparateur ` || `.
 
 ## Tests
 - `make test` / `./scripts/test.sh`:
-  - Extracts subject-provided binaries (`rush1_bins.tgz`).
-  - Pipes several dimension sets through our `rush3` implementation.
-  - Checks ambiguous cases (e.g. `rush1-4 1 1`, `rush1-3 5 1`).
-  - Verifies the fallback `none` on arbitrary input.
-- Sample run: `Passed: 6  Failed: 0`.
+  - Extrait les binaires officiels `rush1-x` fournis dans `rush1_bins.tgz`.
+  - Vérifie les exemples du sujet (4×4, ambigu 1×1) + cas supplémentaires (`5×1`, motif invalide → `none`).
+  - Nettoyage auto du répertoire temporaire via `trap`.
+- Dernière exécution: `Passed: 6  Failed: 0`.
 
 ## Checklist
 - [x] Detects all five rush patterns with correct formatting.
